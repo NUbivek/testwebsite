@@ -60,6 +60,9 @@
             background: #f7fafc;
             border-radius: 8px;
             transition: background-color 0.3s ease;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
         }
 
         .tab:hover, .tab.active {
@@ -73,6 +76,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             width: 100%;
+            box-sizing: border-box;
         }
 
         .tab-content.active {
@@ -213,6 +217,9 @@
             .tabs {
                 flex-direction: column;
                 gap: 10px;
+            }
+            .tab {
+                margin: 5px 0;
             }
         }
     </style>
@@ -389,8 +396,4 @@
         <div id="personal-mission" class="tab-content">
             <h2>Personal Mission & Vision</h2>
             <div class="quote">
-                "Going where others won't and doing what others don't,<br>
-                Not because others aren't, but because others should and yet won't."
-            </div>
-            <div class="grid-2">
-                <div class="card">
+                "Going where others won't and doing what others
