@@ -172,7 +172,19 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
-
+        .experience-category:nth-child(2) .experience-box {
+            background: #011f4b;  /* Dark blue background for technical experience boxes */
+            color: white;  /* White text for better contrast */
+        }
+        
+        .experience-category:nth-child(2) .experience-box h3,
+        .experience-category:nth-child(2) .experience-box li {
+            color: white;
+        }
+        
+        .experience-category:nth-child(2) .experience-box .strategic-note {
+            color: #a0aec0;  /* Lighter color for the strategic note */
+        }
         .experience-date {
             position: absolute;
             top: -10px;
@@ -357,9 +369,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="experience-category">
+                 <div class="experience-category">
                     <h3 style="color: #4a5568; font-size: 1.4em;">Technical Expertise</h3>
-                    <div class="experience-box">
+                    <div class="experience-box technical-experience">
                         <span class="experience-date">2020-2023</span>
                         <h3>ServicePower</h3>
                         <div class="strategic-note">Strategically chosen for a parallel/relevant startup quest</div>
@@ -369,7 +381,7 @@
                             <li>Led 37+ member team across 14 firms</li>
                         </ul>
                     </div>
-                    <div class="experience-box">
+                    <div class="experience-box technical-experience">
                         <span class="experience-date">2020-2022</span>
                         <h3>Monk Robotics</h3>
                         <ul>
@@ -378,7 +390,7 @@
                             <li>Achieved $12K in pilot ARR in manufacturing tech</li>
                         </ul>
                     </div>
-                    <div class="experience-box">
+                    <div class="experience-box technical-experience">
                         <span class="experience-date">2017-2020</span>
                         <h3>Amida Technology</h3>
                         <ul>
@@ -430,7 +442,7 @@
                         <div>Auditing & Accounting | 2024</div>
                     </div>
                     <div class="market-stat">
-                        <li>Key attributes: poor interoperability, integration nightmare, disparate data sources, unstructured datasets</li>
+                        <div>Key attributes: poor interoperability, integration nightmares, disparate data sources, unstructured datasets, excessive reliance on paper-based systems, overuse of on-premises databases, and a maze of clicks and endless finagling.</div>
                     </div>
                 </div>
                 <div class="card">
