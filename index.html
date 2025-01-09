@@ -3,111 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabbed Navigation</title>
+    <title>Bivek Adhikari - Investment Professional</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #2d3748;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .header {
-            background-color: #4CAF50;
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #1a365d, #2a4365);
             color: white;
             text-align: center;
-            padding: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            padding: 60px 40px;
+            width: 100%;
+            margin-bottom: 20px;
         }
 
-        .tab-container {
+        .title-slide h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #cbd5e0;
+            margin-bottom: 30px;
+        }
+
+        /* Tabs */
+        .tabs {
             display: flex;
-            justify-content: center;
-            background-color: #f1f1f1;
-            border-bottom: 1px solid #ccc;
+            justify-content: space-around;
+            background: #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
         }
 
         .tab {
             padding: 10px 20px;
             cursor: pointer;
-            text-align: center;
-            background-color: #f1f1f1;
-            border: 1px solid transparent;
-            border-bottom: none;
-            margin: 0;
+            background: #f7fafc;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
         }
 
-        .tab:hover {
-            background-color: #ddd;
-        }
-
-        .tab.active {
-            background-color: white;
-            border: 1px solid #ccc;
-            border-bottom: none;
+        .tab:hover, .tab.active {
+            background: #edf2f7;
         }
 
         .tab-content {
             display: none;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-top: none;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .tab-content.active {
             display: block;
         }
+
+        /* Content styles */
+        .experience-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .experience-category {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .experience-box {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            border-left: 4px solid #4299e1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            margin-bottom: 20px;
+        }
+
+        .experience-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .experience-box h3 {
+            color: #2b6cb0;
+            font-size: 1.2em;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .experience-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .experience-box li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .experience-date {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #4299e1;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+
+        .strategic-note {
+            font-style: italic;
+            color: #4a5568;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .market-stat {
+            background: #ebf8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+
+        .sub-stat {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 5px;
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #4a5568;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+
+        .blue-bold {
+            color: #2b6cb0;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+            .experience-container {
+                grid-template-columns: 1fr;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .tabs {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="title-slide">
+            <h1>Bivek Adhikari</h1>
+            <div class="subtitle">Investment Professional</div>
+            <div style="font-size: 1.1em; margin-top: 40px;">
+                Technical Founder • AI/ML Expert • Tech Investor<br>
+                Berkeley Haas MBA • MS in Machine Learning, Northwestern University • BS Finance & CS
+            </div>
+        </div>
 
-    <!-- Header Section -->
-    <div class="header">
-        <h1>Title Slide</h1>
-    </div>
+        <div class="tabs">
+            <div class="tab active" onclick="openTab(event, 'track-record')">Track Record & Experience</div>
+            <div class="tab" onclick="openTab(event, 'deal-flow')">Deal Flow & Network</div>
+            <div class="tab" onclick="openTab(event, 'investment-focus')">Investment Focus</div>
+            <div class="tab" onclick="openTab(event, 'personal-mission')">Personal Mission</div>
+        </div>
 
-    <!-- Tabs Section -->
-    <div class="tab-container">
-        <div class="tab active" data-tab="tab1">Tab 1</div>
-        <div class="tab" data-tab="tab2">Tab 2</div>
-        <div class="tab" data-tab="tab3">Tab 3</div>
-        <!-- Add more tabs as needed -->
-    </div>
+        <div id="track-record" class="tab-content active">
+            <h2>Track Record & Experience</h2>
+            <div class="experience-container">
+                <div class="experience-category">
+                    <h2>Investment Experience</h2>
+                    <div class="experience-box">
+                        <span class="experience-date">2024-Present</span>
+                        <h3>GroundForce Capital</h3>
+                        <ul>
+                            <li>Developed Supply Chain thesis</li>
+                            <li>Screened 200+ companies</li>
+                            <li>Modeled returns for $10-40M checks (2.5-4x MOIC, 25%+ IRR)</li>
+                            <li>Triangulated DCF, comps, and precedents for valuation</li>
+                        </ul>
+                    </div>
+                    <div class="experience-box">
+                        <span class="experience-date">2023-2024</span>
+                        <h3>Autotech Ventures</h3>
+                        <ul>
+                            <li>Incubated a startup-studio and helped build a home-grown startup</li>
+                            <li>Sourced 35+ leads, leveraging AI & robotics expertise/network</li>
+                            <li>Evaluated technical moats, market size, scalability, and valuation</li>
+                        </ul>
+                    </div>
+                    <div class="experience-box">
+                        <span class="experience-date">2023-2024</span>
+                        <h3>Berkeley Haas SIF</h3>
+                        <ul>
+                            <li>Led $4.3M ESG portfolio (13.87% return)</li>
+                            <li>Implemented technical scalability metrics & impact framework</li>
+                            <li>Revised IPS to include regional concentration risks</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="experience-category">
+                    <h2>Technical Expertise</h2>
+                    <div class="experience-box">
+                        <span class="experience-date">2020-2023</span>
+                        <h3>ServicePower</h3>
+                        <div class="strategic-note">Strategically chosen for a parallel/relevant startup quest</div>
+                        <ul>
+                            <li>Delivered AI/ML solutions for Fortune 100 clients, $13M+ ARR</li>
+                            <li>Built 2 and deployed 5 SaaS products</li>
+                            <li>Led 37+ member team across 14 firms</li>
+                        </ul>
+                    </div>
+                    <div class="experience-box">
+                        <span class="experience-date">2020-2022</span>
+                        <h3>Monk Robotics</h3>
+                        <ul>
+                            <li>Launched 3 MVPs: autonomous lawn mower, sanitizing robots & IoT tech</li>
+                            <li>Rapidly adapted GTM & PMF amid COVID challenges</li>
+                            <li>Achieved $12K in pilot ARR in manufacturing tech</li>
+                        </ul>
+                    </div>
+                    <div class="experience-box">
+                        <span class="experience-date">2017-2020</span>
+                        <h3>Amida Technology</h3>
+                        <ul>
+                            <li>Closed $100M+ in TCV</li>
+                            <li>Owned 2 product lines, led 13+ federal proposals</li>
+                            <li>Supported 23+ commercial deals, driving 100%+ YOY growth</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Tab Content Section -->
-    <div id="tab1" class="tab-content active">
-        <h2>Tab 1 Content</h2>
-        <p>This is the content for Tab 1.</p>
-    </div>
+        <div id="deal-flow" class="tab-content">
+            <h2>Deal Flow & Network</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Bay Area Ecosystem</h3>
+                    <ul>
+                        <li>VC Club, President at Haas</li>
+                        <li>UC LAUNCH accelerator, SVP</li>
+                        <li>Skydeck, AI Entrepreneurs of Berkeley</li>
+                        <li>Stanford & Berkeley Clubs Network</li>
+                        <li>Diverse Community Groups (Immigrant, Australian, South Asian Networks)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Multi-Hub Network</h3>
+                    <ul>
+                        <li>Northwestern: AI/ML research network</li>
+                        <li>DC, MD, and VA: Tech startup community</li>
+                        <li>Florida: UF/UCF entrepreneurship hubs</li>
+                        <li>Other industry network: 800+ in Supply Chain, 300+ in Health Data, and 1,000+ in AI/Data Science</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    <div id="tab2" class="tab-content">
-        <h2>Tab 2 Content</h2>
-        <p>This is the content for Tab 2.</p>
-    </div>
+        <div id="investment-focus" class="tab-content">
+            <h2>Investment Focus & Market Opportunities</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Supply Chain Intelligence</h3>
+                    <div class="market-stat">
+                        <div class="stat-number">$21.93B</div>
+                        <div>Market Size | 15.4% CAGR</div>
+                    </div>
+                    <ul>
+                        <li>Inventory optimization</li>
+                        <li>Supply & Demand planning</li>
+                        <li>Procurement & sourcing</li>
+                        <li>Finance and payment</li>
+                        <li>Traceability & compliance</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Mixed TMS</h3>
+                    <div class="market-stat">
+                        <div class="stat-number">$252.7B</div>
+                        <div>US Market Size | 15.22% CAGR</div>
+                        <div class="sub-stat">
+                            Global Markets: 3PL: $1.1T | TMS: $4.4B | WMS: $2.7B
+                        </div>
+                    </div>
+                    <ul>
+                        <li>Convergence of TMS, WMS, and 3PL systems</li>
+                        <li>Real-time optimization & multi-modal planning</li>
+                        <li>AI/ML enhanced route optimization</li>
+                        <li>IoT and blockchain integration</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>AI-First SaaS Opportunities</h3>
+                    <ul>
+                        <li>Construction Management: <span class="blue-bold">$4.5B</span> market by 2026</li>
+                        <li>Auditing & Accounting: <span class="blue-bold">$4.8B</span> market by 2024</li>
+                        <li>Key attributes: poor interoperability, integration nightmare, disparate data sources, unstructured datasets, diverse data types, excessive collection of paper based, on-premises, and underutilized database, multiple clicks and finagling, etc.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Health Data</h3>
+                    <div class="market-stat">
+                        <div class="stat-number">$5.7B</div>
+                        <div>2025 Market Size</div>
+                    </div>
+                    <ul>
+                        <li>FHIR-based solutions</li>
+                        <li>Clinical decision support</li>
+                        <li>Data integration platforms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    <div id="tab3" class="tab-content">
-        <h2>Tab 3 Content</h2>
-        <p>This is the content for Tab 3.</p>
-    </div>
-
-    <script>
-        // JavaScript to handle tab switching
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs and contents
-                tabs.forEach(t => t.classList.remove('active'));
-                tabContents.forEach(tc => tc.classList.remove('active'));
-
-                // Add active class to the clicked tab and corresponding content
-                tab.classList.add('active');
-                document.getElementById(tab.dataset.tab).classList.add('active');
-            });
-        });
-    </script>
-
-</body>
-</html>
+        <div id="personal-mission" class="tab-content">
+            <h2>Personal Mission & Vision</h2>
+            <div class="quote">
+                "Going where others won't and doing what others don't,<br>
+                Not because others aren't, but because others should and yet won't."
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Journey & Evolution</h3>
+                    <ul>
+                        <li>Nepal to US journey: Overcoming challenges & embracing opportunities
