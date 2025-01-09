@@ -163,18 +163,9 @@
             cursor: pointer;
         }
 
-        .experience-box.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .experience-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
         /* Add this after the .experience-box style */
         .experience-category:nth-child(1) .experience-box {
-            background: #011f4b;  /* Dark blue background for investment experience */
+            background: #2d4a6d;  /* Slightly darker blue for investment experience */
             color: white;
         }
         
@@ -188,18 +179,15 @@
             color: #2d3748;
         }
         
-        .experience-category:nth-child(2) .experience-box {
-            background: #011f4b;  /* Dark blue background for technical experience boxes */
-            color: white;  /* White text for better contrast */
+
+        .experience-box.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
-        .experience-category:nth-child(2) .experience-box h3,
-        .experience-category:nth-child(2) .experience-box li {
-            color: white;
-        }
-        
-        .experience-category:nth-child(2) .experience-box .strategic-note {
-            color: #a0aec0;  /* Lighter color for the strategic note */
+
+        .experience-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
         .experience-date {
             position: absolute;
