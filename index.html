@@ -163,20 +163,14 @@
             cursor: pointer;
         }
 
-        /* Add this after the .experience-box style */
+              /* Update Investment Experience boxes to have darker blue border */
         .experience-category:nth-child(1) .experience-box {
-            background: #2d4a6d;  /* Slightly darker blue for investment experience */
-            color: white;
+            border-left: 4px solid #1a365d;  /* Darker blue border */
         }
         
-        .experience-category:nth-child(1) .experience-box h3,
-        .experience-category:nth-child(1) .experience-box li {
-            color: white;
-        }
-        
+        /* Remove border from Technical Experience boxes */
         .experience-category:nth-child(2) .experience-box {
-            background: #f7fafc;  /* Light background for technical experience */
-            color: #2d3748;
+            border-left: none;
         }
         
 
