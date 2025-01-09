@@ -2,69 +2,22 @@
 <html>
 <head>
     <style>
-        /* Base styles */
         body {
             font-family: system-ui, -apple-system, sans-serif;
             line-height: 1.5;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             background: #f8f9fa;
             color: #2d3748;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        
+
         .container {
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
-        }
-
-        .static-header {
-            background-color: #1a365d;
-            color: white;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 10px 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .static-header .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .static-header .tab {
-            color: white;
-            font-size: 1em;
-            text-decoration: none;
-            padding: 8px 16px;
-            transition: background 0.2s;
-            border-radius: 4px;
-        }
-
-        .static-header .tab:hover {
-            background-color: #2a4365;
-        }
-
-        .content {
-            margin-top: 80px; /* To accommodate the fixed header */
-            width: 100%;
-        }
-
-        .slide {
-            background: white;
-            border-radius: 8px;
-            padding: 40px;
-            margin: 30px auto;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 1200px;
-            box-sizing: border-box;
         }
 
         .title-slide {
@@ -72,10 +25,10 @@
             color: white;
             text-align: center;
             padding: 60px 40px;
-        }
-
-        h1, h2, h3, .subtitle {
-            margin: 0;
+            width: 100%;
+            max-width: 1200px;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
 
         .title-slide h1 {
@@ -84,24 +37,50 @@
             margin-bottom: 10px;
         }
 
-        h2 {
-            font-size: 1.8em;
-            color: #2d3748;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
-        }
-
-        h3 {
-            font-size: 1.4em;
-            color: #4a5568;
-            margin: 0 0 10px;
-        }
-
         .subtitle {
             font-size: 1.2em;
-            color: #718096;
             margin-bottom: 30px;
+        }
+
+        /* Tab styles */
+        .tabs {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .tab-button.active {
+            background: #4299e1;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         /* Experience section styles */
@@ -109,13 +88,6 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
-            margin-top: 20px;
-        }
-
-        .experience-category {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
         }
 
         .experience-box {
@@ -124,32 +96,7 @@
             padding: 20px;
             position: relative;
             border-left: 4px solid #4299e1;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s ease;
             margin-bottom: 20px;
-        }
-
-        .experience-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .experience-box h3 {
-            color: #2b6cb0;
-            font-size: 1.2em;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-        }
-
-        .experience-box ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-
-        .experience-box li {
-            margin-bottom: 8px;
-            font-size: 0.95em;
         }
 
         .experience-date {
@@ -163,43 +110,68 @@
             font-size: 0.8em;
         }
 
-        /* Responsive adjustments */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .market-stat {
+            background: #ebf8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #4a5568;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+
         @media (max-width: 1024px) {
-            .container {
-                padding: 0 20px;
-            }
-            
-            .experience-container {
+            .experience-container, .grid-2 {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Static Header -->
-    <div class="static-header">
-        <div class="tabs">
-            <a href="#about" class="tab">About</a>
-            <a href="#experience" class="tab">Experience</a>
-            <a href="#projects" class="tab">Projects</a>
-            <a href="#contact" class="tab">Contact</a>
+    <div class="title-slide">
+        <h1>Bivek Adhikari</h1>
+        <div class="subtitle">Investment Professional</div>
+        <div style="font-size: 1.1em; margin-top: 40px;">
+            Technical Founder • AI/ML Expert • Tech Investor<br>
+            Berkeley Haas MBA • MS in Machine Learning, Northwestern University • BS Finance & CS
         </div>
     </div>
 
-    <!-- Content Section -->
-    <div class="content">
-        <!-- Title Slide -->
-        <div id="about" class="slide title-slide">
-            <h1>Bivek Adhikari</h1>
-            <div class="subtitle">Investment Professional</div>
-            <div style="font-size: 1.1em; margin-top: 40px;">
-                Technical Founder • AI/ML Expert • Tech Investor<br>
-                Berkeley Haas MBA • MS in Machine Learning, Northwestern University • BS Finance & CS
-            </div>
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-button active" onclick="openTab('track-record')">Track Record & Experience</button>
+            <button class="tab-button" onclick="openTab('deal-flow')">Deal Flow & Network</button>
+            <button class="tab-button" onclick="openTab('investment-focus')">Investment Focus</button>
+            <button class="tab-button" onclick="openTab('personal-mission')">Personal Mission</button>
         </div>
 
-        <!-- Experience Section -->
-        <div id="experience" class="slide">
+        <div id="track-record" class="tab-content active">
             <h2>Track Record & Experience</h2>
             <div class="experience-container">
                 <div class="experience-category">
@@ -214,18 +186,129 @@
                             <li>Triangulated DCF, comps, and precedents for valuation</li>
                         </ul>
                     </div>
+                    <!-- Add other investment experience boxes -->
+                </div>
+                <div class="experience-category">
+                    <h2>Technical Expertise</h2>
                     <div class="experience-box">
-                        <span class="experience-date">2023-2024</span>
-                        <h3>Autotech Ventures</h3>
+                        <span class="experience-date">2020-2023</span>
+                        <h3>ServicePower</h3>
                         <ul>
-                            <li>Incubated a startup-studio and helped build a home-grown startup</li>
-                            <li>Sourced 35+ leads, leveraging AI & robotics expertise/network</li>
-                            <li>Evaluated technical moats, market size, scalability, and valuation</li>
+                            <li>Delivered AI/ML solutions for Fortune 100 clients, $13M+ ARR</li>
+                            <li>Built 2 and deployed 5 SaaS products</li>
+                            <li>Led 37+ member team across 14 firms</li>
                         </ul>
                     </div>
+                    <!-- Add other technical expertise boxes -->
+                </div>
+            </div>
+        </div>
+
+        <div id="deal-flow" class="tab-content">
+            <h2>Deal Flow & Network</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Bay Area Ecosystem</h3>
+                    <ul>
+                        <li>VC Club, President at Haas</li>
+                        <li>UC LAUNCH accelerator, SVP</li>
+                        <li>Skydeck, AI Entrepreneurs of Berkeley</li>
+                        <li>Stanford & Berkeley Clubs Network</li>
+                        <li>Diverse Community Groups</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Multi-Hub Network</h3>
+                    <ul>
+                        <li>Northwestern: AI/ML research network</li>
+                        <li>DC, MD, and VA: Tech startup community</li>
+                        <li>Florida: UF/UCF entrepreneurship hubs</li>
+                        <li>Other industry network: 800+ in Supply Chain, 300+ in Health Data</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="investment-focus" class="tab-content">
+            <h2>Investment Focus & Market Opportunities</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Supply Chain Intelligence</h3>
+                    <div class="market-stat">
+                        <div class="stat-number">$21.93B</div>
+                        <div>Market Size | 15.4% CAGR</div>
+                    </div>
+                    <ul>
+                        <li>Inventory optimization</li>
+                        <li>Supply & Demand planning</li>
+                        <li>Procurement & sourcing</li>
+                        <li>Finance and payment</li>
+                        <li>Traceability & compliance</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Mixed TMS</h3>
+                    <div class="market-stat">
+                        <div class="stat-number">$252.7B</div>
+                        <div>US Market Size | 15.22% CAGR</div>
+                    </div>
+                    <ul>
+                        <li>Convergence of TMS, WMS, and 3PL systems</li>
+                        <li>Real-time optimization & multi-modal planning</li>
+                        <li>AI/ML enhanced route optimization</li>
+                        <li>IoT and blockchain integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="personal-mission" class="tab-content">
+            <h2>Personal Mission & Vision</h2>
+            <div class="quote">
+                "Going where others won't and doing what others don't,<br>
+                Not because others aren't, but because others should and yet won't."
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Journey & Evolution</h3>
+                    <ul>
+                        <li>Nepal to US journey: Overcoming challenges & embracing opportunities</li>
+                        <li>Technical expert to investor transition</li>
+                        <li>Founder & operator experience</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Commitment to Excellence</h3>
+                    <ul>
+                        <li>Promoting underrepresented founders</li>
+                        <li>Driving efficient and resilient global systems</li>
+                        <li>Working with best-in-class talents</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function openTab(tabName) {
+            var i, tabContent, tabButtons;
+            
+            // Hide all tab content
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            tabButtons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show the selected tab content and set button to active
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+    </script>
 </body>
 </html>
