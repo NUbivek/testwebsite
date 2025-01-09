@@ -42,7 +42,6 @@
             margin-bottom: 30px;
         }
 
-        /* Tab styles */
         .tabs {
             width: 100%;
             max-width: 1200px;
@@ -83,7 +82,6 @@
             display: block;
         }
 
-        /* Experience section styles */
         .experience-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -146,6 +144,11 @@
             border-radius: 8px;
         }
 
+        .blue-bold {
+            color: #2b6cb0;
+            font-weight: bold;
+        }
+
         @media (max-width: 1024px) {
             .experience-container, .grid-2 {
                 grid-template-columns: 1fr;
@@ -175,7 +178,7 @@
             <h2>Track Record & Experience</h2>
             <div class="experience-container">
                 <div class="experience-category">
-                    <h2>Investment Experience</h2>
+                    <h3 style="color: #4a5568; font-size: 1.4em;">Investment Experience</h3>
                     <div class="experience-box">
                         <span class="experience-date">2024-Present</span>
                         <h3>GroundForce Capital</h3>
@@ -186,20 +189,55 @@
                             <li>Triangulated DCF, comps, and precedents for valuation</li>
                         </ul>
                     </div>
-                    <!-- Add other investment experience boxes -->
+                    <div class="experience-box">
+                        <span class="experience-date">2023-2024</span>
+                        <h3>Autotech Ventures</h3>
+                        <ul>
+                            <li>Incubated a startup-studio and helped build a home-grown startup</li>
+                            <li>Sourced 35+ leads, leveraging AI & robotics expertise/network</li>
+                            <li>Evaluated technical moats, market size, scalability, and valuation</li>
+                        </ul>
+                    </div>
+                    <div class="experience-box">
+                        <span class="experience-date">2023-2024</span>
+                        <h3>Berkeley Haas SIF</h3>
+                        <ul>
+                            <li>Led $4.3M ESG portfolio (13.87% return)</li>
+                            <li>Implemented technical scalability metrics & impact framework</li>
+                            <li>Revised IPS to include regional concentration risks</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="experience-category">
-                    <h2>Technical Expertise</h2>
+                    <h3 style="color: #4a5568; font-size: 1.4em;">Technical Expertise</h3>
                     <div class="experience-box">
                         <span class="experience-date">2020-2023</span>
                         <h3>ServicePower</h3>
+                        <div class="strategic-note">Strategically chosen for a parallel/relevant startup quest</div>
                         <ul>
                             <li>Delivered AI/ML solutions for Fortune 100 clients, $13M+ ARR</li>
                             <li>Built 2 and deployed 5 SaaS products</li>
                             <li>Led 37+ member team across 14 firms</li>
                         </ul>
                     </div>
-                    <!-- Add other technical expertise boxes -->
+                    <div class="experience-box">
+                        <span class="experience-date">2020-2022</span>
+                        <h3>Monk Robotics</h3>
+                        <ul>
+                            <li>Launched 3 MVPs: autonomous lawn mower, sanitizing robots & IoT tech</li>
+                            <li>Rapidly adapted GTM & PMF amid COVID challenges</li>
+                            <li>Achieved $12K in pilot ARR in manufacturing tech</li>
+                        </ul>
+                    </div>
+                    <div class="experience-box">
+                        <span class="experience-date">2017-2020</span>
+                        <h3>Amida Technology</h3>
+                        <ul>
+                            <li>Closed $100M+ in TCV</li>
+                            <li>Owned 2 product lines, led 13+ federal proposals</li>
+                            <li>Supported 23+ commercial deals, driving 100%+ YOY growth</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -214,7 +252,7 @@
                         <li>UC LAUNCH accelerator, SVP</li>
                         <li>Skydeck, AI Entrepreneurs of Berkeley</li>
                         <li>Stanford & Berkeley Clubs Network</li>
-                        <li>Diverse Community Groups</li>
+                        <li>Diverse Community Groups (Immigrant, Australian, South Asian Networks)</li>
                     </ul>
                 </div>
                 <div class="card">
@@ -223,7 +261,7 @@
                         <li>Northwestern: AI/ML research network</li>
                         <li>DC, MD, and VA: Tech startup community</li>
                         <li>Florida: UF/UCF entrepreneurship hubs</li>
-                        <li>Other industry network: 800+ in Supply Chain, 300+ in Health Data</li>
+                        <li>Other industry network: 800+ in Supply Chain, 300+ in Health Data, and 1,000+ in AI/Data Science</li>
                     </ul>
                 </div>
             </div>
@@ -251,12 +289,37 @@
                     <div class="market-stat">
                         <div class="stat-number">$252.7B</div>
                         <div>US Market Size | 15.22% CAGR</div>
+                        <div class="sub-stat">
+                            Global Markets: 3PL: $1.1T | TMS: $4.4B | WMS: $2.7B
+                        </div>
                     </div>
                     <ul>
                         <li>Convergence of TMS, WMS, and 3PL systems</li>
                         <li>Real-time optimization & multi-modal planning</li>
                         <li>AI/ML enhanced route optimization</li>
                         <li>IoT and blockchain integration</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid-2" style="margin-top: 20px;">
+                <div class="card">
+                    <h3>AI-First SaaS Opportunities</h3>
+                    <ul>
+                        <li>Construction Management: <span class="blue-bold">$4.5B</span> market by 2026</li>
+                        <li>Auditing & Accounting: <span class="blue-bold">$4.8B</span> market by 2024</li>
+                        <li>Key attributes: poor interoperability, integration nightmare, disparate data sources, unstructured datasets</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Health Data</h3>
+                    <div class="market-stat">
+                        <div class="stat-number">$5.7B</div>
+                        <div>2025 Market Size</div>
+                    </div>
+                    <ul>
+                        <li>FHIR-based solutions</li>
+                        <li>Clinical decision support</li>
+                        <li>Data integration platforms</li>
                     </ul>
                 </div>
             </div>
@@ -293,19 +356,16 @@
         function openTab(tabName) {
             var i, tabContent, tabButtons;
             
-            // Hide all tab content
             tabContent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabContent.length; i++) {
                 tabContent[i].classList.remove("active");
             }
             
-            // Remove active class from all tab buttons
             tabButtons = document.getElementsByClassName("tab-button");
             for (i = 0; i < tabButtons.length; i++) {
                 tabButtons[i].classList.remove("active");
             }
             
-            // Show the selected tab content and set button to active
             document.getElementById(tabName).classList.add("active");
             event.currentTarget.classList.add("active");
         }
