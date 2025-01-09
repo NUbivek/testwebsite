@@ -595,5 +595,60 @@
             }
         });
     </script>
+    <script>
+    // Enhanced Tab Switching
+    function openTab(tabName) {
+        const tabContents = document.getElementsByClassName("tab-content");
+        const tabButtons = document.getElementsByClassName("tab-button");
+        
+        Array.from(tabContents).forEach(tab => {
+            tab.classList.remove("active");
+        });
+        
+        Array.from(tabButtons).forEach(button => {
+            button.classList.remove("active");
+        });
+        
+        document.getElementById(tabName).classList.add("active");
+        event.currentTarget.classList.add("active");
+    }
+
+    // Number Counter Animation with Currency Formatting
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            
+            // Extract unit (B or T) from the original text
+            const originalText = obj.getAttribute('data-value');
+            const unit = originalText.slice(-1);
+            
+            // Format number with $ sign, 2 decimal places, and unit
+            const currentValue = (progress * (end - start) + start).toFixed(2);
+            obj.innerHTML = `$${currentValue}${unit}`;
+            
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    // Initialize animations
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            // Store original value as data attribute
+            const originalText = stat.innerText;
+            stat.setAttribute('data-value', originalText);
+            
+            // Extract just the number
+            const value = parseFloat(originalText.replace(/[^0-9.-]+/g,""));
+            if (!isNaN(value)) {
+                animateValue(stat, 0, value, 2000);
+            }
+        });
+    });
+</script>
 </body>
 </html>
