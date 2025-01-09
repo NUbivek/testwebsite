@@ -2,6 +2,7 @@
 <html>
 <head>
     <style>
+        /* Base styles */
         body {
             font-family: system-ui, -apple-system, sans-serif;
             line-height: 1.5;
@@ -12,6 +13,37 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
 
         .container {
@@ -20,8 +52,11 @@
             margin: 0 auto;
         }
 
+        /* Enhanced Title Slide */
         .title-slide {
-            background: linear-gradient(135deg, #1a365d, #2a4365);
+            background: linear-gradient(-45deg, #1a365d, #2a4365, #2c5282, #2b6cb0);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: white;
             text-align: center;
             padding: 60px 40px;
@@ -29,23 +64,33 @@
             max-width: 1200px;
             border-radius: 8px;
             margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .title-slide:hover {
+            transform: translateY(-5px);
         }
 
         .title-slide h1 {
             color: white;
             font-size: 3em;
             margin-bottom: 10px;
+            animation: slideInUp 1s ease-out;
         }
 
         .subtitle {
             font-size: 1.2em;
             margin-bottom: 30px;
+            animation: slideInUp 1s ease-out 0.2s backwards;
         }
 
+        /* Enhanced Tab System */
         .tabs {
             width: 100%;
             max-width: 1200px;
             margin-top: 20px;
+            animation: slideInUp 1s ease-out 0.4s backwards;
         }
 
         .tab-buttons {
@@ -55,33 +100,50 @@
             flex-wrap: wrap;
         }
 
+        /* Enhanced Tab Buttons */
         .tab-button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background: #e2e8f0;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
-            transition: background-color 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .tab-button:hover {
+            background: #cbd5e0;
+            transform: translateY(-2px);
         }
 
         .tab-button.active {
             background: #4299e1;
             color: white;
+            animation: pulse 2s infinite;
         }
 
+        /* Enhanced Tab Content */
         .tab-content {
             display: none;
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .tab-content.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
+        /* Enhanced Experience Boxes */
         .experience-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -95,6 +157,20 @@
             position: relative;
             border-left: 4px solid #4299e1;
             margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .experience-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .experience-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
 
         .experience-date {
@@ -106,42 +182,94 @@
             padding: 2px 8px;
             border-radius: 12px;
             font-size: 0.8em;
+            transition: all 0.3s ease;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
+        /* Enhanced Cards */
         .card {
             background: #edf2f7;
             padding: 20px;
             border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
+            will-change: transform;
         }
 
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Enhanced Market Stats */
         .market-stat {
             background: #ebf8ff;
             padding: 15px;
             border-radius: 8px;
             margin: 10px 0;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+
+        .market-stat:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
 
         .stat-number {
             font-size: 2em;
             font-weight: bold;
             color: #2b6cb0;
+            opacity: 0;
+            animation: slideInUp 1s forwards;
+            animation-delay: 0.3s;
         }
 
+        /* Enhanced Quote */
         .quote {
+            position: relative;
+            opacity: 0;
+            animation: slideInUp 1s forwards;
+            animation-delay: 0.2s;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-left: 4px solid #4299e1;
+            padding: 30px;
+            margin: 40px 0;
             font-style: italic;
             text-align: center;
             font-size: 1.2em;
-            margin: 20px 0;
             color: #4a5568;
-            padding: 20px;
-            background: #f7fafc;
-            border-radius: 8px;
+        }
+
+        .quote:before, .quote:after {
+            content: '"';
+            position: absolute;
+            font-size: 4em;
+            opacity: 0.1;
+            font-family: Georgia, serif;
+            color: #4299e1;
+        }
+
+        .quote:before {
+            left: 10px;
+            top: -20px;
+        }
+
+        .quote:after {
+            right: 10px;
+            bottom: -40px;
+        }
+
+        /* Grid Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
         .blue-bold {
@@ -149,10 +277,31 @@
             font-weight: bold;
         }
 
+        /* Responsive Design */
         @media (max-width: 1024px) {
             .experience-container, .grid-2 {
                 grid-template-columns: 1fr;
             }
+        }
+
+        /* Hardware Acceleration */
+        .experience-box, .card, .market-stat, .tab-button {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        /* Text Formatting */
+        li {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -352,23 +501,92 @@
         </div>
     </div>
 
-    <script>
+   <script>
+        // Enhanced Tab Switching
         function openTab(tabName) {
-            var i, tabContent, tabButtons;
+            const tabContents = document.getElementsByClassName("tab-content");
+            const tabButtons = document.getElementsByClassName("tab-button");
             
-            tabContent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabContent.length; i++) {
-                tabContent[i].classList.remove("active");
-            }
+            Array.from(tabContents).forEach(tab => {
+                tab.classList.remove("active");
+                tab.style.opacity = 0;
+            });
             
-            tabButtons = document.getElementsByClassName("tab-button");
-            for (i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove("active");
-            }
+            Array.from(tabButtons).forEach(button => {
+                button.classList.remove("active");
+            });
             
-            document.getElementById(tabName).classList.add("active");
+            const selectedTab = document.getElementById(tabName);
+            selectedTab.classList.add("active");
+            
+            setTimeout(() => {
+                selectedTab.style.opacity = 1;
+            }, 50);
+            
             event.currentTarget.classList.add("active");
         }
+
+        // Scroll Animation
+        function checkScroll() {
+            const elements = document.querySelectorAll('.experience-box, .card');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight * 0.85) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Number Counter Animation
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkScroll();
+            
+            // Animate numbers
+            document.querySelectorAll('.stat-number').forEach(stat => {
+                const value = parseInt(stat.innerText.replace(/[^0-9.-]+/g,""));
+                if (!isNaN(value)) {
+                    animateValue(stat, 0, value, 2000);
+                }
+            });
+
+            // Initial animations
+            document.querySelectorAll('.card, .experience-box').forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }, 300);
+            });
+        });
+
+        // Optimized scroll listener
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    checkScroll();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
     </script>
 </body>
 </html>
