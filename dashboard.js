@@ -1,4 +1,4 @@
-const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } = Recharts;
+const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } = window.Recharts;
 
 const revenueData = [
   { year: 'FY24', revenue: 7.69, arr: 10.28, customers: 276, arrPerCustomer: 37.246, arrPerEmployee: 140.795 },
@@ -18,7 +18,7 @@ const MicroMetric = ({ title, value, change }) => (
     padding: '8px', 
     borderRadius: '8px', 
     border: '1px solid #1e40af',
-    marginBottom: '4px' 
+    marginBottom: '4px'
   }}>
     <p style={{ fontSize: '12px', color: '#93c5fd', margin: '0' }}>{title}</p>
     <p style={{ fontSize: '14px', fontWeight: 'bold', color: 'white', margin: '4px 0' }}>{value}</p>
@@ -178,24 +178,3 @@ const InvestorDashboard = () => {
                 <span style={{ fontSize: '12px', color: '#93c5fd' }}>Mappings</span>
                 <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>90% Less</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Network</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>Pre-Connected</span>
-              </div>
-            </div>
-          </div>
-
-          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-            <h3 style={{ fontSize: '14px', fontWeight: '600', color: 'white', marginBottom: '8px' }}>ROI Impact</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Labor Cost</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>-70%</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Integration</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>5x Faster</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Operations</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>-30%</span>
