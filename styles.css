@@ -35,6 +35,114 @@ body {
     background-color: #111827;
 }
 
+/* Dashboard Base Styles */
+#investor-dashboard {
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-in;
+    min-height: 600px;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+/* Theme Styles */
+body:not(.dark-theme) #investor-dashboard {
+    background: #ffffff;
+    color: #1a202c;
+}
+
+body.dark-theme #investor-dashboard {
+    background: #111827;
+    color: #f7fafc;
+}
+
+/* Metric Cards */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.metrics-grid > div {
+    animation: slideUp 0.4s ease-out;
+    animation-fill-mode: both;
+}
+
+.metric-card {
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+/* Theme-based Card Styles */
+body:not(.dark-theme) .metric-card {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+}
+
+body.dark-theme .metric-card {
+    background: #1f2937;
+    border: 1px solid #374151;
+}
+
+/* Chart Containers */
+.chart-container {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+body:not(.dark-theme) .chart-container {
+    background: linear-gradient(145deg, #f7fafc 0%, #edf2f7 100%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+body.dark-theme .chart-container {
+    background: linear-gradient(145deg, #1f2937 0%, #111827 100%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered Animation Delays */
+.metrics-grid > div:nth-child(1) { animation-delay: 0.1s; }
+.metrics-grid > div:nth-child(2) { animation-delay: 0.2s; }
+.metrics-grid > div:nth-child(3) { animation-delay: 0.3s; }
+.metrics-grid > div:nth-child(4) { animation-delay: 0.4s; }
+
+/* Hover Effects */
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.chart-container:hover {
+    transform: scale(1.02);
+}
+
+/* Canvas Styles */
+canvas {
+    margin: 16px 0;
+    height: 300px !important;
+    transition: background-color 0.3s ease;
+}
+
+
 #investor-dashboard {
     min-height: 600px;
     width: 100%;
