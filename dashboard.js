@@ -1,7 +1,9 @@
 const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } = window.Recharts;
 
 const InvestorDashboard = () => {
-    // rest of your dashboard code
+    // Your existing component code
+};
+
 
 const revenueData = [
   { year: 'FY24', revenue: 7.69, arr: 10.28, customers: 276, arrPerCustomer: 37.246, arrPerEmployee: 140.795 },
