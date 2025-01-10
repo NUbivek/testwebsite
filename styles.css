@@ -530,10 +530,19 @@ body.dark-theme .stat-number {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 10;
+    z-index: 1000;
     display: flex;
     align-items: center;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    border-radius: 16px;
+    backdrop-filter: blur(4px);
 }
+
+body.dark-theme .theme-toggle {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 
 .toggle-button {
     width: 48px;
