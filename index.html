@@ -237,21 +237,31 @@
                         </button>
                     </div>
                 </div>
-                         <div class="pdf-viewer">
-             <iframe id="sci-tms" class="pdf-frame active"
-                 src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/SCI%20%26%20Mixed-TMS_AgenticSolutionThesis.pdf&embedded=true"
-                 frameborder="0" width="100%" height="700px" loading="lazy">
-             </iframe>
-             <iframe id="linkedin-article1" class="pdf-frame"
-                 src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7282123427535040512"
-                 frameborder="0" width="100%" height="800px" allowfullscreen="" loading="lazy">
-             </iframe>
-             <iframe id="linkedin-article2" class="pdf-frame"
-                 src="https://www.linkedin.com/embed/feed/update/urn:li:share:7280613944342265857"
-                 frameborder="0" width="100%" height="800px" allowfullscreen="" loading="lazy">
-             </iframe>
-         </div>
 
+                  <div class="pdf-viewer">
+                      <div class="loading-indicator">Loading...</div>
+                      <iframe id="sci-tms" class="pdf-frame active"
+                          src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/SCI%20%26%20Mixed-TMS_AgenticSolutionThesis.pdf&embedded=true&rm=minimal"
+                          frameborder="0" 
+                          loading="lazy"
+                          importance="high"
+                          sandbox="allow-scripts allow-same-origin allow-popups">
+                      </iframe>
+                      <iframe id="linkedin-article1" class="pdf-frame"
+                          src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7282123427535040512"
+                          frameborder="0"
+                          loading="lazy"
+                          importance="high">
+                      </iframe>
+                      <iframe id="linkedin-article2" class="pdf-frame"
+                          src="https://www.linkedin.com/embed/feed/update/urn:li:share:7280613944342265857"
+                          frameborder="0"
+                          loading="lazy"
+                          importance="high">
+                      </iframe>
+                  </div>
+
+               
             </div>
         </div>
         
@@ -338,19 +348,41 @@
             event.currentTarget.classList.add("active");
         }
 
-        function switchPDF(pdfId) {
-            // Hide all PDFs
-            document.querySelectorAll('.pdf-frame').forEach(frame => {
-                frame.style.display = 'none';
-                frame.classList.remove('active');
-            });
-            
-            // Show selected PDF
-            const selectedPDF = document.getElementById(pdfId);
-            if (selectedPDF) {
-                selectedPDF.style.display = 'block';
-                selectedPDF.classList.add('active');
-            }
+           function switchPDF(pdfId) {
+       const viewer = document.querySelector('.pdf-viewer');
+       viewer.classList.add('loading');
+       
+       // Hide all frames
+       document.querySelectorAll('.pdf-frame').forEach(frame => {
+           frame.style.display = 'none';
+           frame.classList.remove('active');
+       });
+       
+       // Show selected frame
+       const selectedFrame = document.getElementById(pdfId);
+       if (selectedFrame) {
+           selectedFrame.style.display = 'block';
+           
+           // Handle loading state
+           selectedFrame.onload = () => {
+               viewer.classList.remove('loading');
+               selectedFrame.classList.add('active');
+           };
+           
+           // Fallback if onload doesn't trigger
+           setTimeout(() => {
+               viewer.classList.remove('loading');
+               selectedFrame.classList.add('active');
+           }, 5000);
+       }
+       
+       // Update tab styling
+       document.querySelectorAll('.pdf-tab').forEach(tab => {
+           tab.classList.remove('active');
+       });
+       event.currentTarget.classList.add('active');
+   }
+
             
             // Update tab styling
             document.querySelectorAll('.pdf-tab').forEach(tab => {
