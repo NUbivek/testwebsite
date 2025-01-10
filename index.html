@@ -654,41 +654,41 @@
             </div>
         </div>
                 <!-- Add these new tab content divs right before the closing </div> of the tabs container -->
-<div id="thesis-deep-dive" class="tab-content">
-    <h2>Thesis Deep-Dive</h2>
-    <div class="pdf-container">
-        <div class="pdf-navigation">
-            <div class="pdf-selector">
-                <button class="pdf-tab active" onclick="switchPDF('sci-tms')">
-                    <span class="pdf-icon">📦</span>
-                    <span class="pdf-title">SCI & Mixed-TMS</span>
-                </button>
-                <button class="pdf-tab" onclick="switchPDF('linkedin-article1')">
-                    <span class="pdf-icon">📋</span>
-                    <span class="pdf-title">Supply Chain Article</span>
-                </button>
-                <button class="pdf-tab" onclick="switchPDF('linkedin-article2')">
-                    <span class="pdf-icon">🚚</span>
-                    <span class="pdf-title">Third Article</span>
-                </button>
+        <div id="thesis-deep-dive" class="tab-content">
+            <h2>Thesis Deep-Dive</h2>
+            <div class="pdf-container">
+                <div class="pdf-navigation">
+                    <div class="pdf-selector">
+                        <button class="pdf-tab active" onclick="switchPDF('sci-tms')">
+                            <span class="pdf-icon">📦</span>
+                            <span class="pdf-title">SCI & Mixed-TMS</span>
+                        </button>
+                        <button class="pdf-tab" onclick="switchPDF('linkedin-article1')">
+                            <span class="pdf-icon">📋</span>
+                            <span class="pdf-title">Supply Chain Article</span>
+                        </button>
+                        <button class="pdf-tab" onclick="switchPDF('linkedin-article2')">
+                            <span class="pdf-icon">🚚</span>
+                            <span class="pdf-title">Third Article</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="pdf-viewer">
+                    <iframe id="sci-tms" class="pdf-frame active"
+                        src="https://docs.google.com/viewer?url=https://github.com/NUbivek/testwebsite/raw/main/SCI%20%26%20Mixed-TMS_AgenticSolutionThesis.pdf&embedded=true"
+                        frameborder="0" width="100%" height="700px" loading="lazy">
+                    </iframe>
+                    <iframe id="linkedin-article1" class="pdf-frame"
+                        src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7282123427535040512"
+                        frameborder="0" width="100%" height="700px" style="display: none;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                    <iframe id="linkedin-article2" class="pdf-frame"
+                        src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7264657562241761280"
+                        frameborder="0" width="100%" height="700px" style="display: none;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
             </div>
         </div>
-        <div class="pdf-viewer">
-            <iframe id="sci-tms" class="pdf-frame active"
-                src="https://docs.google.com/viewer?url=https://github.com/NUbivek/testwebsite/raw/main/SCI%20%26%20Mixed-TMS_AgenticSolutionThesis.pdf&embedded=true"
-                frameborder="0" width="100%" height="700px" loading="lazy">
-            </iframe>
-            <iframe id="linkedin-thesis1" class="pdf-frame"
-                src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7282123427535040512"
-                frameborder="0" width="100%" height="700px" style="display: none;" allowfullscreen="" loading="lazy">
-            </iframe>
-            <iframe id="linkedin-thesis2" class="pdf-frame"
-                src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7264657562241761280"
-                frameborder="0" width="100%" height="700px" style="display: none;" allowfullscreen="" loading="lazy">
-            </iframe>
-        </div>
-    </div>
-</div>
 
 
 
@@ -740,8 +740,10 @@
             
             // Show selected PDF
             const selectedPDF = document.getElementById(pdfId);
-            selectedPDF.style.display = 'block';
-            selectedPDF.classList.add('active');
+            if (selectedPDF) {
+                selectedPDF.style.display = 'block';
+                selectedPDF.classList.add('active');
+            }
             
             // Update tab styling
             document.querySelectorAll('.pdf-tab').forEach(tab => {
@@ -749,6 +751,8 @@
             });
             event.currentTarget.classList.add('active');
         }
+        
+
 
        
         // Scroll Animation
