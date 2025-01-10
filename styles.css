@@ -19,7 +19,22 @@ body {
     animation: fadeIn 0.8s ease-out forwards;
 }
 
-        
+ #investor-dashboard {
+    min-height: 600px;
+    width: 100%;
+    background: #111827;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.bg-gray-800 {
+    background-color: #1f2937;
+}
+
+.bg-gray-900 {
+    background-color: #111827;
+}
+       
 
 /* Main container and shared styles */
 .container,
