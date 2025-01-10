@@ -4,25 +4,8 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="vanilla-dashboard.js"></script>
-    <style>
-        #investor-dashboard {
-            padding: 20px;
-            background: #111827;
-            color: white;
-            min-height: 600px;
-        }
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        canvas {
-            margin: 16px 0;
-            height: 300px !important;
-        }
-    </style>
 </head>
+
 
 
 <body>
@@ -306,9 +289,10 @@
                         <button class="subtab-button" onclick="switchSubtab('topic5')">Topic 5</button>
                     </div>
                     
-                    <div id="dashboard" class="subtab-content active">
+                       <div id="dashboard" class="subtab-content active">
                         <div id="investor-dashboard"></div>
-                    </div>
+                        </div>
+
                     <div id="topic2" class="subtab-content">Topic 2 Content</div>
                     <div id="topic3" class="subtab-content">Topic 3 Content</div>
                     <div id="topic4" class="subtab-content">Topic 4 Content</div>
@@ -486,101 +470,31 @@
           });
       </script>
       
-<script type="text/babel">
-    // Initialize dashboard when switching tabs
-    function switchSubtab(subtabId) {
-        document.querySelectorAll('.subtab-content').forEach(content => {
-            content.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.subtab-button').forEach(button => {
-            button.classList.remove('active');
-        });
-        
-        document.getElementById(subtabId).classList.add('active');
-        event.currentTarget.classList.add('active');
-        
-        if (subtabId === 'dashboard') {
-            renderDashboard();
-        }
-    }
-
-    function updateChartTheme(chart) {
-    const isDark = document.body.classList.contains('dark-theme');
-    
-    const theme = {
-        backgroundColor: isDark ? '#1f2937' : '#ffffff',
-        textColor: isDark ? '#f7fafc' : '#2d3748',
-        gridColor: isDark ? '#374151' : '#e2e8f0',
-        tooltipBackground: isDark ? '#1e293b' : '#ffffff'
-    };
-
-    // Update chart colors
-    chart.options.plugins.legend.labels.color = theme.textColor;
-    chart.options.plugins.title.color = theme.textColor;
-    chart.options.scales.x.grid.color = theme.gridColor;
-    chart.options.scales.y.grid.color = theme.gridColor;
-    chart.options.scales.x.ticks.color = theme.textColor;
-    chart.options.scales.y.ticks.color = theme.textColor;
-    
-    // Update tooltip styles
-    chart.options.plugins.tooltip.backgroundColor = theme.tooltipBackground;
-    chart.options.plugins.tooltip.titleColor = theme.textColor;
-    chart.options.plugins.tooltip.bodyColor = theme.textColor;
-    
-    chart.update();
-}
-
-    // Add theme change listener
-    document.getElementById('themeToggle').addEventListener('click', () => {
-        const charts = Chart.instances;
-        charts.forEach(chart => updateChartTheme(chart));
-    });
-    
-    // Initialize dashboard with animations
-    function initDashboard() {
-        const container = document.getElementById('investor-dashboard');
-        if (!container || container.hasChildNodes()) return;
-    
-        // Create dashboard elements with staggered animations
-        createMetricsGrid(container);
-        setTimeout(() => createCharts(container), 300);
-        setTimeout(() => createInfoCards(container), 600);
-    }
-    
-    // Initialize when switching tabs
-    document.querySelector('[onclick="switchSubtab(\'dashboard\')"]')
-        ?.addEventListener('click', () => setTimeout(initDashboard, 100));
-
-
-    // Separate render function
-    function renderDashboard() {
-        console.log('Rendering dashboard...');
-        const container = document.getElementById('investor-dashboard');
-        if (container) {
-            try {
-                ReactDOM.render(
-                    React.createElement(InvestorDashboard),
-                    container
-                );
-                console.log('Dashboard rendered successfully');
-            } catch (error) {
-                console.error('Dashboard rendering error:', error);
+        <script>
+            function switchSubtab(subtabId) {
+                document.querySelectorAll('.subtab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.subtab-button').forEach(button => {
+                    button.classList.remove('active');
+                });
+                
+                document.getElementById(subtabId).classList.add('active');
+                event.currentTarget.classList.add('active');
+                
+                if (subtabId === 'dashboard') {
+                    initDashboard();
+                }
             }
-        }
-    }
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        if (document.getElementById('dashboard').classList.contains('active')) {
-            setTimeout(renderDashboard, 500);
-        }
-    });
-</script>
-
-
-
-
+        
+            // Initialize dashboard when DOM is loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                if (document.getElementById('dashboard').classList.contains('active')) {
+                    setTimeout(initDashboard, 100);
+                }
+            });
+        </script>
 
 
 </body>
