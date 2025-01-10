@@ -14,7 +14,46 @@
             animation: fadeIn 0.8s ease-out forwards;
         }
 
-        /* Animation Keyframes */
+          /* Fix container centering */
+  .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+  }
+  
+  /* Center the investment memo content */
+  #investment-memo {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+  }
+  
+  /* Ensure PDF container maintains width */
+  .pdf-container {
+      width: 100%;
+      margin: 0 auto;
+  }
+  
+  /* Center the dashboard content */
+  .dashboard-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+  }
+  
+  /* Ensure responsive centering on smaller screens */
+  @media (max-width: 1240px) {
+      .container,
+      #investment-memo,
+      .dashboard-container {
+          padding: 0 20px;
+      }
+  }
+
+
+
+/* Animation Keyframes */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
