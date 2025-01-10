@@ -289,9 +289,83 @@
                         <button class="subtab-button" onclick="switchSubtab('topic5')">Topic 5</button>
                     </div>
                     
-                       <div id="dashboard" class="subtab-content active">
-                        <div id="investor-dashboard"></div>
+                         <div id="dashboard" class="subtab-content active">
+                        <div id="investor-dashboard">
+                            <div class="dashboard-container">
+                                <!-- Top Section -->
+                                <div class="metrics-grid">
+                                    <!-- Financial KPIs -->
+                                    <div class="section financial">
+                                        <div class="kpi-grid">
+                                            <div class="metric-card" data-value="141">
+                                                <h3>Revenue CAGR</h3>
+                                                <p class="value">141%</p>
+                                                <span class="trend">Exceptional growth</span>
+                                            </div>
+                                            <!-- Add remaining 5 financial KPI cards -->
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Operational KPIs -->
+                                    <div class="section operational">
+                                        <div class="kpi-grid">
+                                            <div class="metric-card" data-value="10000">
+                                                <h3>Network Partners</h3>
+                                                <p class="value">10,000+</p>
+                                                <span class="trend">Strong network effects</span>
+                                            </div>
+                                            <!-- Add remaining 5 operational KPI cards -->
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <!-- Charts Section -->
+                                <div class="charts-grid">
+                                    <div class="section financial">
+                                        <div class="chart-container">
+                                            <canvas id="revenueChart"></canvas>
+                                        </div>
+                                        <div class="chart-container">
+                                            <canvas id="unitEconomicsChart"></canvas>
+                                        </div>
+                                        <div class="chart-container">
+                                            <canvas id="efficiencyChart"></canvas>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="section operational">
+                                        <div class="chart-container">
+                                            <canvas id="implementationChart"></canvas>
+                                        </div>
+                                        <div class="chart-container">
+                                            <canvas id="marketCoverageChart"></canvas>
+                                        </div>
+                                        <div class="chart-container">
+                                            <canvas id="roiChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <!-- Bottom Metrics -->
+                                <div class="metrics-grid">
+                                    <!-- Financial Metrics -->
+                                    <div class="section financial">
+                                        <div class="metrics-container">
+                                            <!-- Add 6 financial metric cards -->
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Operational Metrics -->
+                                    <div class="section operational">
+                                        <div class="metrics-container">
+                                            <!-- Add 6 operational metric cards -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
 
                     <div id="topic2" class="subtab-content">Topic 2 Content</div>
                     <div id="topic3" class="subtab-content">Topic 3 Content</div>
