@@ -2,12 +2,28 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.18.13/babel.min.js"></script>
-
+    <script src="vanilla-dashboard.js"></script>
+    <style>
+        #investor-dashboard {
+            padding: 20px;
+            background: #111827;
+            color: white;
+            min-height: 600px;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        canvas {
+            margin: 16px 0;
+            height: 300px !important;
+        }
+    </style>
 </head>
+
 
 <body>
     <div class="title-slide">
