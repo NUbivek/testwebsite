@@ -126,13 +126,15 @@ body {
     transform: translateY(0);
 }
 
-/* PDF Container */
+/* PDF Container and Navigation */
 .pdf-container {
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     margin: 20px auto;
     overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .pdf-navigation {
@@ -177,31 +179,90 @@ body {
     color: white;
 }
 
+/* PDF Viewer and Frame */
 .pdf-viewer {
     background: #f8f9fa;
     padding: 24px;
     min-height: 800px;
+    position: relative;
+}
+
+.pdf-viewer::before {
+    content: "Loading...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #4a5568;
+    font-size: 1.1em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pdf-viewer.loading::before {
+    opacity: 1;
 }
 
 .pdf-frame {
-    display: none;
     width: 100%;
+    height: 800px;
     border: none;
-    background: white;
     border-radius: 8px;
+    background: white;
     box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    opacity: 0;
     transition: opacity 0.3s ease;
+    display: none;
+    visibility: hidden;
 }
 
 .pdf-frame.active {
     display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
-/* LinkedIn iframe specific styles */
+/* LinkedIn Embed Optimization */
 iframe[src*="linkedin.com"] {
+    width: 100%;
     min-height: 800px;
+    border: none;
+    border-radius: 8px;
     background: transparent;
+    transition: opacity 0.3s ease;
 }
+
+/* Dark Mode Adjustments */
+body.dark-theme .pdf-container {
+    background: #1a202c;
+}
+
+body.dark-theme .pdf-navigation {
+    background: #2d3748;
+    border-bottom: 1px solid #4a5568;
+}
+
+body.dark-theme .pdf-viewer {
+    background: #1a202c;
+}
+
+body.dark-theme .pdf-frame {
+    background: #2d3748;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .pdf-frame,
+    iframe[src*="linkedin.com"] {
+        height: 600px;
+    }
+    
+    .pdf-viewer {
+        padding: 16px;
+    }
+}
+
 
 /* Experience Boxes */
 .experience-container {
@@ -513,13 +574,6 @@ body.dark-theme li {
     font-weight: 350;
 }
 
-body.dark-theme .pdf-container {
-    background: #1a202c;
-}
-
-body.dark-theme .pdf-navigation {
-    border-bottom: 1px solid #4a5568;
-}
 
 body.dark-theme .stat-number {
     color: #63b3ed;
