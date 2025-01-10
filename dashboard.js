@@ -1,7 +1,4 @@
-import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
-import { Card, CardContent } from "@/components/ui/card";
-import { Share2, DollarSign, Target, Zap, BadgePercent, Network, Gauge, Shield, ArrowUpRight, Rocket, Server, Users, Database, Clock, Activity } from 'lucide-react';
+const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } = Recharts;
 
 const revenueData = [
   { year: 'FY24', revenue: 7.69, arr: 10.28, customers: 276, arrPerCustomer: 37.246, arrPerEmployee: 140.795 },
