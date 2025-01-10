@@ -13,15 +13,26 @@ const metricsData = [
 ];
 
 const MicroMetric = ({ title, value, change }) => (
-  <div className="bg-gray-800 p-2 rounded-lg border border-blue-900">
-    <p className="text-xs text-blue-300">{title}</p>
-    <p className="text-sm font-bold text-white">{value}</p>
-    {change && <p className="text-xs text-blue-400">{change}</p>}
+  <div style={{ 
+    background: '#1f2937', 
+    padding: '8px', 
+    borderRadius: '8px', 
+    border: '1px solid #1e40af',
+    marginBottom: '4px' 
+  }}>
+    <p style={{ fontSize: '12px', color: '#93c5fd', margin: '0' }}>{title}</p>
+    <p style={{ fontSize: '14px', fontWeight: 'bold', color: 'white', margin: '4px 0' }}>{value}</p>
+    {change && <p style={{ fontSize: '12px', color: '#60a5fa', margin: '0' }}>{change}</p>}
   </div>
 );
 
 const MetricRow = ({ metrics }) => (
-  <div className="grid grid-cols-4 md:grid-cols-8 gap-1 mb-2">
+  <div style={{ 
+    display: 'grid', 
+    gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', 
+    gap: '8px', 
+    marginBottom: '16px' 
+  }}>
     {metrics.map((metric, idx) => (
       <MicroMetric key={idx} {...metric} />
     ))}
@@ -30,16 +41,16 @@ const MetricRow = ({ metrics }) => (
 
 const InvestorDashboard = () => {
   return (
-    <div className="bg-gray-900 p-4">
-      <div className="max-w-7xl mx-auto space-y-3">
-        <div className="flex items-center justify-between">
+    <div style={{ background: '#111827', padding: '16px', color: 'white' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div>
-            <h1 className="text-2xl font-bold text-white">Orderful Investment Analysis</h1>
-            <p className="text-sm text-blue-300">Enterprise EDI Platform</p>
+            <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: 'white', margin: '0' }}>Orderful Investment Analysis</h1>
+            <p style={{ fontSize: '14px', color: '#93c5fd', margin: '4px 0' }}>Enterprise EDI Platform</p>
           </div>
-          <div className="flex gap-2">
-            <span className="text-sm text-blue-400 bg-blue-900 px-3 py-1 rounded">141% CAGR</span>
-            <span className="text-sm text-blue-400 bg-blue-900 px-3 py-1 rounded">156% Customer Growth</span>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <span style={{ fontSize: '14px', color: '#60a5fa', background: '#1e3a8a', padding: '4px 12px', borderRadius: '4px' }}>141% CAGR</span>
+            <span style={{ fontSize: '14px', color: '#60a5fa', background: '#1e3a8a', padding: '4px 12px', borderRadius: '4px' }}>156% Customer Growth</span>
           </div>
         </div>
 
@@ -69,168 +80,122 @@ const InvestorDashboard = () => {
           ]}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          <div style={{ 
-              background: '#1f2937', 
-              padding: '16px', 
-              borderRadius: '8px',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-          }}>
-              <div style={{ 
-                  display: 'flex', 
-                  justifyContent: 'space-between', 
-                  alignItems: 'center', 
-                  marginBottom: '8px' 
-              }}>
-                  <h2 style={{ 
-                      fontSize: '14px', 
-                      fontWeight: '600', 
-                      color: 'white' 
-                  }}>Revenue Trajectory</h2>
-                  <span style={{ 
-                      fontSize: '12px', 
-                      color: '#60a5fa' 
-                  }}>Exponential Growth</span>
-              </div>
-              <ResponsiveContainer width="100%" height={180}>
-                <AreaChart data={revenueData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
-                  <XAxis dataKey="year" stroke="#93c5fd" />
-                  <YAxis stroke="#93c5fd" />
-                  <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
-                  <Legend />
-                  <Area type="monotone" dataKey="revenue" name="Revenue ($M)" stroke="#1d4ed8" fill="#1e40af" fillOpacity={0.6} />
-                  <Area type="monotone" dataKey="arr" name="ARR ($M)" stroke="#2563eb" fill="#3b82f6" fillOpacity={0.4} />
-                </AreaChart>
-              </ResponsiveContainer>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginTop: '16px' }}>
+          <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+              <h2 style={{ fontSize: '14px', fontWeight: '600', color: 'white', margin: '0' }}>Revenue Trajectory</h2>
+              <span style={{ fontSize: '12px', color: '#60a5fa' }}>Exponential Growth</span>
+            </div>
+            <ResponsiveContainer width="100%" height={180}>
+              <AreaChart data={revenueData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
+                <XAxis dataKey="year" stroke="#93c5fd" />
+                <YAxis stroke="#93c5fd" />
+                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
+                <Legend />
+                <Area type="monotone" dataKey="revenue" name="Revenue ($M)" stroke="#1d4ed8" fill="#1e40af" fillOpacity={0.6} />
+                <Area type="monotone" dataKey="arr" name="ARR ($M)" stroke="#2563eb" fill="#3b82f6" fillOpacity={0.4} />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
 
-          <div style={{ 
-              background: '#1f2937', 
-              padding: '16px', 
-              borderRadius: '8px',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-          }}>
-              <div style={{ 
-                  display: 'flex', 
-                  justifyContent: 'space-between', 
-                  alignItems: 'center', 
-                  marginBottom: '8px' 
-              }}>
-                  <h2 style={{ 
-                      fontSize: '14px', 
-                      fontWeight: '600', 
-                      color: 'white' 
-                  }}>Performance Metrics</h2>
-                  <span style={{ 
-                      fontSize: '12px', 
-                      color: '#60a5fa' 
-                  }}>Strong Unit Economics</span>
-              </div>
-              <ResponsiveContainer width="100%" height={180}>
-                <LineChart data={metricsData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
-                  <XAxis dataKey="year" stroke="#93c5fd" />
-                  <YAxis stroke="#93c5fd" />
-                  <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
-                  <Legend />
-                  <Line type="monotone" dataKey="margin" name="Margin %" stroke="#60a5fa" />
-                  <Line type="monotone" dataKey="rule40" name="Rule of 40" stroke="#3b82f6" />
-                </LineChart>
-              </ResponsiveContainer>
+          <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+              <h2 style={{ fontSize: '14px', fontWeight: '600', color: 'white', margin: '0' }}>Performance Metrics</h2>
+              <span style={{ fontSize: '12px', color: '#60a5fa' }}>Strong Unit Economics</span>
+            </div>
+            <ResponsiveContainer width="100%" height={180}>
+              <LineChart data={metricsData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
+                <XAxis dataKey="year" stroke="#93c5fd" />
+                <YAxis stroke="#93c5fd" />
+                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
+                <Legend />
+                <Line type="monotone" dataKey="margin" name="Margin %" stroke="#60a5fa" />
+                <Line type="monotone" dataKey="rule40" name="Rule of 40" stroke="#3b82f6" />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginTop: '16px' }}>
           <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-            <h3 className="text-sm font-semibold text-white mb-2">Market Coverage</h3>
-            <div className="space-y-1.5">
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Retail/eComm</span>
-                <span className="text-xs font-bold text-white">3,000+</span>
+            <h3 style={{ fontSize: '14px', fontWeight: '600', color: 'white', marginBottom: '8px' }}>Market Coverage</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Retail/eComm</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>3,000+</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Logistics</span>
-                <span className="text-xs font-bold text-white">2,000+</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Logistics</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>2,000+</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Manufacturing</span>
-                <span className="text-xs font-bold text-white">1,500+</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Manufacturing</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>1,500+</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Healthcare</span>
-                <span className="text-xs font-bold text-white">1,000+</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Healthcare</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>1,000+</span>
               </div>
             </div>
           </div>
 
           <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-            <h3 className="text-sm font-semibold text-white mb-2">Implementation</h3>
-            <div className="space-y-1.5">
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Enterprise</span>
-                <span className="text-xs font-bold text-white">9 days</span>
+            <h3 style={{ fontSize: '14px', fontWeight: '600', color: 'white', marginBottom: '8px' }}>Implementation</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Enterprise</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>9 days</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">SMB</span>
-                <span className="text-xs font-bold text-white">5 days</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>SMB</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>5 days</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Self-Service</span>
-                <span className="text-xs font-bold text-white">Hours</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Self-Service</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>Hours</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Success Rate</span>
-                <span className="text-xs font-bold text-white">100%</span>
-              </div>
-            </div>
-          </div>
-
-          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-            <h3 className="text-sm font-semibold text-white mb-2">Tech Advantage</h3>
-            <div className="space-y-1.5">
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Architecture</span>
-                <span className="text-xs font-bold text-white">API-First</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Infrastructure</span>
-                <span className="text-xs font-bold text-white">Cloud-Native</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Mappings</span>
-                <span className="text-xs font-bold text-white">90% Less</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Network</span>
-                <span className="text-xs font-bold text-white">Pre-Connected</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Success Rate</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>100%</span>
               </div>
             </div>
           </div>
 
           <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-            <h3 className="text-sm font-semibold text-white mb-2">ROI Impact</h3>
-            <div className="space-y-1.5">
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Labor Cost</span>
-                <span className="text-xs font-bold text-white">-70%</span>
+            <h3 style={{ fontSize: '14px', fontWeight: '600', color: 'white', marginBottom: '8px' }}>Tech Advantage</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Architecture</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>API-First</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Integration</span>
-                <span className="text-xs font-bold text-white">5x Faster</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Infrastructure</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>Cloud-Native</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Operations</span>
-                <span className="text-xs font-bold text-white">-30%</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Mappings</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>90% Less</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-xs text-blue-300">Time-to-Value</span>
-                <span className="text-xs font-bold text-white">Days</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Network</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>Pre-Connected</span>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+
+          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '600', color: 'white', marginBottom: '8px' }}>ROI Impact</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Labor Cost</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>-70%</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Integration</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>5x Faster</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Operations</span>
+                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>-30%</span>
