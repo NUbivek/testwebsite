@@ -1,4 +1,4 @@
-const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } = Recharts;
+const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } = window.Recharts;
 
 const revenueData = [
   { year: 'FY24', revenue: 7.69, arr: 10.28, customers: 276, arrPerCustomer: 37.246, arrPerEmployee: 140.795 },
