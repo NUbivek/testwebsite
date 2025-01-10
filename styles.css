@@ -525,23 +525,18 @@ body.dark-theme .stat-number {
     color: #63b3ed;
 }
 
-/* Theme Toggle */
 .theme-toggle {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     right: 20px;
-    z-index: 1000;
     display: flex;
     align-items: center;
-    background: rgba(0, 0, 0, 0.1);
-    padding: 8px;
-    border-radius: 16px;
-    backdrop-filter: blur(4px);
 }
 
-body.dark-theme .theme-toggle {
-    background: rgba(255, 255, 255, 0.1);
+.title-slide {
+    position: relative;  /* Ensure the banner acts as positioning context */
 }
+
 
 
 .toggle-button {
