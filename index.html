@@ -505,6 +505,54 @@
         }
     }
 
+    function updateChartTheme(chart) {
+    const isDark = document.body.classList.contains('dark-theme');
+    
+    const theme = {
+        backgroundColor: isDark ? '#1f2937' : '#ffffff',
+        textColor: isDark ? '#f7fafc' : '#2d3748',
+        gridColor: isDark ? '#374151' : '#e2e8f0',
+        tooltipBackground: isDark ? '#1e293b' : '#ffffff'
+    };
+
+    // Update chart colors
+    chart.options.plugins.legend.labels.color = theme.textColor;
+    chart.options.plugins.title.color = theme.textColor;
+    chart.options.scales.x.grid.color = theme.gridColor;
+    chart.options.scales.y.grid.color = theme.gridColor;
+    chart.options.scales.x.ticks.color = theme.textColor;
+    chart.options.scales.y.ticks.color = theme.textColor;
+    
+    // Update tooltip styles
+    chart.options.plugins.tooltip.backgroundColor = theme.tooltipBackground;
+    chart.options.plugins.tooltip.titleColor = theme.textColor;
+    chart.options.plugins.tooltip.bodyColor = theme.textColor;
+    
+    chart.update();
+}
+
+    // Add theme change listener
+    document.getElementById('themeToggle').addEventListener('click', () => {
+        const charts = Chart.instances;
+        charts.forEach(chart => updateChartTheme(chart));
+    });
+    
+    // Initialize dashboard with animations
+    function initDashboard() {
+        const container = document.getElementById('investor-dashboard');
+        if (!container || container.hasChildNodes()) return;
+    
+        // Create dashboard elements with staggered animations
+        createMetricsGrid(container);
+        setTimeout(() => createCharts(container), 300);
+        setTimeout(() => createInfoCards(container), 600);
+    }
+    
+    // Initialize when switching tabs
+    document.querySelector('[onclick="switchSubtab(\'dashboard\')"]')
+        ?.addEventListener('click', () => setTimeout(initDashboard, 100));
+
+
     // Separate render function
     function renderDashboard() {
         console.log('Rendering dashboard...');
