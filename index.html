@@ -51,7 +51,76 @@
             width: 100%;
             margin: 0 auto;
         }
+        
+        .pdf-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .pdf-navigation {
+            background: #f7fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 20px;
+        }
+        
+        .pdf-selector {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            padding-bottom: 4px;
+        }
+        
+        .pdf-tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #edf2f7;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            color: #4a5568;
+            font-size: 0.9em;
+        }
+        
+        .pdf-tab:hover {
+            background: #e2e8f0;
+            transform: translateY(-1px);
+        }
+        
+        .pdf-tab.active {
+            background: #4299e1;
+            color: white;
+        }
+        
+        .pdf-icon {
+            font-size: 1.2em;
+        }
+        
+        .pdf-title {
+            font-weight: 500;
+        }
+        
+        .pdf-viewer {
+            background: #f8f9fa;
+            padding: 20px;
+            min-height: 800px;
+        }
+        
+        .pdf-viewer iframe {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
 
+        
         /* Enhanced Title Slide */
         .title-slide {
             background: linear-gradient(-45deg, #1a365d, #2a4365, #2c5282, #2b6cb0);
@@ -568,28 +637,29 @@
         </div>
                 <!-- Add these new tab content divs right before the closing </div> of the tabs container -->
         <div id="thesis-deep-dive" class="tab-content">
-            <h2>Thesis Deep-Dive</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <!-- Add your content here -->
-                </div>
-                <div class="card">
-                    <!-- Add your content here -->
-                </div>
+    <h2>Thesis Deep-Dive</h2>
+    <div class="pdf-container">
+        <div class="pdf-navigation">
+            <div class="pdf-selector">
+                <button class="pdf-tab active" onclick="switchPDF('sci-tms')">
+                    <span class="pdf-icon">📄</span>
+                    <span class="pdf-title">SCI & Mixed-TMS Thesis</span>
+                </button>
             </div>
         </div>
-        
-        <div id="case-studies" class="tab-content">
-            <h2>Case Studies</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <!-- Add your content here -->
-                </div>
-                <div class="card">
-                    <!-- Add your content here -->
-                </div>
-            </div>
+        <div class="pdf-viewer" id="pdf-viewer">
+            <iframe
+                id="sci-tms"
+                src="https://docs.google.com/viewer?url=https://github.com/NUbivek/testwebsite/raw/main/SCI%20%26%20Mixed-TMS_AgenticSolutionThesis.pdf&embedded=true"
+                frameborder="0"
+                width="100%"
+                height="800px"
+                loading="lazy">
+            </iframe>
         </div>
+    </div>
+</div>
+
         
         <div id="sample-deals" class="tab-content">
             <h2>Sample Deals</h2>
