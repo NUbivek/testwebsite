@@ -138,6 +138,87 @@
             border-radius: 8px;
         }
 
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: #1a202c;
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .tab-content {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .tab-button {
+            background: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .tab-button:hover {
+            background: #718096;
+        }
+        
+        body.dark-mode .tab-button.active {
+            background: #4299e1;
+        }
+        
+        body.dark-mode .experience-box {
+            background: #2d3748;
+            border-left-color: #4299e1;
+        }
+        
+        body.dark-mode .card {
+            background: #2d3748;
+        }
+        
+        body.dark-mode .market-stat {
+            background: #2d3748;
+        }
+        
+        /* Toggle Button Styles */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            padding: 4px;
+        }
+        
+        .toggle-button {
+            width: 48px;
+            height: 24px;
+            background: #cbd5e0;
+            border-radius: 12px;
+            padding: 2px;
+            position: relative;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-button::before {
+            content: '🌙';
+            position: absolute;
+            left: 4px;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-button.dark::before {
+            content: '☀️';
+            transform: translateX(24px);
+        }
+        
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        
         
         /* Enhanced Title Slide */
         .title-slide {
@@ -462,6 +543,14 @@
             <button class="tab-button" onclick="openTab('sample-deals')">Sample Deals</button>
             <button class="tab-button" onclick="openTab('my-story')">My Story</button>
         </div>
+            <div class="tab-buttons">
+                <!-- Your existing tab buttons -->
+                <div class="theme-toggle">
+                    <div class="toggle-container">
+                        <button class="toggle-button" id="themeToggle" aria-label="Toggle dark mode"></button>
+                    </div>
+                </div>
+            </div>
 
         <div id="background" class="tab-content active">
             <h2>Track Record & Experience</h2>
@@ -753,8 +842,26 @@
         }
         
 
-
-       
+        // Dark mode toggle
+        function initTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (localStorage.getItem('darkMode') === 'true' || (!localStorage.getItem('darkMode') && prefersDark)) {
+                document.body.classList.add('dark-mode');
+                themeToggle.classList.add('dark');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                themeToggle.classList.toggle('dark');
+                localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', initTheme);
+        
+               
         // Scroll Animation
         function checkScroll() {
             const elements = document.querySelectorAll('.experience-box, .card');
