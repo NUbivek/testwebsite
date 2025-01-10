@@ -1,180 +1,272 @@
-const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } = Recharts;
-
+// Data
 const revenueData = [
-  { year: 'FY24', revenue: 7.69, arr: 10.28, customers: 276, arrPerCustomer: 37.246, arrPerEmployee: 140.795 },
-  { year: 'FY25', revenue: 20.25, arr: 27.01, customers: 828, arrPerCustomer: 32.621, arrPerEmployee: 245.503 },
-  { year: 'FY26', revenue: 44.81, arr: 59.74, customers: 1808, arrPerCustomer: 33.043, arrPerEmployee: 449.184 }
+  { year: 'FY24', revenue: 7.69, arr: 10.28 },
+  { year: 'FY25', revenue: 20.25, arr: 27.01 },
+  { year: 'FY26', revenue: 44.81, arr: 59.74 }
 ];
 
 const metricsData = [
-  { year: 'FY24', margin: 74.19, nrr: 130, ltvcac: 10, rule40: 176, burnMultiple: 1.96 },
-  { year: 'FY25', margin: 95.02, nrr: 130, ltvcac: 10, rule40: 258, burnMultiple: -0.24 },
-  { year: 'FY26', margin: 95.03, nrr: 130, ltvcac: 10, rule40: 216, burnMultiple: -0.24 }
+  { year: 'FY24', margin: 74.19, rule40: 176 },
+  { year: 'FY25', margin: 95.02, rule40: 258 },
+  { year: 'FY26', margin: 95.03, rule40: 216 }
 ];
 
-const MicroMetric = ({ title, value, change }) => (
-  <div style={{ 
-    background: '#1f2937', 
-    padding: '8px', 
-    borderRadius: '8px', 
-    border: '1px solid #1e40af',
-    marginBottom: '4px'
-  }}>
-    <p style={{ fontSize: '12px', color: '#93c5fd', margin: '0' }}>{title}</p>
-    <p style={{ fontSize: '14px', fontWeight: 'bold', color: 'white', margin: '4px 0' }}>{value}</p>
-    {change && <p style={{ fontSize: '12px', color: '#60a5fa', margin: '0' }}>{change}</p>}
-  </div>
-);
+const additionalMetrics = {
+  topRow: [
+    { title: 'FY26 ARR', value: '$59.74M', change: '141% CAGR' },
+    { title: 'Customers', value: '1,808', change: '156% CAGR' },
+    { title: 'Network', value: '10,000+', change: 'Partners' },
+    { title: 'Transactions', value: '265M', change: 'Annual' },
+    { title: 'ARR/Employee', value: '$449K', change: '79% CAGR' },
+    { title: 'ARR/Customer', value: '$33K', change: 'Expanding' },
+    { title: 'Gross Margin', value: '95.03%', change: 'Elite' },
+    { title: 'Rule of 40', value: '216%', change: 'Best-in-class' }
+  ],
+  bottomRow: [
+    { title: 'LTV/CAC', value: '10x', change: 'Sustainable' },
+    { title: 'NRR', value: '130%', change: 'Strong' },
+    { title: 'Burn Multiple', value: '-0.24', change: 'Efficient' },
+    { title: 'Implementation', value: '9 days', change: '5x faster' },
+    { title: 'Labor Savings', value: '70%', change: 'vs 30%' },
+    { title: 'Integration', value: '80%', change: 'Time saved' },
+    { title: 'Uptime', value: '99.99%', change: 'Enterprise' },
+    { title: 'Error Fix', value: 'Real-time', change: 'vs 48h' }
+  ],
+  marketCoverage: [
+    { label: 'Retail/eComm', value: '3,000+' },
+    { label: 'Logistics', value: '2,000+' },
+    { label: 'Manufacturing', value: '1,500+' },
+    { label: 'Healthcare', value: '1,000+' }
+  ],
+  implementation: [
+    { label: 'Enterprise', value: '9 days' },
+    { label: 'SMB', value: '5 days' },
+    { label: 'Self-Service', value: 'Hours' },
+    { label: 'Success Rate', value: '100%' }
+  ],
+  techAdvantage: [
+    { label: 'Architecture', value: 'API-First' },
+    { label: 'Infrastructure', value: 'Cloud-Native' },
+    { label: 'Mappings', value: '90% Less' },
+    { label: 'Network', value: 'Pre-Connected' }
+  ],
+  roiImpact: [
+    { label: 'Labor Cost', value: '-70%' },
+    { label: 'Integration', value: '5x Faster' },
+    { label: 'Operations', value: '-30%' },
+    { label: 'Time-to-Value', value: 'Days' }
+  ]
+};
 
-const MetricRow = ({ metrics }) => (
-  <div style={{ 
-    display: 'grid', 
-    gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', 
-    gap: '8px', 
-    marginBottom: '16px' 
-  }}>
-    {metrics.map((metric, idx) => (
-      <MicroMetric key={idx} {...metric} />
-    ))}
-  </div>
-);
+function initDashboard() {
+  const container = document.getElementById('investor-dashboard');
+  if (!container) return;
 
-const InvestorDashboard = () => {
-  return (
-    <div style={{ background: '#111827', padding: '16px', color: 'white' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          <div>
-            <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: 'white', margin: '0' }}>Orderful Investment Analysis</h1>
-            <p style={{ fontSize: '14px', color: '#93c5fd', margin: '4px 0' }}>Enterprise EDI Platform</p>
-          </div>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <span style={{ fontSize: '14px', color: '#60a5fa', background: '#1e3a8a', padding: '4px 12px', borderRadius: '4px' }}>141% CAGR</span>
-            <span style={{ fontSize: '14px', color: '#60a5fa', background: '#1e3a8a', padding: '4px 12px', borderRadius: '4px' }}>156% Customer Growth</span>
-          </div>
+  // Clear existing content
+  container.innerHTML = '';
+  
+  // Create header
+  createHeader(container);
+  
+  // Create metrics grid
+  createMetricsGrid(container, additionalMetrics.topRow);
+  createMetricsGrid(container, additionalMetrics.bottomRow);
+  
+  // Create charts
+  const chartsContainer = document.createElement('div');
+  chartsContainer.style.display = 'grid';
+  chartsContainer.style.gridTemplateColumns = '1fr 1fr';
+  chartsContainer.style.gap = '16px';
+  chartsContainer.style.marginTop = '16px';
+  container.appendChild(chartsContainer);
+  
+  createRevenueChart(chartsContainer);
+  createMetricsChart(chartsContainer);
+  
+  // Create info cards
+  createInfoCards(container);
+}
+
+function createHeader(container) {
+  const header = document.createElement('div');
+  header.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <div>
+        <h1 style="font-size: 24px; font-weight: bold; color: white; margin: 0;">Orderful Investment Analysis</h1>
+        <p style="font-size: 14px; color: #93c5fd; margin: 4px 0;">Enterprise EDI Platform</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <span style="font-size: 14px; color: #60a5fa; background: #1e3a8a; padding: 4px 12px; border-radius: 4px;">141% CAGR</span>
+        <span style="font-size: 14px; color: #60a5fa; background: #1e3a8a; padding: 4px 12px; border-radius: 4px;">156% Customer Growth</span>
+      </div>
+    </div>
+  `;
+  container.appendChild(header);
+}
+
+function createMetricsGrid(container, metrics) {
+  const grid = document.createElement('div');
+  grid.style.display = 'grid';
+  grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(150px, 1fr))';
+  grid.style.gap = '12px';
+  grid.style.marginBottom = '16px';
+
+  metrics.forEach(metric => {
+    const card = document.createElement('div');
+    card.style.background = '#1f2937';
+    card.style.padding = '12px';
+    card.style.borderRadius = '8px';
+    card.style.border = '1px solid #1e40af';
+    card.innerHTML = `
+      <p style="font-size: 12px; color: #93c5fd; margin: 0;">${metric.title}</p>
+      <p style="font-size: 14px; font-weight: bold; color: white; margin: 4px 0;">${metric.value}</p>
+      <p style="font-size: 12px; color: #60a5fa; margin: 0;">${metric.change}</p>
+    `;
+    grid.appendChild(card);
+  });
+
+  container.appendChild(grid);
+}
+
+function createRevenueChart(container) {
+  const chartContainer = document.createElement('div');
+  chartContainer.style.background = '#1f2937';
+  chartContainer.style.padding = '16px';
+  chartContainer.style.borderRadius = '8px';
+  
+  const canvas = document.createElement('canvas');
+  chartContainer.appendChild(canvas);
+  container.appendChild(chartContainer);
+
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: revenueData.map(d => d.year),
+      datasets: [
+        {
+          label: 'Revenue ($M)',
+          data: revenueData.map(d => d.revenue),
+          borderColor: '#1d4ed8',
+          backgroundColor: '#1e40af80',
+          fill: true
+        },
+        {
+          label: 'ARR ($M)',
+          data: revenueData.map(d => d.arr),
+          borderColor: '#3b82f6',
+          backgroundColor: '#3b82f680',
+          fill: true
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Revenue Trajectory',
+          color: 'white'
+        },
+        legend: {
+          labels: { color: 'white' }
+        }
+      },
+      scales: {
+        x: { grid: { color: '#1e40af' }, ticks: { color: 'white' } },
+        y: { grid: { color: '#1e40af' }, ticks: { color: 'white' } }
+      }
+    }
+  });
+}
+
+function createMetricsChart(container) {
+  const chartContainer = document.createElement('div');
+  chartContainer.style.background = '#1f2937';
+  chartContainer.style.padding = '16px';
+  chartContainer.style.borderRadius = '8px';
+  
+  const canvas = document.createElement('canvas');
+  chartContainer.appendChild(canvas);
+  container.appendChild(chartContainer);
+
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: metricsData.map(d => d.year),
+      datasets: [
+        {
+          label: 'Margin %',
+          data: metricsData.map(d => d.margin),
+          borderColor: '#60a5fa',
+          tension: 0.1
+        },
+        {
+          label: 'Rule of 40',
+          data: metricsData.map(d => d.rule40),
+          borderColor: '#3b82f6',
+          tension: 0.1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Performance Metrics',
+          color: 'white'
+        },
+        legend: {
+          labels: { color: 'white' }
+        }
+      },
+      scales: {
+        x: { grid: { color: '#1e40af' }, ticks: { color: 'white' } },
+        y: { grid: { color: '#1e40af' }, ticks: { color: 'white' } }
+      }
+    }
+  });
+}
+
+function createInfoCards(container) {
+  const infoGrid = document.createElement('div');
+  infoGrid.style.display = 'grid';
+  infoGrid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+  infoGrid.style.gap = '8px';
+  infoGrid.style.marginTop = '16px';
+
+  const sections = [
+    { title: 'Market Coverage', data: additionalMetrics.marketCoverage },
+    { title: 'Implementation', data: additionalMetrics.implementation },
+    { title: 'Tech Advantage', data: additionalMetrics.techAdvantage },
+    { title: 'ROI Impact', data: additionalMetrics.roiImpact }
+  ];
+
+  sections.forEach(section => {
+    const card = document.createElement('div');
+    card.style.background = '#1f2937';
+    card.style.padding = '12px';
+    card.style.borderRadius = '8px';
+    
+    let html = `<h3 style="font-size: 14px; font-weight: 600; color: white; margin-bottom: 8px;">${section.title}</h3>`;
+    html += '<div style="display: flex; flex-direction: column; gap: 6px;">';
+    
+    section.data.forEach(item => {
+      html += `
+        <div style="display: flex; justify-content: space-between;">
+          <span style="font-size: 12px; color: #93c5fd;">${item.label}</span>
+          <span style="font-size: 12px; font-weight: bold; color: white;">${item.value}</span>
         </div>
+      `;
+    });
+    
+    html += '</div>';
+    card.innerHTML = html;
+    infoGrid.appendChild(card);
+  });
 
-        <MetricRow 
-          metrics={[
-            { title: 'FY26 ARR', value: '$59.74M', change: '141% CAGR' },
-            { title: 'Customers', value: '1,808', change: '156% CAGR' },
-            { title: 'Network', value: '10,000+', change: 'Partners' },
-            { title: 'Transactions', value: '265M', change: 'Annual' },
-            { title: 'ARR/Employee', value: '$449K', change: '79% CAGR' },
-            { title: 'ARR/Customer', value: '$33K', change: 'Expanding' },
-            { title: 'Gross Margin', value: '95.03%', change: 'Elite' },
-            { title: 'Rule of 40', value: '216%', change: 'Best-in-class' }
-          ]}
-        />
+  container.appendChild(infoGrid);
+}
 
-        <MetricRow 
-          metrics={[
-            { title: 'LTV/CAC', value: '10x', change: 'Sustainable' },
-            { title: 'NRR', value: '130%', change: 'Strong' },
-            { title: 'Burn Multiple', value: '-0.24', change: 'Efficient' },
-            { title: 'Implementation', value: '9 days', change: '5x faster' },
-            { title: 'Labor Savings', value: '70%', change: 'vs 30%' },
-            { title: 'Integration', value: '80%', change: 'Time saved' },
-            { title: 'Uptime', value: '99.99%', change: 'Enterprise' },
-            { title: 'Error Fix', value: 'Real-time', change: 'vs 48h' }
-          ]}
-        />
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginTop: '16px' }}>
-          <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <h2 style={{ fontSize: '14px', fontWeight: '600', color: 'white', margin: '0' }}>Revenue Trajectory</h2>
-              <span style={{ fontSize: '12px', color: '#60a5fa' }}>Exponential Growth</span>
-            </div>
-            <ResponsiveContainer width="100%" height={180}>
-              <AreaChart data={revenueData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
-                <XAxis dataKey="year" stroke="#93c5fd" />
-                <YAxis stroke="#93c5fd" />
-                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
-                <Legend />
-                <Area type="monotone" dataKey="revenue" name="Revenue ($M)" stroke="#1d4ed8" fill="#1e40af" fillOpacity={0.6} />
-                <Area type="monotone" dataKey="arr" name="ARR ($M)" stroke="#2563eb" fill="#3b82f6" fillOpacity={0.4} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <h2 style={{ fontSize: '14px', fontWeight: '600', color: 'white', margin: '0' }}>Performance Metrics</h2>
-              <span style={{ fontSize: '12px', color: '#60a5fa' }}>Strong Unit Economics</span>
-            </div>
-            <ResponsiveContainer width="100%" height={180}>
-              <LineChart data={metricsData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
-                <XAxis dataKey="year" stroke="#93c5fd" />
-                <YAxis stroke="#93c5fd" />
-                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
-                <Legend />
-                <Line type="monotone" dataKey="margin" name="Margin %" stroke="#60a5fa" />
-                <Line type="monotone" dataKey="rule40" name="Rule of 40" stroke="#3b82f6" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginTop: '16px' }}>
-          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-            <h3 style={{ fontSize: '14px', fontWeight: '600', color: 'white', marginBottom: '8px' }}>Market Coverage</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Retail/eComm</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>3,000+</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Logistics</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>2,000+</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Manufacturing</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>1,500+</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Healthcare</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>1,000+</span>
-              </div>
-            </div>
-          </div>
-
-          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-            <h3 style={{ fontSize: '14px', fontWeight: '600', color: 'white', marginBottom: '8px' }}>Implementation</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Enterprise</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>9 days</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>SMB</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>5 days</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Self-Service</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>Hours</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Success Rate</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>100%</span>
-              </div>
-            </div>
-          </div>
-
-          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-            <h3 style={{ fontSize: '14px', fontWeight: '600', color: 'white', marginBottom: '8px' }}>Tech Advantage</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Architecture</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>API-First</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Infrastructure</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>Cloud-Native</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '12px', color: '#93c5fd' }}>Mappings</span>
-                <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'white' }}>90% Less</span>
-              </div>
+// Initialize dashboard when DOM is loaded
+document.addEventListener('DOMContentLoaded', initDashboard);
