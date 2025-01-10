@@ -1,0 +1,668 @@
+ <style>
+        /* Base styles */
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #2d3748;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .pdf-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .pdf-navigation {
+            background: #f7fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 20px;
+        }
+        
+        .pdf-selector {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            padding-bottom: 4px;
+        }
+        
+        .pdf-tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #edf2f7;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            color: #4a5568;
+            font-size: 0.9em;
+        }
+        
+        .pdf-tab:hover {
+            background: #e2e8f0;
+            transform: translateY(-1px);
+        }
+        
+        .pdf-tab.active {
+            background: #4299e1;
+            color: white;
+        }
+        
+        .pdf-icon {
+            font-size: 1.2em;
+        }
+        
+        .pdf-title {
+            font-weight: 500;
+        }
+        
+        .pdf-viewer {
+            background: #f8f9fa;
+            padding: 20px;
+            min-height: 800px;
+        }
+        
+        .pdf-viewer iframe {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .pdf-frame {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: opacity 0.3s ease;
+            min-height: 700px;
+        }
+        
+        .pdf-frame.active {
+            display: block;
+        }
+        
+        .pdf-viewer {
+            background: #f8f9fa;
+            padding: 20px;
+            min-height: 700px;
+            border-radius: 8px;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-theme {
+            background: #121212;
+            color: #e2e8f0;
+        }
+        
+        /* Container & Content */
+        body.dark-theme .tab-content,
+        body.dark-theme .card,
+        body.dark-theme .market-stat,
+        body.dark-theme .pdf-navigation {
+            background: #2d3748;
+        }
+        
+        /* Navigation */
+        body.dark-theme .tab-button,
+        body.dark-theme .pdf-tab {
+            background: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        body.dark-theme .tab-button:hover,
+        body.dark-theme .pdf-tab:hover {
+            background: #718096;
+        }
+        
+        body.dark-theme .tab-button.active,
+        body.dark-theme .pdf-tab.active {
+            background: #4299e1;
+            color: #fff;
+        }
+        
+        /* Experience Box Headers */
+        body.dark-theme .experience-category h3 {
+            color: #90cdf4;
+            font-size: 1.4em;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        /* Experience Boxes */
+        body.dark-theme .experience-box {
+            background: #1a202c;
+            border-left-color: rgba(66, 153, 225, 0.6);
+        }
+        
+        body.dark-theme .experience-box:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Strategic Notes */
+        body.dark-theme .strategic-note {
+            background: rgba(66, 153, 225, 0.03);
+            color: #a0aec0;
+            border-left: 2px solid rgba(66, 153, 225, 0.3);
+            font-weight: 350;
+            box-shadow: none;
+            opacity: 0.75;
+        }
+        
+        body.dark-theme .strategic-note:before {
+            opacity: 0.02;
+            background: transparent;
+        }
+        
+        /* Typography */
+        body.dark-theme h1, 
+        body.dark-theme h2, 
+        body.dark-theme h3 {
+            color: #e2e8f0;
+            font-weight: 350;
+        }
+        
+        body.dark-theme p, 
+        body.dark-theme li {
+            color: #cbd5e0;
+            font-weight: 350;
+        }
+        
+        /* PDF Viewer */
+        body.dark-theme .pdf-container {
+            background: #1a202c;
+        }
+        
+        body.dark-theme .pdf-navigation {
+            border-bottom: 1px solid #4a5568;
+        }
+        
+        /* Statistics */
+        body.dark-theme .stat-number {
+            color: #63b3ed;
+        }
+        
+        /* Headers with Separator */
+        h2 {
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(66, 153, 225, 0.15);
+            margin-bottom: 20px;
+        }
+        
+        body.dark-theme h2 {
+            border-bottom: 1px solid rgba(66, 153, 225, 0.1);
+        }
+        
+        /* Toggle Button */
+        .theme-toggle {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-button {
+            width: 48px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 2px;
+            position: relative;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-button::before {
+            content: '🌙';
+            position: absolute;
+            left: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .toggle-button.dark::before {
+            content: '☀️';
+            transform: translate(24px, -50%);
+        }
+        
+        .title-slide {
+            position: relative;
+        }
+
+          .memo-content {
+        display: none;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .memo-content.active {
+        display: block;
+    }
+    
+    .subtab-navigation {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 10px;
+    }
+    
+    .subtab-button {
+        padding: 8px 16px;
+        background: #edf2f7;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+        color: #4a5568;
+    }
+
+    .subtab-button:hover {
+        background: #e2e8f0;
+        transform: translateY(-1px);
+    }
+    
+    .subtab-button.active {
+        background: #4299e1;
+        color: white;
+    }
+    
+    .subtab-content {
+        display: none;
+        padding: 20px 0;
+    }
+    
+    .subtab-content.active {
+        display: block;
+    }
+    
+    .dashboard-container {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 20px;
+    }
+    
+    /* Dark Mode Additions */
+    body.dark-theme .memo-content {
+        background: #1a202c;
+    }
+    
+    body.dark-theme .subtab-button {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    body.dark-theme .subtab-button:hover {
+        background: #4a5568;
+    }
+    
+    body.dark-theme .subtab-button.active {
+        background: #4299e1;
+    }
+    
+    body.dark-theme .dashboard-container {
+        background: #2d3748;
+    }
+                 
+        
+        /* Enhanced Title Slide */
+        .title-slide {
+            background: linear-gradient(-45deg, #1a365d, #2a4365, #2c5282, #2b6cb0);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            width: 100%;
+            max-width: 1200px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .title-slide:hover {
+            transform: translateY(-5px);
+        }
+
+        .title-slide h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 10px;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            animation: slideInUp 1s ease-out 0.2s backwards;
+        }
+
+        /* Enhanced Tab System */
+        .tabs {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+            animation: slideInUp 1s ease-out 0.4s backwards;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Enhanced Tab Buttons */
+        .tab-button {
+            padding: 12px 24px;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .tab-button:hover {
+            background: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: #4299e1;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        /* Enhanced Tab Content */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Experience Boxes */
+        .experience-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .experience-box {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            border-left: 4px solid #4299e1;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+              /* Update Investment Experience boxes to have darker blue border */
+        .experience-category:nth-child(1) .experience-box {
+            border-left: 4px solid #1a365d;  /* Darker blue border */
+        }
+        
+        /* Remove border from Technical Experience boxes */
+        .experience-category:nth-child(2) .experience-box {
+            border-left: none;
+        }
+
+              .experience-box h3 {
+            margin-top: 2px;
+            margin-bottom: 8px;
+            padding-top: 2px;
+            padding-bottom: 0;
+        }
+        
+        .experience-box ul {
+            margin-top: 0;
+            padding-top: 2px;
+        }
+
+        .experience-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .experience-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .experience-date {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #4299e1;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+        }
+        
+                .strategic-note {
+            position: relative;
+            font-size: 0.85em;
+            color: #4a5568;
+            padding: 4px 12px 4px 12px;  /* top right bottom left */
+            margin: 0 0 4px 0;  /* reduced top and bottom margin */
+            display: inline-block;
+            background: linear-gradient(120deg, #f7fafc 0%, #edf2f7 100%);
+            border-left: 3px solid #4299e1;
+            opacity: 0.85;
+            font-style: italic;
+            letter-spacing: 0.02em;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .strategic-note:before {
+            content: "";
+            position: absolute;
+            left: -3px;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #4299e1;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+
+        /* Enhanced Cards */
+        .card {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
+            will-change: transform;
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Enhanced Market Stats */
+        .market-stat {
+            background: #ebf8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+
+        .market-stat:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2b6cb0;
+            opacity: 0;
+            animation: slideInUp 1s forwards;
+            animation-delay: 0.3s;
+        }
+
+        /* Enhanced Quote */
+        .quote {
+            position: relative;
+            opacity: 0;
+            animation: slideInUp 1s forwards;
+            animation-delay: 0.2s;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-left: 4px solid #4299e1;
+            padding: 30px;
+            margin: 40px 0;
+            font-style: italic;
+            text-align: center;
+            font-size: 1.2em;
+            color: #4a5568;
+        }
+
+        .quote:before, .quote:after {
+            content: '"';
+            position: absolute;
+            font-size: 4em;
+            opacity: 0.1;
+            font-family: Georgia, serif;
+            color: #4299e1;
+        }
+
+        .quote:before {
+            left: 10px;
+            top: -20px;
+        }
+
+        .quote:after {
+            right: 10px;
+            bottom: -40px;
+        }
+
+        /* Grid Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .blue-bold {
+            color: #2b6cb0;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .experience-container, .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hardware Acceleration */
+        .experience-box, .card, .market-stat, .tab-button {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        /* Text Formatting */
+        li {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
