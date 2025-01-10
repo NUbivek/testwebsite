@@ -14,6 +14,54 @@
             animation: fadeIn 0.8s ease-out forwards;
         }
 
+        /* Core centering fixes */
+        body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container,
+        .title-slide,
+        .tabs,
+        .tab-content,
+        .pdf-container {
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* PDF and iframe specific fixes */
+        .pdf-viewer {
+            width: 100%;
+        }
+        
+        .pdf-frame,
+        iframe[src*="linkedin.com"] {
+            width: 100%;
+            min-height: 700px;
+        }
+        
+        /* Responsive padding */
+        @media (max-width: 1240px) {
+            body {
+                padding: 20px;
+            }
+            
+            .container,
+            .title-slide,
+            .tabs,
+            .tab-content,
+            .pdf-container {
+                width: calc(100% - 40px);
+            }
+        }
+
+
         /* Animation Keyframes */
         @keyframes fadeIn {
             from { opacity: 0; }
