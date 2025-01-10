@@ -1,139 +1,44 @@
 /* Base styles */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: system-ui, -apple-system, sans-serif;
     line-height: 1.5;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     background: #f8f9fa;
     color: #2d3748;
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
+    width: 100%;
     opacity: 0;
     animation: fadeIn 0.8s ease-out forwards;
 }
 
-/* Animation Keyframes */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
-}
-
 /* Main container and shared styles */
-.container {
+.container,
+.title-slide,
+.tabs,
+.tab-content,
+.pdf-container,
+#investment-memo,
+.memo-content,
+.dashboard-container,
+.grid-2,
+.experience-container {
+    width: 100%;
     max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
-/* PDF Container */
-.pdf-container {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-top: 20px;
-    overflow: hidden;
-}
-
-.pdf-navigation {
-    background: #f7fafc;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 12px 20px;
-}
-
-.pdf-selector {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    scrollbar-width: thin;
-    padding-bottom: 4px;
-}
-
-.pdf-tab {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: #edf2f7;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    color: #4a5568;
-    font-size: 0.9em;
-}
-
-.pdf-tab:hover {
-    background: #e2e8f0;
-    transform: translateY(-1px);
-}
-
-.pdf-tab.active {
-    background: #4299e1;
-    color: white;
-}
-
-.pdf-icon {
-    font-size: 1.2em;
-}
-
-.pdf-title {
-    font-weight: 500;
-}
-
-.pdf-viewer {
-    background: #f8f9fa;
-    padding: 20px;
-    min-height: 800px;
-}
-
-.pdf-viewer iframe {
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    width: 100%;
-    height: 800px;
-}
-
-.pdf-frame {
-    width: 100%;
-    height: 800px;
-    border: none;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    transition: opacity 0.3s ease;
-}
-
-.pdf-frame.active {
-    display: block;
-}
-
-/* Enhanced Title Slide */
+/* Title Slide */
 .title-slide {
     background: linear-gradient(-45deg, #1a365d, #2a4365, #2c5282, #2b6cb0);
     background-size: 400% 400%;
@@ -141,8 +46,6 @@ body {
     color: white;
     text-align: center;
     padding: 60px 40px;
-    width: 100%;
-    max-width: 1200px;
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -168,7 +71,6 @@ body {
 
 /* Tab System */
 .tabs {
-    width: 100%;
     margin-top: 20px;
     animation: slideInUp 1s ease-out 0.4s backwards;
 }
@@ -220,6 +122,73 @@ body {
     display: block;
     opacity: 1;
     transform: translateY(0);
+}
+
+/* PDF Container */
+.pdf-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.pdf-navigation {
+    background: #f7fafc;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.pdf-selector {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    padding-bottom: 4px;
+}
+
+.pdf-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #edf2f7;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    color: #4a5568;
+    font-size: 0.9em;
+}
+
+.pdf-tab:hover {
+    background: #e2e8f0;
+    transform: translateY(-1px);
+}
+
+.pdf-tab.active {
+    background: #4299e1;
+    color: white;
+}
+
+.pdf-viewer {
+    background: #f8f9fa;
+    padding: 24px;
+    min-height: 800px;
+}
+
+.pdf-frame {
+    width: 100%;
+    height: 800px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: opacity 0.3s ease;
 }
 
 /* Experience Boxes */
@@ -281,7 +250,6 @@ body {
     padding: 2px 8px;
     border-radius: 12px;
     font-size: 0.8em;
-    transition: all 0.3s ease;
 }
 
 /* Strategic Notes */
@@ -289,7 +257,7 @@ body {
     position: relative;
     font-size: 0.85em;
     color: #4a5568;
-    padding: 4px 12px 4px 12px;
+    padding: 4px 12px;
     margin: 0 0 4px 0;
     display: inline-block;
     background: linear-gradient(120deg, #f7fafc 0%, #edf2f7 100%);
@@ -329,18 +297,12 @@ body {
     transform: translateY(0);
 }
 
-.card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 12px 20px rgba(0,0,0,0.1);
-}
-
 .market-stat {
     background: #ebf8ff;
     padding: 15px;
     border-radius: 8px;
     margin: 10px 0;
     transition: all 0.3s ease;
-    transform: translateZ(0);
 }
 
 .market-stat:hover {
@@ -479,7 +441,7 @@ body.dark-theme .stat-number {
 
 /* Theme Toggle */
 .theme-toggle {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 10;
@@ -519,6 +481,51 @@ body.dark-theme .stat-number {
     transform: translate(24px, -50%);
 }
 
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .experience-container,
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .pdf-frame {
+        height: 600px;
+    }
+}
+
+/* Hardware Acceleration */
+.experience-box,
+.card,
+.market-stat,
+.tab-button {
+    transform: translateZ(0);
+    backface-visibility: hidden;
