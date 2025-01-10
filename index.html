@@ -138,106 +138,33 @@
             border-radius: 8px;
         }
 
-        /* Dark Mode Styles */
-        body.dark-theme {
-            background: #121212;
-            color: #e2e8f0;
-        }
-        
-        /* Container & Content Adjustments */
-        body.dark-theme .tab-content,
-        body.dark-theme .card,
-        body.dark-theme .market-stat,
-        body.dark-theme .pdf-navigation {
-            background: #2d3748;
-        }
-        
-        /* Navigation Elements */
-        body.dark-theme .tab-button,
-        body.dark-theme .pdf-tab {
-            background: #4a5568;
-            color: #e2e8f0;
-        }
-        
-        body.dark-theme .tab-button:hover,
-        body.dark-theme .pdf-tab:hover {
-            background: #718096;
-        }
-        
-        body.dark-theme .tab-button.active,
-        body.dark-theme .pdf-tab.active {
-            background: #4299e1;
-            color: #fff;
-        }
-        
-        /* Experience Box Styling */
-        body.dark-theme .experience-box {
-            background: #1a202c;
-            border-left-color: rgba(66, 153, 225, 0.6);
-        }
-        
-        body.dark-theme .experience-box:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Strategic Note Refinements */
-        body.dark-theme .strategic-note {
-            background: rgba(66, 153, 225, 0.05);
-            color: #a0aec0;
-            border-left: 3px solid rgba(66, 153, 225, 0.3);
-            font-weight: 350;
-            box-shadow: none;
-        }
-        
-        body.dark-theme .strategic-note:before {
-            opacity: 0.02;
-        }
-        
-        /* Text Elements */
-        body.dark-theme h1, 
-        body.dark-theme h2, 
-        body.dark-theme h3 {
-            color: #e2e8f0;
-            font-weight: 350;
-        }
-        
-        body.dark-theme p, 
-        body.dark-theme li {
-            color: #cbd5e0;
-            font-weight: 350;
-        }
-        
-        /* PDF Container Specifics */
-        body.dark-theme .pdf-container {
-            background: #1a202c;
-        }
-        
-        body.dark-theme .pdf-navigation {
-            border-bottom: 1px solid #4a5568;
-        }
-        
-        /* Stats & Numbers */
-        body.dark-theme .stat-number {
-            color: #63b3ed;
-        }
-        
-        /* Header Separators */
-        body.dark-theme h2 {
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(66, 153, 225, 0.2);
-            margin-bottom: 20px;
-        }
-
-         
-        /* Toggle Button Styles */
+                /* Toggle Button Positioning */
         .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
             display: flex;
             align-items: center;
-            margin-left: auto;
-            padding: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
-       
+        .toggle-button {
+            width: 48px;
+            height: 24px;
+            background: #cbd5e0;
+            border-radius: 12px;
+            padding: 2px;
+            position: relative;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
         .toggle-button::before {
             content: '🌙';
             position: absolute;
@@ -253,14 +180,136 @@
             content: '☀️';
             transform: translateX(24px);
         }
-        
-        .toggle-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
 
-        
+            
+            /* Dark Mode Styles */
+            body.dark-theme {
+                background: #121212;
+                color: #e2e8f0;
+            }
+            
+            /* Container & Content */
+            body.dark-theme .tab-content,
+            body.dark-theme .card,
+            body.dark-theme .market-stat,
+            body.dark-theme .pdf-navigation {
+                background: #2d3748;
+            }
+            
+            /* Navigation */
+            body.dark-theme .tab-button,
+            body.dark-theme .pdf-tab {
+                background: #4a5568;
+                color: #e2e8f0;
+            }
+            
+            body.dark-theme .tab-button:hover,
+            body.dark-theme .pdf-tab:hover {
+                background: #718096;
+            }
+            
+            body.dark-theme .tab-button.active,
+            body.dark-theme .pdf-tab.active {
+                background: #4299e1;
+                color: #fff;
+            }
+            
+            /* Experience Boxes */
+            body.dark-theme .experience-box {
+                background: #1a202c;
+                border-left-color: rgba(66, 153, 225, 0.6);
+            }
+            
+            body.dark-theme .experience-box:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* Strategic Notes */
+            body.dark-theme .strategic-note {
+                background: rgba(66, 153, 225, 0.05);
+                color: #a0aec0;
+                border-left: 3px solid rgba(66, 153, 225, 0.3);
+                font-weight: 350;
+                box-shadow: none;
+            }
+            
+            body.dark-theme .strategic-note:before {
+                opacity: 0.02;
+            }
+            
+            /* Typography */
+            body.dark-theme h1, 
+            body.dark-theme h2, 
+            body.dark-theme h3 {
+                color: #e2e8f0;
+                font-weight: 350;
+            }
+            
+            body.dark-theme p, 
+            body.dark-theme li {
+                color: #cbd5e0;
+                font-weight: 350;
+            }
+            
+            /* PDF Viewer */
+            body.dark-theme .pdf-container {
+                background: #1a202c;
+            }
+            
+            body.dark-theme .pdf-navigation {
+                border-bottom: 1px solid #4a5568;
+            }
+            
+            /* Statistics */
+            body.dark-theme .stat-number {
+                color: #63b3ed;
+            }
+            
+            /* Headers */
+            body.dark-theme h2 {
+                padding-bottom: 12px;
+                border-bottom: 1px solid rgba(66, 153, 225, 0.2);
+                margin-bottom: 20px;
+            }
+            
+             /* Subdued Strategic Note in Dark Mode */
+            body.dark-theme .strategic-note {
+                background: rgba(66, 153, 225, 0.03);
+                color: #a0aec0;
+                border-left: 2px solid rgba(66, 153, 225, 0.3);
+                font-weight: 350;
+                box-shadow: none;
+                opacity: 0.75;
+            }
+            
+            body.dark-theme .strategic-note:before {
+                opacity: 0.02;
+                background: transparent;
+            }
+            
+            /* Header Separator for Both Modes */
+            h2 {
+                padding-bottom: 12px;
+                border-bottom: 1px solid rgba(66, 153, 225, 0.15);
+                margin-bottom: 20px;
+            }
+            
+            /* Header Separator in Dark Mode */
+            body.dark-theme h2 {
+                border-bottom: 1px solid rgba(66, 153, 225, 0.1);
+            }
+            
+            /* Experience Headers Spacing */
+            .experience-category h3 {
+                margin-top: 24px;
+                color: #4a5568;
+                font-size: 1.4em;
+            }
+            
+            body.dark-theme .experience-category h3 {
+                color: #e2e8f0;
+            }
+                   
         
         /* Enhanced Title Slide */
         .title-slide {
@@ -567,6 +616,17 @@
 </head>
 <body>
     <div class="title-slide">
+        <div class="theme-toggle">
+        <button class="toggle-button" id="themeToggle" aria-label="Toggle dark mode"></button>
+        </div>
+        <h1>Bivek Adhikari</h1>
+        <div class="subtitle">Investment Professional</div>
+        <div style="font-size: 1.1em; margin-top: 40px;">
+            Technical Founder • AI/ML Expert • Tech Investor<br>
+            Berkeley Haas MBA • MS in Machine Learning, Northwestern University • BS Finance & CS
+        </div>
+    </div>
+
         <h1>Bivek Adhikari</h1>
         <div class="subtitle">Investment Professional</div>
         <div style="font-size: 1.1em; margin-top: 40px;">
@@ -585,14 +645,6 @@
             <button class="tab-button" onclick="openTab('sample-deals')">Sample Deals</button>
             <button class="tab-button" onclick="openTab('my-story')">My Story</button>
         </div>
-            <div class="tab-buttons">
-                <!-- Your existing tab buttons -->
-                <div class="theme-toggle">
-                    <div class="toggle-container">
-                        <button class="toggle-button" id="themeToggle" aria-label="Toggle dark mode"></button>
-                    </div>
-                </div>
-            </div>
 
         <div id="background" class="tab-content active">
             <h2>Track Record & Experience</h2>
@@ -821,8 +873,6 @@
             </div>
         </div>
 
-
-
         
         <div id="sample-deals" class="tab-content">
             <h2>Sample Deals</h2>
@@ -883,27 +933,25 @@
             event.currentTarget.classList.add('active');
         }
         
-
-        // Dark mode toggle
         function initTheme() {
             const themeToggle = document.getElementById('themeToggle');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             
             if (localStorage.getItem('darkMode') === 'true' || (!localStorage.getItem('darkMode') && prefersDark)) {
-                document.body.classList.add('dark-mode');
+                document.body.classList.add('dark-theme');  // Changed from dark-mode to dark-theme
                 themeToggle.classList.add('dark');
             }
             
             themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
+                document.body.classList.toggle('dark-theme');  // Changed from dark-mode to dark-theme
                 themeToggle.classList.toggle('dark');
-                localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+                localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));  // Changed from dark-mode to dark-theme
             });
         }
         
         document.addEventListener('DOMContentLoaded', initTheme);
-        
-               
+
+       
         // Scroll Animation
         function checkScroll() {
             const elements = document.querySelectorAll('.experience-box, .card');
