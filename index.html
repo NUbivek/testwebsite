@@ -138,171 +138,97 @@
             border-radius: 8px;
         }
 
-
         /* Dark Mode Styles */
-        body.dark-mode {
-            background: #1a202c;
+        body.dark-theme {
+            background: #121212;
             color: #e2e8f0;
         }
         
-        body.dark-mode .tab-content {
+        /* Container & Content Adjustments */
+        body.dark-theme .tab-content,
+        body.dark-theme .card,
+        body.dark-theme .market-stat,
+        body.dark-theme .pdf-navigation {
             background: #2d3748;
-            color: #e2e8f0;
         }
         
-        body.dark-mode .tab-button {
+        /* Navigation Elements */
+        body.dark-theme .tab-button,
+        body.dark-theme .pdf-tab {
             background: #4a5568;
             color: #e2e8f0;
         }
         
-        body.dark-mode .tab-button:hover {
+        body.dark-theme .tab-button:hover,
+        body.dark-theme .pdf-tab:hover {
             background: #718096;
         }
         
-        body.dark-mode .tab-button.active {
+        body.dark-theme .tab-button.active,
+        body.dark-theme .pdf-tab.active {
             background: #4299e1;
+            color: #fff;
         }
         
-        body.dark-mode .experience-box {
-            background: #2d3748;
-            border-left-color: #4299e1;
-        }
-        
-        body.dark-mode .card {
-            background: #2d3748;
-        }
-        
-        body.dark-mode .market-stat {
-            background: #2d3748;
-        }
-        
-        /* Dark Mode Styles */
-        body.dark-theme {
-            background: #121212;
-            color: color-mix(in srgb, CanvasText, Canvas 15%);
-        }
-        
-        /* Strategic Note Adjustments for Dark Mode */
-        body.dark-theme .strategic-note {
-            background: rgba(66, 153, 225, 0.08);
-            color: #a0aec0;
-            border-left: 3px solid rgba(66, 153, 225, 0.4);
-            font-weight: 350;
-        }
-        
-        body.dark-theme .strategic-note:before {
-            opacity: 0.03;
-        }
-        
-        /* Experience Box Adjustments */
+        /* Experience Box Styling */
         body.dark-theme .experience-box {
             background: #1a202c;
             border-left-color: rgba(66, 153, 225, 0.6);
         }
         
-        /* Card Adjustments */
-        body.dark-theme .card {
-            background: #2d3748;
+        body.dark-theme .experience-box:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
         
-        /* PDF Viewer Adjustments */
+        /* Strategic Note Refinements */
+        body.dark-theme .strategic-note {
+            background: rgba(66, 153, 225, 0.05);
+            color: #a0aec0;
+            border-left: 3px solid rgba(66, 153, 225, 0.3);
+            font-weight: 350;
+            box-shadow: none;
+        }
+        
+        body.dark-theme .strategic-note:before {
+            opacity: 0.02;
+        }
+        
+        /* Text Elements */
+        body.dark-theme h1, 
+        body.dark-theme h2, 
+        body.dark-theme h3 {
+            color: #e2e8f0;
+            font-weight: 350;
+        }
+        
+        body.dark-theme p, 
+        body.dark-theme li {
+            color: #cbd5e0;
+            font-weight: 350;
+        }
+        
+        /* PDF Container Specifics */
         body.dark-theme .pdf-container {
             background: #1a202c;
         }
         
         body.dark-theme .pdf-navigation {
-            background: #2d3748;
             border-bottom: 1px solid #4a5568;
         }
         
-        body.dark-theme .pdf-tab {
-            background: #4a5568;
-            color: #e2e8f0;
-        }
-        
-        body.dark-theme .pdf-tab:hover {
-            background: #718096;
-        }
-        
-        body.dark-theme .pdf-tab.active {
-            background: #4299e1;
-            color: #fff;
-        }
-        
-        /* Market Stats Adjustments */
-        body.dark-theme .market-stat {
-            background: #2d3748;
-        }
-        
+        /* Stats & Numbers */
         body.dark-theme .stat-number {
             color: #63b3ed;
         }
         
-        /* Text Legibility Improvements */
-        body.dark-theme h1, 
-        body.dark-theme h2, 
-        body.dark-theme h3 {
-            color: #e2e8f0;
-            font-weight: 350;
-        }
-        
-        body.dark-theme p, 
-        body.dark-theme li {
-            color: #cbd5e0;
-            font-weight: 350;
+        /* Header Separators */
+        body.dark-theme h2 {
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(66, 153, 225, 0.2);
+            margin-bottom: 20px;
         }
 
-
-        
-        /* Add these to your existing dark mode styles */
-        body.dark-theme .strategic-note {
-            background: rgba(66, 153, 225, 0.08);
-            color: #a0aec0;
-            border-left: 3px solid rgba(66, 153, 225, 0.4);
-            font-weight: 350;
-        }
-        
-        body.dark-theme .strategic-note:before {
-            opacity: 0.03;
-        }
-        
-        body.dark-theme h1, 
-        body.dark-theme h2, 
-        body.dark-theme h3 {
-            color: #e2e8f0;
-            font-weight: 350;
-        }
-        
-        body.dark-theme p, 
-        body.dark-theme li {
-            color: #cbd5e0;
-            font-weight: 350;
-        }
-        
-        body.dark-theme .pdf-container {
-            background: #1a202c;
-        }
-        
-        body.dark-theme .pdf-navigation {
-            background: #2d3748;
-            border-bottom: 1px solid #4a5568;
-        }
-        
-        body.dark-theme .pdf-tab {
-            background: #4a5568;
-            color: #e2e8f0;
-        }
-        
-        body.dark-theme .pdf-tab:hover {
-            background: #718096;
-        }
-        
-        body.dark-theme .pdf-tab.active {
-            background: #4299e1;
-            color: #fff;
-        }
-        
-                
+         
         /* Toggle Button Styles */
         .theme-toggle {
             display: flex;
