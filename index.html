@@ -2,10 +2,11 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.12/Recharts.js"></script>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/recharts@2.1.12/umd/Recharts.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone@7.18.13/babel.min.js"></script>
+
 </head>
 
 <body>
@@ -469,24 +470,34 @@
           });
       </script>
       
-      <script type="text/babel">
-          function initDashboard() {
-              const dashboardContainer = document.getElementById('investor-dashboard');
-              if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
-                  ReactDOM.render(
-                      React.createElement(InvestorDashboard),
-                      dashboardContainer
-                  );
-              }
-          }
-      
-          // Initialize dashboard if it's the active tab
-          document.addEventListener('DOMContentLoaded', function() {
-              if (document.getElementById('dashboard').classList.contains('active')) {
-                  initDashboard();
-              }
-          });
-      </script>
+          <script type="text/babel">
+        function initDashboard() {
+            console.log('Initializing dashboard...');
+            const dashboardContainer = document.getElementById('investor-dashboard');
+            if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
+                console.log('Rendering dashboard...');
+                ReactDOM.render(
+                    React.createElement(InvestorDashboard),
+                    dashboardContainer
+                );
+            }
+        }
+    
+        // Initialize dashboard when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            if (document.getElementById('dashboard').classList.contains('active')) {
+                initDashboard();
+            }
+        });
+    
+        // Also initialize when switching to dashboard tab
+        const dashboardTab = document.querySelector('[onclick="switchSubtab(\'dashboard\')"]');
+        if (dashboardTab) {
+            dashboardTab.addEventListener('click', initDashboard);
+        }
+    </script>
+
 
 
 </body>
