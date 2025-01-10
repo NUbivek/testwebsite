@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <link rel="stylesheet" type="text/css" href="styles.css">
-      <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-       <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.12/Recharts.js"></script>
-       <script src="https://unpkg.com/@babel/standalone@7.18.13/babel.min.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.12/Recharts.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.18.13/babel.min.js"></script>
 </head>
+
 <body>
     <div class="title-slide">
         <h1>Bivek Adhikari</h1>
@@ -316,280 +316,178 @@
             </div>
         </div>
     </div>
-
-   <script>
-        // Enhanced Tab Switching
-        function openTab(tabName) {
-            const tabContents = document.getElementsByClassName("tab-content");
-            const tabButtons = document.getElementsByClassName("tab-button");
-            
-            Array.from(tabContents).forEach(tab => {
-                tab.classList.remove("active");
-                tab.style.opacity = 0;
-            });
-            
-            Array.from(tabButtons).forEach(button => {
-                button.classList.remove("active");
-            });
-            
-            const selectedTab = document.getElementById(tabName);
-            selectedTab.classList.add("active");
-            
-            setTimeout(() => {
-                selectedTab.style.opacity = 1;
-            }, 50);
-            
-            event.currentTarget.classList.add("active");
-        }
-
-        function switchPDF(pdfId) {
-            // Hide all PDFs
-            document.querySelectorAll('.pdf-frame').forEach(frame => {
-                frame.style.display = 'none';
-                frame.classList.remove('active');
-            });
-            
-            // Show selected PDF
-            const selectedPDF = document.getElementById(pdfId);
-            if (selectedPDF) {
-                selectedPDF.style.display = 'block';
-                selectedPDF.classList.add('active');
-            }
-            
-            // Update tab styling
-            document.querySelectorAll('.pdf-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
-        }
-        
-      function initTheme() {
-    const themeToggle = document.getElementById('themeToggle');
-
-        function switchMemo(memoId) {
-            document.querySelectorAll('.memo-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            document.querySelectorAll('.pdf-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            document.getElementById(memoId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-
-         function initDashboard() {
-             const dashboardContainer = document.getElementById('investor-dashboard');
-             if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
-                 ReactDOM.render(
-                     React.createElement(InvestorDashboard),
-                     dashboardContainer
-                 );
-             }
-         }
-
-         
-                 function switchSubtab(subtabId) {
-             document.querySelectorAll('.subtab-content').forEach(content => {
-                 content.classList.remove('active');
-             });
-             
-             document.querySelectorAll('.subtab-button').forEach(button => {
-                 button.classList.remove('active');
-             });
-             
-             document.getElementById(subtabId).classList.add('active');
-             event.currentTarget.classList.add('active');
-             
-             if (subtabId === 'dashboard') {
-                 const dashboardContainer = document.getElementById('investor-dashboard');
-                 if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
-                     ReactDOM.render(
-                         React.createElement(InvestorDashboard),
-                         dashboardContainer
-                     );
-                 }
-             }
-         }
-         
-                 
-        // Initialize the dashboard when the tab is opened
-        document.addEventListener('DOMContentLoaded', function() {
-            const dashboardContainer = document.getElementById('investor-dashboard');
-            if (dashboardContainer) {
-                // Initialize your React dashboard component here
-                ReactDOM.render(
-                    React.createElement(InvestorDashboard),
-                    dashboardContainer
-                );
-            }
-        });
-
-          
-    // Remove system preference check and set light mode as default
-    if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark-theme');
-        themeToggle.classList.add('dark');
-    } else {
-        // Explicitly set light mode
-        document.body.classList.remove('dark-theme');
-        themeToggle.classList.remove('dark');
-        localStorage.setItem('darkMode', 'false');
-    }
-    
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme');
-        themeToggle.classList.toggle('dark');
-        localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
-    });
-          
-}
-document.addEventListener('DOMContentLoaded', function() {
-    // Existing animation code...
-    
-    // Add dark theme initialization
-    initTheme();
-});
-
-       
-        // Scroll Animation
-        function checkScroll() {
-            const elements = document.querySelectorAll('.experience-box, .card');
-            const windowHeight = window.innerHeight;
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                if (elementTop < windowHeight * 0.85) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-
-        // Number Counter Animation
-        function animateValue(obj, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            checkScroll();
-            
-            // Animate numbers
-            document.querySelectorAll('.stat-number').forEach(stat => {
-                const value = parseInt(stat.innerText.replace(/[^0-9.-]+/g,""));
-                if (!isNaN(value)) {
-                    animateValue(stat, 0, value, 2000);
-                }
-            });
-
-            // Initial animations
-            document.querySelectorAll('.card, .experience-box').forEach(element => {
-                element.style.opacity = 0;
-                element.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    element.style.opacity = 1;
-                    element.style.transform = 'translateY(0)';
-                }, 300);
-            });
-        });
-
-        // Optimized scroll listener
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    checkScroll();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-    </script>
-    <script>
-    // Enhanced Tab Switching
-    function openTab(tabName) {
-        const tabContents = document.getElementsByClassName("tab-content");
-        const tabButtons = document.getElementsByClassName("tab-button");
-        
-        Array.from(tabContents).forEach(tab => {
-            tab.classList.remove("active");
-        });
-        
-        Array.from(tabButtons).forEach(button => {
-            button.classList.remove("active");
-        });
-        
-        document.getElementById(tabName).classList.add("active");
-        event.currentTarget.classList.add("active");
-    }
-
-    // Number Counter Animation with Currency Formatting
-    function animateValue(obj, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            
-            // Extract unit (B or T) from the original text
-            const originalText = obj.getAttribute('data-value');
-            const unit = originalText.slice(-1);
-            
-            // Format number with $ sign, 2 decimal places, and unit
-            const currentValue = (progress * (end - start) + start).toFixed(2);
-            obj.innerHTML = `$${currentValue}${unit}`;
-            
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-        window.requestAnimationFrame(step);
-    }
-
-    // Initialize animations
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.stat-number').forEach(stat => {
-            // Store original value as data attribute
-            const originalText = stat.innerText;
-            stat.setAttribute('data-value', originalText);
-            
-            // Extract just the number
-            const value = parseFloat(originalText.replace(/[^0-9.-]+/g,""));
-            if (!isNaN(value)) {
-                animateValue(stat, 0, value, 2000);
-            }
-        });
-    });
-</script>
-         <script type="text/babel">
-      function initDashboard() {
-          const dashboardContainer = document.getElementById('investor-dashboard');
-          if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
-              ReactDOM.render(
-                  React.createElement(InvestorDashboard),
-                  dashboardContainer
-              );
+      <script>
+          // Tab Switching Functions
+          function openTab(tabName) {
+              const tabContents = document.getElementsByClassName("tab-content");
+              const tabButtons = document.getElementsByClassName("tab-button");
+              
+              Array.from(tabContents).forEach(tab => {
+                  tab.classList.remove("active");
+                  tab.style.opacity = 0;
+              });
+              
+              Array.from(tabButtons).forEach(button => {
+                  button.classList.remove("active");
+              });
+              
+              const selectedTab = document.getElementById(tabName);
+              selectedTab.classList.add("active");
+              
+              setTimeout(() => {
+                  selectedTab.style.opacity = 1;
+              }, 50);
+              
+              event.currentTarget.classList.add("active");
           }
-      }
       
-      // Call initDashboard when the dashboard tab is opened
-      document.querySelector('[onclick="switchSubtab(\'dashboard\')"]')
-          .addEventListener('click', initDashboard);
+          function switchPDF(pdfId) {
+              document.querySelectorAll('.pdf-frame').forEach(frame => {
+                  frame.style.display = 'none';
+                  frame.classList.remove('active');
+              });
+              
+              const selectedPDF = document.getElementById(pdfId);
+              if (selectedPDF) {
+                  selectedPDF.style.display = 'block';
+                  selectedPDF.classList.add('active');
+              }
+              
+              document.querySelectorAll('.pdf-tab').forEach(tab => {
+                  tab.classList.remove('active');
+              });
+              event.currentTarget.classList.add('active');
+          }
       
-      // Initialize dashboard if it's the active tab
-      if (document.getElementById('dashboard').classList.contains('active')) {
-          initDashboard();
-      }
+          function switchMemo(memoId) {
+              document.querySelectorAll('.memo-content').forEach(content => {
+                  content.classList.remove('active');
+              });
+              
+              document.querySelectorAll('.pdf-tab').forEach(tab => {
+                  tab.classList.remove('active');
+              });
+              
+              document.getElementById(memoId).classList.add('active');
+              event.currentTarget.classList.add('active');
+          }
+      
+          function switchSubtab(subtabId) {
+              document.querySelectorAll('.subtab-content').forEach(content => {
+                  content.classList.remove('active');
+              });
+              
+              document.querySelectorAll('.subtab-button').forEach(button => {
+                  button.classList.remove('active');
+              });
+              
+              document.getElementById(subtabId).classList.add('active');
+              event.currentTarget.classList.add('active');
+              
+              if (subtabId === 'dashboard') {
+                  initDashboard();
+              }
+          }
+      
+          // Theme Functions
+          function initTheme() {
+              const themeToggle = document.getElementById('themeToggle');
+              
+              if (localStorage.getItem('darkMode') === 'true') {
+                  document.body.classList.add('dark-theme');
+                  themeToggle.classList.add('dark');
+              } else {
+                  document.body.classList.remove('dark-theme');
+                  themeToggle.classList.remove('dark');
+                  localStorage.setItem('darkMode', 'false');
+              }
+              
+              themeToggle.addEventListener('click', () => {
+                  document.body.classList.toggle('dark-theme');
+                  themeToggle.classList.toggle('dark');
+                  localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
+              });
+          }
+      
+          // Animation Functions
+          function checkScroll() {
+              const elements = document.querySelectorAll('.experience-box, .card');
+              const windowHeight = window.innerHeight;
+              
+              elements.forEach(element => {
+                  const elementTop = element.getBoundingClientRect().top;
+                  if (elementTop < windowHeight * 0.85) {
+                      element.classList.add('visible');
+                  }
+              });
+          }
+      
+          function animateValue(obj, start, end, duration) {
+              let startTimestamp = null;
+              const step = (timestamp) => {
+                  if (!startTimestamp) startTimestamp = timestamp;
+                  const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                  obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                  if (progress < 1) {
+                      window.requestAnimationFrame(step);
+                  }
+              };
+              window.requestAnimationFrame(step);
+          }
+      
+          // Initialization
+          document.addEventListener('DOMContentLoaded', function() {
+              initTheme();
+              checkScroll();
+              
+              document.querySelectorAll('.stat-number').forEach(stat => {
+                  const value = parseInt(stat.innerText.replace(/[^0-9.-]+/g,""));
+                  if (!isNaN(value)) {
+                      animateValue(stat, 0, value, 2000);
+                  }
+              });
+      
+              document.querySelectorAll('.card, .experience-box').forEach(element => {
+                  element.style.opacity = 0;
+                  element.style.transform = 'translateY(20px)';
+                  setTimeout(() => {
+                      element.style.opacity = 1;
+                      element.style.transform = 'translateY(0)';
+                  }, 300);
+              });
+          });
+      
+          let ticking = false;
+          window.addEventListener('scroll', () => {
+              if (!ticking) {
+                  window.requestAnimationFrame(() => {
+                      checkScroll();
+                      ticking = false;
+                  });
+                  ticking = true;
+              }
+          });
       </script>
+      
+      <script type="text/babel">
+          function initDashboard() {
+              const dashboardContainer = document.getElementById('investor-dashboard');
+              if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
+                  ReactDOM.render(
+                      React.createElement(InvestorDashboard),
+                      dashboardContainer
+                  );
+              }
+          }
+      
+          // Initialize dashboard if it's the active tab
+          document.addEventListener('DOMContentLoaded', function() {
+              if (document.getElementById('dashboard').classList.contains('active')) {
+                  initDashboard();
+              }
+          });
+      </script>
+
 
 </body>
 </html>
