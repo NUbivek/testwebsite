@@ -1,10 +1,5 @@
 const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } = window.Recharts;
 
-const InvestorDashboard = () => {
-    // Your existing component code
-};
-
-
 const revenueData = [
   { year: 'FY24', revenue: 7.69, arr: 10.28, customers: 276, arrPerCustomer: 37.246, arrPerEmployee: 140.795 },
   { year: 'FY25', revenue: 20.25, arr: 27.01, customers: 828, arrPerCustomer: 32.621, arrPerEmployee: 245.503 },
@@ -48,7 +43,6 @@ const InvestorDashboard = () => {
           </div>
         </div>
 
-        {/* Growth Metrics */}
         <MetricRow 
           metrics={[
             { title: 'FY26 ARR', value: '$59.74M', change: '141% CAGR' },
@@ -62,7 +56,6 @@ const InvestorDashboard = () => {
           ]}
         />
 
-        {/* Unit Economics */}
         <MetricRow 
           metrics={[
             { title: 'LTV/CAC', value: '10x', change: 'Sustainable' },
@@ -77,48 +70,79 @@ const InvestorDashboard = () => {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-          {/* Revenue Growth */}
-          <Card className="bg-gray-800 p-4">
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="text-sm font-semibold text-white">Revenue Trajectory</h2>
-              <span className="text-xs text-blue-400">Exponential Growth</span>
-            </div>
-            <ResponsiveContainer width="100%" height={180}>
-              <AreaChart data={revenueData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
-                <XAxis dataKey="year" stroke="#93c5fd" />
-                <YAxis stroke="#93c5fd" />
-                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
-                <Legend />
-                <Area type="monotone" dataKey="revenue" name="Revenue ($M)" stroke="#1d4ed8" fill="#1e40af" fillOpacity={0.6} />
-                <Area type="monotone" dataKey="arr" name="ARR ($M)" stroke="#2563eb" fill="#3b82f6" fillOpacity={0.4} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </Card>
+          <div style={{ 
+              background: '#1f2937', 
+              padding: '16px', 
+              borderRadius: '8px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}>
+              <div style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  marginBottom: '8px' 
+              }}>
+                  <h2 style={{ 
+                      fontSize: '14px', 
+                      fontWeight: '600', 
+                      color: 'white' 
+                  }}>Revenue Trajectory</h2>
+                  <span style={{ 
+                      fontSize: '12px', 
+                      color: '#60a5fa' 
+                  }}>Exponential Growth</span>
+              </div>
+              <ResponsiveContainer width="100%" height={180}>
+                <AreaChart data={revenueData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
+                  <XAxis dataKey="year" stroke="#93c5fd" />
+                  <YAxis stroke="#93c5fd" />
+                  <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
+                  <Legend />
+                  <Area type="monotone" dataKey="revenue" name="Revenue ($M)" stroke="#1d4ed8" fill="#1e40af" fillOpacity={0.6} />
+                  <Area type="monotone" dataKey="arr" name="ARR ($M)" stroke="#2563eb" fill="#3b82f6" fillOpacity={0.4} />
+                </AreaChart>
+              </ResponsiveContainer>
+          </div>
 
-          {/* Performance Metrics */}
-          <Card className="bg-gray-800 p-4">
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="text-sm font-semibold text-white">Performance Metrics</h2>
-              <span className="text-xs text-blue-400">Strong Unit Economics</span>
-            </div>
-            <ResponsiveContainer width="100%" height={180}>
-              <LineChart data={metricsData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
-                <XAxis dataKey="year" stroke="#93c5fd" />
-                <YAxis stroke="#93c5fd" />
-                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
-                <Legend />
-                <Line type="monotone" dataKey="margin" name="Margin %" stroke="#60a5fa" />
-                <Line type="monotone" dataKey="rule40" name="Rule of 40" stroke="#3b82f6" />
-              </LineChart>
-            </ResponsiveContainer>
-          </Card>
+          <div style={{ 
+              background: '#1f2937', 
+              padding: '16px', 
+              borderRadius: '8px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}>
+              <div style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  marginBottom: '8px' 
+              }}>
+                  <h2 style={{ 
+                      fontSize: '14px', 
+                      fontWeight: '600', 
+                      color: 'white' 
+                  }}>Performance Metrics</h2>
+                  <span style={{ 
+                      fontSize: '12px', 
+                      color: '#60a5fa' 
+                  }}>Strong Unit Economics</span>
+              </div>
+              <ResponsiveContainer width="100%" height={180}>
+                <LineChart data={metricsData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#1e40af" />
+                  <XAxis dataKey="year" stroke="#93c5fd" />
+                  <YAxis stroke="#93c5fd" />
+                  <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none' }} />
+                  <Legend />
+                  <Line type="monotone" dataKey="margin" name="Margin %" stroke="#60a5fa" />
+                  <Line type="monotone" dataKey="rule40" name="Rule of 40" stroke="#3b82f6" />
+                </LineChart>
+              </ResponsiveContainer>
+          </div>
         </div>
 
-        {/* Market & Product Leadership */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          <Card className="bg-gray-800 p-3">
+          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
             <h3 className="text-sm font-semibold text-white mb-2">Market Coverage</h3>
             <div className="space-y-1.5">
               <div className="flex justify-between">
@@ -138,9 +162,9 @@ const InvestorDashboard = () => {
                 <span className="text-xs font-bold text-white">1,000+</span>
               </div>
             </div>
-          </Card>
+          </div>
 
-          <Card className="bg-gray-800 p-3">
+          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
             <h3 className="text-sm font-semibold text-white mb-2">Implementation</h3>
             <div className="space-y-1.5">
               <div className="flex justify-between">
@@ -160,9 +184,9 @@ const InvestorDashboard = () => {
                 <span className="text-xs font-bold text-white">100%</span>
               </div>
             </div>
-          </Card>
+          </div>
 
-          <Card className="bg-gray-800 p-3">
+          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
             <h3 className="text-sm font-semibold text-white mb-2">Tech Advantage</h3>
             <div className="space-y-1.5">
               <div className="flex justify-between">
@@ -182,9 +206,9 @@ const InvestorDashboard = () => {
                 <span className="text-xs font-bold text-white">Pre-Connected</span>
               </div>
             </div>
-          </Card>
+          </div>
 
-          <Card className="bg-gray-800 p-3">
+          <div style={{ background: '#1f2937', padding: '12px', borderRadius: '8px' }}>
             <h3 className="text-sm font-semibold text-white mb-2">ROI Impact</h3>
             <div className="space-y-1.5">
               <div className="flex justify-between">
@@ -204,11 +228,9 @@ const InvestorDashboard = () => {
                 <span className="text-xs font-bold text-white">Days</span>
               </div>
             </div>
-          </Card>
+          </div>
         </div>
       </div>
     </div>
   );
 };
-
-export default InvestorDashboard;
