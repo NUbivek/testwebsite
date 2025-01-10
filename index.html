@@ -138,7 +138,111 @@
             border-radius: 8px;
         }
 
-
+        /* Dark Mode Styles */
+        body.dark-theme {
+            background: #121212;
+            color: #e2e8f0;
+        }
+        
+        /* Container & Content */
+        body.dark-theme .tab-content,
+        body.dark-theme .card,
+        body.dark-theme .market-stat,
+        body.dark-theme .pdf-navigation {
+            background: #2d3748;
+        }
+        
+        /* Navigation */
+        body.dark-theme .tab-button,
+        body.dark-theme .pdf-tab {
+            background: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        body.dark-theme .tab-button:hover,
+        body.dark-theme .pdf-tab:hover {
+            background: #718096;
+        }
+        
+        body.dark-theme .tab-button.active,
+        body.dark-theme .pdf-tab.active {
+            background: #4299e1;
+            color: #fff;
+        }
+        
+        /* Experience Box Headers */
+        body.dark-theme .experience-category h3 {
+            color: #90cdf4;
+            font-size: 1.4em;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        /* Experience Boxes */
+        body.dark-theme .experience-box {
+            background: #1a202c;
+            border-left-color: rgba(66, 153, 225, 0.6);
+        }
+        
+        body.dark-theme .experience-box:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Strategic Notes */
+        body.dark-theme .strategic-note {
+            background: rgba(66, 153, 225, 0.03);
+            color: #a0aec0;
+            border-left: 2px solid rgba(66, 153, 225, 0.3);
+            font-weight: 350;
+            box-shadow: none;
+            opacity: 0.75;
+        }
+        
+        body.dark-theme .strategic-note:before {
+            opacity: 0.02;
+            background: transparent;
+        }
+        
+        /* Typography */
+        body.dark-theme h1, 
+        body.dark-theme h2, 
+        body.dark-theme h3 {
+            color: #e2e8f0;
+            font-weight: 350;
+        }
+        
+        body.dark-theme p, 
+        body.dark-theme li {
+            color: #cbd5e0;
+            font-weight: 350;
+        }
+        
+        /* PDF Viewer */
+        body.dark-theme .pdf-container {
+            background: #1a202c;
+        }
+        
+        body.dark-theme .pdf-navigation {
+            border-bottom: 1px solid #4a5568;
+        }
+        
+        /* Statistics */
+        body.dark-theme .stat-number {
+            color: #63b3ed;
+        }
+        
+        /* Headers with Separator */
+        h2 {
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(66, 153, 225, 0.15);
+            margin-bottom: 20px;
+        }
+        
+        body.dark-theme h2 {
+            border-bottom: 1px solid rgba(66, 153, 225, 0.1);
+        }
+        
+        /* Toggle Button */
         .theme-toggle {
             position: absolute;
             bottom: 20px;
@@ -146,10 +250,8 @@
             z-index: 10;
             display: flex;
             align-items: center;
-            background: transparent;
         }
         
-             /* Centered toggle button icons */
         .toggle-button {
             width: 48px;
             height: 24px;
@@ -170,158 +272,22 @@
             transform: translateY(-50%);
             width: 20px;
             height: 20px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s ease;
         }
         
         .toggle-button.dark::before {
             content: '☀️';
             transform: translate(24px, -50%);
-        }   
+        }
         
         .title-slide {
-            position: relative;  /* Ensures proper positioning of toggle */
+            position: relative;
         }
 
-        /* Fix for h3 readability in dark mode */
-        body.dark-theme .experience-category h3 {
-            color: #90cdf4;  /* Light blue for better visibility */
-            font-weight: 500;
-            font-size: 1.4em;
-            margin-bottom: 16px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-    
-                
-            /* Dark Mode Styles */
-            body.dark-theme {
-                background: #121212;
-                color: #e2e8f0;
-            }
-            
-            /* Container & Content */
-            body.dark-theme .tab-content,
-            body.dark-theme .card,
-            body.dark-theme .market-stat,
-            body.dark-theme .pdf-navigation {
-                background: #2d3748;
-            }
-            
-            /* Navigation */
-            body.dark-theme .tab-button,
-            body.dark-theme .pdf-tab {
-                background: #4a5568;
-                color: #e2e8f0;
-            }
-            
-            body.dark-theme .tab-button:hover,
-            body.dark-theme .pdf-tab:hover {
-                background: #718096;
-            }
-            
-            body.dark-theme .tab-button.active,
-            body.dark-theme .pdf-tab.active {
-                background: #4299e1;
-                color: #fff;
-            }
-            
-            /* Experience Boxes */
-            body.dark-theme .experience-box {
-                background: #1a202c;
-                border-left-color: rgba(66, 153, 225, 0.6);
-            }
-            
-            body.dark-theme .experience-box:hover {
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            }
-            
-            /* Strategic Notes */
-            body.dark-theme .strategic-note {
-                background: rgba(66, 153, 225, 0.05);
-                color: #a0aec0;
-                border-left: 3px solid rgba(66, 153, 225, 0.3);
-                font-weight: 350;
-                box-shadow: none;
-            }
-            
-            body.dark-theme .strategic-note:before {
-                opacity: 0.02;
-            }
-            
-            /* Typography */
-            body.dark-theme h1, 
-            body.dark-theme h2, 
-            body.dark-theme h3 {
-                color: #e2e8f0;
-                font-weight: 350;
-            }
-            
-            body.dark-theme p, 
-            body.dark-theme li {
-                color: #cbd5e0;
-                font-weight: 350;
-            }
-            
-            /* PDF Viewer */
-            body.dark-theme .pdf-container {
-                background: #1a202c;
-            }
-            
-            body.dark-theme .pdf-navigation {
-                border-bottom: 1px solid #4a5568;
-            }
-            
-            /* Statistics */
-            body.dark-theme .stat-number {
-                color: #63b3ed;
-            }
-            
-            /* Headers */
-            body.dark-theme h2 {
-                padding-bottom: 12px;
-                border-bottom: 1px solid rgba(66, 153, 225, 0.2);
-                margin-bottom: 20px;
-            }
-            
-             /* Subdued Strategic Note in Dark Mode */
-            body.dark-theme .strategic-note {
-                background: rgba(66, 153, 225, 0.03);
-                color: #a0aec0;
-                border-left: 2px solid rgba(66, 153, 225, 0.3);
-                font-weight: 350;
-                box-shadow: none;
-                opacity: 0.75;
-            }
-            
-            body.dark-theme .strategic-note:before {
-                opacity: 0.02;
-                background: transparent;
-            }
-            
-            /* Header Separator for Both Modes */
-            h2 {
-                padding-bottom: 12px;
-                border-bottom: 1px solid rgba(66, 153, 225, 0.15);
-                margin-bottom: 20px;
-            }
-            
-            /* Header Separator in Dark Mode */
-            body.dark-theme h2 {
-                border-bottom: 1px solid rgba(66, 153, 225, 0.1);
-            }
-            
-            /* Experience Headers Spacing */
-            .experience-category h3 {
-                margin-top: 24px;
-                color: #4a5568;
-                font-size: 1.4em;
-            }
-            
-            body.dark-theme .experience-category h3 {
-                color: #e2e8f0;
-            }
                    
         
         /* Enhanced Title Slide */
@@ -938,23 +904,26 @@
             event.currentTarget.classList.add('active');
         }
         
-        function initTheme() {
-            const themeToggle = document.getElementById('themeToggle');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (localStorage.getItem('darkMode') === 'true' || (!localStorage.getItem('darkMode') && prefersDark)) {
-                document.body.classList.add('dark-theme');  // Changed from dark-mode to dark-theme
-                themeToggle.classList.add('dark');
-            }
-            
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-theme');  // Changed from dark-mode to dark-theme
-                themeToggle.classList.toggle('dark');
-                localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));  // Changed from dark-mode to dark-theme
-            });
-        }
-        
-        document.addEventListener('DOMContentLoaded', initTheme);
+       function initTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    
+    // Remove system preference check and set light mode as default
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-theme');
+        themeToggle.classList.add('dark');
+    } else {
+        // Explicitly set light mode
+        document.body.classList.remove('dark-theme');
+        themeToggle.classList.remove('dark');
+        localStorage.setItem('darkMode', 'false');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        themeToggle.classList.toggle('dark');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
+    });
+}
 
        
         // Scroll Animation
