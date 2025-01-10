@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+
     <style>
         /* Base styles */
         body {
@@ -288,7 +292,84 @@
             position: relative;
         }
 
-                   
+          .memo-content {
+        display: none;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .memo-content.active {
+        display: block;
+    }
+    
+    .subtab-navigation {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 10px;
+    }
+    
+    .subtab-button {
+        padding: 8px 16px;
+        background: #edf2f7;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9em;
+        color: #4a5568;
+    }
+
+    .subtab-button:hover {
+        background: #e2e8f0;
+        transform: translateY(-1px);
+    }
+    
+    .subtab-button.active {
+        background: #4299e1;
+        color: white;
+    }
+    
+    .subtab-content {
+        display: none;
+        padding: 20px 0;
+    }
+    
+    .subtab-content.active {
+        display: block;
+    }
+    
+    .dashboard-container {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 20px;
+    }
+    
+    /* Dark Mode Additions */
+    body.dark-theme .memo-content {
+        background: #1a202c;
+    }
+    
+    body.dark-theme .subtab-button {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    body.dark-theme .subtab-button:hover {
+        background: #4a5568;
+    }
+    
+    body.dark-theme .subtab-button.active {
+        background: #4299e1;
+    }
+    
+    body.dark-theme .dashboard-container {
+        background: #2d3748;
+    }
+                 
         
         /* Enhanced Title Slide */
         .title-slide {
@@ -843,6 +924,50 @@
                 </div>
             </div>
         </div>
+        
+        <div id="investment-memo" class="tab-content">
+            <h2>Investment Memos</h2>
+            <div class="pdf-container">
+                <div class="pdf-navigation">
+                    <div class="pdf-selector">
+                        <button class="pdf-tab active" onclick="switchMemo('orderful')">
+                            <span class="pdf-icon">📊</span>
+                            <span class="pdf-title">Orderful</span>
+                        </button>
+                        <button class="pdf-tab" onclick="switchMemo('memo2')">
+                            <span class="pdf-icon">📝</span>
+                            <span class="pdf-title">Memo 2</span>
+                        </button>
+                        <button class="pdf-tab" onclick="switchMemo('memo3')">
+                            <span class="pdf-icon">📈</span>
+                            <span class="pdf-title">Memo 3</span>
+                        </button>
+                    </div>
+                </div>
+        
+                <!-- Orderful Content -->
+                <div id="orderful" class="memo-content active">
+                    <div class="subtab-navigation">
+                        <button class="subtab-button active" onclick="switchSubtab('dashboard')">Dashboard</button>
+                        <button class="subtab-button" onclick="switchSubtab('topic2')">Topic 2</button>
+                        <button class="subtab-button" onclick="switchSubtab('topic3')">Topic 3</button>
+                        <button class="subtab-button" onclick="switchSubtab('topic4')">Topic 4</button>
+                        <button class="subtab-button" onclick="switchSubtab('topic5')">Topic 5</button>
+                    </div>
+                    
+                    <div id="dashboard" class="subtab-content active">
+                        <div id="investor-dashboard"></div>
+                    </div>
+                    <div id="topic2" class="subtab-content">Topic 2 Content</div>
+                    <div id="topic3" class="subtab-content">Topic 3 Content</div>
+                    <div id="topic4" class="subtab-content">Topic 4 Content</div>
+                    <div id="topic5" class="subtab-content">Topic 5 Content</div>
+                </div>
+        
+                <div id="memo2" class="memo-content">Memo 2 Content</div>
+                <div id="memo3" class="memo-content">Memo 3 Content</div>
+            </div>
+        </div>
 
         
         <div id="sample-deals" class="tab-content">
@@ -906,7 +1031,46 @@
         
       function initTheme() {
     const themeToggle = document.getElementById('themeToggle');
-    
+
+        function switchMemo(memoId) {
+            document.querySelectorAll('.memo-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.pdf-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(memoId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        function switchSubtab(subtabId) {
+            document.querySelectorAll('.subtab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.subtab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(subtabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Initialize the dashboard when the tab is opened
+        document.addEventListener('DOMContentLoaded', function() {
+            const dashboardContainer = document.getElementById('investor-dashboard');
+            if (dashboardContainer) {
+                // Initialize your React dashboard component here
+                ReactDOM.render(
+                    React.createElement(InvestorDashboard),
+                    dashboardContainer
+                );
+            }
+        });
+
+          
     // Remove system preference check and set light mode as default
     if (localStorage.getItem('darkMode') === 'true') {
         document.body.classList.add('dark-theme');
