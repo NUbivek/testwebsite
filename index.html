@@ -161,11 +161,12 @@
             transition: all 0.3s ease;
         }
         
-        .toggle-button::before {
+               .toggle-button::before {
             content: '🌙';
             position: absolute;
             left: 4px;
-            top: 2px;
+            top: 50%;
+            transform: translateY(-50%);
             width: 20px;
             height: 20px;
             border-radius: 50%;
@@ -174,26 +175,29 @@
         
         .toggle-button.dark::before {
             content: '☀️';
-            transform: translateX(24px);
+            transform: translate(24px, -50%);
         }
+
         
         .title-slide {
             position: relative;  /* Ensures proper positioning of toggle */
         }
 
-        
-                /* Text Elements with Better Contrast */
-        body.dark-theme h3 {
-            color: #e2e8f0;  /* Light gray for better contrast */
-        }
-        
-        /* Specific fix for Background tab h3 headers */
-        body.dark-theme .experience-category h3 {
-            color: #90cdf4;  /* Lighter blue for better visibility */
-            font-weight: 500;
-        }
-
-            
+            /* Experience Category Headers in Dark Mode */
+    body.dark-theme .experience-category h3 {
+        color: #90cdf4;  /* Light blue for better visibility */
+        font-size: 1.4em;
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+    
+    /* Experience Box Headers in Dark Mode */
+    body.dark-theme .experience-box h3 {
+        color: #e2e8f0;  /* Light gray for better contrast */
+        font-weight: 500;
+    }
+    
+                
             /* Dark Mode Styles */
             body.dark-theme {
                 background: #121212;
