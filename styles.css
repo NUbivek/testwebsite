@@ -34,7 +34,68 @@ body {
 .bg-gray-900 {
     background-color: #111827;
 }
-       
+
+#investor-dashboard {
+    min-height: 600px;
+    width: 100%;
+    background: #111827;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.bg-gray-800 {
+    background-color: #1f2937;
+}
+
+.bg-gray-900 {
+    background-color: #111827;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.metric-card {
+    background: #1f2937;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #1e40af;
+}
+
+.metric-title {
+    font-size: 12px;
+    color: #93c5fd;
+    margin: 0;
+}
+
+.metric-value {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    margin: 4px 0;
+}
+
+.metric-change {
+    font-size: 12px;
+    color: #60a5fa;
+    margin: 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+canvas {
+    margin: 16px 0;
+    height: 300px !important;
+}
+
 
 /* Main container and shared styles */
 .container,
