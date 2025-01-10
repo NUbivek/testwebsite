@@ -378,20 +378,42 @@
             document.getElementById(memoId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
-        
-        function switchSubtab(subtabId) {
-            document.querySelectorAll('.subtab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            document.querySelectorAll('.subtab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            document.getElementById(subtabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-        
+
+         function initDashboard() {
+             const dashboardContainer = document.getElementById('investor-dashboard');
+             if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
+                 ReactDOM.render(
+                     React.createElement(InvestorDashboard),
+                     dashboardContainer
+                 );
+             }
+         }
+
+         
+                 function switchSubtab(subtabId) {
+             document.querySelectorAll('.subtab-content').forEach(content => {
+                 content.classList.remove('active');
+             });
+             
+             document.querySelectorAll('.subtab-button').forEach(button => {
+                 button.classList.remove('active');
+             });
+             
+             document.getElementById(subtabId).classList.add('active');
+             event.currentTarget.classList.add('active');
+             
+             if (subtabId === 'dashboard') {
+                 const dashboardContainer = document.getElementById('investor-dashboard');
+                 if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
+                     ReactDOM.render(
+                         React.createElement(InvestorDashboard),
+                         dashboardContainer
+                     );
+                 }
+             }
+         }
+         
+                 
         // Initialize the dashboard when the tab is opened
         document.addEventListener('DOMContentLoaded', function() {
             const dashboardContainer = document.getElementById('investor-dashboard');
