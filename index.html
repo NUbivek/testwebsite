@@ -570,6 +570,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 </script>
-    <script type="text/babel" src="dashboard.js"></script>
+         <script type="text/babel">
+      function initDashboard() {
+          const dashboardContainer = document.getElementById('investor-dashboard');
+          if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
+              ReactDOM.render(
+                  React.createElement(InvestorDashboard),
+                  dashboardContainer
+              );
+          }
+      }
+      
+      // Call initDashboard when the dashboard tab is opened
+      document.querySelector('[onclick="switchSubtab(\'dashboard\')"]')
+          .addEventListener('click', initDashboard);
+      
+      // Initialize dashboard if it's the active tab
+      if (document.getElementById('dashboard').classList.contains('active')) {
+          initDashboard();
+      }
+      </script>
+
 </body>
 </html>
