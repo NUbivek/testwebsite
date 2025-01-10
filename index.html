@@ -904,7 +904,7 @@
             event.currentTarget.classList.add('active');
         }
         
-       function initTheme() {
+      function initTheme() {
     const themeToggle = document.getElementById('themeToggle');
     
     // Remove system preference check and set light mode as default
@@ -923,7 +923,14 @@
         themeToggle.classList.toggle('dark');
         localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
     });
+          
 }
+document.addEventListener('DOMContentLoaded', function() {
+    // Existing animation code...
+    
+    // Add dark theme initialization
+    initTheme();
+});
 
        
         // Scroll Animation
