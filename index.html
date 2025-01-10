@@ -2,12 +2,10 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js" crossorigin></script>
+     <script src="https://unpkg.com/react@17.0.2/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.1.12/Recharts.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone@7.18.13/babel.min.js"></script>
-    <script type="text/babel" src="dashboard.js"></script>
-
+    <script src="https://unpkg.com/recharts@2.7.2/umd/Recharts.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone@7.22.10/babel.min.js"></script>
 
 </head>
 
@@ -473,31 +471,49 @@
       </script>
       
 <script type="text/babel">
-    function initDashboard() {
-        const dashboardContainer = document.getElementById('investor-dashboard');
-        if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
-            ReactDOM.render(
-                React.createElement(InvestorDashboard),
-                dashboardContainer
-            );
+    // Initialize dashboard when switching tabs
+    function switchSubtab(subtabId) {
+        document.querySelectorAll('.subtab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        document.querySelectorAll('.subtab-button').forEach(button => {
+            button.classList.remove('active');
+        });
+        
+        document.getElementById(subtabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+        
+        if (subtabId === 'dashboard') {
+            renderDashboard();
         }
     }
 
-    // Initialize dashboard when DOM is loaded
+    // Separate render function
+    function renderDashboard() {
+        console.log('Rendering dashboard...');
+        const container = document.getElementById('investor-dashboard');
+        if (container) {
+            try {
+                ReactDOM.render(
+                    React.createElement(InvestorDashboard),
+                    container
+                );
+                console.log('Dashboard rendered successfully');
+            } catch (error) {
+                console.error('Dashboard rendering error:', error);
+            }
+        }
+    }
+
+    // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('dashboard').classList.contains('active')) {
-            setTimeout(initDashboard, 100);
+            setTimeout(renderDashboard, 500);
         }
     });
-
-    // Initialize when switching to dashboard tab
-    const dashboardTab = document.querySelector('[onclick="switchSubtab(\'dashboard\')"]');
-    if (dashboardTab) {
-        dashboardTab.addEventListener('click', function() {
-            setTimeout(initDashboard, 100);
-        });
-    }
 </script>
+
 
 
 
