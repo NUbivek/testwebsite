@@ -175,7 +175,85 @@
         body.dark-mode .market-stat {
             background: #2d3748;
         }
+        
+        /* Dark Mode Styles */
+        body.dark-theme {
+            background: #121212;
+            color: color-mix(in srgb, CanvasText, Canvas 15%);
+        }
+        
+        /* Strategic Note Adjustments for Dark Mode */
+        body.dark-theme .strategic-note {
+            background: rgba(66, 153, 225, 0.08);
+            color: #a0aec0;
+            border-left: 3px solid rgba(66, 153, 225, 0.4);
+            font-weight: 350;
+        }
+        
+        body.dark-theme .strategic-note:before {
+            opacity: 0.03;
+        }
+        
+        /* Experience Box Adjustments */
+        body.dark-theme .experience-box {
+            background: #1a202c;
+            border-left-color: rgba(66, 153, 225, 0.6);
+        }
+        
+        /* Card Adjustments */
+        body.dark-theme .card {
+            background: #2d3748;
+        }
+        
+        /* PDF Viewer Adjustments */
+        body.dark-theme .pdf-container {
+            background: #1a202c;
+        }
+        
+        body.dark-theme .pdf-navigation {
+            background: #2d3748;
+            border-bottom: 1px solid #4a5568;
+        }
+        
+        body.dark-theme .pdf-tab {
+            background: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        body.dark-theme .pdf-tab:hover {
+            background: #718096;
+        }
+        
+        body.dark-theme .pdf-tab.active {
+            background: #4299e1;
+            color: #fff;
+        }
+        
+        /* Market Stats Adjustments */
+        body.dark-theme .market-stat {
+            background: #2d3748;
+        }
+        
+        body.dark-theme .stat-number {
+            color: #63b3ed;
+        }
+        
+        /* Text Legibility Improvements */
+        body.dark-theme h1, 
+        body.dark-theme h2, 
+        body.dark-theme h3 {
+            color: #e2e8f0;
+            font-weight: 350;
+        }
+        
+        body.dark-theme p, 
+        body.dark-theme li {
+            color: #cbd5e0;
+            font-weight: 350;
+        }
 
+
+        
         /* Add these to your existing dark mode styles */
         body.dark-theme .strategic-note {
             background: rgba(66, 153, 225, 0.08);
