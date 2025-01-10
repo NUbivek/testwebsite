@@ -415,6 +415,10 @@ body.dark-theme .experience-box:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+body.dark-theme .experience-category h3[style*="color: #4a5568"] {
+    color: #90cdf4 !important;
+}
+
 body.dark-theme .strategic-note {
     background: rgba(66, 153, 225, 0.03);
     color: #a0aec0;
