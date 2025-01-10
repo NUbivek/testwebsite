@@ -13,48 +13,68 @@
             opacity: 0;
             animation: fadeIn 0.8s ease-out forwards;
         }
-       /* Main container and shared styles */
-       .container,
-       #investment-memo,
-       .memo-content,
-       .dashboard-container,
-       .title-slide {
-           max-width: 1200px;
-           width: 100%;
-           margin: 0 auto;
-       }
-       
-       /* Specific padding adjustments */
-       .container {
-           padding: 0 20px;
-       }
-       
-       #investment-memo {
-           padding: 20px;
-       }
-       
-       .dashboard-container {
-           padding: 20px;
-       }
-       
-       /* PDF container specific styles */
-       .pdf-container {
-           width: 100%;
-           margin: 0 auto;
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-       }
-       
-       /* Responsive design */
-       @media (max-width: 1240px) {
-           .container,
-           #investment-memo,
-           .memo-content,
-           .dashboard-container {
-               padding: 0 20px;
-           }
-       }
+            /* Main container and shared styles */
+     .container,
+     #investment-memo,
+     .memo-content,
+     .dashboard-container,
+     .title-slide,
+     .tabs,
+     .tab-content,
+     .grid-2,
+     .experience-container {
+         max-width: 1200px;
+         width: 100%;
+         margin: 0 auto;
+     }
+     
+     /* Specific padding adjustments */
+     .container {
+         padding: 0 20px;
+     }
+     
+     #investment-memo {
+         padding: 20px;
+     }
+     
+     .dashboard-container {
+         padding: 20px;
+     }
+     
+     /* Tab buttons centering */
+     .tab-buttons {
+         max-width: 1200px;
+         width: 100%;
+         margin: 0 auto;
+         display: flex;
+         justify-content: center;
+         gap: 10px;
+         flex-wrap: wrap;
+     }
+     
+     /* PDF container specific styles */
+     .pdf-container {
+         width: 100%;
+         margin: 0 auto;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+     }
+     
+     /* Responsive design */
+     @media (max-width: 1240px) {
+         .container,
+         #investment-memo,
+         .memo-content,
+         .dashboard-container,
+         .tabs,
+         .tab-content,
+         .grid-2,
+         .experience-container {
+             padding: 0 20px;
+         }
+     }
+
 
 
 /* Animation Keyframes */
