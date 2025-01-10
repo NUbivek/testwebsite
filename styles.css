@@ -199,6 +199,23 @@ body {
     transition: opacity 0.3s ease;
 }
 
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    z-index: 100;
+    display: none;
+}
+
+.loading .loading-indicator {
+    display: block;
+}
+
 .pdf-viewer.loading::before {
     opacity: 1;
 }
@@ -213,12 +230,10 @@ body {
     opacity: 0;
     transition: opacity 0.3s ease;
     display: none;
-    visibility: hidden;
 }
 
 .pdf-frame.active {
     display: block;
-    visibility: visible;
     opacity: 1;
 }
 
