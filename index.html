@@ -140,10 +140,6 @@
 
                 /* Toggle Button Positioning */
         .theme-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.1);
@@ -179,6 +175,17 @@
         .toggle-button.dark::before {
             content: '☀️';
             transform: translateX(24px);
+        }
+        
+                /* Text Elements with Better Contrast */
+        body.dark-theme h3 {
+            color: #e2e8f0;  /* Light gray for better contrast */
+        }
+        
+        /* Specific fix for Background tab h3 headers */
+        body.dark-theme .experience-category h3 {
+            color: #90cdf4;  /* Lighter blue for better visibility */
+            font-weight: 500;
         }
 
             
