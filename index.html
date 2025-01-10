@@ -470,33 +470,49 @@
           });
       </script>
       
-          <script type="text/babel">
-        function initDashboard() {
-            console.log('Initializing dashboard...');
-            const dashboardContainer = document.getElementById('investor-dashboard');
-            if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
-                console.log('Rendering dashboard...');
+       <script type="text/babel">
+    // Dashboard initialization function
+    function initDashboard() {
+        const dashboardContainer = document.getElementById('investor-dashboard');
+        if (dashboardContainer && !dashboardContainer.hasChildNodes()) {
+            try {
                 ReactDOM.render(
                     React.createElement(InvestorDashboard),
                     dashboardContainer
                 );
+            } catch (error) {
+                console.error('Dashboard rendering error:', error);
             }
         }
-    
-        // Initialize dashboard when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded');
-            if (document.getElementById('dashboard').classList.contains('active')) {
-                initDashboard();
-            }
-        });
-    
-        // Also initialize when switching to dashboard tab
+    }
+
+    // Initialize dashboard on page load and tab switch
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initial load if dashboard is active
+        if (document.getElementById('dashboard').classList.contains('active')) {
+            setTimeout(initDashboard, 100);
+        }
+
+        // Add click listener to dashboard tab
         const dashboardTab = document.querySelector('[onclick="switchSubtab(\'dashboard\')"]');
         if (dashboardTab) {
-            dashboardTab.addEventListener('click', initDashboard);
+            dashboardTab.addEventListener('click', function() {
+                setTimeout(initDashboard, 100);
+            });
         }
-    </script>
+
+        // Add listener for memo switch
+        const orderfulTab = document.querySelector('[onclick="switchMemo(\'orderful\')"]');
+        if (orderfulTab) {
+            orderfulTab.addEventListener('click', function() {
+                if (document.getElementById('dashboard').classList.contains('active')) {
+                    setTimeout(initDashboard, 100);
+                }
+            });
+        }
+    });
+</script>
+
 
 
 
