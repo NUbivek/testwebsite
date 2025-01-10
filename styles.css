@@ -19,21 +19,95 @@ body {
     animation: fadeIn 0.8s ease-out forwards;
 }
 
- #investor-dashboard {
-    min-height: 600px;
-    width: 100%;
-    background: #111827;
-    padding: 1rem;
-    border-radius: 0.5rem;
-}
-
-.bg-gray-800 {
-    background-color: #1f2937;
-}
-
-.bg-gray-900 {
-    background-color: #111827;
-}
+    /* Dashboard Grid Layout */
+    .dashboard-container {
+        display: grid;
+        gap: 2rem;
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+    
+    /* Section Styles */
+    .section {
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .section.financial {
+        background: var(--financial-gradient);
+    }
+    
+    .section.operational {
+        background: var(--operational-gradient);
+    }
+    
+    /* Theme Variables */
+    :root {
+        --financial-primary: #1e40af;
+        --financial-secondary: #60a5fa;
+        --financial-gradient: linear-gradient(to right, #1e40af, #60a5fa);
+        --operational-primary: #0f172a;
+        --operational-secondary: #475569;
+        --operational-gradient: linear-gradient(to right, #0f172a, #475569);
+    }
+    
+    /* Dark Theme Overrides */
+    [data-theme="dark"] {
+        --bg-primary: #0f172a;
+        --text-primary: #f1f5f9;
+        --card-bg: #1e293b;
+    }
+    
+    /* Metric Cards Grid */
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Chart Grid */
+    .charts-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    /* Bottom Metrics Grid */
+    .metrics-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    
+    /* Card Styles */
+    .metric-card {
+        background: var(--card-bg, #ffffff);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        transition: transform 0.3s ease;
+        animation: slideIn 0.4s ease-out;
+    }
+    
+    /* Chart Container */
+    .chart-container {
+        background: var(--card-bg, #ffffff);
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .metrics-grid,
+        .charts-grid,
+        .metrics-container {
+            grid-template-columns: 1fr;
+        }
+    }
+    
 
 /* Dashboard Base Styles */
 #investor-dashboard {
