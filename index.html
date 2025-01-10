@@ -149,6 +149,7 @@
             background: transparent;
         }
         
+             /* Centered toggle button icons */
         .toggle-button {
             width: 48px;
             height: 24px;
@@ -161,7 +162,7 @@
             transition: all 0.3s ease;
         }
         
-               .toggle-button::before {
+        .toggle-button::before {
             content: '🌙';
             position: absolute;
             left: 4px;
@@ -169,33 +170,29 @@
             transform: translateY(-50%);
             width: 20px;
             height: 20px;
-            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.3s ease;
         }
         
         .toggle-button.dark::before {
             content: '☀️';
             transform: translate(24px, -50%);
-        }
-
+        }   
         
         .title-slide {
             position: relative;  /* Ensures proper positioning of toggle */
         }
 
-            /* Experience Category Headers in Dark Mode */
-    body.dark-theme .experience-category h3 {
-        color: #90cdf4;  /* Light blue for better visibility */
-        font-size: 1.4em;
-        font-weight: 500;
-        margin-bottom: 16px;
-    }
-    
-    /* Experience Box Headers in Dark Mode */
-    body.dark-theme .experience-box h3 {
-        color: #e2e8f0;  /* Light gray for better contrast */
-        font-weight: 500;
-    }
+        /* Fix for h3 readability in dark mode */
+        body.dark-theme .experience-category h3 {
+            color: #90cdf4;  /* Light blue for better visibility */
+            font-weight: 500;
+            font-size: 1.4em;
+            margin-bottom: 16px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
     
                 
             /* Dark Mode Styles */
