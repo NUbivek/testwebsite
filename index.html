@@ -13,7 +13,7 @@
         <h1>Bivek Adhikari</h1>
         <div class="subtitle">Investment Professional</div>
         <div style="font-size: 1.1em; margin-top: 40px;">
-            Technical Founder • AI/ML SME • Tech Investor<br>
+            Technical Founder • AI/ML Expert • Tech Investor<br>
             Berkeley Haas MBA • MS in Machine Learning, Northwestern University • BS Finance & CS
         </div>
          <div class="theme-toggle">
@@ -44,7 +44,7 @@
                         <ul>
                             <li>Developed & executed Supply Chain thesis</li>
                             <li>Screened 200+ companies</li>
-                            <li>Modeled returns: $10-40M checks (2.5-4x MOIC, 25%+ IRR)</li>
+                            <li>Modeled returns for $10-40M checks (2.5-4x MOIC, 25%+ IRR)</li>
                             <li>Triangulated DCF, comps, and precedents for valuation</li>
                         </ul>
                     </div>
@@ -54,8 +54,8 @@
                         <div class="strategic-note">Early-stage Investments</div>
                         <ul>
                             <li>Incubated a startup-studio and built a home-grown startup</li>
-                            <li>Sourced 35+ leads, using AI & robotics expertise/network</li>
-                            <li>Scrutinized tech moats, market size, scalability & valuation</li>
+                            <li>Sourced 35+ leads, leveraging AI & robotics expertise/network</li>
+                            <li>Evaluated technical moats, market size, scalability, and valuation</li>
                         </ul>
                     </div>
                     <div class="experience-box">
@@ -64,7 +64,7 @@
                         <div class="strategic-note">Socially Responsible Investment (SRI) & ESG fund</div>
                         <ul>
                             <li>Led $4.3M ESG portfolio (13.87% return)</li>
-                            <li>Implemented ESG scalability metrics & impact framework</li>
+                            <li>Implemented technical scalability metrics & impact framework</li>
                             <li>Revised IPS to include regional concentration risks</li>
                         </ul>
                     </div>
@@ -86,7 +86,7 @@
                         <h3>Monk Robotics</h3>
                         <div class="strategic-note">Startup</div>
                         <ul>
-                            <li>Launched 3 MVPs: robot mower, sanitizing robots & IoT tech</li>
+                            <li>Launched 3 MVPs: autonomous mower, sanitizing robots & IoT tech</li>
                             <li>Rapidly adapted GTM & PMF amid COVID challenges</li>
                             <li>Achieved $12K in pilot ARR in manufacturing tech</li>
                         </ul>
@@ -258,7 +258,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div id="investment-memo" class="tab-content">
             <h2>Investment Memos</h2>
             <div class="pdf-container">
@@ -278,7 +278,7 @@
                         </button>
                     </div>
                 </div>
-
+        
                 <!-- Orderful Content -->
                 <div id="orderful" class="memo-content active">
                     <div class="subtab-navigation">
@@ -288,7 +288,7 @@
                         <button class="subtab-button" onclick="switchSubtab('topic4')">Topic 4</button>
                         <button class="subtab-button" onclick="switchSubtab('topic5')">Topic 5</button>
                     </div>
-
+                    
                     <div id="dashboard" class="subtab-content active">
                     <div id="investor-dashboard">
                         <div class="dashboard-container">
@@ -475,18 +475,19 @@
                 </div>
 
 
+
                     <div id="topic2" class="subtab-content">Topic 2 Content</div>
                     <div id="topic3" class="subtab-content">Topic 3 Content</div>
                     <div id="topic4" class="subtab-content">Topic 4 Content</div>
                     <div id="topic5" class="subtab-content">Topic 5 Content</div>
                 </div>
-
+        
                 <div id="memo2" class="memo-content">Memo 2 Content</div>
                 <div id="memo3" class="memo-content">Memo 3 Content</div>
             </div>
         </div>
 
-
+        
         <div id="sample-deals" class="tab-content">
             <h2>Sample Deals</h2>
             <div class="grid-2">
@@ -504,78 +505,78 @@
           function openTab(tabName) {
               const tabContents = document.getElementsByClassName("tab-content");
               const tabButtons = document.getElementsByClassName("tab-button");
-
+              
               Array.from(tabContents).forEach(tab => {
                   tab.classList.remove("active");
                   tab.style.opacity = 0;
               });
-
+              
               Array.from(tabButtons).forEach(button => {
                   button.classList.remove("active");
               });
-
+              
               const selectedTab = document.getElementById(tabName);
               selectedTab.classList.add("active");
-
+              
               setTimeout(() => {
                   selectedTab.style.opacity = 1;
               }, 50);
-
+              
               event.currentTarget.classList.add("active");
           }
-
+      
           function switchPDF(pdfId) {
               document.querySelectorAll('.pdf-frame').forEach(frame => {
                   frame.style.display = 'none';
                   frame.classList.remove('active');
               });
-
+              
               const selectedPDF = document.getElementById(pdfId);
               if (selectedPDF) {
                   selectedPDF.style.display = 'block';
                   selectedPDF.classList.add('active');
               }
-
+              
               document.querySelectorAll('.pdf-tab').forEach(tab => {
                   tab.classList.remove('active');
               });
               event.currentTarget.classList.add('active');
           }
-
+      
           function switchMemo(memoId) {
               document.querySelectorAll('.memo-content').forEach(content => {
                   content.classList.remove('active');
               });
-
+              
               document.querySelectorAll('.pdf-tab').forEach(tab => {
                   tab.classList.remove('active');
               });
-
+              
               document.getElementById(memoId).classList.add('active');
               event.currentTarget.classList.add('active');
           }
-
+      
           function switchSubtab(subtabId) {
               document.querySelectorAll('.subtab-content').forEach(content => {
                   content.classList.remove('active');
               });
-
+              
               document.querySelectorAll('.subtab-button').forEach(button => {
                   button.classList.remove('active');
               });
-
+              
               document.getElementById(subtabId).classList.add('active');
               event.currentTarget.classList.add('active');
-
+              
               if (subtabId === 'dashboard') {
                   initDashboard();
               }
           }
-
+      
           // Theme Functions
           function initTheme() {
               const themeToggle = document.getElementById('themeToggle');
-
+              
               if (localStorage.getItem('darkMode') === 'true') {
                   document.body.classList.add('dark-theme');
                   themeToggle.classList.add('dark');
@@ -584,19 +585,19 @@
                   themeToggle.classList.remove('dark');
                   localStorage.setItem('darkMode', 'false');
               }
-
+              
               themeToggle.addEventListener('click', () => {
                   document.body.classList.toggle('dark-theme');
                   themeToggle.classList.toggle('dark');
                   localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
               });
           }
-
+      
           // Animation Functions
           function checkScroll() {
               const elements = document.querySelectorAll('.experience-box, .card');
               const windowHeight = window.innerHeight;
-
+              
               elements.forEach(element => {
                   const elementTop = element.getBoundingClientRect().top;
                   if (elementTop < windowHeight * 0.85) {
@@ -604,7 +605,7 @@
                   }
               });
           }
-
+      
           function animateValue(obj, start, end, duration) {
               let startTimestamp = null;
               const step = (timestamp) => {
@@ -617,19 +618,19 @@
               };
               window.requestAnimationFrame(step);
           }
-
+      
           // Initialization
           document.addEventListener('DOMContentLoaded', function() {
               initTheme();
               checkScroll();
-
+              
               document.querySelectorAll('.stat-number').forEach(stat => {
                   const value = parseInt(stat.innerText.replace(/[^0-9.-]+/g,""));
                   if (!isNaN(value)) {
                       animateValue(stat, 0, value, 2000);
                   }
               });
-
+      
               document.querySelectorAll('.card, .experience-box').forEach(element => {
                   element.style.opacity = 0;
                   element.style.transform = 'translateY(20px)';
@@ -639,7 +640,7 @@
                   }, 300);
               });
           });
-
+      
           let ticking = false;
           window.addEventListener('scroll', () => {
               if (!ticking) {
@@ -651,25 +652,25 @@
               }
           });
       </script>
-
+      
         <script>
             function switchSubtab(subtabId) {
                 document.querySelectorAll('.subtab-content').forEach(content => {
                     content.classList.remove('active');
                 });
-
+                
                 document.querySelectorAll('.subtab-button').forEach(button => {
                     button.classList.remove('active');
                 });
-
+                
                 document.getElementById(subtabId).classList.add('active');
                 event.currentTarget.classList.add('active');
-
+                
                 if (subtabId === 'dashboard') {
                     initDashboard();
                 }
             }
-
+        
             // Initialize dashboard when DOM is loaded
             document.addEventListener('DOMContentLoaded', function() {
                 if (document.getElementById('dashboard').classList.contains('active')) {
