@@ -39,7 +39,7 @@ body {
     --card-bg: #1e293b;
 }
 
-            /* Dashboard Base */
+          /* Dashboard Base */
                 #investor-dashboard {
                     min-height: 600px;
                     width: 100%;
@@ -80,7 +80,8 @@ body {
                 }
                 
                 /* KPI Cards Grid */
-                .kpi-grid {
+                .kpi-grid,
+                .metrics-container {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     grid-template-rows: repeat(3, auto);
@@ -88,23 +89,23 @@ body {
                 }
                 
                 .metric-card {
-                background: var(--card-bg);
-                padding: 0.75rem;
-                border-radius: 0.5rem;
-                border: 1px solid var(--border-color);
-                transition: all 0.2s ease;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                animation: fadeIn 0.3s ease-in-out;
-                display: grid;
-                grid-template-columns: 1fr auto;
-                grid-template-areas: 
-                    "title trend"
-                    "value trend";
-                align-items: center;
-                gap: 0.25rem 1rem;
-            }
+                    background: var(--card-bg);
+                    padding: 0.75rem;
+                    border-radius: 0.5rem;
+                    border: 1px solid var(--border-color);
+                    transition: all 0.2s ease;
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                    animation: fadeIn 0.3s ease-in-out;
+                    display: grid;
+                    grid-template-columns: 1fr auto;
+                    grid-template-areas: 
+                        "title trend"
+                        "value trend";
+                    align-items: center;
+                    gap: 0.25rem 1rem;
+                }
                 
-                 .metric-card:hover {
+                .metric-card:hover {
                     transform: translateY(-2px);
                     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                 }
@@ -265,7 +266,8 @@ body {
                         grid-template-columns: 1fr;
                     }
                     
-                    .kpi-grid {
+                    .kpi-grid,
+                    .metrics-container {
                         grid-template-columns: 1fr;
                         grid-template-rows: auto;
                     }
