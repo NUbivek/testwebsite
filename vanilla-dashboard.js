@@ -78,16 +78,17 @@ function initChartNavigation() {
         
         // Initialize first chart
         showChart(0, section);
+
+        // Add in initChartNavigation
+        prevBtn.addEventListener('click', prevChart);
+        nextBtn.addEventListener('click', nextChart);
+
         
         // Event listeners
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => showChart(index, section));
         });
 
-        
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showChart(index));
-        });
     });
 }
 
@@ -414,14 +415,6 @@ function updateChartsTheme() {
         chart.update();
     });
 
-    // Animate theme transition
-    gsap.to('body', {
-        duration: 0.3,
-        backgroundColor: document.body.classList.contains('dark-theme') ? '#1a202c' : '#ffffff',
-        ease: 'power2.inOut'
-    });
-}
-
 
     // Animate theme transition
     gsap.to('body', {
@@ -431,10 +424,6 @@ function updateChartsTheme() {
     });
 }
 
-if (typeof Chart === 'undefined') {
-    console.error('Chart.js not loaded');
-    return;
-}
 
 
 // Initialize dashboard
