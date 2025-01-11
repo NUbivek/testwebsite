@@ -426,41 +426,61 @@ function updateChartsTheme() {
 
 // Initialize dashboard
 function initDashboard() {
-    const charts = [
-        createRevenueChart,
-        createUnitEconomicsChart,
-        createEfficiencyChart,
-        createImplementationChart,
-        createMarketCoverageChart,
-        createROIChart
-    ];
-    
-    charts.forEach(chart => {
-        try {
-            chart();
-        } catch (error) {
-            console.error(`Error creating chart: ${error.message}`);
-        }
-    });
+    // Ensure Chart.js is loaded
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js not loaded');
+        return;
+    }
 
-    initChartNavigation();
-    initDashboardAnimations();
-    
-    // Theme toggle listener
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            updateChartsTheme();
-            updateThemeWithAnimation();
+    try {
+        const charts = [
+            createRevenueChart,
+            createUnitEconomicsChart,
+            createEfficiencyChart,
+            createImplementationChart,
+            createMarketCoverageChart,
+            createROIChart
+        ];
+        
+        // Initialize charts with error handling
+        charts.forEach(chart => {
+            try {
+                chart();
+            } catch (error) {
+                console.error(`Error creating chart: ${error.message}`);
+            }
         });
+
+        // Initialize navigation and animations
+        initChartNavigation();
+        initDashboardAnimations();
+        
+        // Theme toggle listener
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                updateChartsTheme();
+                updateThemeWithAnimation();
+            });
+        }
+    } catch (error) {
+        console.error(`Dashboard initialization failed: ${error.message}`);
     }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    
-    if (document.getElementById('dashboard')?.classList.contains('active')) {
-        setTimeout(initDashboard, 100);
+    const dashboard = document.getElementById('dashboard');
+    if (dashboard?.classList.contains('active')) {
+        setTimeout(() => {
+            try {
+                initDashboard();
+                showChart(0, 'financial');
+                showChart(0, 'operational');
+            } catch (error) {
+                console.error('Dashboard initialization failed:', error);
+            }
+        }, 100);
     }
 });
 
