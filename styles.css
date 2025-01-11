@@ -31,12 +31,14 @@ body {
     --text-primary: #1a202c;
     --card-bg: #f7fafc;
 }
+
 /* Dark Theme Overrides */
 [data-theme="dark"], body.dark-theme {
     --bg-primary: #0f172a;
     --text-primary: #f1f5f9;
     --card-bg: #1e293b;
 }
+
 /* Dashboard Layout */
 #investor-dashboard {
     min-height: 600px;
@@ -48,6 +50,7 @@ body {
     transition: all 0.3s ease;
     animation: fadeIn 0.5s ease-in;
 }
+
 .dashboard-container {
     display: grid;
     gap: 2rem;
@@ -82,9 +85,11 @@ body {
     border-radius: 0.5rem;
     transition: all 0.3s ease;
 }
+
 .section.financial {
     background: var(--financial-gradient);
 }
+
 .section.operational {
     background: var(--operational-gradient);
 }
@@ -424,7 +429,7 @@ body.dark-theme .pdf-frame {
     iframe[src*="linkedin.com"] {
         height: 600px;
     }
-
+    
     .pdf-viewer {
         padding: 16px;
     }
@@ -529,11 +534,11 @@ body.dark-theme .pdf-frame {
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-
+        
         .memo-content.active {
             display: block;
         }
-
+        
         .subtab-navigation {
             display: flex;
             gap: 10px;
@@ -541,7 +546,7 @@ body.dark-theme .pdf-frame {
             border-bottom: 1px solid #e2e8f0;
             padding-bottom: 10px;
         }
-
+        
         .subtab-button {
             padding: 8px 16px;
             background: #edf2f7;
@@ -552,40 +557,40 @@ body.dark-theme .pdf-frame {
             font-size: 0.9em;
             color: #4a5568;
         }
-
+        
         .subtab-button:hover {
             background: #e2e8f0;
             transform: translateY(-1px);
         }
-
+        
         .subtab-button.active {
             background: #4299e1;
             color: white;
         }
-
+        
         .subtab-content {
             display: none;
             padding: 20px 0;
         }
-
+        
         .subtab-content.active {
             display: block;
         }
-
+        
         /* Dark Mode Additions for Subtabs */
         body.dark-theme .memo-content {
             background: #1a202c;
         }
-
+        
         body.dark-theme .subtab-button {
             background: #2d3748;
             color: #e2e8f0;
         }
-
+        
         body.dark-theme .subtab-button:hover {
             background: #4a5568;
         }
-
+        
         body.dark-theme .subtab-button.active {
             background: #4299e1;
         }
@@ -827,7 +832,7 @@ body.dark-theme .stat-number {
     .grid-2 {
         grid-template-columns: 1fr;
     }
-
+    
     .pdf-frame {
         height: 600px;
     }
