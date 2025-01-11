@@ -34,6 +34,7 @@ const operationalData = {
     }
 };
 
+
 // Theme Configuration
 function getThemeColors(isDark) {
     return {
@@ -50,6 +51,52 @@ function getThemeColors(isDark) {
         }
     };
 }
+
+// Chart Navigation Functions
+function initChartNavigation() {
+    const sections = ['financial', 'operational'];
+    
+    sections.forEach(section => {
+        const container = document.querySelector(`.section.${section} .chart-container`);
+        const charts = container.querySelectorAll('canvas');
+        const dots = document.querySelectorAll(`.section.${section} .dot`);
+        const prevBtn = document.querySelector(`.section.${section} .nav-arrow.left`);
+        const nextBtn = document.querySelector(`.section.${section} .nav-arrow.right`);
+        let currentIndex = 0;
+
+        function showChart(index) {
+            charts.forEach(chart => chart.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            charts[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentIndex = index;
+        }
+
+        function nextChart() {
+            const nextIndex = (currentIndex + 1) % charts.length;
+            showChart(nextIndex);
+        }
+
+        function prevChart() {
+            const prevIndex = (currentIndex - 1 + charts.length) % charts.length;
+            showChart(prevIndex);
+        }
+
+        // Initialize first chart
+        showChart(0);
+
+        // Event listeners
+        nextBtn.addEventListener('click', nextChart);
+        prevBtn.addEventListener('click', prevChart);
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showChart(index));
+        });
+    });
+}
+
+
 // Chart Creation Functions
 function createRevenueChart() {
     const ctx = document.getElementById('revenueChart').getContext('2d');
@@ -96,12 +143,6 @@ function createRevenueChart() {
                 y: {
                     grid: { color: colors.grid },
                     ticks: { color: colors.text }
-                }
-            },
-            animations: {
-                tension: {
-                    duration: 1000,
-                    easing: 'linear'
                 }
             }
         }
@@ -338,8 +379,9 @@ function initDashboard() {
     ];
     
     charts.forEach(chart => chart());
+    initChartNavigation();
     
-    // Theme change listener
+ // Theme change listener
     document.getElementById('themeToggle').addEventListener('click', updateChartsTheme);
 }
 
