@@ -66,20 +66,24 @@ function initChartNavigation() {
 
         function nextChart() {
             const nextIndex = (currentIndex + 1) % charts.length;
-            showChart(nextIndex);
+            showChart(nextIndex, section);
+            currentIndex = nextIndex;
         }
-
+        
         function prevChart() {
             const prevIndex = (currentIndex - 1 + charts.length) % charts.length;
-            showChart(prevIndex);
+            showChart(prevIndex, section);
+            currentIndex = prevIndex;
         }
-
+        
         // Initialize first chart
-        showChart(0);
-
+        showChart(0, section);
+        
         // Event listeners
-        nextBtn.addEventListener('click', nextChart);
-        prevBtn.addEventListener('click', prevChart);
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showChart(index, section));
+        });
+
         
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => showChart(index));
