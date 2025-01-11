@@ -64,17 +64,6 @@ function initChartNavigation() {
         const nextBtn = document.querySelector(`.section.${section} .nav-arrow.right`);
         let currentIndex = 0;
 
-        function showChart(index) {
-            const charts = document.querySelectorAll('.chart-container canvas');
-            charts.forEach(chart => {
-                chart.style.display = 'none';
-                chart.classList.remove('active');
-            });
-            charts[index].style.display = 'block';
-            charts[index].classList.add('active');
-        }
-
-
         function nextChart() {
             const nextIndex = (currentIndex + 1) % charts.length;
             showChart(nextIndex);
@@ -98,9 +87,28 @@ function initChartNavigation() {
     });
 }
 
+// Standalone function outside any other function
+function showChart(index, section) {
+    const container = document.querySelector(`.section.${section} .chart-container`);
+    const charts = container.querySelectorAll('canvas');
+    const dots = document.querySelectorAll(`.section.${section} .dot`);
+    
+    charts.forEach(chart => {
+        chart.style.display = 'none';
+        chart.classList.remove('active');
+    });
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    charts[index].style.display = 'block';
+    charts[index].classList.add('active');
+    dots[index].classList.add('active');
+}
+
+
+
 // Updated Chart Creation Functions with new chart types
 function createRevenueChart() {
-    const ctx = document.getElementById('revenueLineChart').getContext('2d');
+    const ctx = document.getElementById('revenueChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
@@ -142,7 +150,7 @@ function createRevenueChart() {
 }
 
 function createUnitEconomicsChart() {
-    const ctx = document.getElementById('unitEconomicsAreaChart').getContext('2d');
+    const ctx = document.getElementById('unitEconomicsChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
@@ -184,7 +192,7 @@ function createUnitEconomicsChart() {
 }
 
 function createEfficiencyChart() {
-    const ctx = document.getElementById('efficiencyDonutChart').getContext('2d');
+    const ctx = document.getElementById('efficiencyChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
@@ -223,7 +231,7 @@ function createEfficiencyChart() {
 }
 
 function createImplementationChart() {
-    const ctx = document.getElementById('implementationBarChart').getContext('2d');
+    const ctx = document.getElementById('implementationChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
@@ -264,7 +272,7 @@ function createImplementationChart() {
 }
 
 function createMarketCoverageChart() {
-    const ctx = document.getElementById('marketCoveragePieChart').getContext('2d');
+    const ctx = document.getElementById('marketCoverageChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
@@ -300,15 +308,56 @@ function createMarketCoverageChart() {
 }
 
 function createROIChart() {
-    // Since Chart.js doesn't support Sankey diagrams natively,
-    // we'll create a custom visualization using Canvas API
-    const ctx = document.getElementById('roiSankeyChart').getContext('2d');
+    const ctx = document.getElementById('roiChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
-    // Custom Sankey implementation...
-    // This would require additional custom code to create a Sankey diagram
-    // For now, keeping as a placeholder
+    return new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['Labor Cost Savings', 'Integration Speed', 'Operational Efficiency', 'Success Rate', 'System Uptime'],
+            datasets: [{
+                label: 'Performance Metrics (%)',
+                data: [
+                    operationalData.roi.laborCost,
+                    operationalData.roi.integrationTime,
+                    operationalData.roi.operationalCost,
+                    operationalData.roi.successRate,
+                    operationalData.roi.uptime
+                ],
+                backgroundColor: colors.operational.primary + '40',
+                borderColor: colors.operational.primary,
+                pointBackgroundColor: colors.operational.secondary,
+                pointBorderColor: colors.operational.primary
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { color: colors.text }
+                }
+            },
+            scales: {
+                r: {
+                    angleLines: { color: colors.grid },
+                    grid: { color: colors.grid },
+                    pointLabels: { color: colors.text },
+                    ticks: { 
+                        color: colors.text,
+                        backdropColor: 'transparent'
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
+            }
+        }
+    });
 }
+
 
 
 
@@ -348,6 +397,12 @@ function updateChartsTheme() {
         ease: 'power2.inOut'
     });
 }
+
+if (typeof Chart === 'undefined') {
+    console.error('Chart.js not loaded');
+    return;
+}
+
 
 // Initialize dashboard
 function initDashboard() {
