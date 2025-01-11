@@ -108,10 +108,15 @@ body {
                 align-items: center;
                 gap: 0.25rem 1rem;
             }
-                
-                .metric-card:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                /* Enhanced Animations for Metric Cards */
+                .metric-card {
+                    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+               .metric-card:hover {
+                    transform: translateY(-2px) scale(1.02);
+                    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
                 }
                 
                 .metric-card h3 {
@@ -179,7 +184,19 @@ body {
                     opacity: 1;
                     display: block;
                 }
+
+                /* Chart Container Animations */
+                .chart-container {
+                    transition: all 0.3s ease;
+                }
                 
+                .chart-container:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+                }
+                
+
+
                 /* Navigation Controls */
                 .nav-arrow {
                     position: absolute;
@@ -964,3 +981,11 @@ body.dark-theme .stat-number {
 .tab-button {
     transform: translateZ(0);
     backface-visibility: hidden;
+
+/* Hardware Acceleration for Smooth Animations */
+.metric-card,
+.chart-container {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+}
