@@ -392,6 +392,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Add to your existing JavaScript
+function initDashboardAnimations() {
+    // Staggered entry animation for metric cards
+    gsap.from('.metric-card', {
+        duration: 0.6,
+        y: 30,
+        opacity: 0,
+        stagger: 0.1,
+        ease: 'power3.out'
+    });
+
+    // Chart reveal animations
+    gsap.from('.chart-container', {
+        duration: 0.8,
+        opacity: 0,
+        y: 20,
+        stagger: 0.2,
+        ease: 'power2.out',
+        delay: 0.3
+    });
+}
+
+// Add smooth transitions for theme switching
+function updateThemeWithAnimation() {
+    gsap.to('body', {
+        duration: 0.3,
+        backgroundColor: document.body.classList.contains('dark-theme') ? '#1a202c' : '#ffffff',
+        ease: 'power2.inOut'
+    });
+}
+
+
+
 // Tab switching
 function switchSubtab(subtabId) {
     document.querySelectorAll('.subtab-content').forEach(content => {
