@@ -365,19 +365,27 @@ function createROIChart() {
 
 
 
-// Theme Switching
 function updateChartsTheme() {
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
-    // Update existing charts
     Chart.instances.forEach(chart => {
         // Base theme updates
         chart.options.plugins.legend.labels.color = colors.text;
         chart.options.plugins.title.color = colors.text;
-        chart.options.scales.x.grid.color = colors.grid;
-        chart.options.scales.y.grid.color = colors.grid;
-        chart.options.scales.x.ticks.color = colors.text;
-        chart.options.scales.y.ticks.color = colors.text;
+        
+        // Update scales based on chart type
+        if (chart.config.type === 'radar') {
+            chart.options.scales.r.angleLines.color = colors.grid;
+            chart.options.scales.r.grid.color = colors.grid;
+            chart.options.scales.r.pointLabels.color = colors.text;
+            chart.options.scales.r.ticks.color = colors.text;
+            chart.options.scales.r.ticks.backdropColor = 'transparent';
+        } else {
+            chart.options.scales.x.grid.color = colors.grid;
+            chart.options.scales.y.grid.color = colors.grid;
+            chart.options.scales.x.ticks.color = colors.text;
+            chart.options.scales.y.ticks.color = colors.text;
+        }
         
         // Update chart-specific colors
         if (chart.config.type === 'line' || chart.config.type === 'area') {
@@ -385,14 +393,35 @@ function updateChartsTheme() {
                 dataset.borderColor = index === 0 ? colors.financial.primary : colors.financial.secondary;
                 dataset.backgroundColor = index === 0 ? colors.financial.primary + '40' : colors.financial.secondary + '40';
             });
-        } else if (chart.config.type === 'doughnut') {
-            chart.data.datasets[0].backgroundColor = [colors.financial.primary, colors.financial.secondary, colors.financial.primary + '80'];
+        } else if (chart.config.type === 'doughnut' || chart.config.type === 'pie') {
+            chart.data.datasets[0].backgroundColor = [
+                colors.operational.primary,
+                colors.operational.primary + '80',
+                colors.operational.secondary,
+                colors.operational.secondary + '80'
+            ];
         } else if (chart.config.type === 'bar') {
-            chart.data.datasets[0].backgroundColor = colors.operational.primary;
+            chart.data.datasets.forEach((dataset, index) => {
+                dataset.backgroundColor = index === 0 ? colors.operational.primary : colors.operational.secondary;
+            });
+        } else if (chart.config.type === 'radar') {
+            chart.data.datasets[0].backgroundColor = colors.operational.primary + '40';
+            chart.data.datasets[0].borderColor = colors.operational.primary;
+            chart.data.datasets[0].pointBackgroundColor = colors.operational.secondary;
+            chart.data.datasets[0].pointBorderColor = colors.operational.primary;
         }
         
         chart.update();
     });
+
+    // Animate theme transition
+    gsap.to('body', {
+        duration: 0.3,
+        backgroundColor: document.body.classList.contains('dark-theme') ? '#1a202c' : '#ffffff',
+        ease: 'power2.inOut'
+    });
+}
+
 
     // Animate theme transition
     gsap.to('body', {
