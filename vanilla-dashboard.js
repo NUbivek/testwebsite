@@ -34,6 +34,50 @@ const operationalData = {
     }
 };
 
+function initDashboard() {
+    // Ensure Chart.js is loaded
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js not loaded');
+        return;
+    }
+
+    try {
+        const charts = [
+            createRevenueChart,
+            createUnitEconomicsChart,
+            createEfficiencyChart,
+            createImplementationChart,
+            createMarketCoverageChart,
+            createROIChart
+        ];
+        
+        // Initialize charts with error handling
+        charts.forEach(chart => {
+            try {
+                chart();
+            } catch (error) {
+                console.error(`Error creating chart: ${error.message}`);
+            }
+        });
+
+        // Initialize navigation and animations
+        initChartNavigation();
+        initDashboardAnimations();
+        
+        // Theme toggle listener
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                updateChartsTheme();
+                updateThemeWithAnimation();
+            });
+        }
+    } catch (error) {
+        console.error(`Dashboard initialization failed: ${error.message}`);
+    }
+}
+
+
 
 // Theme Configuration
 function getThemeColors(isDark) {
@@ -95,18 +139,32 @@ function initChartNavigation() {
 // Standalone function outside any other function
 function showChart(index, section) {
     const container = document.querySelector(`.section.${section} .chart-container`);
+    if (!container) return;
+    
     const charts = container.querySelectorAll('canvas');
     const dots = document.querySelectorAll(`.section.${section} .dot`);
     
+    // Reset all charts and dots
     charts.forEach(chart => {
         chart.style.display = 'none';
         chart.classList.remove('active');
     });
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    // Show selected chart
+    if (charts[index]) {
+        charts[index].style.display = 'block';
+        charts[index].classList.add('active');
+        dots[index]?.classList.add('active');
         
-    charts[index].style.display = 'block';
-    charts[index].classList.add('active');
-    dots[index].classList.add('active');
+        // Force chart redraw
+        const chartInstance = Chart.getChart(charts[index]);
+        if (chartInstance) {
+            chartInstance.update();
+        }
+    }
 }
+
 
 
 
@@ -424,65 +482,22 @@ function updateChartsTheme() {
 }
 
 
-// Initialize dashboard
-function initDashboard() {
-    // Ensure Chart.js is loaded
-    if (typeof Chart === 'undefined') {
-        console.error('Chart.js not loaded');
-        return;
-    }
-
-    try {
-        const charts = [
-            createRevenueChart,
-            createUnitEconomicsChart,
-            createEfficiencyChart,
-            createImplementationChart,
-            createMarketCoverageChart,
-            createROIChart
-        ];
-        
-        // Initialize charts with error handling
-        charts.forEach(chart => {
-            try {
-                chart();
-            } catch (error) {
-                console.error(`Error creating chart: ${error.message}`);
-            }
-        });
-
-        // Initialize navigation and animations
-        initChartNavigation();
-        initDashboardAnimations();
-        
-        // Theme toggle listener
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                updateChartsTheme();
-                updateThemeWithAnimation();
-            });
-        }
-    } catch (error) {
-        console.error(`Dashboard initialization failed: ${error.message}`);
-    }
-}
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     const dashboard = document.getElementById('dashboard');
     if (dashboard?.classList.contains('active')) {
+        // Ensure proper initialization timing
         setTimeout(() => {
             try {
                 initDashboard();
-                showChart(0, 'financial');
-                showChart(0, 'operational');
             } catch (error) {
                 console.error('Dashboard initialization failed:', error);
             }
         }, 100);
     }
 });
+
 
 
 
@@ -509,31 +524,6 @@ function initDashboardAnimations() {
     });
 }
 
-function initDashboard() {
-    try {
-        const charts = [
-            createRevenueChart,
-            createUnitEconomicsChart,
-            createEfficiencyChart,
-            createImplementationChart,
-            createMarketCoverageChart,
-            createROIChart
-        ];
-        
-        charts.forEach(chart => {
-            try {
-                chart();
-            } catch (error) {
-                console.error(`Error creating chart: ${error.message}`);
-            }
-        });
-
-        initChartNavigation();
-        initDashboardAnimations();
-    } catch (error) {
-        console.error(`Dashboard initialization failed: ${error.message}`);
-    }
-}
 
 
 // Tab switching
