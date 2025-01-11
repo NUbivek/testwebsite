@@ -88,26 +88,30 @@ body {
                 .metrics-container {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
-                    grid-template-rows: repeat(3, auto);
+                    grid-template-rows: repeat(3, minmax(65px, auto));
                     gap: 0.75rem;
+                    align-items: stretch;
                 }
                 
-               .metric-card {
-                background: var(--card-bg);
-                padding: 0.75rem;
-                border-radius: 0.5rem;
-                border: 1px solid var(--border-color);
-                transition: all 0.2s ease;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                animation: fadeIn 0.3s ease-in-out;
-                display: grid;
-                grid-template-columns: 1fr auto;
-                grid-template-areas: 
-                    "title trend"
-                    "value trend";
-                align-items: center;
-                gap: 0.25rem 1rem;
-            }
+               /* Update metric card layout */
+                    .metric-card {
+                        background: var(--card-bg);
+                        padding: 0.75rem 1rem;
+                        border-radius: 0.5rem;
+                        border: 1px solid var(--border-color);
+                        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                        animation: fadeIn 0.3s ease-in-out;
+                        display: grid;
+                        grid-template-columns: 65% 35%;
+                        grid-template-areas: 
+                            "title trend"
+                            "value trend";
+                        align-items: center;
+                        gap: 0.25rem 0.75rem;
+                        min-height: 65px;
+                        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                                    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
                 /* Enhanced Animations for Metric Cards */
                 .metric-card {
                     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
@@ -120,27 +124,30 @@ body {
                 }
                 
                 .metric-card h3 {
-                font-size: 0.9rem;
-                margin: 0;
-                color: var(--text-secondary);
-                font-weight: 500;
-                grid-area: title;
-            }
+                    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+                    margin: 0;
+                    color: var(--text-secondary);
+                    font-weight: 500;
+                    grid-area: title;
+                    line-height: 1.2;
+                }
             
             .metric-card .value {
-                font-size: 1.2rem;
+                font-size: clamp(1rem, 2vw, 1.2rem);
                 font-weight: bold;
                 margin: 0;
                 color: var(--text-primary);
                 grid-area: value;
+                line-height: 1.2;
             }
             
             .metric-card .trend {
-                font-size: 0.8rem;
+                font-size: clamp(0.7rem, 1.3vw, 0.8rem);
                 color: var(--text-tertiary);
                 grid-area: trend;
                 text-align: right;
                 align-self: center;
+                line-height: 1.1;
             }
                 
                 /* Charts Section */
