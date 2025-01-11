@@ -96,10 +96,9 @@ function initChartNavigation() {
     });
 }
 
-
-// Chart Creation Functions
-function createRevenueChart() {
-    const ctx = document.getElementById('revenueChart').getContext('2d');
+// Updated Chart Creation Functions with new chart types
+function createRevenueLineChart() {
+    const ctx = document.getElementById('revenueLineChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
@@ -111,46 +110,37 @@ function createRevenueChart() {
                     label: 'Revenue ($M)',
                     data: financialData.revenue.map(d => d.revenue),
                     borderColor: colors.financial.primary,
-                    backgroundColor: colors.financial.primary + '40',
-                    fill: true
+                    tension: 0.4,
+                    fill: false
                 },
                 {
                     label: 'ARR ($M)',
                     data: financialData.revenue.map(d => d.arr),
                     borderColor: colors.financial.secondary,
-                    backgroundColor: colors.financial.secondary + '40',
-                    fill: true
+                    tension: 0.4,
+                    fill: false
                 }
             ]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Revenue & ARR Growth',
-                    color: colors.text
-                },
                 legend: {
+                    position: 'top',
                     labels: { color: colors.text }
                 }
             },
-            scales: {
-                x: {
-                    grid: { color: colors.grid },
-                    ticks: { color: colors.text }
-                },
-                y: {
-                    grid: { color: colors.grid },
-                    ticks: { color: colors.text }
-                }
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
 
-function createUnitEconomicsChart() {
-    const ctx = document.getElementById('unitEconomicsChart').getContext('2d');
+function createUnitEconomicsAreaChart() {
+    const ctx = document.getElementById('unitEconomicsAreaChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
@@ -161,89 +151,77 @@ function createUnitEconomicsChart() {
                 {
                     label: 'Gross Margin (%)',
                     data: financialData.metrics.map(d => d.margin),
+                    backgroundColor: colors.financial.primary + '40',
                     borderColor: colors.financial.primary,
-                    yAxisID: 'y'
+                    fill: true
                 },
                 {
                     label: 'Rule of 40',
                     data: financialData.metrics.map(d => d.rule40),
+                    backgroundColor: colors.financial.secondary + '40',
                     borderColor: colors.financial.secondary,
-                    yAxisID: 'y1'
+                    fill: true
                 }
             ]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Unit Economics',
-                    color: colors.text
+                legend: {
+                    position: 'top',
+                    labels: { color: colors.text }
                 }
             },
-            scales: {
-                y: {
-                    type: 'linear',
-                    position: 'left',
-                },
-                y1: {
-                    type: 'linear',
-                    position: 'right',
-                    grid: {
-                        drawOnChartArea: false
-                    }
-                }
-            },
-            animations: {
-                y: {
-                    duration: 2000
-                }
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
 
-function createEfficiencyChart() {
-    const ctx = document.getElementById('efficiencyChart').getContext('2d');
+function createEfficiencyDonutChart() {
+    const ctx = document.getElementById('efficiencyDonutChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
-        type: 'bar',
+        type: 'doughnut',
         data: {
-            labels: financialData.metrics.map(d => d.year),
-            datasets: [
-                {
-                    label: 'ARR per Employee ($K)',
-                    data: financialData.revenue.map(d => d.arrPerEmployee/1000),
-                    backgroundColor: colors.financial.primary
-                },
-                {
-                    label: 'ARR per Customer ($K)',
-                    data: financialData.revenue.map(d => d.arrPerCustomer/1000),
-                    backgroundColor: colors.financial.secondary
-                }
-            ]
+            labels: ['ARR/Employee', 'ARR/Customer', 'NRR'],
+            datasets: [{
+                data: [
+                    financialData.revenue[2].arrPerEmployee/1000,
+                    financialData.revenue[2].arrPerCustomer/1000,
+                    financialData.metrics[2].nrr
+                ],
+                backgroundColor: [
+                    colors.financial.primary,
+                    colors.financial.secondary,
+                    colors.financial.primary + '80'
+                ]
+            }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Efficiency Metrics',
-                    color: colors.text
+                legend: {
+                    position: 'right',
+                    labels: { color: colors.text }
                 }
             },
-            animations: {
-                y: {
-                    duration: 2000
-                }
+            animation: {
+                animateRotate: true,
+                animateScale: true,
+                duration: 2000
             }
         }
     });
 }
 
-function createImplementationChart() {
-    const ctx = document.getElementById('implementationChart').getContext('2d');
+function createImplementationBarChart() {
+    const ctx = document.getElementById('implementationBarChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
@@ -254,135 +232,141 @@ function createImplementationChart() {
                 {
                     label: 'Orderful (Days)',
                     data: operationalData.implementation.map(d => d.orderful),
-                    backgroundColor: colors.operational.primary
+                    backgroundColor: colors.operational.primary,
+                    borderRadius: 8
                 },
                 {
                     label: 'Industry Average',
                     data: operationalData.implementation.map(d => d.industry),
-                    backgroundColor: colors.operational.secondary
+                    backgroundColor: colors.operational.secondary,
+                    borderRadius: 8
                 }
             ]
         },
         options: {
+            indexAxis: 'y',
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Implementation Timeline',
-                    color: colors.text
+                legend: {
+                    position: 'top',
+                    labels: { color: colors.text }
                 }
             },
-            animations: {
-                y: {
-                    duration: 2000
-                }
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
 
-function createMarketCoverageChart() {
-    const ctx = document.getElementById('marketCoverageChart').getContext('2d');
+function createMarketCoveragePieChart() {
+    const ctx = document.getElementById('marketCoveragePieChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
-        type: 'polarArea',
+        type: 'pie',
         data: {
             labels: operationalData.marketCoverage.map(d => d.vertical),
             datasets: [{
                 data: operationalData.marketCoverage.map(d => d.partners),
                 backgroundColor: [
+                    colors.operational.primary,
                     colors.operational.primary + '80',
-                    colors.operational.primary + '60',
-                    colors.operational.secondary + '80',
-                    colors.operational.secondary + '60'
+                    colors.operational.secondary,
+                    colors.operational.secondary + '80'
                 ]
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Market Coverage',
-                    color: colors.text
+                legend: {
+                    position: 'right',
+                    labels: { color: colors.text }
                 }
             },
             animation: {
                 animateRotate: true,
-                animateScale: true
-            }
-        }
-    });
-}
-
-function createROIChart() {
-    const ctx = document.getElementById('roiChart').getContext('2d');
-    const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
-    return new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ['Labor Cost', 'Integration Time', 'Error Resolution', 'Implementation', 'Success Rate'],
-            datasets: [{
-                label: 'Improvement (%)',
-                data: [
-                    operationalData.roi.laborCost,
-                    operationalData.roi.integrationTime,
-                    operationalData.roi.operationalCost,
-                    operationalData.roi.successRate,
-                    operationalData.roi.uptime
-                ],
-                backgroundColor: colors.operational.primary + '40',
-                borderColor: colors.operational.primary
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'ROI Impact',
-                    color: colors.text
-                }
-            },
-            animation: {
+                animateScale: true,
                 duration: 2000
             }
         }
     });
 }
 
+function createROISankeyChart() {
+    // Since Chart.js doesn't support Sankey diagrams natively,
+    // we'll create a custom visualization using Canvas API
+    const ctx = document.getElementById('roiSankeyChart').getContext('2d');
+    const colors = getThemeColors(document.body.classList.contains('dark-theme'));
+    
+    // Custom Sankey implementation...
+    // This would require additional custom code to create a Sankey diagram
+    // For now, keeping as a placeholder
+}
+
+
+
 // Theme Switching
 function updateChartsTheme() {
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
+    
+    // Update existing charts
     Chart.instances.forEach(chart => {
+        // Base theme updates
         chart.options.plugins.legend.labels.color = colors.text;
         chart.options.plugins.title.color = colors.text;
         chart.options.scales.x.grid.color = colors.grid;
         chart.options.scales.y.grid.color = colors.grid;
         chart.options.scales.x.ticks.color = colors.text;
         chart.options.scales.y.ticks.color = colors.text;
+        
+        // Update chart-specific colors
+        if (chart.config.type === 'line' || chart.config.type === 'area') {
+            chart.data.datasets.forEach((dataset, index) => {
+                dataset.borderColor = index === 0 ? colors.financial.primary : colors.financial.secondary;
+                dataset.backgroundColor = index === 0 ? colors.financial.primary + '40' : colors.financial.secondary + '40';
+            });
+        } else if (chart.config.type === 'doughnut') {
+            chart.data.datasets[0].backgroundColor = [colors.financial.primary, colors.financial.secondary, colors.financial.primary + '80'];
+        } else if (chart.config.type === 'bar') {
+            chart.data.datasets[0].backgroundColor = colors.operational.primary;
+        }
+        
         chart.update();
+    });
+
+    // Animate theme transition
+    gsap.to('body', {
+        duration: 0.3,
+        backgroundColor: document.body.classList.contains('dark-theme') ? '#1a202c' : '#ffffff',
+        ease: 'power2.inOut'
     });
 }
 
 // Initialize dashboard
 function initDashboard() {
     const charts = [
-        createRevenueChart,
+        createRevenueLineChart,
         createUnitEconomicsChart,
-        createEfficiencyChart,
-        createImplementationChart,
-        createMarketCoverageChart,
-        createROIChart
+        createEfficiencyDonutChart,
+        createImplementationBarChart,
+        createMarketCoveragePieChart,
+        createROISankeyChart
     ];
     
     charts.forEach(chart => chart());
     initChartNavigation();
+    initDashboardAnimations();
     
- // Theme change listener
-    document.getElementById('themeToggle').addEventListener('click', updateChartsTheme);
+    // Theme change listener
+    document.getElementById('themeToggle').addEventListener('click', () => {
+        updateChartsTheme();
+        updateThemeWithAnimation();
+    });
 }
 
 // Initialize when DOM is loaded
@@ -392,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Add to your existing JavaScript
+// Enhanced dashboard animations
 function initDashboardAnimations() {
     // Staggered entry animation for metric cards
     gsap.from('.metric-card', {
@@ -403,25 +387,30 @@ function initDashboardAnimations() {
         ease: 'power3.out'
     });
 
-    // Chart reveal animations
+    // Enhanced chart reveal animations with scaling
     gsap.from('.chart-container', {
         duration: 0.8,
         opacity: 0,
         y: 20,
+        scale: 0.95,
         stagger: 0.2,
-        ease: 'power2.out',
+        ease: 'back.out(1.2)',
         delay: 0.3
     });
 }
 
-// Add smooth transitions for theme switching
+// Enhanced theme switching animation
 function updateThemeWithAnimation() {
+    const isDark = document.body.classList.contains('dark-theme');
     gsap.to('body', {
         duration: 0.3,
-        backgroundColor: document.body.classList.contains('dark-theme') ? '#1a202c' : '#ffffff',
+        backgroundColor: isDark ? '#1a202c' : '#ffffff',
+        color: isDark ? '#f7fafc' : '#1a202c',
         ease: 'power2.inOut'
     });
 }
+
+
 
 
 
