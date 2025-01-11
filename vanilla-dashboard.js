@@ -350,24 +350,24 @@ function updateChartsTheme() {
 // Initialize dashboard
 function initDashboard() {
     const charts = [
-        createRevenueLineChart,
+        createRevenueChart,
         createUnitEconomicsChart,
-        createEfficiencyDonutChart,
-        createImplementationBarChart,
-        createMarketCoveragePieChart,
-        createROISankeyChart
+        createEfficiencyChart,
+        createImplementationChart,
+        createMarketCoverageChart,
+        createROIChart
     ];
     
     charts.forEach(chart => chart());
     initChartNavigation();
     initDashboardAnimations();
     
-    // Theme change listener
     document.getElementById('themeToggle').addEventListener('click', () => {
         updateChartsTheme();
         updateThemeWithAnimation();
     });
 }
+
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
