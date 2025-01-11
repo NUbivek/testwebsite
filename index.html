@@ -286,231 +286,182 @@
                         <button class="subtab-button" onclick="switchSubtab('topic4')">Topic 4</button>
                         <button class="subtab-button" onclick="switchSubtab('topic5')">Topic 5</button>
                     </div>
-                    
-                           <div id="dashboard" class="subtab-content active">
-                               <div id="investor-dashboard">
-                                   <!-- Theme Toggle -->
-                                   <div class="theme-switch-container">
-                                       <button id="themeToggle" aria-label="Toggle theme">
-                                           <span class="theme-icon"></span>
-                                       </button>
-                                   </div>
-                           
-                                   <!-- Loading State -->
-                                   <div class="loading-overlay">
-                                       <div class="loading-spinner"></div>
-                                       <p>Loading dashboard...</p>
-                                   </div>
-                           
-                                   <div class="dashboard-container">
-                                       <!-- Top Section -->
-                                       <div class="metrics-grid top-section">
-                                           <!-- Financial KPIs -->
-                                           <div class="section financial">
-                                               <h2>Financial Performance</h2>
-                                               <div class="kpi-grid">
-                                                   <!-- Row 1 -->
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="100">
-                                                       <h3>Revenue CAGR</h3>
-                                                       <p class="value stat-number">141%</p>
-                                                       <span class="trend">Exceptional growth</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="200">
-                                                       <h3>Gross Margin</h3>
-                                                       <p class="value stat-number">95.03%</p>
-                                                       <span class="trend">Elite</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="300">
-                                                       <h3>Rule of 40</h3>
-                                                       <p class="value stat-number">216%</p>
-                                                       <span class="trend">Best-in-class</span>
-                                                   </div>
-                                                   <!-- Row 2 -->
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="400">
-                                                       <h3>ARR Growth</h3>
-                                                       <p class="value stat-number">$59.74M</p>
-                                                       <span class="trend">141% CAGR</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="500">
-                                                       <h3>LTV/CAC</h3>
-                                                       <p class="value stat-number">10x</p>
-                                                       <span class="trend">Sustainable</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="600">
-                                                       <h3>NRR</h3>
-                                                       <p class="value stat-number">130%</p>
-                                                       <span class="trend">Strong</span>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                           
-                                           <!-- Operational KPIs -->
-                                           <div class="section operational">
-                                               <h2>Operational Excellence</h2>
-                                               <div class="kpi-grid">
-                                                   <!-- Row 1 -->
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="100">
-                                                       <h3>Network Partners</h3>
-                                                       <p class="value stat-number">10,000+</p>
-                                                       <span class="trend">Strong network effects</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="200">
-                                                       <h3>Implementation Time</h3>
-                                                       <p class="value stat-number">9</p>
-                                                       <span class="trend">5x faster than industry</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="300">
-                                                       <h3>System Uptime</h3>
-                                                       <p class="value stat-number">99.99%</p>
-                                                       <span class="trend">Enterprise-grade</span>
-                                                   </div>
-                                                   <!-- Row 2 -->
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="400">
-                                                       <h3>Error Resolution</h3>
-                                                       <p class="value">Real-time</p>
-                                                       <span class="trend">vs 48h industry</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="500">
-                                                       <h3>Labor Savings</h3>
-                                                       <p class="value stat-number">70%</p>
-                                                       <span class="trend">vs 30% benchmark</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="600">
-                                                       <h3>Integration Speed</h3>
-                                                       <p class="value stat-number">80%</p>
-                                                       <span class="trend">Time saved</span>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                           
-                                       <!-- Charts Section -->
-                                       <div class="charts-grid">
-                                           <!-- Financial Charts -->
-                                           <div class="section financial">
-                                               <h2>Financial Analytics</h2>
-                                               <div class="chart-container" data-animation="fade-in">
-                                                   <div class="chart-loading"></div>
-                                                   <h3>Revenue & ARR Growth</h3>
-                                                   <canvas id="revenueChart"></canvas>
-                                               </div>
-                                               <div class="chart-container" data-animation="fade-in">
-                                                   <div class="chart-loading"></div>
-                                                   <h3>Unit Economics</h3>
-                                                   <canvas id="unitEconomicsChart"></canvas>
-                                               </div>
-                                               <div class="chart-container" data-animation="fade-in">
-                                                   <div class="chart-loading"></div>
-                                                   <h3>Financial Efficiency</h3>
-                                                   <canvas id="efficiencyChart"></canvas>
-                                               </div>
-                                           </div>
-                                           
-                                           <!-- Operational Charts -->
-                                           <div class="section operational">
-                                               <h2>Operational Metrics</h2>
-                                               <div class="chart-container" data-animation="fade-in">
-                                                   <div class="chart-loading"></div>
-                                                   <h3>Implementation Timeline</h3>
-                                                   <canvas id="implementationChart"></canvas>
-                                               </div>
-                                               <div class="chart-container" data-animation="fade-in">
-                                                   <div class="chart-loading"></div>
-                                                   <h3>Market Coverage</h3>
-                                                   <canvas id="marketCoverageChart"></canvas>
-                                               </div>
-                                               <div class="chart-container" data-animation="fade-in">
-                                                   <div class="chart-loading"></div>
-                                                   <h3>ROI Impact</h3>
-                                                   <canvas id="roiChart"></canvas>
-                                               </div>
-                                           </div>
-                                       </div>
-                           
-                                       <!-- Bottom Section -->
-                                       <div class="metrics-grid bottom-section">
-                                           <!-- Financial Bottom Metrics -->
-                                           <div class="section financial">
-                                               <h2>Financial Efficiency</h2>
-                                               <div class="metrics-container">
-                                                   <!-- Row 1 -->
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="100">
-                                                       <h3>ARR per Customer</h3>
-                                                       <p class="value stat-number">$33,043</p>
-                                                       <span class="trend">Expanding</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="200">
-                                                       <h3>ARR per Employee</h3>
-                                                       <p class="value stat-number">$449,184</p>
-                                                       <span class="trend">79% CAGR</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="300">
-                                                       <h3>Burn Multiple</h3>
-                                                       <p class="value stat-number">-0.24</p>
-                                                       <span class="trend">Efficient</span>
-                                                   </div>
-                                                   <!-- Row 2 -->
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="400">
-                                                       <h3>YoY Growth</h3>
-                                                       <p class="value stat-number">121%</p>
-                                                       <span class="trend">Consistent</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="500">
-                                                       <h3>Customer Growth</h3>
-                                                       <p class="value stat-number">156%</p>
-                                                       <span class="trend">CAGR</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="600">
-                                                       <h3>Revenue per Sales Rep</h3>
-                                                       <p class="value stat-number">$1.6M</p>
-                                                       <span class="trend">Increasing</span>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                           
-                                           <!-- Operational Bottom Metrics -->
-                                           <div class="section operational">
-                                               <h2>Operational Impact</h2>
-                                               <div class="metrics-container">
-                                                   <!-- Row 1 -->
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="100">
-                                                       <h3>Transaction Volume</h3>
-                                                       <p class="value stat-number">265M</p>
-                                                       <span class="trend">Annual</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="200">
-                                                       <h3>Success Rate</h3>
-                                                       <p class="value stat-number">100%</p>
-                                                       <span class="trend">Perfect</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="300">
-                                                       <h3>Partner Growth</h3>
-                                                       <p class="value stat-number">156%</p>
-                                                       <span class="trend">YoY</span>
-                                                   </div>
-                                                   <!-- Row 2 -->
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="400">
-                                                       <h3>Integration Efficiency</h3>
-                                                       <p class="value stat-number">90%</p>
-                                                       <span class="trend">Reduction</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="500">
-                                                       <h3>Cost Reduction</h3>
-                                                       <p class="value stat-number">70%</p>
-                                                       <span class="trend">vs Industry</span>
-                                                   </div>
-                                                   <div class="metric-card" data-animation="fade-in" data-delay="600">
-                                                       <h3>Time Savings</h3>
-                                                       <p class="value stat-number">80%</p>
-                                                       <span class="trend">vs Legacy</span>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                           
+
+
+                   
+                        <div id="dashboard" class="subtab-content active">
+                            <div id="investor-dashboard">
+                                <!-- Theme Toggle -->
+                                <div class="theme-switch-container">
+                                    <button id="themeToggle" aria-label="Toggle theme">
+                                        <span class="theme-icon"></span>
+                                    </button>
+                                </div>
+                        
+                                <div class="dashboard-container">
+                                    <!-- Loading State -->
+                                    <div class="loading-overlay">
+                                        <div class="loading-spinner"></div>
+                                        <p>Loading dashboard...</p>
+                                    </div>
+                        
+                                    <!-- Top Section -->
+                                    <div class="metrics-grid top-section">
+                                        <!-- Financial KPIs -->
+                                        <div class="section financial">
+                                            <h2>Financial Performance</h2>
+                                            <div class="kpi-grid">
+                                                <!-- Row 1 -->
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="100">
+                                                    <h3>Revenue CAGR</h3>
+                                                    <p class="value stat-number">141%</p>
+                                                    <span class="trend">Exceptional growth</span>
+                                                </div>
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="200">
+                                                    <h3>Gross Margin</h3>
+                                                    <p class="value stat-number">95.03%</p>
+                                                    <span class="trend">Elite</span>
+                                                </div>
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="300">
+                                                    <h3>Rule of 40</h3>
+                                                    <p class="value stat-number">216%</p>
+                                                    <span class="trend">Best-in-class</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Operational KPIs -->
+                                        <div class="section operational">
+                                            <h2>Operational Excellence</h2>
+                                            <div class="kpi-grid">
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="100">
+                                                    <h3>Network Partners</h3>
+                                                    <p class="value stat-number">10,000+</p>
+                                                    <span class="trend">Strong network effects</span>
+                                                </div>
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="200">
+                                                    <h3>Implementation Time</h3>
+                                                    <p class="value stat-number">9</p>
+                                                    <span class="trend">5x faster</span>
+                                                </div>
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="300">
+                                                    <h3>System Uptime</h3>
+                                                    <p class="value stat-number">99.99%</p>
+                                                    <span class="trend">Enterprise-grade</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    <!-- Charts Section -->
+                                    <div class="charts-section">
+                                        <div class="chart-navigation">
+                                            <button class="nav-button prev">←</button>
+                                            <button class="nav-button next">→</button>
+                                            
+                                            <div class="chart-indicators">
+                                                <span class="indicator active" data-index="0"></span>
+                                                <span class="indicator" data-index="1"></span>
+                                                <span class="indicator" data-index="2"></span>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="chart-carousel">
+                                            <!-- Financial Charts -->
+                                            <div class="chart-slide active">
+                                                <h3>Revenue & Growth</h3>
+                                                <div class="chart-container glass">
+                                                    <canvas id="revenueChart"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="chart-slide">
+                                                <h3>Unit Economics</h3>
+                                                <div class="chart-container glass">
+                                                    <canvas id="unitEconomicsChart"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="chart-slide">
+                                                <h3>Efficiency Metrics</h3>
+                                                <div class="chart-container glass">
+                                                    <canvas id="efficiencyChart"></canvas>
+                                                </div>
+                                            </div>
+                                            <!-- Operational Charts -->
+                                            <div class="chart-slide">
+                                                <h3>Implementation Timeline</h3>
+                                                <div class="chart-container glass">
+                                                    <canvas id="implementationChart"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="chart-slide">
+                                                <h3>Market Coverage</h3>
+                                                <div class="chart-container glass">
+                                                    <canvas id="marketCoverageChart"></canvas>
+                                                </div>
+                                            </div>
+                                            <div class="chart-slide">
+                                                <h3>ROI Impact</h3>
+                                                <div class="chart-container glass">
+                                                    <canvas id="roiChart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    <!-- Bottom Section -->
+                                    <div class="metrics-grid bottom-section">
+                                        <!-- Financial Bottom Metrics -->
+                                        <div class="section financial">
+                                            <h2>Financial Efficiency</h2>
+                                            <div class="metrics-container">
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="100">
+                                                    <h3>ARR per Customer</h3>
+                                                    <p class="value stat-number">$33,043</p>
+                                                    <span class="trend">Expanding</span>
+                                                </div>
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="200">
+                                                    <h3>ARR per Employee</h3>
+                                                    <p class="value stat-number">$449,184</p>
+                                                    <span class="trend">79% CAGR</span>
+                                                </div>
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="300">
+                                                    <h3>Burn Multiple</h3>
+                                                    <p class="value stat-number">-0.24</p>
+                                                    <span class="trend">Efficient</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Operational Bottom Metrics -->
+                                        <div class="section operational">
+                                            <h2>Operational Impact</h2>
+                                            <div class="metrics-container">
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="100">
+                                                    <h3>Transaction Volume</h3>
+                                                    <p class="value stat-number">265M</p>
+                                                    <span class="trend">Annual</span>
+                                                </div>
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="200">
+                                                    <h3>Success Rate</h3>
+                                                    <p class="value stat-number">100%</p>
+                                                    <span class="trend">Perfect</span>
+                                                </div>
+                                                <div class="metric-card glass" data-animation="fade-in" data-delay="300">
+                                                    <h3>Partner Growth</h3>
+                                                    <p class="value stat-number">156%</p>
+                                                    <span class="trend">YoY</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                   
                                                                        
                     <div id="topic2" class="subtab-content">Topic 2 Content</div>
                     <div id="topic3" class="subtab-content">Topic 3 Content</div>
