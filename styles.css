@@ -122,18 +122,12 @@ body {
                 }
                 
                 /* Charts Section */
-                .charts-container {
-                    position: relative;
-                    width: 100%;
-                    height: 400px;
-                    margin: 1.5rem 0;
-                    overflow: hidden;
-                }
-                
-                .charts-grid {
+                .charts-section {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
-                    gap: 1rem;
+                    gap: 1.5rem;
+                    margin: 1.5rem 0;
+                    height: 400px;
                 }
                 
                 .chart-slider {
@@ -147,8 +141,7 @@ body {
                     background: var(--card-bg);
                     padding: 1rem;
                     border-radius: 0.5rem;
-                    height: 250px;
-                    margin-bottom: 1rem;
+                    height: 300px;
                     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
                     transition: all 0.3s ease;
                     position: relative;
@@ -185,10 +178,16 @@ body {
                     opacity: 0.8;
                     transition: opacity 0.3s ease;
                     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.2rem;
+                    color: var(--text-primary);
                 }
                 
                 .nav-arrow:hover {
                     opacity: 1;
+                    background: var(--card-bg);
                 }
                 
                 .nav-arrow.left {
@@ -206,6 +205,7 @@ body {
                     transform: translateX(-50%);
                     display: flex;
                     gap: 8px;
+                    z-index: 10;
                 }
                 
                 .dot {
@@ -220,6 +220,7 @@ body {
                 
                 .dot.active {
                     opacity: 1;
+                    background: var(--text-primary);
                 }
                 
                 /* Theme Variables */
@@ -248,7 +249,7 @@ body {
                 /* Responsive Design */
                 @media (max-width: 768px) {
                     .metrics-section,
-                    .charts-grid {
+                    .charts-section {
                         grid-template-columns: 1fr;
                     }
                     
@@ -258,7 +259,7 @@ body {
                     }
                     
                     .chart-container {
-                        height: 200px;
+                        height: 250px;
                     }
                 }
                 
@@ -278,6 +279,7 @@ body {
                         transform: translateX(0);
                     }
                 }
+
 
 
 /* Main container and shared styles */
