@@ -41,21 +41,25 @@ body {
 
           /* Dashboard Base */
                 #investor-dashboard {
-                    min-height: 600px;
-                    width: 100%;
-                    padding: 0.5rem;
-                    border-radius: 0.5rem;
-                    background: var(--bg-primary);
-                    color: var(--text-primary);
-                    transition: all 0.3s ease;
-                }
-                
-                .dashboard-container {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
-                    padding: 1rem;
-                }
+                min-height: 600px;
+                width: 100%;
+                max-width: 1440px; /* Added */
+                margin: 0 auto; /* Added */
+                padding: 0.5rem;
+                border-radius: 0.5rem;
+                background: var(--bg-primary);
+                color: var(--text-primary);
+                transition: all 0.3s ease;
+            }
+            
+            .dashboard-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 2rem; /* Modified */
+                max-width: 100%; /* Added */
+                margin: 0 auto; /* Added */
+            }
                 
                 /* Metrics Grid Layout */
                 .metrics-section {
@@ -88,22 +92,22 @@ body {
                     gap: 0.75rem;
                 }
                 
-                .metric-card {
-                    background: var(--card-bg);
-                    padding: 0.75rem;
-                    border-radius: 0.5rem;
-                    border: 1px solid var(--border-color);
-                    transition: all 0.2s ease;
-                    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                    animation: fadeIn 0.3s ease-in-out;
-                    display: grid;
-                    grid-template-columns: 1fr auto;
-                    grid-template-areas: 
-                        "title trend"
-                        "value trend";
-                    align-items: center;
-                    gap: 0.25rem 1rem;
-                }
+               .metric-card {
+                background: var(--card-bg);
+                padding: 0.75rem;
+                border-radius: 0.5rem;
+                border: 1px solid var(--border-color);
+                transition: all 0.2s ease;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                animation: fadeIn 0.3s ease-in-out;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                grid-template-areas: 
+                    "title trend"
+                    "value trend";
+                align-items: center;
+                gap: 0.25rem 1rem;
+            }
                 
                 .metric-card:hover {
                     transform: translateY(-2px);
@@ -111,28 +115,28 @@ body {
                 }
                 
                 .metric-card h3 {
-                    font-size: 0.9rem;
-                    margin: 0;
-                    color: var(--text-secondary);
-                    font-weight: 500;
-                    grid-area: title;
-                }
-                
-                .metric-card .value {
-                    font-size: 1.2rem;
-                    font-weight: bold;
-                    margin: 0;
-                    color: var(--text-primary);
-                    grid-area: value;
-                }
-                
-                .metric-card .trend {
-                    font-size: 0.8rem;
-                    color: var(--text-tertiary);
-                    grid-area: trend;
-                    text-align: right;
-                    align-self: center;
-                }
+                font-size: 0.9rem;
+                margin: 0;
+                color: var(--text-secondary);
+                font-weight: 500;
+                grid-area: title;
+            }
+            
+            .metric-card .value {
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin: 0;
+                color: var(--text-primary);
+                grid-area: value;
+            }
+            
+            .metric-card .trend {
+                font-size: 0.8rem;
+                color: var(--text-tertiary);
+                grid-area: trend;
+                text-align: right;
+                align-self: center;
+            }
                 
                 /* Charts Section */
                 .charts-section {
