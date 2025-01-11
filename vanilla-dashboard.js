@@ -102,8 +102,7 @@ function showChart(index, section) {
         chart.style.display = 'none';
         chart.classList.remove('active');
     });
-    dots.forEach(dot => dot.classList.remove('active'));
-    
+        
     charts[index].style.display = 'block';
     charts[index].classList.add('active');
     dots[index].classList.add('active');
@@ -425,7 +424,6 @@ function updateChartsTheme() {
 }
 
 
-
 // Initialize dashboard
 function initDashboard() {
     const charts = [
@@ -437,23 +435,36 @@ function initDashboard() {
         createROIChart
     ];
     
-    charts.forEach(chart => chart());
+    charts.forEach(chart => {
+        try {
+            chart();
+        } catch (error) {
+            console.error(`Error creating chart: ${error.message}`);
+        }
+    });
+
     initChartNavigation();
     initDashboardAnimations();
     
-    document.getElementById('themeToggle').addEventListener('click', () => {
-        updateChartsTheme();
-        updateThemeWithAnimation();
-    });
+    // Theme toggle listener
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            updateChartsTheme();
+            updateThemeWithAnimation();
+        });
+    }
 }
-
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    if (document.getElementById('dashboard').classList.contains('active')) {
+    
+    if (document.getElementById('dashboard')?.classList.contains('active')) {
         setTimeout(initDashboard, 100);
     }
 });
+
+
 
 // Enhanced dashboard animations
 function initDashboardAnimations() {
@@ -478,19 +489,31 @@ function initDashboardAnimations() {
     });
 }
 
-// Enhanced theme switching animation
-function updateThemeWithAnimation() {
-    const isDark = document.body.classList.contains('dark-theme');
-    gsap.to('body', {
-        duration: 0.3,
-        backgroundColor: isDark ? '#1a202c' : '#ffffff',
-        color: isDark ? '#f7fafc' : '#1a202c',
-        ease: 'power2.inOut'
-    });
+function initDashboard() {
+    try {
+        const charts = [
+            createRevenueChart,
+            createUnitEconomicsChart,
+            createEfficiencyChart,
+            createImplementationChart,
+            createMarketCoverageChart,
+            createROIChart
+        ];
+        
+        charts.forEach(chart => {
+            try {
+                chart();
+            } catch (error) {
+                console.error(`Error creating chart: ${error.message}`);
+            }
+        });
+
+        initChartNavigation();
+        initDashboardAnimations();
+    } catch (error) {
+        console.error(`Dashboard initialization failed: ${error.message}`);
+    }
 }
-
-
-
 
 
 // Tab switching
