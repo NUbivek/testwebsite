@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="vanilla-dashboard.js"></script>
-
 </head>
+
+
+
 <body>
     <div class="title-slide">
         <h1>Bivek Adhikari</h1>
@@ -242,7 +244,7 @@
                 </div>
                 <div class="pdf-viewer">
                     <iframe id="sci-tms" class="pdf-frame active"
-                src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/SCI%20%26%20Mixed-TMS_AgenticSolutionThesis.pdf&embedded=true"
+                src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/SCI%20%26%20Mixed-TMS_AgenticSolutionThesis.pdf&embedded=true&rm=minimal"
                 frameborder="0" width="100%" height="700px" loading="lazy">
                     </iframe>
                     <iframe id="linkedin-article1" class="pdf-frame"
@@ -256,7 +258,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="investment-memo" class="tab-content">
             <h2>Investment Memos</h2>
             <div class="pdf-container">
@@ -276,7 +278,7 @@
                         </button>
                     </div>
                 </div>
-        
+
                 <!-- Orderful Content -->
                 <div id="orderful" class="memo-content active">
                     <div class="subtab-navigation">
@@ -287,188 +289,204 @@
                         <button class="subtab-button" onclick="switchSubtab('topic5')">Topic 5</button>
                     </div>
 
-                                 <div id="dashboard" class="subtab-content active">
-                               <div id="investor-dashboard">
-                                   <!-- Theme Toggle -->
-                                   <div class="theme-switch-container">
-                                       <button id="themeToggle" aria-label="Toggle theme">
-                                           <span class="theme-icon"></span>
-                                       </button>
-                                   </div>
-                           
-                                   <div class="dashboard-container">
-                                       <!-- Loading State -->
-                                       <div class="loading-overlay">
-                                           <div class="loading-spinner"></div>
-                                           <p>Loading dashboard...</p>
-                                       </div>
-                           
-                                       <!-- Top Section -->
-                                       <div class="metrics-grid top-section">
-                                           <!-- Financial KPIs -->
-                                           <div class="section financial">
-                                               <h2>Financial Performance</h2>
-                                               <div class="kpi-grid">
-                                                   <!-- Row 1 -->
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="100">
-                                                       <h3>Revenue CAGR</h3>
-                                                       <p class="value stat-number">141%</p>
-                                                       <span class="trend">Exceptional growth</span>
-                                                   </div>
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="200">
-                                                       <h3>Gross Margin</h3>
-                                                       <p class="value stat-number">95.03%</p>
-                                                       <span class="trend">Elite</span>
-                                                   </div>
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="300">
-                                                       <h3>Rule of 40</h3>
-                                                       <p class="value stat-number">216%</p>
-                                                       <span class="trend">Best-in-class</span>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                           
-                                           <!-- Operational KPIs -->
-                                           <div class="section operational">
-                                               <h2>Operational Excellence</h2>
-                                               <div class="kpi-grid">
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="100">
-                                                       <h3>Network Partners</h3>
-                                                       <p class="value stat-number">10,000+</p>
-                                                       <span class="trend">Strong network effects</span>
-                                                   </div>
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="200">
-                                                       <h3>Implementation Time</h3>
-                                                       <p class="value stat-number">9</p>
-                                                       <span class="trend">5x faster</span>
-                                                   </div>
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="300">
-                                                       <h3>System Uptime</h3>
-                                                       <p class="value stat-number">99.99%</p>
-                                                       <span class="trend">Enterprise-grade</span>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                           
-                                       <!-- Charts Section -->
-                                       <div class="charts-section">
-                                           <div class="chart-navigation">
-                                               <button class="nav-button prev">←</button>
-                                               <button class="nav-button next">→</button>
-                                               
-                                               <div class="chart-indicators">
-                                                   <span class="indicator active" data-index="0"></span>
-                                                   <span class="indicator" data-index="1"></span>
-                                                   <span class="indicator" data-index="2"></span>
-                                               </div>
-                                           </div>
-                           
-                                           <div class="chart-carousel">
-                                               <!-- Financial Charts -->
-                                               <div class="chart-slide active">
-                                                   <h3>Revenue & Growth</h3>
-                                                   <div class="chart-container glass">
-                                                       <canvas id="revenueChart"></canvas>
-                                                   </div>
-                                               </div>
-                                               <div class="chart-slide">
-                                                   <h3>Unit Economics</h3>
-                                                   <div class="chart-container glass">
-                                                       <canvas id="unitEconomicsChart"></canvas>
-                                                   </div>
-                                               </div>
-                                               <div class="chart-slide">
-                                                   <h3>Efficiency Metrics</h3>
-                                                   <div class="chart-container glass">
-                                                       <canvas id="efficiencyChart"></canvas>
-                                                   </div>
-                                               </div>
-                                               <!-- Operational Charts -->
-                                               <div class="chart-slide">
-                                                   <h3>Implementation Timeline</h3>
-                                                   <div class="chart-container glass">
-                                                       <canvas id="implementationChart"></canvas>
-                                                   </div>
-                                               </div>
-                                               <div class="chart-slide">
-                                                   <h3>Market Coverage</h3>
-                                                   <div class="chart-container glass">
-                                                       <canvas id="marketCoverageChart"></canvas>
-                                                   </div>
-                                               </div>
-                                               <div class="chart-slide">
-                                                   <h3>ROI Impact</h3>
-                                                   <div class="chart-container glass">
-                                                       <canvas id="roiChart"></canvas>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                           
-                                       <!-- Bottom Section -->
-                                       <div class="metrics-grid bottom-section">
-                                           <!-- Financial Bottom Metrics -->
-                                           <div class="section financial">
-                                               <h2>Financial Efficiency</h2>
-                                               <div class="metrics-container">
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="100">
-                                                       <h3>ARR per Customer</h3>
-                                                       <p class="value stat-number">$33,043</p>
-                                                       <span class="trend">Expanding</span>
-                                                   </div>
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="200">
-                                                       <h3>ARR per Employee</h3>
-                                                       <p class="value stat-number">$449,184</p>
-                                                       <span class="trend">79% CAGR</span>
-                                                   </div>
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="300">
-                                                       <h3>Burn Multiple</h3>
-                                                       <p class="value stat-number">-0.24</p>
-                                                       <span class="trend">Efficient</span>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                           
-                                           <!-- Operational Bottom Metrics -->
-                                           <div class="section operational">
-                                               <h2>Operational Impact</h2>
-                                               <div class="metrics-container">
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="100">
-                                                       <h3>Transaction Volume</h3>
-                                                       <p class="value stat-number">265M</p>
-                                                       <span class="trend">Annual</span>
-                                                   </div>
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="200">
-                                                       <h3>Success Rate</h3>
-                                                       <p class="value stat-number">100%</p>
-                                                       <span class="trend">Perfect</span>
-                                                   </div>
-                                                   <div class="metric-card glass" data-animation="fade-in" data-delay="300">
-                                                       <h3>Partner Growth</h3>
-                                                       <p class="value stat-number">156%</p>
-                                                       <span class="trend">YoY</span>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                   
-                                                                       
+                    <div id="dashboard" class="subtab-content active">
+                    <div id="investor-dashboard">
+                        <div class="dashboard-container">
+                            <!-- Top Section -->
+                            <div class="metrics-grid top-section">
+                                <!-- Financial KPIs -->
+                                <div class="section financial">
+                                    <div class="kpi-grid">
+                                        <div class="metric-card">
+                                            <h3>Revenue CAGR</h3>
+                                            <p class="value">141%</p>
+                                            <span class="trend">Exceptional growth</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Gross Margin</h3>
+                                            <p class="value">95.03%</p>
+                                            <span class="trend">Elite</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Rule of 40</h3>
+                                            <p class="value">216%</p>
+                                            <span class="trend">Best-in-class</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>ARR Growth</h3>
+                                            <p class="value">$59.74M</p>
+                                            <span class="trend">141% CAGR</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>LTV/CAC</h3>
+                                            <p class="value">10x</p>
+                                            <span class="trend">Sustainable</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>NRR</h3>
+                                            <p class="value">130%</p>
+                                            <span class="trend">Strong</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Operational KPIs -->
+                                <div class="section operational">
+                                    <div class="kpi-grid">
+                                        <div class="metric-card">
+                                            <h3>Network Partners</h3>
+                                            <p class="value">10,000+</p>
+                                            <span class="trend">Strong network effects</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Implementation Time</h3>
+                                            <p class="value">9 days</p>
+                                            <span class="trend">5x faster</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>System Uptime</h3>
+                                            <p class="value">99.99%</p>
+                                            <span class="trend">Enterprise-grade</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Error Resolution</h3>
+                                            <p class="value">Real-time</p>
+                                            <span class="trend">vs 48h industry</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Labor Savings</h3>
+                                            <p class="value">70%</p>
+                                            <span class="trend">vs 30% benchmark</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Integration Speed</h3>
+                                            <p class="value">80%</p>
+                                            <span class="trend">Time saved</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Charts Section -->
+                            <div class="charts-grid">
+                                <!-- Financial Charts -->
+                                <div class="section financial">
+                                    <div class="chart-container">
+                                        <canvas id="revenueChart"></canvas>
+                                    </div>
+                                    <div class="chart-container">
+                                        <canvas id="unitEconomicsChart"></canvas>
+                                    </div>
+                                    <div class="chart-container">
+                                        <canvas id="efficiencyChart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <!-- Operational Charts -->
+                                <div class="section operational">
+                                    <div class="chart-container">
+                                        <canvas id="implementationChart"></canvas>
+                                    </div>
+                                    <div class="chart-container">
+                                        <canvas id="marketCoverageChart"></canvas>
+                                    </div>
+                                    <div class="chart-container">
+                                        <canvas id="roiChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Bottom Section -->
+                            <div class="metrics-grid bottom-section">
+                                <!-- Financial Bottom Metrics -->
+                                <div class="section financial">
+                                    <div class="metrics-container">
+                                        <div class="metric-card">
+                                            <h3>ARR per Customer</h3>
+                                            <p class="value">$33,043</p>
+                                            <span class="trend">Expanding</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>ARR per Employee</h3>
+                                            <p class="value">$449,184</p>
+                                            <span class="trend">79% CAGR</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Burn Multiple</h3>
+                                            <p class="value">-0.24</p>
+                                            <span class="trend">Efficient</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>YoY Growth</h3>
+                                            <p class="value">121%</p>
+                                            <span class="trend">Consistent</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Customer Growth</h3>
+                                            <p class="value">156%</p>
+                                            <span class="trend">CAGR</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Revenue per Sales Rep</h3>
+                                            <p class="value">$1.6M</p>
+                                            <span class="trend">Increasing</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Operational Bottom Metrics -->
+                                <div class="section operational">
+                                    <div class="metrics-container">
+                                        <div class="metric-card">
+                                            <h3>Transaction Volume</h3>
+                                            <p class="value">265M</p>
+                                            <span class="trend">Annual</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Success Rate</h3>
+                                            <p class="value">100%</p>
+                                            <span class="trend">Perfect</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Partner Growth</h3>
+                                            <p class="value">156%</p>
+                                            <span class="trend">YoY</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Integration Efficiency</h3>
+                                            <p class="value">90%</p>
+                                            <span class="trend">Reduction</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Cost Reduction</h3>
+                                            <p class="value">70%</p>
+                                            <span class="trend">vs Industry</span>
+                                        </div>
+                                        <div class="metric-card">
+                                            <h3>Time Savings</h3>
+                                            <p class="value">80%</p>
+                                            <span class="trend">vs Legacy</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                     <div id="topic2" class="subtab-content">Topic 2 Content</div>
                     <div id="topic3" class="subtab-content">Topic 3 Content</div>
                     <div id="topic4" class="subtab-content">Topic 4 Content</div>
                     <div id="topic5" class="subtab-content">Topic 5 Content</div>
                 </div>
-        
+
                 <div id="memo2" class="memo-content">Memo 2 Content</div>
                 <div id="memo3" class="memo-content">Memo 3 Content</div>
             </div>
         </div>
 
-        
+
         <div id="sample-deals" class="tab-content">
             <h2>Sample Deals</h2>
             <div class="grid-2">
@@ -481,237 +499,185 @@
             </div>
         </div>
     </div>
+      <script>
+          // Tab Switching Functions
+          function openTab(tabName) {
+              const tabContents = document.getElementsByClassName("tab-content");
+              const tabButtons = document.getElementsByClassName("tab-button");
 
-   <script>
-        // Enhanced Tab Switching
-        function openTab(tabName) {
-            const tabContents = document.getElementsByClassName("tab-content");
-            const tabButtons = document.getElementsByClassName("tab-button");
-            
-            Array.from(tabContents).forEach(tab => {
-                tab.classList.remove("active");
-                tab.style.opacity = 0;
-            });
-            
-            Array.from(tabButtons).forEach(button => {
-                button.classList.remove("active");
-            });
-            
-            const selectedTab = document.getElementById(tabName);
-            selectedTab.classList.add("active");
-            
-            setTimeout(() => {
-                selectedTab.style.opacity = 1;
-            }, 50);
-            
-            event.currentTarget.classList.add("active");
-        }
+              Array.from(tabContents).forEach(tab => {
+                  tab.classList.remove("active");
+                  tab.style.opacity = 0;
+              });
 
-        function switchPDF(pdfId) {
-            // Hide all PDFs
-            document.querySelectorAll('.pdf-frame').forEach(frame => {
-                frame.style.display = 'none';
-                frame.classList.remove('active');
-            });
-            
-            // Show selected PDF
-            const selectedPDF = document.getElementById(pdfId);
-            if (selectedPDF) {
-                selectedPDF.style.display = 'block';
-                selectedPDF.classList.add('active');
-            }
-            
-            // Update tab styling
-            document.querySelectorAll('.pdf-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
-        }
-        
-      function initTheme() {
-    const themeToggle = document.getElementById('themeToggle');
+              Array.from(tabButtons).forEach(button => {
+                  button.classList.remove("active");
+              });
 
-        function switchMemo(memoId) {
-            document.querySelectorAll('.memo-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            document.querySelectorAll('.pdf-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            document.getElementById(memoId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-        
-        function switchSubtab(subtabId) {
-            document.querySelectorAll('.subtab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            document.querySelectorAll('.subtab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            document.getElementById(subtabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-        
-        // Initialize the dashboard when the tab is opened
-        document.addEventListener('DOMContentLoaded', function() {
-            const dashboardContainer = document.getElementById('investor-dashboard');
-            if (dashboardContainer) {
-                // Initialize your React dashboard component here
-                ReactDOM.render(
-                    React.createElement(InvestorDashboard),
-                    dashboardContainer
-                );
-            }
-        });
+              const selectedTab = document.getElementById(tabName);
+              selectedTab.classList.add("active");
 
-          
-    // Remove system preference check and set light mode as default
-    if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark-theme');
-        themeToggle.classList.add('dark');
-    } else {
-        // Explicitly set light mode
-        document.body.classList.remove('dark-theme');
-        themeToggle.classList.remove('dark');
-        localStorage.setItem('darkMode', 'false');
-    }
-    
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme');
-        themeToggle.classList.toggle('dark');
-        localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
-    });
-          
-}
-document.addEventListener('DOMContentLoaded', function() {
-    // Existing animation code...
-    
-    // Add dark theme initialization
-    initTheme();
-});
+              setTimeout(() => {
+                  selectedTab.style.opacity = 1;
+              }, 50);
 
-       
-        // Scroll Animation
-        function checkScroll() {
-            const elements = document.querySelectorAll('.experience-box, .card');
-            const windowHeight = window.innerHeight;
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                if (elementTop < windowHeight * 0.85) {
-                    element.classList.add('visible');
-                }
-            });
-        }
+              event.currentTarget.classList.add("active");
+          }
 
-        // Number Counter Animation
-        function animateValue(obj, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
+          function switchPDF(pdfId) {
+              document.querySelectorAll('.pdf-frame').forEach(frame => {
+                  frame.style.display = 'none';
+                  frame.classList.remove('active');
+              });
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            checkScroll();
-            
-            // Animate numbers
-            document.querySelectorAll('.stat-number').forEach(stat => {
-                const value = parseInt(stat.innerText.replace(/[^0-9.-]+/g,""));
-                if (!isNaN(value)) {
-                    animateValue(stat, 0, value, 2000);
-                }
-            });
+              const selectedPDF = document.getElementById(pdfId);
+              if (selectedPDF) {
+                  selectedPDF.style.display = 'block';
+                  selectedPDF.classList.add('active');
+              }
 
-            // Initial animations
-            document.querySelectorAll('.card, .experience-box').forEach(element => {
-                element.style.opacity = 0;
-                element.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    element.style.opacity = 1;
-                    element.style.transform = 'translateY(0)';
-                }, 300);
-            });
-        });
+              document.querySelectorAll('.pdf-tab').forEach(tab => {
+                  tab.classList.remove('active');
+              });
+              event.currentTarget.classList.add('active');
+          }
 
-        // Optimized scroll listener
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    checkScroll();
-                    ticking = false;
+          function switchMemo(memoId) {
+              document.querySelectorAll('.memo-content').forEach(content => {
+                  content.classList.remove('active');
+              });
+
+              document.querySelectorAll('.pdf-tab').forEach(tab => {
+                  tab.classList.remove('active');
+              });
+
+              document.getElementById(memoId).classList.add('active');
+              event.currentTarget.classList.add('active');
+          }
+
+          function switchSubtab(subtabId) {
+              document.querySelectorAll('.subtab-content').forEach(content => {
+                  content.classList.remove('active');
+              });
+
+              document.querySelectorAll('.subtab-button').forEach(button => {
+                  button.classList.remove('active');
+              });
+
+              document.getElementById(subtabId).classList.add('active');
+              event.currentTarget.classList.add('active');
+
+              if (subtabId === 'dashboard') {
+                  initDashboard();
+              }
+          }
+
+          // Theme Functions
+          function initTheme() {
+              const themeToggle = document.getElementById('themeToggle');
+
+              if (localStorage.getItem('darkMode') === 'true') {
+                  document.body.classList.add('dark-theme');
+                  themeToggle.classList.add('dark');
+              } else {
+                  document.body.classList.remove('dark-theme');
+                  themeToggle.classList.remove('dark');
+                  localStorage.setItem('darkMode', 'false');
+              }
+
+              themeToggle.addEventListener('click', () => {
+                  document.body.classList.toggle('dark-theme');
+                  themeToggle.classList.toggle('dark');
+                  localStorage.setItem('darkMode', document.body.classList.contains('dark-theme'));
+              });
+          }
+
+          // Animation Functions
+          function checkScroll() {
+              const elements = document.querySelectorAll('.experience-box, .card');
+              const windowHeight = window.innerHeight;
+
+              elements.forEach(element => {
+                  const elementTop = element.getBoundingClientRect().top;
+                  if (elementTop < windowHeight * 0.85) {
+                      element.classList.add('visible');
+                  }
+              });
+          }
+
+          function animateValue(obj, start, end, duration) {
+              let startTimestamp = null;
+              const step = (timestamp) => {
+                  if (!startTimestamp) startTimestamp = timestamp;
+                  const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                  obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                  if (progress < 1) {
+                      window.requestAnimationFrame(step);
+                  }
+              };
+              window.requestAnimationFrame(step);
+          }
+
+          // Initialization
+          document.addEventListener('DOMContentLoaded', function() {
+              initTheme();
+              checkScroll();
+
+              document.querySelectorAll('.stat-number').forEach(stat => {
+                  const value = parseInt(stat.innerText.replace(/[^0-9.-]+/g,""));
+                  if (!isNaN(value)) {
+                      animateValue(stat, 0, value, 2000);
+                  }
+              });
+
+              document.querySelectorAll('.card, .experience-box').forEach(element => {
+                  element.style.opacity = 0;
+                  element.style.transform = 'translateY(20px)';
+                  setTimeout(() => {
+                      element.style.opacity = 1;
+                      element.style.transform = 'translateY(0)';
+                  }, 300);
+              });
+          });
+
+          let ticking = false;
+          window.addEventListener('scroll', () => {
+              if (!ticking) {
+                  window.requestAnimationFrame(() => {
+                      checkScroll();
+                      ticking = false;
+                  });
+                  ticking = true;
+              }
+          });
+      </script>
+
+        <script>
+            function switchSubtab(subtabId) {
+                document.querySelectorAll('.subtab-content').forEach(content => {
+                    content.classList.remove('active');
                 });
-                ticking = true;
-            }
-        });
-    </script>
-    <script>
-    // Enhanced Tab Switching
-    function openTab(tabName) {
-        const tabContents = document.getElementsByClassName("tab-content");
-        const tabButtons = document.getElementsByClassName("tab-button");
-        
-        Array.from(tabContents).forEach(tab => {
-            tab.classList.remove("active");
-        });
-        
-        Array.from(tabButtons).forEach(button => {
-            button.classList.remove("active");
-        });
-        
-        document.getElementById(tabName).classList.add("active");
-        event.currentTarget.classList.add("active");
-    }
 
-    // Number Counter Animation with Currency Formatting
-    function animateValue(obj, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            
-            // Extract unit (B or T) from the original text
-            const originalText = obj.getAttribute('data-value');
-            const unit = originalText.slice(-1);
-            
-            // Format number with $ sign, 2 decimal places, and unit
-            const currentValue = (progress * (end - start) + start).toFixed(2);
-            obj.innerHTML = `$${currentValue}${unit}`;
-            
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-        window.requestAnimationFrame(step);
-    }
+                document.querySelectorAll('.subtab-button').forEach(button => {
+                    button.classList.remove('active');
+                });
 
-    // Initialize animations
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.stat-number').forEach(stat => {
-            // Store original value as data attribute
-            const originalText = stat.innerText;
-            stat.setAttribute('data-value', originalText);
-            
-            // Extract just the number
-            const value = parseFloat(originalText.replace(/[^0-9.-]+/g,""));
-            if (!isNaN(value)) {
-                animateValue(stat, 0, value, 2000);
+                document.getElementById(subtabId).classList.add('active');
+                event.currentTarget.classList.add('active');
+
+                if (subtabId === 'dashboard') {
+                    initDashboard();
+                }
             }
-        });
-    });
-</script>
+
+            // Initialize dashboard when DOM is loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                if (document.getElementById('dashboard').classList.contains('active')) {
+                    setTimeout(initDashboard, 100);
+                }
+            });
+        </script>
+
+
 </body>
 </html>
