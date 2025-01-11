@@ -50,7 +50,6 @@ function getThemeColors(isDark) {
         }
     };
 }
-
 // Chart Creation Functions
 function createRevenueChart() {
     const ctx = document.getElementById('revenueChart').getContext('2d');
@@ -327,14 +326,18 @@ function updateChartsTheme() {
     });
 }
 
-// Initialization
+// Initialize dashboard
 function initDashboard() {
-    createRevenueChart();
-    createUnitEconomicsChart();
-    createEfficiencyChart();
-    createImplementationChart();
-    createMarketCoverageChart();
-    createROIChart();
+    const charts = [
+        createRevenueChart,
+        createUnitEconomicsChart,
+        createEfficiencyChart,
+        createImplementationChart,
+        createMarketCoverageChart,
+        createROIChart
+    ];
+    
+    charts.forEach(chart => chart());
     
     // Theme change listener
     document.getElementById('themeToggle').addEventListener('click', updateChartsTheme);
