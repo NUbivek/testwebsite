@@ -65,13 +65,15 @@ function initChartNavigation() {
         let currentIndex = 0;
 
         function showChart(index) {
-            charts.forEach(chart => chart.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
+            const charts = document.querySelectorAll('.chart-container canvas');
+            charts.forEach(chart => {
+                chart.style.display = 'none';
+                chart.classList.remove('active');
+            });
+            charts[index].style.display = 'block';
             charts[index].classList.add('active');
-            dots[index].classList.add('active');
-            currentIndex = index;
         }
+
 
         function nextChart() {
             const nextIndex = (currentIndex + 1) % charts.length;
@@ -97,7 +99,7 @@ function initChartNavigation() {
 }
 
 // Updated Chart Creation Functions with new chart types
-function createRevenueLineChart() {
+function createRevenueChart() {
     const ctx = document.getElementById('revenueLineChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
@@ -139,7 +141,7 @@ function createRevenueLineChart() {
     });
 }
 
-function createUnitEconomicsAreaChart() {
+function createUnitEconomicsChart() {
     const ctx = document.getElementById('unitEconomicsAreaChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
@@ -181,7 +183,7 @@ function createUnitEconomicsAreaChart() {
     });
 }
 
-function createEfficiencyDonutChart() {
+function createEfficiencyChart() {
     const ctx = document.getElementById('efficiencyDonutChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
@@ -220,7 +222,7 @@ function createEfficiencyDonutChart() {
     });
 }
 
-function createImplementationBarChart() {
+function createImplementationChart() {
     const ctx = document.getElementById('implementationBarChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
@@ -261,7 +263,7 @@ function createImplementationBarChart() {
     });
 }
 
-function createMarketCoveragePieChart() {
+function createMarketCoverageChart() {
     const ctx = document.getElementById('marketCoveragePieChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
@@ -297,7 +299,7 @@ function createMarketCoveragePieChart() {
     });
 }
 
-function createROISankeyChart() {
+function createROIChart() {
     // Since Chart.js doesn't support Sankey diagrams natively,
     // we'll create a custom visualization using Canvas API
     const ctx = document.getElementById('roiSankeyChart').getContext('2d');
