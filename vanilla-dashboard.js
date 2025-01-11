@@ -201,6 +201,7 @@ function createEfficiencyChart() {
         }
     });
 }
+
 function createImplementationChart() {
     const ctx = document.getElementById('implementationChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
@@ -274,6 +275,7 @@ function createMarketCoverageChart() {
         }
     });
 }
+
 function createROIChart() {
     const ctx = document.getElementById('roiChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
@@ -333,26 +335,28 @@ function initDashboard() {
     createImplementationChart();
     createMarketCoverageChart();
     createROIChart();
-
+    
     // Theme change listener
     document.getElementById('themeToggle').addEventListener('click', updateChartsTheme);
 }
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('dashboard').classList.contains('active')) {
         setTimeout(initDashboard, 100);
     }
 });
+
 // Tab switching
 function switchSubtab(subtabId) {
     document.querySelectorAll('.subtab-content').forEach(content => {
         content.classList.remove('active');
     });
-
+    
     document.querySelectorAll('.subtab-button').forEach(button => {
         button.classList.remove('active');
     });
-
+    
     document.getElementById(subtabId).classList.add('active');
     event.currentTarget.classList.add('active');
     
