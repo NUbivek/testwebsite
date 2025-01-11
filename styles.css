@@ -94,48 +94,59 @@ body {
                 
                .metric-card {
                 background: var(--card-bg);
-                padding: 0.75rem;
+                padding: 0.75rem 1rem;
                 border-radius: 0.5rem;
                 border: 1px solid var(--border-color);
                 transition: all 0.2s ease;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.1);
                 animation: fadeIn 0.3s ease-in-out;
                 display: grid;
-                grid-template-columns: 1fr auto;
+                grid-template-columns: minmax(0, 1fr) auto;
                 grid-template-areas: 
                     "title trend"
                     "value trend";
                 align-items: center;
                 gap: 0.25rem 1rem;
+                min-height: 70px;
             }
-                
+                            
                 .metric-card:hover {
                     transform: translateY(-2px);
                     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                 }
                 
                 .metric-card h3 {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
                 margin: 0;
                 color: var(--text-secondary);
                 font-weight: 500;
                 grid-area: title;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
             .metric-card .value {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 font-weight: bold;
                 margin: 0;
                 color: var(--text-primary);
                 grid-area: value;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             
             .metric-card .trend {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
                 color: var(--text-tertiary);
                 grid-area: trend;
                 text-align: right;
                 align-self: center;
+                max-width: 100px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
                 
                 /* Charts Section */
@@ -270,10 +281,13 @@ body {
                         grid-template-columns: 1fr;
                     }
                     
+                    /* Grid Layout Optimization */
                     .kpi-grid,
                     .metrics-container {
-                        grid-template-columns: 1fr;
-                        grid-template-rows: auto;
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-rows: repeat(3, minmax(70px, auto));
+                        gap: 0.75rem;
                     }
                     
                     .chart-container {
