@@ -88,16 +88,23 @@ body {
                 }
                 
                 .metric-card {
-                    background: var(--card-bg);
-                    padding: 0.75rem;
-                    border-radius: 0.5rem;
-                    border: 1px solid var(--border-color);
-                    transition: all 0.2s ease;
-                    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                    animation: fadeIn 0.3s ease-in-out;
-                }
+                background: var(--card-bg);
+                padding: 0.75rem;
+                border-radius: 0.5rem;
+                border: 1px solid var(--border-color);
+                transition: all 0.2s ease;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                animation: fadeIn 0.3s ease-in-out;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                grid-template-areas: 
+                    "title trend"
+                    "value trend";
+                align-items: center;
+                gap: 0.25rem 1rem;
+            }
                 
-                .metric-card:hover {
+                 .metric-card:hover {
                     transform: translateY(-2px);
                     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                 }
@@ -107,18 +114,23 @@ body {
                     margin: 0;
                     color: var(--text-secondary);
                     font-weight: 500;
+                    grid-area: title;
                 }
                 
                 .metric-card .value {
                     font-size: 1.2rem;
                     font-weight: bold;
-                    margin: 0.25rem 0;
+                    margin: 0;
                     color: var(--text-primary);
+                    grid-area: value;
                 }
                 
                 .metric-card .trend {
                     font-size: 0.8rem;
                     color: var(--text-tertiary);
+                    grid-area: trend;
+                    text-align: right;
+                    align-self: center;
                 }
                 
                 /* Charts Section */
