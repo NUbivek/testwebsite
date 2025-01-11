@@ -201,6 +201,7 @@ function createEfficiencyChart() {
         }
     });
 }
+
 function createImplementationChart() {
     const ctx = document.getElementById('implementationChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
@@ -274,6 +275,7 @@ function createMarketCoverageChart() {
         }
     });
 }
+
 function createROIChart() {
     const ctx = document.getElementById('roiChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
@@ -325,8 +327,33 @@ function updateChartsTheme() {
     });
 }
 
+// Grid Layout Handler
+function handleResize() {
+    const kpiGrids = document.querySelectorAll('.kpi-grid');
+    if (window.innerWidth <= 1024) {
+        kpiGrids.forEach(grid => {
+            grid.style.gridTemplateColumns = '1fr';
+            grid.style.gridTemplateRows = 'auto';
+        });
+    } else {
+        kpiGrids.forEach(grid => {
+            grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            grid.style.gridTemplateRows = 'repeat(3, auto)';
+        });
+    }
+}
+
 // Initialization
 function initDashboard() {
+    // Initialize grid layout
+    const kpiGrids = document.querySelectorAll('.kpi-grid');
+    kpiGrids.forEach(grid => {
+        grid.style.display = 'grid';
+        grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        grid.style.gridTemplateRows = 'repeat(3, auto)';
+    });
+
+    // Initialize charts
     createRevenueChart();
     createUnitEconomicsChart();
     createEfficiencyChart();
@@ -334,25 +361,30 @@ function initDashboard() {
     createMarketCoverageChart();
     createROIChart();
 
-    // Theme change listener
+    // Add event listeners
     document.getElementById('themeToggle').addEventListener('click', updateChartsTheme);
+    window.addEventListener('resize', handleResize);
+
+    // Trigger initial layout
+    handleResize();
 }
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('dashboard').classList.contains('active')) {
         setTimeout(initDashboard, 100);
     }
 });
+
 // Tab switching
 function switchSubtab(subtabId) {
     document.querySelectorAll('.subtab-content').forEach(content => {
         content.classList.remove('active');
     });
-
     document.querySelectorAll('.subtab-button').forEach(button => {
         button.classList.remove('active');
     });
-
+    
     document.getElementById(subtabId).classList.add('active');
     event.currentTarget.classList.add('active');
     
