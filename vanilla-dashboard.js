@@ -1500,20 +1500,31 @@ function updateChartsTheme() {
 
 
 // Initialize when DOM is loaded
+// Update the initialization code
 document.addEventListener('DOMContentLoaded', function() {
     const dashboard = document.getElementById('dashboard');
     if (dashboard?.classList.contains('active')) {
+        // Increase timeout to ensure DOM is ready
         setTimeout(() => {
             try {
-                initDashboard();
-                showChart(0, 'financial');
-                showChart(0, 'operational');
+                // Verify elements exist before initialization
+                const financialSection = document.querySelector('.section.financial');
+                const operationalSection = document.querySelector('.section.operational');
+                
+                if (financialSection && operationalSection) {
+                    initDashboard();
+                    showChart(0, 'financial');
+                    showChart(0, 'operational');
+                } else {
+                    console.error('Required dashboard sections not found');
+                }
             } catch (error) {
                 console.error('Dashboard initialization failed:', error);
             }
-        }, 100);
+        }, 300); // Increased timeout
     }
 });
+
 
 // Update switchSubtab
 function switchSubtab(subtabId) {
