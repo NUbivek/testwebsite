@@ -1297,38 +1297,68 @@ function createTeamCompositionChart() {
     });
 }
 
-
-// Update chart navigation system
+// KEEP THIS VERSION ONLY
 function initChartNavigation() {
     const financialCharts = document.querySelectorAll('.section.financial .chart-container canvas');
     const operationalCharts = document.querySelectorAll('.section.operational .chart-container canvas');
     
-    // Initialize navigation for both sections
     initSectionNavigation('financial', financialCharts);
     initSectionNavigation('operational', operationalCharts);
 }
 
 function initSectionNavigation(section, charts) {
     const container = document.querySelector(`.section.${section}`);
-    if (!container) return;
-    
     const leftArrow = container.querySelector('.nav-arrow.left');
     const rightArrow = container.querySelector('.nav-arrow.right');
     const dotsContainer = container.querySelector('.slide-dots');
     
-    if (!leftArrow || !rightArrow || !dotsContainer) return;
+    let currentIndex = 0;
     
     // Clear existing dots
     dotsContainer.innerHTML = '';
     
-    // Create new dots
+    // Create dot elements
     charts.forEach((_, index) => {
         const dot = document.createElement('span');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
-        dot.addEventListener('click', () => showChart(index, section));
+        dot.addEventListener('click', () => showChart(index));
         dotsContainer.appendChild(dot);
     });
+
+    // Show initial chart
+    showChart(0);
+
+    // Navigation logic
+    function showChart(index) {
+        // Hide/show canvases
+        charts.forEach((chart, i) => {
+            chart.style.display = i === index ? 'block' : 'none';
+            dotsContainer.children[i].classList.toggle('active', i === index);
+        });
+        currentIndex = index;
+        
+        // Arrow opacity
+        leftArrow.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        rightArrow.style.opacity = currentIndex === charts.length - 1 ? '0.5' : '1';
+    }
+
+    // Arrow event listeners
+    leftArrow.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            showChart(currentIndex - 1);
+        }
+    });
+
+    rightArrow.addEventListener('click', () => {
+        if (currentIndex < charts.length - 1) {
+            showChart(currentIndex + 1);
+        }
+    });
+    
+    // Optional: keyboard + swipe listeners if desired
+    // ...
 }
+
 
 
     // Show initial chart
