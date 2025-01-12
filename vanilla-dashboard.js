@@ -395,7 +395,9 @@ function createROIChart() {
                 backgroundColor: colors.operational.primary + '40',
                 borderColor: colors.operational.primary,
                 pointBackgroundColor: colors.operational.secondary,
-                pointBorderColor: colors.operational.primary
+                pointBorderColor: colors.operational.primary,
+                borderWidth: 2,
+                lineTension: 0.3
             }]
         },
         options: {
@@ -409,12 +411,24 @@ function createROIChart() {
             },
             scales: {
                 r: {
-                    angleLines: { color: colors.grid },
-                    grid: { color: colors.grid },
-                    pointLabels: { color: colors.text },
+                    angleLines: {
+                        color: colors.text + '40'
+                    },
+                    grid: {
+                        color: colors.text + '20'
+                    },
+                    pointLabels: {
+                        color: colors.text,
+                        font: {
+                            size: 12
+                        }
+                    },
                     ticks: { 
                         color: colors.text,
-                        backdropColor: 'transparent'
+                        backdropColor: 'transparent',
+                        font: {
+                            size: 10
+                        }
                     }
                 }
             },
