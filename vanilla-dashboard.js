@@ -79,12 +79,14 @@ function initDashboard() {
 
 
 
-// Theme Configuration
+// ---------------------------
+// REPLACE the getThemeColors(isDark) function in paste-3.txt [3]
+// ---------------------------
 function getThemeColors(isDark) {
     return {
-        background: isDark ? '#1f2937' : '#ffffff',
-        text: isDark ? '#f7fafc' : '#1f2937',
-        grid: isDark ? '#374151' : '#e2e8f0',
+        background: isDark ? '#0f172a' : '#ffffff',
+        text: isDark ? '#f1f5f9' : '#1a202c',
+        grid: isDark ? '#475569' : '#e2e8f0',
         financial: {
             primary: isDark ? '#60a5fa' : '#1e40af',
             secondary: isDark ? '#93c5fd' : '#3b82f6'
@@ -95,6 +97,7 @@ function getThemeColors(isDark) {
         }
     };
 }
+
 
 // Chart Navigation Functions
 function initChartNavigation() {
