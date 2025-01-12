@@ -1312,29 +1312,37 @@ function initChartNavigation() {
 // Standalone function outside any other function
 function showChart(index, section) {
     const container = document.querySelector(`.section.${section} .chart-container`);
+    if (!container) return;
+    
     const charts = container.querySelectorAll('canvas');
     const dots = document.querySelectorAll(`.section.${section} .dot`);
     
-    // Reset all charts and dots
     charts.forEach(chart => {
         chart.style.display = 'none';
         chart.classList.remove('active');
+        
+        // Force chart destroy and redraw
+        const chartInstance = Chart.getChart(chart);
+        if (chartInstance) {
+            chartInstance.destroy();
+        }
     });
+    
     dots.forEach(dot => dot.classList.remove('active'));
     
-    // Show selected chart and dot
     if (charts[index]) {
         charts[index].style.display = 'block';
         charts[index].classList.add('active');
         dots[index]?.classList.add('active');
         
-        // Force chart redraw
-        const chartInstance = Chart.getChart(charts[index]);
-        if (chartInstance) {
-            chartInstance.update();
+        // Recreate chart
+        const chartFunction = getChartFunction(charts[index].id);
+        if (chartFunction) {
+            chartFunction();
         }
     }
 }
+
 
 
 function updateChartsTheme() {
@@ -1395,6 +1403,13 @@ function updateChartsTheme() {
     });
 }
 
+.chart-container canvas {
+    display: none;
+}
+
+.chart-container canvas.active {
+    display: block;
+}
 
 
 // Initialize when DOM is loaded
@@ -1414,7 +1429,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Then show initial charts
                     showChart(0, 'financial');
                     showChart(0, 'operational');
-                }, 100);
+                }, 500);
                 
             } catch (error) {
                 console.error('Dashboard initialization failed:', error);
