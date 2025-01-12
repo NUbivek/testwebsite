@@ -1277,11 +1277,25 @@ function initChartNavigation() {
     
     sections.forEach(section => {
         const container = document.querySelector(`.section.${section} .chart-container`);
+        const dotsContainer = document.querySelector(`.section.${section} .slide-dots`);
         const charts = container.querySelectorAll('canvas');
-        const dots = document.querySelectorAll(`.section.${section} .dot`);
         const prevBtn = document.querySelector(`.section.${section} .nav-arrow.left`);
         const nextBtn = document.querySelector(`.section.${section} .nav-arrow.right`);
         let currentIndex = 0;
+
+        // Clear existing dots
+        dotsContainer.innerHTML = '';
+        
+        // Create dots dynamically
+        charts.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = `dot ${index === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => {
+                showChart(index, section);
+                currentIndex = index;
+            });
+            dotsContainer.appendChild(dot);
+        });
 
         function nextChart() {
             const nextIndex = (currentIndex + 1) % charts.length;
@@ -1298,16 +1312,18 @@ function initChartNavigation() {
         // Initialize first chart
         showChart(0, section);
 
-        // Add in initChartNavigation
+        // Add event listeners
         prevBtn.addEventListener('click', prevChart);
         nextBtn.addEventListener('click', nextChart);
 
-        
-        // Event listeners
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showChart(index, section));
-        });
+        // Update arrow states
+        function updateArrowStates() {
+            prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentIndex === charts.length - 1 ? '0.5' : '1';
+        }
 
+        // Initial arrow states
+        updateArrowStates();
     });
 }
 
@@ -1336,38 +1352,33 @@ function getChartFunction(chartId) {
 
 
 
-// Standalone function outside any other function
 function showChart(index, section) {
     const container = document.querySelector(`.section.${section} .chart-container`);
     if (!container) return;
     
     const charts = container.querySelectorAll('canvas');
-    const dots = document.querySelectorAll(`.section.${section} .dot`);
+    const dots = document.querySelector(`.section.${section} .slide-dots`).children;
     
-    charts.forEach(chart => {
-        chart.style.display = 'none';
-        chart.classList.remove('active');
+    charts.forEach((chart, i) => {
+        chart.style.display = i === index ? 'block' : 'none';
+        chart.classList.toggle('active', i === index);
         
-        // Force chart destroy and redraw
+        // Only destroy/recreate the active chart
         const chartInstance = Chart.getChart(chart);
         if (chartInstance) {
             chartInstance.destroy();
         }
+        if (i === index) {
+            const chartFunction = getChartFunction(chart.id);
+            if (chartFunction) {
+                chartFunction();
+            }
+        }
     });
     
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    if (charts[index]) {
-        charts[index].style.display = 'block';
-        charts[index].classList.add('active');
-        dots[index]?.classList.add('active');
-        
-        // Recreate chart
-        const chartFunction = getChartFunction(charts[index].id);
-        if (chartFunction) {
-            chartFunction();
-        }
-    }
+    Array.from(dots).forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+    });
 }
 
 
