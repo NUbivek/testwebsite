@@ -207,7 +207,13 @@ body {
     display: block;  // Add this line
 }
 
+.chart-container canvas {
+    display: none;
+}
 
+.chart-container canvas.active {
+    display: block;
+}
 
                 /* Chart-specific animations */
                @keyframes chartFadeIn {
