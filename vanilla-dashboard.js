@@ -79,24 +79,28 @@ function initDashboard() {
 
 
 
-// ---------------------------
-// REPLACE the getThemeColors(isDark) function in paste-3.txt [3]
-// ---------------------------
 function getThemeColors(isDark) {
     return {
-        background: isDark ? '#0f172a' : '#ffffff',
-        text: isDark ? '#f1f5f9' : '#1a202c',
+        background: isDark ? 'rgba(30, 41, 59, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        text: isDark ? '#e2e8f0' : '#2d3748',
         grid: isDark ? '#475569' : '#e2e8f0',
         financial: {
-            primary: isDark ? '#60a5fa' : '#1e40af',
-            secondary: isDark ? '#93c5fd' : '#3b82f6'
+            primary: isDark ? '#60a5fa' : '#3b82f6',
+            secondary: isDark ? '#93c5fd' : '#60a5fa',
+            gradient: isDark ? 
+                ['rgba(96, 165, 250, 0.8)', 'rgba(147, 197, 253, 0.8)'] :
+                ['rgba(59, 130, 246, 0.8)', 'rgba(96, 165, 250, 0.8)']
         },
         operational: {
-            primary: isDark ? '#475569' : '#0f172a',
-            secondary: isDark ? '#64748b' : '#1f2937'
+            primary: isDark ? '#818cf8' : '#4f46e5',
+            secondary: isDark ? '#a5b4fc' : '#818cf8',
+            gradient: isDark ?
+                ['rgba(129, 140, 248, 0.8)', 'rgba(165, 180, 252, 0.8)'] :
+                ['rgba(79, 70, 229, 0.8)', 'rgba(129, 140, 248, 0.8)']
         }
     };
 }
+
 
 
 // Chart Navigation Functions
