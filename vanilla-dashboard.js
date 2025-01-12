@@ -121,34 +121,6 @@ function getThemeColors(isDark) {
 
 
 
-
-// Standalone function outside any other function
-function showChart(index, section) {
-    const container = document.querySelector(`.section.${section} .chart-container`);
-    const charts = container.querySelectorAll('canvas');
-    const dots = document.querySelectorAll(`.section.${section} .dot`);
-    
-    // Reset all charts and dots
-    charts.forEach(chart => {
-        chart.style.display = 'none';
-        chart.classList.remove('active');
-    });
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    // Show selected chart and dot
-    if (charts[index]) {
-        charts[index].style.display = 'block';
-        charts[index].classList.add('active');
-        dots[index]?.classList.add('active');
-        
-        // Force chart redraw
-        const chartInstance = Chart.getChart(charts[index]);
-        if (chartInstance) {
-            chartInstance.update();
-        }
-    }
-}
-
 function createRevenueChart() {
     const ctx = document.getElementById('revenueChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
@@ -1297,68 +1269,73 @@ function createTeamCompositionChart() {
     });
 }
 
-// KEEP THIS VERSION ONLY
+///////
 function initChartNavigation() {
-    const financialCharts = document.querySelectorAll('.section.financial .chart-container canvas');
-    const operationalCharts = document.querySelectorAll('.section.operational .chart-container canvas');
+    const sections = ['financial', 'operational'];
     
-    initSectionNavigation('financial', financialCharts);
-    initSectionNavigation('operational', operationalCharts);
-}
+    sections.forEach(section => {
+        const container = document.querySelector(`.section.${section} .chart-container`);
+        const charts = container.querySelectorAll('canvas');
+        const dots = document.querySelectorAll(`.section.${section} .dot`);
+        const prevBtn = document.querySelector(`.section.${section} .nav-arrow.left`);
+        const nextBtn = document.querySelector(`.section.${section} .nav-arrow.right`);
+        let currentIndex = 0;
 
-function initSectionNavigation(section, charts) {
-    const container = document.querySelector(`.section.${section}`);
-    const leftArrow = container.querySelector('.nav-arrow.left');
-    const rightArrow = container.querySelector('.nav-arrow.right');
-    const dotsContainer = container.querySelector('.slide-dots');
-    
-    let currentIndex = 0;
-    
-    // Clear existing dots
-    dotsContainer.innerHTML = '';
-    
-    // Create dot elements
-    charts.forEach((_, index) => {
-        const dot = document.createElement('span');
-        dot.className = `dot ${index === 0 ? 'active' : ''}`;
-        dot.addEventListener('click', () => showChart(index));
-        dotsContainer.appendChild(dot);
-    });
-
-    // Show initial chart
-    showChart(0);
-
-    // Navigation logic
-    function showChart(index) {
-        // Hide/show canvases
-        charts.forEach((chart, i) => {
-            chart.style.display = i === index ? 'block' : 'none';
-            dotsContainer.children[i].classList.toggle('active', i === index);
-        });
-        currentIndex = index;
+        function nextChart() {
+            const nextIndex = (currentIndex + 1) % charts.length;
+            showChart(nextIndex, section);
+            currentIndex = nextIndex;
+        }
         
-        // Arrow opacity
-        leftArrow.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        rightArrow.style.opacity = currentIndex === charts.length - 1 ? '0.5' : '1';
-    }
-
-    // Arrow event listeners
-    leftArrow.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            showChart(currentIndex - 1);
+        function prevChart() {
+            const prevIndex = (currentIndex - 1 + charts.length) % charts.length;
+            showChart(prevIndex, section);
+            currentIndex = prevIndex;
         }
-    });
+        
+        // Initialize first chart
+        showChart(0, section);
 
-    rightArrow.addEventListener('click', () => {
-        if (currentIndex < charts.length - 1) {
-            showChart(currentIndex + 1);
-        }
+        // Add in initChartNavigation
+        prevBtn.addEventListener('click', prevChart);
+        nextBtn.addEventListener('click', nextChart);
+
+        
+        // Event listeners
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showChart(index, section));
+        });
+
     });
-    
-    // Optional: keyboard + swipe listeners if desired
-    // ...
 }
 
+// Standalone function outside any other function
+function showChart(index, section) {
+    const container = document.querySelector(`.section.${section} .chart-container`);
+    const charts = container.querySelectorAll('canvas');
+    const dots = document.querySelectorAll(`.section.${section} .dot`);
+    
+    // Reset all charts and dots
+    charts.forEach(chart => {
+        chart.style.display = 'none';
+        chart.classList.remove('active');
+    });
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    // Show selected chart and dot
+    if (charts[index]) {
+        charts[index].style.display = 'block';
+        charts[index].classList.add('active');
+        dots[index]?.classList.add('active');
+        
+        // Force chart redraw
+        const chartInstance = Chart.getChart(charts[index]);
+        if (chartInstance) {
+            chartInstance.update();
+        }
+    }
+}
+////
 
 
     // Show initial chart
@@ -1500,10 +1477,8 @@ function updateChartsTheme() {
 document.addEventListener('DOMContentLoaded', function() {
     const dashboard = document.getElementById('dashboard');
     if (dashboard?.classList.contains('active')) {
-        // Increase timeout and add proper initialization sequence
         setTimeout(() => {
             try {
-                // Initialize charts first
                 initDashboard();
                 
                 // Wait for charts to be created
