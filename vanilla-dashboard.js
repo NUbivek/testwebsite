@@ -1336,12 +1336,6 @@ function showChart(index, section) {
     }
 }
 
-// Call this function after all charts are initialized
-function updateDashboard() {
-    initChartNavigation();
-    // Add any additional dashboard updates here
-}
-
 
 function updateChartsTheme() {
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
