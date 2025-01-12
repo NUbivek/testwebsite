@@ -175,47 +175,10 @@ function showChart(index, section) {
     }
 }
 
-// Common options object for all charts
-const commonOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-        title: {
-            display: true,
-            align: 'start',
-            color: colors.text,
-            font: {
-                size: 16,
-                weight: 'bold',
-                family: 'system-ui, -apple-system, sans-serif'
-            },
-            padding: {
-                top: 10,
-                bottom: 20
-            }
-        },
-        legend: {
-            position: 'top',
-            align: 'end',
-            labels: { 
-                color: colors.text,
-                padding: 20
-            }
-        },
-        datalabels: {
-            display: false // Disable permanent labels
-        }
-    },
-    animation: {
-        duration: 2000,
-        easing: 'easeInOutQuart'
-    }
-};
-
 function createRevenueChart() {
     const ctx = document.getElementById('revenueChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
+
     return new Chart(ctx, {
         type: 'line',
         data: {
@@ -225,35 +188,87 @@ function createRevenueChart() {
                     label: 'Revenue ($M)',
                     data: financialData.revenue.map(d => d.revenue),
                     borderColor: colors.financial.primary,
+                    backgroundColor: colors.financial.primary + '20',
                     tension: 0.4,
-                    fill: false
+                    fill: true
                 },
                 {
                     label: 'ARR ($M)',
                     data: financialData.revenue.map(d => d.arr),
                     borderColor: colors.financial.secondary,
+                    backgroundColor: colors.financial.secondary + '20',
                     tension: 0.4,
-                    fill: false
+                    fill: true
                 }
             ]
         },
         options: {
-            ...commonOptions,
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                ...commonOptions.plugins,
                 title: {
-                    ...commonOptions.plugins.title,
-                    text: 'Earnings'
+                    display: true,
+                    text: 'Earnings',
+                    align: 'start',
+                    color: colors.text,
+                    font: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'system-ui, -apple-system, sans-serif'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: colors.text,
+                        boxWidth: 12,
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                },
+                datalabels: {
+                    display: false // Hide permanent data labels
                 }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: colors.text
+                    },
+                    grid: {
+                        color: colors.grid + '20'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: colors.text
+                    },
+                    grid: {
+                        color: colors.grid + '20'
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
 
+
 function createUnitEconomicsChart() {
     const ctx = document.getElementById('unitEconomicsChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
+
     return new Chart(ctx, {
         type: 'line',
         data: {
@@ -262,36 +277,160 @@ function createUnitEconomicsChart() {
                 {
                     label: 'Gross Margin (%)',
                     data: financialData.metrics.map(d => d.margin),
-                    backgroundColor: colors.financial.primary + '40',
                     borderColor: colors.financial.primary,
+                    backgroundColor: colors.financial.primary + '40',
                     fill: true
                 },
                 {
                     label: 'Rule of 40',
                     data: financialData.metrics.map(d => d.rule40),
-                    backgroundColor: colors.financial.secondary + '40',
                     borderColor: colors.financial.secondary,
+                    backgroundColor: colors.financial.secondary + '40',
                     fill: true
                 }
             ]
         },
         options: {
-            ...commonOptions,
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                ...commonOptions.plugins,
                 title: {
-                    ...commonOptions.plugins.title,
-                    text: 'Performance'
+                    display: true,
+                    text: 'Performance',
+                    align: 'start',
+                    color: colors.text,
+                    font: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'system-ui, -apple-system, sans-serif'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: colors.text,
+                        boxWidth: 12,
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                },
+                datalabels: {
+                    display: false
                 }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: colors.text
+                    },
+                    grid: {
+                        color: colors.grid + '20'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: colors.text
+                    },
+                    grid: {
+                        color: colors.grid + '20'
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
 
+function createEfficiencyChart() {
+    const ctx = document.getElementById('efficiencyChart').getContext('2d');
+    const colors = getThemeColors(document.body.classList.contains('dark-theme'));
+    
+    return new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['ARR/Employee ($K)', 'ARR/Customer ($K)', 'NRR (%)'],
+            datasets: [{
+                data: [
+                    financialData.revenue[2].arrPerEmployee/1000,
+                    financialData.revenue[2].arrPerCustomer/1000,
+                    financialData.metrics[2].nrr
+                ],
+                backgroundColor: [
+                    colors.financial.primary,
+                    colors.financial.secondary,
+                    colors.operational.primary
+                ],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true,
+                    callbacks: {
+                        label: function(context) {
+                            return context.raw.toLocaleString();
+                        }
+                    }
+                },
+                datalabels: {
+                    display: false // This disables permanent labels
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: colors.text,
+                        font: {
+                            weight: '500'
+                        }
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
+            }
+        }
+    });
+}
+
+
+
+
 function createImplementationChart() {
     const ctx = document.getElementById('implementationChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
+
     return new Chart(ctx, {
         type: 'bar',
         data: {
@@ -301,34 +440,88 @@ function createImplementationChart() {
                     label: 'Orderful (Days)',
                     data: operationalData.implementation.map(d => d.orderful),
                     backgroundColor: colors.operational.primary,
-                    borderRadius: 8
+                    borderColor: colors.operational.primary,
+                    borderWidth: 1,
+                    borderRadius: 6
                 },
                 {
                     label: 'Industry Average',
                     data: operationalData.implementation.map(d => d.industry),
                     backgroundColor: colors.operational.secondary,
-                    borderRadius: 8
+                    borderColor: colors.operational.secondary,
+                    borderWidth: 1,
+                    borderRadius: 6
                 }
             ]
         },
         options: {
-            ...commonOptions,
             indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                ...commonOptions.plugins,
                 title: {
-                    ...commonOptions.plugins.title,
-                    text: 'Avg. Deployment Timeline'
+                    display: true,
+                    text: 'Avg. Deployment Timeline',
+                    align: 'start',
+                    color: colors.text,
+                    font: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'system-ui, -apple-system, sans-serif'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: colors.text,
+                        boxWidth: 12,
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                },
+                datalabels: {
+                    display: false
                 }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: colors.text
+                    },
+                    grid: {
+                        color: colors.grid + '20'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: colors.text
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
 
+
 function createMarketCoverageChart() {
     const ctx = document.getElementById('marketCoverageChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
+
     return new Chart(ctx, {
         type: 'pie',
         data: {
@@ -340,30 +533,68 @@ function createMarketCoverageChart() {
                     colors.operational.primary + '80',
                     colors.operational.secondary,
                     colors.operational.secondary + '80'
-                ]
+                ],
+                borderWidth: 1
             }]
         },
         options: {
-            ...commonOptions,
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                ...commonOptions.plugins,
                 title: {
-                    ...commonOptions.plugins.title,
-                    text: 'Customer Type'
+                    display: true,
+                    text: 'Customer Type',
+                    align: 'start',
+                    color: colors.text,
+                    font: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'system-ui, -apple-system, sans-serif'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                legend: {
+                    position: 'right',
+                    align: 'center',
+                    labels: {
+                        color: colors.text,
+                        boxWidth: 12,
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                },
+                datalabels: {
+                    display: false
                 }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
 
+
 function createROIChart() {
     const ctx = document.getElementById('roiChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
+
     return new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['Labor Cost Savings', 'Integration Speed', 'Operational Efficiency', 'Success Rate', 'System Uptime'],
+            labels: [
+                'Labor Cost Savings',
+                'Integration Speed',
+                'Operational Efficiency',
+                'Success Rate',
+                'System Uptime'
+            ],
             datasets: [{
                 label: 'Performance Metrics (%)',
                 data: [
@@ -373,25 +604,79 @@ function createROIChart() {
                     operationalData.roi.successRate,
                     operationalData.roi.uptime
                 ],
-                backgroundColor: colors.operational.primary + '40',
+                backgroundColor: colors.operational.primary + '20',
                 borderColor: colors.operational.primary,
                 pointBackgroundColor: colors.operational.secondary,
-                pointBorderColor: colors.operational.primary
+                pointBorderColor: colors.operational.primary,
+                borderWidth: 2,
+                tension: 0.3
             }]
         },
         options: {
-            ...commonOptions,
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                ...commonOptions.plugins,
                 title: {
-                    ...commonOptions.plugins.title,
-                    text: 'ROI'
+                    display: true,
+                    text: 'ROI',
+                    align: 'start',
+                    color: colors.text,
+                    font: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'system-ui, -apple-system, sans-serif'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: colors.text,
+                        boxWidth: 12,
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                },
+                datalabels: {
+                    display: false
                 }
+            },
+            scales: {
+                r: {
+                    angleLines: {
+                        color: colors.grid + '40'
+                    },
+                    grid: {
+                        color: colors.grid + '20'
+                    },
+                    pointLabels: {
+                        color: colors.text,
+                        font: {
+                            size: 12
+                        }
+                    },
+                    ticks: {
+                        color: colors.text,
+                        backdropColor: 'transparent',
+                        font: {
+                            size: 10
+                        }
+                    }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
-
 
 
 
