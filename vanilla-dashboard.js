@@ -604,7 +604,7 @@ function createROIChart() {
                     operationalData.roi.successRate,
                     operationalData.roi.uptime
                 ],
-                backgroundColor: colors.operational.primary + '20',
+                backgroundColor: colors.operational.primary + '40',
                 borderColor: colors.operational.primary,
                 pointBackgroundColor: colors.operational.secondary,
                 pointBorderColor: colors.operational.primary,
