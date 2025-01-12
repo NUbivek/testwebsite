@@ -1507,7 +1507,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Increase timeout to ensure DOM is ready
         setTimeout(() => {
             try {
-                // Verify elements exist before initialization
                 const financialSection = document.querySelector('.section.financial');
                 const operationalSection = document.querySelector('.section.operational');
                 
@@ -1515,15 +1514,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     initDashboard();
                     showChart(0, 'financial');
                     showChart(0, 'operational');
-                } else {
-                    console.error('Required dashboard sections not found');
                 }
             } catch (error) {
                 console.error('Dashboard initialization failed:', error);
             }
-        }, 300); // Increased timeout
+        }, 300); // Increased from 100ms to 300ms
     }
 });
+
 
 
 // Update switchSubtab
