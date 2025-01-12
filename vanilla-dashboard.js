@@ -375,21 +375,23 @@ function createEfficiencyChart() {
             }]
         },
         options: {
-            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    enabled: true,
-                    callbacks: {
-                        label: function(context) {
-                            return context.raw.toLocaleString();
-                        }
-                    }
-                },
+                title: {
+                    display: true,
+                    text: 'Efficiency',
+                    align: 'start',
+                    color: colors.text,
+                    font: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'system-ui, -apple-system, sans-serif'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    },
                 datalabels: {
                     display: false // This disables permanent labels
                 }
