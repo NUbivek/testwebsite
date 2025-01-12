@@ -301,18 +301,12 @@ function createUnitEconomicsChart() {
 
 function createEfficiencyChart() {
     const ctx = document.getElementById('efficiencyChart').getContext('2d');
-    const isDark = document.body.classList.contains('dark-theme');
-    
-    const colors = {
-        primary: isDark ? '#94a3b8' : '#475569',
-        secondary: isDark ? '#64748b' : '#334155',
-        tertiary: isDark ? '#cbd5e0' : '#1e293b'
-    };
+    const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
-            labels: ['ARR/Employee', 'ARR/Customer', 'NRR'],
+            labels: ['ARR/Employee ($K)', 'ARR/Customer ($K)', 'NRR (%)'],
             datasets: [{
                 data: [
                     financialData.revenue[2].arrPerEmployee/1000,
@@ -320,12 +314,11 @@ function createEfficiencyChart() {
                     financialData.metrics[2].nrr
                 ],
                 backgroundColor: [
-                    colors.primary,
-                    colors.secondary,
-                    colors.tertiary
+                    colors.financial.primary,
+                    colors.financial.secondary,
+                    colors.operational.primary
                 ],
-                borderWidth: 2,
-                borderColor: isDark ? '#1a202c' : '#ffffff'
+                borderRadius: 6
             }]
         },
         options: {
@@ -333,24 +326,56 @@ function createEfficiencyChart() {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    position: 'right',
-                    labels: { 
-                        color: isDark ? '#e2e8f0' : '#1f2937',
-                        padding: 20,
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Efficiency',
+                    color: colors.text,
+                    font: {
+                        family: 'system-ui, -apple-system, sans-serif',
+                        size: 16,
+                        weight: '500'
+                    },
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: colors.grid + '20'
+                    },
+                    ticks: {
+                        color: colors.text,
                         font: {
-                            size: 12
+                            family: 'system-ui, -apple-system, sans-serif'
+                        }
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: colors.text,
+                        font: {
+                            family: 'system-ui, -apple-system, sans-serif'
                         }
                     }
                 }
             },
             animation: {
-                animateRotate: true,
-                animateScale: true,
-                duration: 2000
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
+
 
 function createImplementationChart() {
     const ctx = document.getElementById('implementationChart').getContext('2d');
