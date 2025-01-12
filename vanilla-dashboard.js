@@ -1269,6 +1269,8 @@ function createTeamCompositionChart() {
     });
 }
 
+
+
 ///////
 function initChartNavigation() {
     const sections = ['financial', 'operational'];
@@ -1308,6 +1310,31 @@ function initChartNavigation() {
 
     });
 }
+
+function getChartFunction(chartId) {
+    const chartFunctions = {
+        'revenueChart': createRevenueChart,
+        'unitEconomicsChart': createUnitEconomicsChart,
+        'efficiencyChart': createEfficiencyChart,
+        'implementationChart': createImplementationChart,
+        'marketCoverageChart': createMarketCoverageChart,
+        'roiChart': createROIChart,
+        'revenueGrowthChart': createRevenueGrowthChart,
+        'burnMarginChart': createBurnMarginChart,
+        'revenueStreamsChart': createRevenueStreamsChart,
+        'costScalingChart': createCostScalingChart,
+        'headcountEfficiencyChart': createHeadcountEfficiencyChart,
+        'deploymentTimelineChart': createDeploymentTimelineChart,
+        'supportMetricsChart': createSupportMetricsChart,
+        'marketPenetrationChart': createMarketPenetrationChart,
+        'partnerGrowthChart': createPartnerGrowthChart,
+        'teamCompositionChart': createTeamCompositionChart
+    };
+    
+    return chartFunctions[chartId];
+}
+
+
 
 // Standalone function outside any other function
 function showChart(index, section) {
