@@ -1508,21 +1508,26 @@ function updateChartsTheme() {
 document.addEventListener('DOMContentLoaded', function() {
     const dashboard = document.getElementById('dashboard');
     if (dashboard?.classList.contains('active')) {
-        // Increase timeout to ensure DOM is ready
+        // Increase timeout and add proper initialization sequence
         setTimeout(() => {
             try {
-                const financialSection = document.querySelector('.section.financial');
-                const operationalSection = document.querySelector('.section.operational');
+                // Initialize charts first
+                initDashboard();
                 
-                if (financialSection && operationalSection) {
-                    initDashboard();
+                // Wait for charts to be created
+                setTimeout(() => {
+                    // Initialize navigation
+                    initChartNavigation();
+                    
+                    // Then show initial charts
                     showChart(0, 'financial');
                     showChart(0, 'operational');
-                }
+                }, 300);
+                
             } catch (error) {
                 console.error('Dashboard initialization failed:', error);
             }
-        }, 300); // Increased from 100ms to 300ms
+        }, 500);
     }
 });
 
