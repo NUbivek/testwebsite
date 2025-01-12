@@ -750,16 +750,32 @@ function updateChartsTheme() {
 document.addEventListener('DOMContentLoaded', function() {
     const dashboard = document.getElementById('dashboard');
     if (dashboard?.classList.contains('active')) {
-        // Ensure proper initialization timing
         setTimeout(() => {
             try {
                 initDashboard();
+                showChart(0, 'financial');
+                showChart(0, 'operational');
             } catch (error) {
                 console.error('Dashboard initialization failed:', error);
             }
         }, 100);
     }
 });
+
+// Update switchSubtab
+function switchSubtab(subtabId) {
+    document.querySelectorAll('.subtab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    document.querySelectorAll('.subtab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    document.getElementById(subtabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+}
+
 
 
 
@@ -789,20 +805,3 @@ function initDashboardAnimations() {
 
 
 
-// Tab switching
-function switchSubtab(subtabId) {
-    document.querySelectorAll('.subtab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    
-    document.querySelectorAll('.subtab-button').forEach(button => {
-        button.classList.remove('active');
-    });
-    
-    document.getElementById(subtabId).classList.add('active');
-    event.currentTarget.classList.add('active');
-    
-    if (subtabId === 'dashboard') {
-        setTimeout(initDashboard, 100);
-    }
-}
