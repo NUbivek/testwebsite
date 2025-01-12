@@ -23,10 +23,10 @@ body {
 :root {
     --financial-primary: #1e40af;
     --financial-secondary: #60a5fa;
-    --financial-gradient: linear-gradient(to right, #1e40af, #60a5fa);
+    --financial-gradient: linear-gradient(145deg, #1e40af26, #60a5fa26);
     --operational-primary: #0f172a;
     --operational-secondary: #475569;
-    --operational-gradient: linear-gradient(to right, #0f172a, #475569);
+    --operational-gradient: linear-gradient(145deg, #0f172a26, #47556926);
     --bg-primary: #ffffff;
     --text-primary: #1a202c;
     --card-bg: #f7fafc;
@@ -34,9 +34,14 @@ body {
 
 /* Dark Theme Overrides */
 [data-theme="dark"], body.dark-theme {
-    --bg-primary: #0f172a;
-    --text-primary: #f1f5f9;
-    --card-bg: #1e293b;
+   --bg-primary: #0f172a;           /* Darker background */
+    --card-bg: #1e293b;             /* Deeper card color */
+    --financial-gradient: linear-gradient(145deg, #1e40af66, #60a5fa66);
+    --operational-gradient: linear-gradient(145deg, #0f172a66, #47556966);
+    --border-color: #2d3748;
+    --text-primary: #f1f5f9;         /* Increase brightness for main text */
+    --text-secondary: #cbd5e0;       /* Lighter subtext */
+    --text-tertiary: #a0aec0;        /* Even lighter tertiary text */
 }
 
           /* Dashboard Base */
@@ -99,7 +104,7 @@ body {
                         padding: 0.75rem 1rem;
                         border-radius: 0.5rem;
                         border: 1px solid var(--border-color);
-                        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
                         animation: fadeIn 0.3s ease-in-out;
                         display: grid;
                         grid-template-columns: 65% 35%;
