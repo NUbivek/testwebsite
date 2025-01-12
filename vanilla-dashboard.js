@@ -139,8 +139,6 @@ function initChartNavigation() {
 // Standalone function outside any other function
 function showChart(index, section) {
     const container = document.querySelector(`.section.${section} .chart-container`);
-    if (!container) return;
-    
     const charts = container.querySelectorAll('canvas');
     const dots = document.querySelectorAll(`.section.${section} .dot`);
     
@@ -151,7 +149,7 @@ function showChart(index, section) {
     });
     dots.forEach(dot => dot.classList.remove('active'));
     
-    // Show selected chart
+    // Show selected chart and dot
     if (charts[index]) {
         charts[index].style.display = 'block';
         charts[index].classList.add('active');
@@ -164,6 +162,7 @@ function showChart(index, section) {
         }
     }
 }
+
 
 
 
