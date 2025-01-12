@@ -261,7 +261,13 @@ function createUnitEconomicsChart() {
 
 function createEfficiencyChart() {
     const ctx = document.getElementById('efficiencyChart').getContext('2d');
-    const colors = getThemeColors(document.body.classList.contains('dark-theme'));
+    const isDark = document.body.classList.contains('dark-theme');
+    
+    const colors = {
+        primary: isDark ? '#94a3b8' : '#475569',
+        secondary: isDark ? '#64748b' : '#334155',
+        tertiary: isDark ? '#cbd5e0' : '#1e293b'
+    };
     
     return new Chart(ctx, {
         type: 'doughnut',
@@ -274,10 +280,12 @@ function createEfficiencyChart() {
                     financialData.metrics[2].nrr
                 ],
                 backgroundColor: [
-                    colors.financial.primary,
-                    colors.financial.secondary,
-                    colors.financial.primary + '80'
-                ]
+                    colors.primary,
+                    colors.secondary,
+                    colors.tertiary
+                ],
+                borderWidth: 2,
+                borderColor: isDark ? '#1a202c' : '#ffffff'
             }]
         },
         options: {
@@ -286,7 +294,13 @@ function createEfficiencyChart() {
             plugins: {
                 legend: {
                     position: 'right',
-                    labels: { color: colors.text }
+                    labels: { 
+                        color: isDark ? '#e2e8f0' : '#1f2937',
+                        padding: 20,
+                        font: {
+                            size: 12
+                        }
+                    }
                 }
             },
             animation: {
