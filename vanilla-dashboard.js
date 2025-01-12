@@ -327,54 +327,48 @@ function createEfficiencyChart() {
             }]
         },
         options: {
-            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
                     display: false
                 },
-                tooltip: {
-                    enabled: true,
-                    callbacks: {
-                        label: function(context) {
-                            const value = context.raw;
-                            const label = context.label;
-                            return `${label}: ${value.toLocaleString()}`;
-                        }
-                    }
-                },
-                datalabels: {
-                    color: '#ffffff',
-                    anchor: 'center',
-                    align: 'center',
+                title: {
+                    display: true,
+                    text: 'Efficiency',
+                    color: colors.text,
                     font: {
-                        weight: 'bold',
-                        size: 13
+                        family: 'system-ui, -apple-system, sans-serif',
+                        size: 16,
+                        weight: '500'
                     },
-                    formatter: function(value) {
-                        return value.toLocaleString();
+                    padding: {
+                        top: 10,
+                        bottom: 20
                     }
                 }
             },
             scales: {
-                x: {
+                y: {
                     beginAtZero: true,
                     grid: {
-                        display: false
+                        color: colors.grid + '20'
                     },
                     ticks: {
-                        color: colors.text
+                        color: colors.text,
+                        font: {
+                            family: 'system-ui, -apple-system, sans-serif'
+                        }
                     }
                 },
-                y: {
+                x: {
                     grid: {
                         display: false
                     },
                     ticks: {
                         color: colors.text,
                         font: {
-                            weight: '500'
+                            family: 'system-ui, -apple-system, sans-serif'
                         }
                     }
                 }
