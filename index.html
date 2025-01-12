@@ -292,226 +292,249 @@
                         <button class="subtab-button" onclick="switchSubtab('topic5')">Topic 5</button>
                     </div>
                     
-                         <div id="dashboard" class="subtab-content active">
-                            <div id="investor-dashboard">
-                                <div class="dashboard-container">
-                                    <!-- Top Section -->
-                                    <div class="charts-section">
-                                        <!-- Financial Charts -->
-                                        <div class="section financial">
-                                            <div class="chart-slider">
-                                                <button class="nav-arrow left">←</button>
-                                                <div class="chart-container">
-                                                    <!-- Existing Financial Charts -->
-                                                    <canvas id="revenueChart"></canvas>
-                                                    <canvas id="unitEconomicsChart"></canvas>
-                                                    <canvas id="efficiencyChart"></canvas>
-                                                    
-                                                    <!-- New Financial Charts -->
-                                                    <canvas id="revenueGrowthChart" 
-                                                        data-type="line"
-                                                        data-labels="FY24,FY25,FY26"
-                                                        data-revenue="7.69,20.25,44.81"
-                                                        data-arr="10.28,27.01,59.74">
-                                                    </canvas>
-                                                    <canvas id="burnMarginChart" 
-                                                        data-type="scatter"
-                                                        data-burn="1.96,-0.24,-0.24"
-                                                        data-margin="74.19,95.02,95.03">
-                                                    </canvas>
-                                                    <canvas id="revenueStreamsChart" 
-                                                        data-type="stacked-bar"
-                                                        data-base="23988"
-                                                        data-enterprise="54600"
-                                                        data-growth="44280"
-                                                        data-scale="26040">
-                                                    </canvas>
-                                                    <canvas id="costScalingChart" 
-                                                        data-type="stacked-area"
-                                                        data-engineering="5.18,7.62,9.03"
-                                                        data-sales="2.80,4.53,5.94"
-                                                        data-cs="2.08,3.21,3.86">
-                                                    </canvas>
-                                                    <canvas id="headcountEfficiencyChart" 
-                                                        data-type="bar"
-                                                        data-revenue="140795,245503,449184"
-                                                        data-headcount="73,110,133">
-                                                    </canvas>
-                                                </div>
-                                                <button class="nav-arrow right">→</button>
-                                                <div class="slide-dots">
-                                                    <span class="dot active"></span>
-                                                    <span class="dot"></span>
-                                                    <span class="dot"></span>
-                                                    <span class="dot"></span>
-                                                    <span class="dot"></span>
-                                                    <span class="dot"></span>
-                                                    <span class="dot"></span>
-                                                    <span class="dot"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                    <!-- Top Right Financial KPIs -->
-                                    <div class="metrics-section">
-                                        <div class="section financial">
-                                            <div class="kpi-grid">
-                                                <div class="metric-card">
-                                                    <h3>Revenue CAGR</h3>
-                                                    <p class="value">141%</p>
-                                                    <span class="trend">Rapid Growth Path</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Gross Margin</h3>
-                                                    <p class="value">74.19%</p>
-                                                    <span class="trend">Top Performance</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Rule of 40</h3>
-                                                    <p class="value">176%</p>
-                                                    <span class="trend">Best-in-class</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>ARR Growth</h3>
-                                                    <p class="value">$10.28M</p>
-                                                    <span class="trend">Scaling Momentum</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>LTV/CAC</h3>
-                                                    <p class="value">10x</p>
-                                                    <span class="trend">Smart Economics</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Net Revenue Retention</h3>
-                                                    <p class="value">130%</p>
-                                                    <span class="trend">Customer Loyalty</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                    <!-- Middle Section -->
-                                    <div class="metrics-section">
-                                        <!-- Operational KPIs -->
-                                        <div class="section operational">
-                                            <div class="kpi-grid">
-                                                <div class="metric-card">
-                                                    <h3>Network Partners</h3>
-                                                    <p class="value">5,000+</p>
-                                                    <span class="trend">Ecosystem Growth</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Implementation Time</h3>
-                                                    <p class="value">9 days</p>
-                                                    <span class="trend">Rapid Deployment</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>System Uptime</h3>
-                                                    <p class="value">99.99%</p>
-                                                    <span class="trend">Reliable Platform</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Error Resolution</h3>
-                                                    <p class="value">Real-time</p>
-                                                    <span class="trend">Instant Support</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Success Rate</h3>
-                                                    <p class="value">100%</p>
-                                                    <span class="trend">Perfect Execution</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Integration Speed</h3>
-                                                    <p class="value">80%</p>
-                                                    <span class="trend">Quick Connect</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                
-                                        <!-- Financial Charts -->
-                                        <div class="section financial">
-                                            <div class="chart-slider">
-                                                <!-- Same content as top financial charts -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                    <!-- Bottom Section -->
-                                    <div class="metrics-section">
-                                        <!-- Financial KPIs -->
-                                        <div class="section financial">
-                                            <div class="kpi-grid">
-                                                <div class="metric-card">
-                                                    <h3>ARR per Customer</h3>
-                                                    <p class="value">$33,043</p>
-                                                    <span class="trend">Expanding</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>ARR per Employee</h3>
-                                                    <p class="value">$449,184</p>
-                                                    <span class="trend">79% CAGR</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Burn Multiple</h3>
-                                                    <p class="value">-0.24</p>
-                                                    <span class="trend">Efficient</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>YoY Growth</h3>
-                                                    <p class="value">121%</p>
-                                                    <span class="trend">Consistent</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Customer Growth</h3>
-                                                    <p class="value">156%</p>
-                                                    <span class="trend">CAGR</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Revenue per Sales Rep</h3>
-                                                    <p class="value">$1.6M</p>
-                                                    <span class="trend">Increasing</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                
-                                        <!-- Operational KPIs -->
-                                        <div class="section operational">
-                                            <div class="kpi-grid">
-                                                <div class="metric-card">
-                                                    <h3>Transaction Volume</h3>
-                                                    <p class="value">265M</p>
-                                                    <span class="trend">Annual</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Success Rate</h3>
-                                                    <p class="value">100%</p>
-                                                    <span class="trend">Perfect</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Partner Growth</h3>
-                                                    <p class="value">156%</p>
-                                                    <span class="trend">YoY</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Integration Efficiency</h3>
-                                                    <p class="value">90%</p>
-                                                    <span class="trend">Reduction</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Cost Reduction</h3>
-                                                    <p class="value">70%</p>
-                                                    <span class="trend">vs Industry</span>
-                                                </div>
-                                                <div class="metric-card">
-                                                    <h3>Time Savings</h3>
-                                                    <p class="value">80%</p>
-                                                    <span class="trend">vs Legacy</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                       <div id="dashboard" class="subtab-content active">
+    <div id="investor-dashboard">
+        <div class="dashboard-container">
+            <!-- Top Section -->
+            <div class="charts-section">
+                <!-- Financial Charts -->
+                <div class="section financial">
+                    <div class="chart-slider">
+                        <button class="nav-arrow left">←</button>
+                        <div class="chart-container">
+                            <!-- Financial Charts -->
+                            <canvas id="revenueChart"></canvas>
+                            <canvas id="unitEconomicsChart"></canvas>
+                            <canvas id="efficiencyChart"></canvas>
+                            <canvas id="revenueGrowthChart" 
+                                data-type="line"
+                                data-labels="FY24,FY25,FY26"
+                                data-revenue="7.69,20.25,44.81"
+                                data-arr="10.28,27.01,59.74">
+                            </canvas>
+                            <canvas id="burnMarginChart" 
+                                data-type="scatter"
+                                data-burn="1.96,-0.24,-0.24"
+                                data-margin="74.19,95.02,95.03">
+                            </canvas>
+                            <canvas id="revenueStreamsChart" 
+                                data-type="stacked-bar"
+                                data-base="23988"
+                                data-enterprise="54600"
+                                data-growth="44280"
+                                data-scale="26040">
+                            </canvas>
+                            <canvas id="costScalingChart" 
+                                data-type="stacked-area"
+                                data-engineering="5.18,7.62,9.03"
+                                data-sales="2.80,4.53,5.94"
+                                data-cs="2.08,3.21,3.86">
+                            </canvas>
+                            <canvas id="headcountEfficiencyChart" 
+                                data-type="bar"
+                                data-revenue="140795,245503,449184"
+                                data-headcount="73,110,133">
+                            </canvas>
+                        </div>
+                        <button class="nav-arrow right">→</button>
+                        <div class="slide-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Right Financial KPIs -->
+            <div class="metrics-section">
+                <div class="section financial">
+                    <div class="kpi-grid">
+                        <div class="metric-card">
+                            <h3>Revenue CAGR</h3>
+                            <p class="value">141%</p>
+                            <span class="trend">Rapid Growth Path</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Gross Margin</h3>
+                            <p class="value">74.19%</p>
+                            <span class="trend">Top Performance</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Rule of 40</h3>
+                            <p class="value">176%</p>
+                            <span class="trend">Best-in-class</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>ARR Growth</h3>
+                            <p class="value">$10.28M</p>
+                            <span class="trend">Scaling Momentum</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>LTV/CAC</h3>
+                            <p class="value">10x</p>
+                            <span class="trend">Smart Economics</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Net Revenue Retention</h3>
+                            <p class="value">130%</p>
+                            <span class="trend">Customer Loyalty</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Section -->
+            <div class="metrics-section">
+                <!-- Operational KPIs -->
+                <div class="section operational">
+                    <div class="kpi-grid">
+                        <div class="metric-card">
+                            <h3>Network Partners</h3>
+                            <p class="value">5,000+</p>
+                            <span class="trend">Ecosystem Growth</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Implementation Time</h3>
+                            <p class="value">9 days</p>
+                            <span class="trend">Rapid Deployment</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>System Uptime</h3>
+                            <p class="value">99.99%</p>
+                            <span class="trend">Reliable Platform</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Error Resolution</h3>
+                            <p class="value">Real-time</p>
+                            <span class="trend">Instant Support</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Success Rate</h3>
+                            <p class="value">100%</p>
+                            <span class="trend">Perfect Execution</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Integration Speed</h3>
+                            <p class="value">80%</p>
+                            <span class="trend">Quick Connect</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Charts -->
+                <div class="section financial">
+                    <div class="chart-slider">
+                        <button class="nav-arrow left">←</button>
+                        <div class="chart-container">
+                            <!-- Same content as top financial charts -->
+                            <canvas id="revenueChart"></canvas>
+                            <canvas id="unitEconomicsChart"></canvas>
+                            <canvas id="efficiencyChart"></canvas>
+                            <canvas id="revenueGrowthChart"></canvas>
+                            <canvas id="burnMarginChart"></canvas>
+                            <canvas id="revenueStreamsChart"></canvas>
+                            <canvas id="costScalingChart"></canvas>
+                            <canvas id="headcountEfficiencyChart"></canvas>
+                        </div>
+                        <button class="nav-arrow right">→</button>
+                        <div class="slide-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="metrics-section">
+                <!-- Financial KPIs -->
+                <div class="section financial">
+                    <div class="kpi-grid">
+                        <div class="metric-card">
+                            <h3>ARR per Customer</h3>
+                            <p class="value">$33,043</p>
+                            <span class="trend">Expanding</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>ARR per Employee</h3>
+                            <p class="value">$449,184</p>
+                            <span class="trend">79% CAGR</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Burn Multiple</h3>
+                            <p class="value">-0.24</p>
+                            <span class="trend">Efficient</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>YoY Growth</h3>
+                            <p class="value">121%</p>
+                            <span class="trend">Consistent</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Customer Growth</h3>
+                            <p class="value">156%</p>
+                            <span class="trend">CAGR</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Revenue per Sales Rep</h3>
+                            <p class="value">$1.6M</p>
+                            <span class="trend">Increasing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Operational KPIs -->
+                <div class="section operational">
+                    <div class="kpi-grid">
+                        <div class="metric-card">
+                            <h3>Transaction Volume</h3>
+                            <p class="value">265M</p>
+                            <span class="trend">Annual</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Success Rate</h3>
+                            <p class="value">100%</p>
+                            <span class="trend">Perfect</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Partner Growth</h3>
+                            <p class="value">156%</p>
+                            <span class="trend">YoY</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Integration Efficiency</h3>
+                            <p class="value">90%</p>
+                            <span class="trend">Reduction</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Cost Reduction</h3>
+                            <p class="value">70%</p>
+                            <span class="trend">vs Industry</span>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Time Savings</h3>
+                            <p class="value">80%</p>
+                            <span class="trend">vs Legacy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                 
  
