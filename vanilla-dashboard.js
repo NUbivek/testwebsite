@@ -120,45 +120,7 @@ function getThemeColors(isDark) {
 
 
 
-// Chart Navigation Functions
-function initChartNavigation() {
-    const sections = ['financial', 'operational'];
-    
-    sections.forEach(section => {
-        const container = document.querySelector(`.section.${section} .chart-container`);
-        const charts = container.querySelectorAll('canvas');
-        const dots = document.querySelectorAll(`.section.${section} .dot`);
-        const prevBtn = document.querySelector(`.section.${section} .nav-arrow.left`);
-        const nextBtn = document.querySelector(`.section.${section} .nav-arrow.right`);
-        let currentIndex = 0;
 
-        function nextChart() {
-            const nextIndex = (currentIndex + 1) % charts.length;
-            showChart(nextIndex, section);
-            currentIndex = nextIndex;
-        }
-        
-        function prevChart() {
-            const prevIndex = (currentIndex - 1 + charts.length) % charts.length;
-            showChart(prevIndex, section);
-            currentIndex = prevIndex;
-        }
-        
-        // Initialize first chart
-        showChart(0, section);
-
-        // Add in initChartNavigation
-        prevBtn.addEventListener('click', prevChart);
-        nextBtn.addEventListener('click', nextChart);
-
-        
-        // Event listeners
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showChart(index, section));
-        });
-
-    });
-}
 
 // Standalone function outside any other function
 function showChart(index, section) {
