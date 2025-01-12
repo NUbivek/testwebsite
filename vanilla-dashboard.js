@@ -1403,13 +1403,7 @@ function updateChartsTheme() {
     });
 }
 
-.chart-container canvas {
-    display: none;
-}
 
-.chart-container canvas.active {
-    display: block;
-}
 
 
 // Initialize when DOM is loaded
