@@ -361,9 +361,11 @@ function createEfficiencyChart() {
         data: {
             labels: ['ARR/Employee ($K)', 'ARR/Customer ($K)', 'NRR (%)'],
             datasets: [{
+                // Add a label if you want it in the legend:
+                // label: 'Efficiency Metrics',
                 data: [
-                    financialData.revenue[2].arrPerEmployee/1000,
-                    financialData.revenue[2].arrPerCustomer/1000,
+                    financialData.revenue[2].arrPerEmployee / 1000,
+                    financialData.revenue[2].arrPerCustomer / 1000,
                     financialData.metrics[2].nrr
                 ],
                 backgroundColor: [
@@ -378,6 +380,7 @@ function createEfficiencyChart() {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
+                // Here we properly close the title bracket:
                 title: {
                     display: true,
                     text: 'Efficiency',
@@ -392,9 +395,12 @@ function createEfficiencyChart() {
                         top: 10,
                         bottom: 20
                     }
-                }, // <-- Be sure to close "title" here
+                },
                 datalabels: {
-                    display: false // This disables permanent labels
+                    display: false  // Turn off all data labels
+                },
+                legend: {
+                    display: false  // Hide legend to avoid "undefined"
                 }
             },
             scales: {
@@ -426,6 +432,7 @@ function createEfficiencyChart() {
         }
     });
 }
+
 
 
 
