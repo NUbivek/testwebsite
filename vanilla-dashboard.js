@@ -175,11 +175,43 @@ function showChart(index, section) {
     }
 }
 
+// Common options object for all charts
+const commonOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        title: {
+            display: true,
+            align: 'start',
+            color: colors.text,
+            font: {
+                size: 16,
+                weight: 'bold',
+                family: 'system-ui, -apple-system, sans-serif'
+            },
+            padding: {
+                top: 10,
+                bottom: 20
+            }
+        },
+        legend: {
+            position: 'top',
+            align: 'end',
+            labels: { 
+                color: colors.text,
+                padding: 20
+            }
+        },
+        datalabels: {
+            display: false // Disable permanent labels
+        }
+    },
+    animation: {
+        duration: 2000,
+        easing: 'easeInOutQuart'
+    }
+};
 
-
-
-
-// Updated Chart Creation Functions with new chart types
 function createRevenueChart() {
     const ctx = document.getElementById('revenueChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
@@ -193,50 +225,25 @@ function createRevenueChart() {
                     label: 'Revenue ($M)',
                     data: financialData.revenue.map(d => d.revenue),
                     borderColor: colors.financial.primary,
-                    backgroundColor: colors.financial.primary + '20',
                     tension: 0.4,
                     fill: false
                 },
                 {
                     label: 'ARR ($M)',
                     data: financialData.revenue.map(d => d.arr),
-                    borderColor: colors.operational.primary,
-                    backgroundColor: colors.operational.primary + '20',
+                    borderColor: colors.financial.secondary,
                     tension: 0.4,
                     fill: false
                 }
             ]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
+            ...commonOptions,
             plugins: {
-                legend: {
-                    position: 'top',
-                    labels: { 
-                        color: colors.text,
-                        usePointStyle: true,
-                        pointStyle: 'circle'
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: colors.grid + '20'
-                    },
-                    ticks: {
-                        color: colors.text
-                    }
-                },
-                x: {
-                    grid: {
-                        color: colors.grid + '20'
-                    },
-                    ticks: {
-                        color: colors.text
-                    }
+                ...commonOptions.plugins,
+                title: {
+                    ...commonOptions.plugins.title,
+                    text: 'Earnings'
                 }
             }
         }
@@ -255,133 +262,31 @@ function createUnitEconomicsChart() {
                 {
                     label: 'Gross Margin (%)',
                     data: financialData.metrics.map(d => d.margin),
-                    backgroundColor: colors.financial.primary + '20',
+                    backgroundColor: colors.financial.primary + '40',
                     borderColor: colors.financial.primary,
                     fill: true
                 },
                 {
                     label: 'Rule of 40',
                     data: financialData.metrics.map(d => d.rule40),
-                    backgroundColor: colors.operational.primary + '20',
-                    borderColor: colors.operational.primary,
+                    backgroundColor: colors.financial.secondary + '40',
+                    borderColor: colors.financial.secondary,
                     fill: true
                 }
             ]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
+            ...commonOptions,
             plugins: {
-                legend: {
-                    position: 'top',
-                    labels: { 
-                        color: colors.text,
-                        usePointStyle: true,
-                        pointStyle: 'circle'
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: colors.grid + '20'
-                    },
-                    ticks: {
-                        color: colors.text
-                    }
-                },
-                x: {
-                    grid: {
-                        color: colors.grid + '20'
-                    },
-                    ticks: {
-                        color: colors.text
-                    }
-                }
-            }
-        }
-    });
-}
-
-function createEfficiencyChart() {
-    const ctx = document.getElementById('efficiencyChart').getContext('2d');
-    const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
-    return new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['ARR/Employee ($K)', 'ARR/Customer ($K)', 'NRR (%)'],
-            datasets: [{
-                data: [
-                    financialData.revenue[2].arrPerEmployee/1000,
-                    financialData.revenue[2].arrPerCustomer/1000,
-                    financialData.metrics[2].nrr
-                ],
-                backgroundColor: [
-                    colors.financial.primary,
-                    colors.financial.secondary,
-                    colors.operational.primary
-                ],
-                borderRadius: 6
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
+                ...commonOptions.plugins,
                 title: {
-                    display: true,
-                    text: 'Efficiency',
-                    color: colors.text,
-                    font: {
-                        family: 'system-ui, -apple-system, sans-serif',
-                        size: 16,
-                        weight: '500'
-                    },
-                    padding: {
-                        top: 10,
-                        bottom: 20
-                    }
+                    ...commonOptions.plugins.title,
+                    text: 'Performance'
                 }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: colors.grid + '20'
-                    },
-                    ticks: {
-                        color: colors.text,
-                        font: {
-                            family: 'system-ui, -apple-system, sans-serif'
-                        }
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        color: colors.text,
-                        font: {
-                            family: 'system-ui, -apple-system, sans-serif'
-                        }
-                    }
-                }
-            },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
             }
         }
     });
 }
-
-
 
 function createImplementationChart() {
     const ctx = document.getElementById('implementationChart').getContext('2d');
@@ -407,18 +312,14 @@ function createImplementationChart() {
             ]
         },
         options: {
+            ...commonOptions,
             indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
             plugins: {
-                legend: {
-                    position: 'top',
-                    labels: { color: colors.text }
+                ...commonOptions.plugins,
+                title: {
+                    ...commonOptions.plugins.title,
+                    text: 'Avg. Deployment Timeline'
                 }
-            },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
             }
         }
     });
@@ -443,18 +344,13 @@ function createMarketCoverageChart() {
             }]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
+            ...commonOptions,
             plugins: {
-                legend: {
-                    position: 'right',
-                    labels: { color: colors.text }
+                ...commonOptions.plugins,
+                title: {
+                    ...commonOptions.plugins.title,
+                    text: 'Customer Type'
                 }
-            },
-            animation: {
-                animateRotate: true,
-                animateScale: true,
-                duration: 2000
             }
         }
     });
@@ -480,50 +376,25 @@ function createROIChart() {
                 backgroundColor: colors.operational.primary + '40',
                 borderColor: colors.operational.primary,
                 pointBackgroundColor: colors.operational.secondary,
-                pointBorderColor: colors.operational.primary,
-                borderWidth: 2,
-                lineTension: 0.3
+                pointBorderColor: colors.operational.primary
             }]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
+            ...commonOptions,
             plugins: {
-                legend: {
-                    position: 'top',
-                    labels: { color: colors.text }
+                ...commonOptions.plugins,
+                title: {
+                    ...commonOptions.plugins.title,
+                    text: 'ROI'
                 }
-            },
-            scales: {
-                r: {
-                    angleLines: {
-                        color: colors.text + '40'
-                    },
-                    grid: {
-                        color: colors.text + '20'
-                    },
-                    pointLabels: {
-                        color: colors.text,
-                        font: {
-                            size: 12
-                        }
-                    },
-                    ticks: { 
-                        color: colors.text,
-                        backdropColor: 'transparent',
-                        font: {
-                            size: 10
-                        }
-                    }
-                }
-            },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
             }
         }
     });
 }
+
+
+
+
 
 
 
