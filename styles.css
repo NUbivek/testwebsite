@@ -189,26 +189,24 @@ body {
                 }
                 
 
+.chart-container canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 90%;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none;  // Add this line
+}
 
+.chart-container canvas.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    display: block;  // Add this line
+}
 
-
-                .chart-container canvas {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    max-width: 90%;
-                    max-height: 90%;
-                    opacity: 0;
-                    transition: opacity 0.5s ease-in-out;
-                }
-                
-           
-                .chart-container canvas.active {
-                    opacity: 1;
-                    transform: translate(-50%, -50%) scale(1);
-                    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-                }
 
 
                 /* Chart-specific animations */
