@@ -1335,75 +1335,6 @@ function showChart(index, section) {
         }
     }
 }
-////
-
-
-    // Show initial chart
-    showChart(0);
-
-    // Navigation functions
-    function showChart(index) {
-        charts.forEach((chart, i) => {
-            chart.style.display = i === index ? 'block' : 'none';
-            dotsContainer.children[i].classList.toggle('active', i === index);
-        });
-        currentIndex = index;
-        
-        // Update arrow states
-        leftArrow.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        rightArrow.style.opacity = currentIndex === charts.length - 1 ? '0.5' : '1';
-    }
-
-    // Event listeners
-    leftArrow.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            showChart(currentIndex - 1);
-        }
-    });
-
-    rightArrow.addEventListener('click', () => {
-        if (currentIndex < charts.length - 1) {
-            showChart(currentIndex + 1);
-        }
-    });
-
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft' && currentIndex > 0) {
-            showChart(currentIndex - 1);
-        } else if (e.key === 'ArrowRight' && currentIndex < charts.length - 1) {
-            showChart(currentIndex + 1);
-        }
-    });
-
-    // Add swipe navigation
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    container.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
-
-    container.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    });
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0 && currentIndex < charts.length - 1) {
-                // Swipe left
-                showChart(currentIndex + 1);
-            } else if (diff < 0 && currentIndex > 0) {
-                // Swipe right
-                showChart(currentIndex - 1);
-            }
-        }
-    }
-}
 
 // Call this function after all charts are initialized
 function updateDashboard() {
@@ -1489,12 +1420,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Then show initial charts
                     showChart(0, 'financial');
                     showChart(0, 'operational');
-                }, 300);
+                }, 100);
                 
             } catch (error) {
                 console.error('Dashboard initialization failed:', error);
             }
-        }, 500);
+        }, 300);
     }
 });
 
