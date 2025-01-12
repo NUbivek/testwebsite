@@ -391,7 +391,8 @@ function createEfficiencyChart() {
                     padding: {
                         top: 10,
                         bottom: 20
-                    },
+                    }
+                }, // <-- Be sure to close "title" here
                 datalabels: {
                     display: false // This disables permanent labels
                 }
@@ -425,6 +426,7 @@ function createEfficiencyChart() {
         }
     });
 }
+
 
 
 
