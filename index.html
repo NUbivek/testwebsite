@@ -665,32 +665,6 @@
               }
           });
       </script>
-      
-        <script>
-            function switchSubtab(subtabId) {
-                document.querySelectorAll('.subtab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                document.querySelectorAll('.subtab-button').forEach(button => {
-                    button.classList.remove('active');
-                });
-                
-                document.getElementById(subtabId).classList.add('active');
-                event.currentTarget.classList.add('active');
-                
-                if (subtabId === 'dashboard') {
-                    initDashboard();
-                }
-            }
-        
-            // Initialize dashboard when DOM is loaded
-            document.addEventListener('DOMContentLoaded', function() {
-                if (document.getElementById('dashboard').classList.contains('active')) {
-                    setTimeout(initDashboard, 100);
-                }
-            });
-        </script>
 
 
 </body>
