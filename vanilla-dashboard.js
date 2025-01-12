@@ -188,13 +188,15 @@ function createRevenueChart() {
                     label: 'Revenue ($M)',
                     data: financialData.revenue.map(d => d.revenue),
                     borderColor: colors.financial.primary,
+                    backgroundColor: colors.financial.primary + '20',
                     tension: 0.4,
                     fill: false
                 },
                 {
                     label: 'ARR ($M)',
                     data: financialData.revenue.map(d => d.arr),
-                    borderColor: colors.financial.secondary,
+                    borderColor: colors.operational.primary,
+                    backgroundColor: colors.operational.primary + '20',
                     tension: 0.4,
                     fill: false
                 }
@@ -206,12 +208,31 @@ function createRevenueChart() {
             plugins: {
                 legend: {
                     position: 'top',
-                    labels: { color: colors.text }
+                    labels: { 
+                        color: colors.text,
+                        usePointStyle: true,
+                        pointStyle: 'circle'
+                    }
                 }
             },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: colors.grid + '20'
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                },
+                x: {
+                    grid: {
+                        color: colors.grid + '20'
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                }
             }
         }
     });
@@ -229,15 +250,15 @@ function createUnitEconomicsChart() {
                 {
                     label: 'Gross Margin (%)',
                     data: financialData.metrics.map(d => d.margin),
-                    backgroundColor: colors.financial.primary + '40',
+                    backgroundColor: colors.financial.primary + '20',
                     borderColor: colors.financial.primary,
                     fill: true
                 },
                 {
                     label: 'Rule of 40',
                     data: financialData.metrics.map(d => d.rule40),
-                    backgroundColor: colors.financial.secondary + '40',
-                    borderColor: colors.financial.secondary,
+                    backgroundColor: colors.operational.primary + '20',
+                    borderColor: colors.operational.primary,
                     fill: true
                 }
             ]
@@ -248,12 +269,31 @@ function createUnitEconomicsChart() {
             plugins: {
                 legend: {
                     position: 'top',
-                    labels: { color: colors.text }
+                    labels: { 
+                        color: colors.text,
+                        usePointStyle: true,
+                        pointStyle: 'circle'
+                    }
                 }
             },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: colors.grid + '20'
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                },
+                x: {
+                    grid: {
+                        color: colors.grid + '20'
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                }
             }
         }
     });
