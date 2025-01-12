@@ -34,6 +34,11 @@ const operationalData = {
     }
 };
 
+// Register Chart.js plugin
+Chart.register(ChartDataLabels);
+
+
+
 function initDashboard() {
     // Ensure Chart.js is loaded
     if (typeof Chart === 'undefined') {
@@ -322,48 +327,54 @@ function createEfficiencyChart() {
             }]
         },
         options: {
+            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
                     display: false
                 },
-                title: {
-                    display: true,
-                    text: 'Efficiency',
-                    color: colors.text,
+                tooltip: {
+                    enabled: true,
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const label = context.label;
+                            return `${label}: ${value.toLocaleString()}`;
+                        }
+                    }
+                },
+                datalabels: {
+                    color: '#ffffff',
+                    anchor: 'center',
+                    align: 'center',
                     font: {
-                        family: 'system-ui, -apple-system, sans-serif',
-                        size: 16,
-                        weight: '500'
+                        weight: 'bold',
+                        size: 13
                     },
-                    padding: {
-                        top: 10,
-                        bottom: 20
+                    formatter: function(value) {
+                        return value.toLocaleString();
                     }
                 }
             },
             scales: {
-                y: {
+                x: {
                     beginAtZero: true,
                     grid: {
-                        color: colors.grid + '20'
+                        display: false
                     },
                     ticks: {
-                        color: colors.text,
-                        font: {
-                            family: 'system-ui, -apple-system, sans-serif'
-                        }
+                        color: colors.text
                     }
                 },
-                x: {
+                y: {
                     grid: {
                         display: false
                     },
                     ticks: {
                         color: colors.text,
                         font: {
-                            family: 'system-ui, -apple-system, sans-serif'
+                            weight: '500'
                         }
                     }
                 }
@@ -375,6 +386,7 @@ function createEfficiencyChart() {
         }
     });
 }
+
 
 
 function createImplementationChart() {
