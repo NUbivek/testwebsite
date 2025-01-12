@@ -1348,22 +1348,26 @@ function initChartNavigation() {
 
 function initSectionNavigation(section, charts) {
     const container = document.querySelector(`.section.${section}`);
+    if (!container) return;
+    
     const leftArrow = container.querySelector('.nav-arrow.left');
     const rightArrow = container.querySelector('.nav-arrow.right');
     const dotsContainer = container.querySelector('.slide-dots');
     
-    let currentIndex = 0;
+    if (!leftArrow || !rightArrow || !dotsContainer) return;
     
     // Clear existing dots
     dotsContainer.innerHTML = '';
     
-    // Create dots based on number of charts
+    // Create new dots
     charts.forEach((_, index) => {
         const dot = document.createElement('span');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
-        dot.addEventListener('click', () => showChart(index));
+        dot.addEventListener('click', () => showChart(index, section));
         dotsContainer.appendChild(dot);
     });
+}
+
 
     // Show initial chart
     showChart(0);
