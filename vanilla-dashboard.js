@@ -126,22 +126,27 @@ function initDashboard() {
 
 function getThemeColors(isDark) {
     return {
-        background: isDark ? 'rgba(26, 32, 44, 0.9)' : 'rgba(248, 249, 250, 0.9)',
-        text: isDark ? '#e2e8f0' : '#2d3748',
-        grid: isDark ? '#4a5568' : '#cbd5e0',
+        background: isDark ? 'rgba(36, 44, 52, 0.9)' : 'rgba(242, 243, 245, 0.9)', // Soft dark gray vs light off-white
+        text: isDark ? '#d4d8dd' : '#4a4a4a', // Gentle light gray vs deep charcoal
+        grid: isDark ? '#5c6671' : '#d1d5db', // Medium slate gray vs soft silver
         financial: {
-            primary: isDark ? '#4a5568' : '#2d3748',     // Subtle slate gray
-            secondary: isDark ? '#718096' : '#4a5568',   // Muted gray
+            primary: isDark ? '#3d474f' : '#5a5f65', // Muted slate blue-gray
+            secondary: isDark ? '#6b7280' : '#888c93', // Delicate muted gray
             gradient: isDark ? 
-                ['rgba(74, 85, 104, 0.5)', 'rgba(113, 128, 150, 0.5)'] :
-                ['rgba(45, 55, 72, 0.5)', 'rgba(74, 85, 104, 0.5)']
+                ['rgba(61, 71, 79, 0.5)', 'rgba(107, 114, 128, 0.5)'] :
+                ['rgba(90, 95, 101, 0.5)', 'rgba(136, 140, 147, 0.5)'] // Smooth transition
         },
         operational: {
-            primary: isDark ? '#2c5282' : '#2b6cb0',     // Soft navy blue
-            secondary: isDark ? '#4a5568' : '#718096',   // Subdued gray
+            primary: isDark ? '#355f7a' : '#3c8dad', // Soft navy blue vs teal
+            secondary: isDark ? '#5c6671' : '#8a939e', // Subtle gray
             gradient: isDark ?
-                ['rgba(44, 82, 130, 0.5)', 'rgba(74, 85, 104, 0.5)'] :
-                ['rgba(43, 108, 176, 0.5)', 'rgba(113, 128, 150, 0.5)']
+                ['rgba(53, 95, 122, 0.5)', 'rgba(92, 102, 113, 0.5)'] :
+                ['rgba(60, 141, 173, 0.5)', 'rgba(138, 147, 158, 0.5)'] // Balanced blues and grays
+        },
+        accents: {
+            brown: isDark ? '#6b4f4f' : '#8b6b6b', // Gentle mocha
+            purple: isDark ? '#4c4177' : '#6e5a99', // Muted lavender
+            green: isDark ? '#345e52' : '#4d8b75', // Subtle forest green
         }
     };
 }
