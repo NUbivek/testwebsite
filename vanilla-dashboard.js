@@ -752,25 +752,34 @@ function createRevenueGrowthChart() {
     });
 }
 
-function createBurnMarginChart() {
+function createBurnMarginLineChart() {
     const ctx = document.getElementById('burnMarginChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
-        type: 'scatter',
+        type: 'line',
         data: {
-            datasets: [{
-                label: 'Burn Multiple vs Margin',
-                data: [
-                    {x: 1.96, y: 74.19},
-                    {x: -0.24, y: 95.02},
-                    {x: -0.24, y: 95.03}
-                ],
-                backgroundColor: colors.financial.primary,
-                borderColor: colors.financial.secondary,
-                pointRadius: 8,
-                pointHoverRadius: 12
-            }]
+            labels: ['FY24', 'FY25', 'FY26'],
+            datasets: [
+                {
+                    label: 'Burn Multiple',
+                    data: [1.96, -0.24, -0.24],
+                    borderColor: colors.financial.primary,
+                    backgroundColor: colors.financial.primary + '20',
+                    yAxisID: 'y',
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Gross Margin (%)',
+                    data: [74.19, 95.02, 95.03],
+                    borderColor: colors.financial.secondary,
+                    backgroundColor: colors.financial.secondary + '20',
+                    yAxisID: 'y1',
+                    tension: 0.4,
+                    fill: true
+                }
+            ]
         },
         options: {
             responsive: true,
@@ -778,44 +787,38 @@ function createBurnMarginChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Burn Margin Progression',
+                    text: 'Burn Multiple vs Gross Margin',
                     align: 'start',
-                    color: colors.text,
-                    font: {
-                        size: 16,
-                        weight: 'bold',
-                        family: 'system-ui, -apple-system, sans-serif'
-                    }
-                },
-                legend: {
-                    display: false
+                    color: colors.text
                 }
             },
             scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Burn Multiple'
-                    },
-                    ticks: { color: colors.text },
-                    grid: { color: colors.grid + '20' }
-                },
                 y: {
-                    title: {
-                        display: true,
-                        text: 'Gross Margin (%)'
+                    type: 'linear',
+                    position: 'left',
+                    title: { 
+                        display: true, 
+                        text: 'Burn Multiple' 
                     },
-                    ticks: { color: colors.text },
-                    grid: { color: colors.grid + '20' }
+                    ticks: { color: colors.text }
+                },
+                y1: {
+                    type: 'linear',
+                    position: 'right',
+                    title: { 
+                        display: true, 
+                        text: 'Gross Margin (%)' 
+                    },
+                    grid: { 
+                        drawOnChartArea: false 
+                    },
+                    ticks: { color: colors.text }
                 }
-            },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
             }
         }
     });
 }
+
 
 
 function createRevenueStreamsChart() {
