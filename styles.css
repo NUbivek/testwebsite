@@ -284,6 +284,7 @@ body {
                     transform: translateX(0);  /* Changed from translateY(-50%) */
                     z-index: 10;
                     background: var(--bg-primary);
+                    opacity: 0.4;
                     border: none;
                     border-radius: 50%;
                     width: 30px;
