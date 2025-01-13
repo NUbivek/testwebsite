@@ -752,7 +752,7 @@ function createRevenueGrowthChart() {
     });
 }
 
-function createBurnMarginLineChart() {
+function createBurnMarginChart() {
     const ctx = document.getElementById('burnMarginChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
@@ -787,9 +787,23 @@ function createBurnMarginLineChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Burn Multiple vs Gross Margin',
+                    text: 'Burn Margin',
                     align: 'start',
-                    color: colors.text
+                    color: colors.text,
+                    font: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'system-ui, -apple-system, sans-serif'
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: colors.text,
+                        boxWidth: 12,
+                        padding: 20
+                    }
                 }
             },
             scales: {
@@ -814,6 +828,10 @@ function createBurnMarginLineChart() {
                     },
                     ticks: { color: colors.text }
                 }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
