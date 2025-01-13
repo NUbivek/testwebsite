@@ -126,22 +126,22 @@ function initDashboard() {
 
 function getThemeColors(isDark) {
     return {
-        background: isDark ? '#1a202c' : '#f8f9fa',
+        background: isDark ? 'rgba(26, 32, 44, 0.9)' : 'rgba(248, 249, 250, 0.9)',
         text: isDark ? '#e2e8f0' : '#2d3748',
         grid: isDark ? '#4a5568' : '#cbd5e0',
         financial: {
-            primary: isDark ? '#6b46c1' : '#44337a',     // Deep Purple
-            secondary: isDark ? '#48bb78' : '#2f855a',   // Sage Green
+            primary: isDark ? '#4a5568' : '#2d3748',     // Subtle slate gray
+            secondary: isDark ? '#718096' : '#4a5568',   // Muted gray
             gradient: isDark ? 
-                ['rgba(107, 70, 193, 0.7)', 'rgba(72, 187, 120, 0.7)'] :
-                ['rgba(68, 51, 122, 0.7)', 'rgba(47, 133, 90, 0.7)']
+                ['rgba(74, 85, 104, 0.5)', 'rgba(113, 128, 150, 0.5)'] :
+                ['rgba(45, 55, 72, 0.5)', 'rgba(74, 85, 104, 0.5)']
         },
         operational: {
-            primary: isDark ? '#4a5568' : '#2d3748',     // Slate Gray
-            secondary: isDark ? '#744210' : '#5f370e',   // Warm Taupe
+            primary: isDark ? '#2c5282' : '#2b6cb0',     // Soft navy blue
+            secondary: isDark ? '#4a5568' : '#718096',   // Subdued gray
             gradient: isDark ?
-                ['rgba(74, 85, 104, 0.7)', 'rgba(116, 66, 16, 0.7)'] :
-                ['rgba(45, 55, 72, 0.7)', 'rgba(95, 55, 14, 0.7)']
+                ['rgba(44, 82, 130, 0.5)', 'rgba(74, 85, 104, 0.5)'] :
+                ['rgba(43, 108, 176, 0.5)', 'rgba(113, 128, 150, 0.5)']
         }
     };
 }
