@@ -284,13 +284,13 @@ body {
                     transform: translateX(0);  /* Changed from translateY(-50%) */
                     z-index: 10;
                     background: var(--bg-primary);
-                    opacity: 0.4;
+                    opacity: 0.8;
                     border: none;
                     border-radius: 50%;
                     width: 30px;
                     height: 30px;
                     cursor: pointer;
-                    opacity: 0.4;
+                    opacity: 0.9;
                     transition: opacity 0.3s ease;
                     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                     display: flex;
