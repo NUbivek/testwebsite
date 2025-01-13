@@ -578,21 +578,54 @@
                         </iframe>
                     </div>
 
-                    <div id="topic3" class="subtab-content">
-                        <iframe 
-                            src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/2024%20Orderful%20Deck.pdf&embedded=true" 
-                            width="100%" 
-                            height="700px" 
-                            style="border: none;"
-                            frameborder="0"
-                            loading="lazy">
-                        </iframe>
+                              <div id="topic3" class="subtab-content">
+                <div class="pdf-password-container">
+                    <div class="password-overlay">
+                        <h3>Secure Document Access</h3>
+                        <input 
+                            type="password" 
+                            id="orderfulDeckPassword" 
+                            placeholder="Enter Password"
+                        >
+                        <button onclick="validatePDFAccess()">Access Document</button>
+                        <p id="passwordError" class="error-message"></p>
                     </div>
+                    
+                    <iframe 
+                        id="orderfulDeckPDF" 
+                        src="" 
+                        width="100%" 
+                        height="700px" 
+                        style="display:none;"
+                        frameborder="0">
+                    </iframe>
+                </div>
+            </div>
+            
+            <script>
+            function validatePDFAccess() {
+                const passwordInput = document.getElementById('orderfulDeckPassword');
+                const pdfFrame = document.getElementById('orderfulDeckPDF');
+                const errorMessage = document.getElementById('passwordError');
+                
+                const CORRECT_PASSWORD = 'OrderfulDeck2024';
+                
+                if (passwordInput.value === CORRECT_PASSWORD) {
+                    pdfFrame.src = 'https://github.com/NUbivek/NUbivek.github.io/raw/main/2024%20Orderful%20Deck.pdf';
+                    pdfFrame.style.display = 'block';
+                    document.querySelector('.password-overlay').style.display = 'none';
+                    errorMessage.textContent = '';
+                } else {
+                    errorMessage.textContent = 'Incorrect password. Please try again.';
+                    passwordInput.value = '';
+                }
+            }
+            </script>
+
 
                 </div>
         
                 <div id="memo2" class="memo-content">
-
                     <iframe 
                         src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/Ethic_OnePager.pdf&embedded=true" 
                         width="100%" 
@@ -601,9 +634,7 @@
                         frameborder="0"
                         loading="lazy">
                     </iframe>
-                    
                 </div>
-                <div id="memo3" class="memo-content">Memo 3 Content</div>
             </div>
         </div>
 
