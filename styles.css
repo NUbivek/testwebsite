@@ -78,7 +78,6 @@ body {
                     border-radius: 0.5rem;
                     transition: background 0.3s ease;
                     position: relative;
-                    height: 100%;  /* Add this line */
                     
                 }
                 
