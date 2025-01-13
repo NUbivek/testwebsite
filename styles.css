@@ -280,8 +280,8 @@ body {
                 /* Navigation Controls */
                 .nav-arrow {
                     position: absolute;
-                    bottom: 10px;  /* Changed from top: 50% */
-                    transform: translateX(0);  /* Changed from translateY(-50%) */
+                    top: 50%;  /* Restore vertical centering */
+                    transform: translateY(-50%);  /* Restore vertical alignment */
                     z-index: 10;
                     background: var(--bg-primary);
                     border: none;
