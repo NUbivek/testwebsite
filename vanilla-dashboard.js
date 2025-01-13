@@ -571,23 +571,9 @@ function createMarketCoverageChart() {
     });
 }
 
-
 function createROIChart() {
     const ctx = document.getElementById('roiChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-
-    // Create background plugin
-    const roiChartBackgroundPlugin = {
-        id: 'roiChartBackground',
-        beforeDraw: (chart) => {
-            const ctx = chart.ctx;
-            ctx.save();
-            ctx.globalCompositeOperation = 'destination-over';
-            ctx.fillStyle = '#ebdde9';
-            ctx.fillRect(0, 0, chart.width, chart.height);
-            ctx.restore();
-        }
-    };
 
     return new Chart(ctx, {
         type: 'radar',
@@ -608,7 +594,7 @@ function createROIChart() {
                     operationalData.roi.successRate,
                     operationalData.roi.uptime
                 ],
-                backgroundColor: colors.operational.primary + '40',
+                backgroundColor: '#e7dde1',
                 borderColor: colors.operational.primary,
                 pointBackgroundColor: colors.operational.secondary,
                 pointBorderColor: colors.operational.primary,
@@ -648,7 +634,14 @@ function createROIChart() {
                     enabled: true
                 },
                 datalabels: {
-                    display: false
+                    display: function(context) {
+                        return context.active;  // Only show labels on hover
+                    },
+                    color: colors.text,
+                    font: {
+                        weight: 'bold'
+                    },
+                    padding: 6
                 }
             },
             scales: {
@@ -671,6 +664,10 @@ function createROIChart() {
                         font: {
                             size: 10
                         }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Performance Score (%)'
                     }
                 }
             },
@@ -678,8 +675,7 @@ function createROIChart() {
                 duration: 2000,
                 easing: 'easeInOutQuart'
             }
-        },
-        plugins: [roiChartBackgroundPlugin]  // Add the background plugin
+        }
     });
 }
 
