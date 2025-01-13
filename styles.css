@@ -283,7 +283,7 @@ body {
 
                 /* Navigation Controls */
                     .nav-arrow:hover {
-                    opacity: 1;
+                    opacity: 0.8;
                     background: var(--card-bg);
                     transform: translateY(-50%) scale(1.1);
                     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
