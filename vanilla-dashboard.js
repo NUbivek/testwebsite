@@ -122,43 +122,6 @@ function initDashboard() {
     }
 }
 
-// Add touch swipe functionality to chart sliders
-function addTouchSwipe() {
-    const chartSliders = document.querySelectorAll('.chart-slider');
-    
-    chartSliders.forEach(slider => {
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        slider.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, false);
-        
-        slider.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe(slider);
-        }, false);
-        
-        function handleSwipe(slider) {
-            const swipeThreshold = 50; // Minimum swipe distance
-            const swipeDistance = touchEndX - touchStartX;
-            
-            if (Math.abs(swipeDistance) > swipeThreshold) {
-                if (swipeDistance > 0) {
-                    // Swipe right - previous chart
-                    slider.querySelector('.nav-arrow.left').click();
-                } else {
-                    // Swipe left - next chart
-                    slider.querySelector('.nav-arrow.right').click();
-                }
-            }
-        }
-    });
-}
-
-// Initialize touch swipe
-document.addEventListener('DOMContentLoaded', addTouchSwipe);
-
 
 
 function getThemeColors(isDark) {
@@ -1621,6 +1584,3 @@ function initDashboardAnimations() {
         delay: 0.3
     });
 }
-
-
-
