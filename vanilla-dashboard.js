@@ -156,7 +156,6 @@ function getThemeColors(isDark) {
 
 
 
-
 function createRevenueChart() {
     const ctx = document.getElementById('revenueChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
