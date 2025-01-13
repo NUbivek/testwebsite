@@ -594,7 +594,7 @@ function createROIChart() {
                     operationalData.roi.successRate,
                     operationalData.roi.uptime
                 ],
-                backgroundColor: '#e7dde1',
+                backgroundColor: colors.operational.primary + '40',
                 borderColor: colors.operational.primary,
                 pointBackgroundColor: colors.operational.secondary,
                 pointBorderColor: colors.operational.primary,
@@ -635,7 +635,7 @@ function createROIChart() {
                 },
                 datalabels: {
                     display: function(context) {
-                        return context.active;  // Only show labels on hover
+                        return context.active;
                     },
                     color: colors.text,
                     font: {
@@ -647,7 +647,7 @@ function createROIChart() {
             scales: {
                 r: {
                     angleLines: {
-                        color: colors.grid + '40'
+                        color: '#e7dde1'  // Changed this line to set radar line color
                     },
                     grid: {
                         color: colors.grid + '20'
