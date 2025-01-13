@@ -78,6 +78,9 @@ body {
                     border-radius: 0.5rem;
                     transition: background 0.3s ease;
                     position: relative;
+                  height: 100%;  /* Add this for consistent height */
+                display: flex;  /* Add this for proper content alignment */
+                flex-direction: column;  /* Add this for proper content alignment */
                     
                 }
                 
@@ -96,6 +99,7 @@ body {
                     grid-template-columns: repeat(2, 1fr);
                     grid-template-rows: repeat(3, minmax(65px, auto));
                     gap: 0.75rem;
+                    height: 100%;  /* Add this for proper section filling */
                     align-items: stretch;
                 }
                 
@@ -115,6 +119,7 @@ body {
                         align-items: center;
                         gap: 0.25rem 0.75rem;
                         min-height: 65px;
+                        height: 100%;  /* Add this for consistent card height */
                         transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
                                     box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
                     }
