@@ -576,6 +576,19 @@ function createROIChart() {
     const ctx = document.getElementById('roiChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
 
+    // Create background plugin
+    const roiChartBackgroundPlugin = {
+        id: 'roiChartBackground',
+        beforeDraw: (chart) => {
+            const ctx = chart.ctx;
+            ctx.save();
+            ctx.globalCompositeOperation = 'destination-over';
+            ctx.fillStyle = '#e7dde1';
+            ctx.fillRect(0, 0, chart.width, chart.height);
+            ctx.restore();
+        }
+    };
+
     return new Chart(ctx, {
         type: 'radar',
         data: {
@@ -665,9 +678,11 @@ function createROIChart() {
                 duration: 2000,
                 easing: 'easeInOutQuart'
             }
-        }
+        },
+        plugins: [roiChartBackgroundPlugin]  // Add the background plugin
     });
 }
+
 
 function createRevenueGrowthChart() {
     const ctx = document.getElementById('revenueGrowthChart').getContext('2d');
