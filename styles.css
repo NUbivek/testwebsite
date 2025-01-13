@@ -215,6 +215,34 @@ body {
     display: block;
 }
 
+
+/* Add these to your existing CSS */
+.top-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.middle-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Update chart container for better visibility */
+.chart-container {
+    min-height: 400px;
+    width: 100%;
+}
+
+/* Ensure proper chart scaling */
+.chart-container canvas.active {
+    max-width: 100%;
+    height: auto;
+}
+
                 /* Chart-specific animations */
                @keyframes chartFadeIn {
                 from { 
