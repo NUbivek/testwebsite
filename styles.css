@@ -315,13 +315,6 @@ body {
                     transition: opacity 0.3s ease;
                 }
 
-                @media (max-width: 768px) {
-                    .chart-slider .nav-arrow {
-                        width: 48px;
-                        height: 48px;
-                    }
-                }
-
                 .dot.active {
                     opacity: 1;
                     background: var(--text-primary);
