@@ -787,7 +787,7 @@ function createBurnMarginChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Burn Margin',
+                    text: 'Burn Margin Progression',
                     align: 'start',
                     color: colors.text,
                     font: {
@@ -825,6 +825,7 @@ function createBurnMarginChart() {
         }
     });
 }
+
 
 function createRevenueStreamsChart() {
     const ctx = document.getElementById('revenueStreamsChart').getContext('2d');
