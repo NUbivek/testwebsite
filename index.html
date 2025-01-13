@@ -272,34 +272,35 @@
             </div>
         </div>
         
-        <div id="investment-memo" class="tab-content">
-            <h2>Investment Memos</h2>
-            <div class="pdf-container">
-                <div class="pdf-navigation">
-                    <div class="pdf-selector">
-                        <button class="pdf-tab active" onclick="switchMemo('orderful')">
-                            <span class="pdf-icon">📊</span>
-                            <span class="pdf-title">Detailed Analysis Example (Orderful)</span>
-                        </button>
-                            <button class="subtab-button active" onclick="switchSubtab('ethic-pdf')">
-                                <span class="pdf-icon">🔍</span>
-                                <span class="pdf-title">Screening Memo (Ethic)</span>
-                            </button>
-                    </div>
-                </div>
-        
-                <!-- Orderful Content -->
-                <div class="subtab-navigation">
-                    <button class="subtab-button active" onclick="switchSubtab('dashboard')">Orderful Dashboard</button>
-                     <button class="subtab-button" onclick="switchSubtab('topic2')">
-                            <span class="pdf-icon">🧩</span>
-                            <span class="pdf-title"> One Page Memo (Orderful) </span>
-                        </button>
-                        <button class="subtab-button" onclick="switchSubtab('topic3')">
-                            <span class="pdf-icon">🗂️</span>
-                            <span class="pdf-title"> Company Slide Deck (Orderful)</span>
-                        </button>
-                </div>
+<div id="investment-memo" class="tab-content">
+    <h2>Investment Memos</h2>
+    <div class="pdf-container">
+        <div class="pdf-navigation">
+            <div class="pdf-selector">
+                <button class="pdf-tab active" onclick="switchMemo('orderful')">
+                    <span class="pdf-icon">📊</span>
+                    <span class="pdf-title">Detailed Analysis Example (Orderful)</span>
+                </button>
+                <button class="pdf-tab" onclick="switchMemo('memo2')">
+                    <span class="pdf-icon">📝</span>
+                    <span class="pdf-title">Screening Memo Example (Ethic)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Orderful Content -->
+        <div id="orderful" class="memo-content active">
+            <div class="subtab-navigation">
+                <button class="subtab-button active" onclick="switchSubtab('dashboard')">Dashboard</button>
+                <button class="subtab-button" onclick="switchSubtab('topic2')">
+                    <span class="pdf-icon">🧩</span>
+                    <span class="pdf-title"> One Page Memo (Orderful) </span>
+                </button>
+                <button class="subtab-button" onclick="switchSubtab('topic3')">
+                    <span class="pdf-icon">🗂️</span>
+                    <span class="pdf-title"> Company Slide Deck (Orderful)</span>
+                </button>
+            </div>
 
                
                        <div id="dashboard" class="subtab-content active">
@@ -611,7 +612,34 @@
                     </iframe>
                 </div>
             </div>
-            <script>
+        </div>
+           
+
+        <!-- Memo 2 Content -->
+        <div id="memo2" class="memo-content">
+            <div class="subtab-navigation">
+                <button class="subtab-button active" onclick="switchSubtab('ethic-pdf')">
+                    <span class="pdf-icon">🔍</span>
+                    <span class="pdf-title">Screening Memo (Ethic)</span>
+                </button>
+            </div>
+            
+            <div id="ethic-pdf" class="subtab-content active">
+                <iframe 
+                    src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/Ethic_OnePager.pdf&embedded=true" 
+                    width="100%" 
+                    height="700px" 
+                    style="border: none;"
+                    frameborder="0"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+         <script>
             function validatePDFAccess() {
                 const passwordInput = document.getElementById('orderfulDeckPassword');
                 const pdfFrame = document.getElementById('orderfulDeckPDF');
@@ -630,29 +658,6 @@
                 }
             }
             </script>
-            </div>
-
-        <!-- Memo 2 Content -->
-        <div id="memo2" class="memo-content">
-            <div class="subtab-navigation">
-                <button class="subtab-button active" onclick="switchSubtab('ethic-pdf')">
-                    <span class="pdf-icon">🔍</span>
-                    <span class="pdf-title">Screening Memo (Ethic)</span>
-                </button>
-            </div>
-            <div id="ethic-pdf" class="subtab-content active">
-                <iframe 
-                    src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/Ethic_OnePager.pdf&embedded=true" 
-                    width="100%" 
-                    height="700px" 
-                    style="border: none;"
-                    frameborder="0"
-                    loading="lazy">
-                </iframe>
-            </div>
-        </div>
-    </div>
-</div>
         
 <div id="sample-deals" class="tab-content">
     <h2>Sample Deals</h2>
