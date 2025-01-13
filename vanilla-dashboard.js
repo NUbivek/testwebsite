@@ -583,7 +583,7 @@ function createROIChart() {
             const ctx = chart.ctx;
             ctx.save();
             ctx.globalCompositeOperation = 'destination-over';
-            ctx.fillStyle = '#e7dde1';
+            ctx.fillStyle = '#ebdde9';
             ctx.fillRect(0, 0, chart.width, chart.height);
             ctx.restore();
         }
