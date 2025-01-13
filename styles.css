@@ -282,11 +282,9 @@ body {
 
 
                 /* Navigation Controls */
-                    .nav-arrow:hover {
+              nav-arrow:hover {
                     opacity: 0.8;
                     background: var(--card-bg);
-                    transform: translateY(-50%) scale(1.1);
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
                 }
                 
                 .nav-arrow.left {
@@ -299,56 +297,34 @@ body {
                 
                 .slide-dots {
                     position: absolute;
-                    bottom: 15px;
+                    bottom: 10px;
                     left: 50%;
                     transform: translateX(-50%);
                     display: flex;
-                    gap: 10px;
+                    gap: 8px;
                     z-index: 10;
-                    padding: 8px 12px;
-                    background: var(--bg-primary);
-                    border-radius: 20px;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
                 }
                 
                 .dot {
-                    width: 10px;
-                    height: 10px;
+                    width: 8px;
+                    height: 8px;
                     border-radius: 50%;
                     background: var(--text-secondary);
                     opacity: 0.5;
                     cursor: pointer;
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    transition: opacity 0.3s ease;
                 }
-                
-                .dot:hover {
-                    opacity: 0.8;
-                    transform: scale(1.2);
-                }
-                
-                .dot.active {
-                    opacity: 1;
-                    background: var(--text-primary);
-                    transform: scale(1.2);
-                    box-shadow: 0 0 4px rgba(0,0,0,0.2);
-                }
-                
+
                 @media (max-width: 768px) {
-                    .nav-arrow {
+                    .chart-slider .nav-arrow {
                         width: 48px;
                         height: 48px;
                     }
-                    
-                    .slide-dots {
-                        bottom: 10px;
-                        gap: 8px;
-                        padding: 6px 10px;
-                    }
-                    
-                    .dot {
-                        width: 8px;
-                        height: 8px;
-                    }
+                }
+
+                .dot.active {
+                    opacity: 1;
+                    background: var(--text-primary);
                 }
 
                 /* Theme Variables */
