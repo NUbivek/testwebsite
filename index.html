@@ -269,15 +269,11 @@
                     <div class="pdf-selector">
                         <button class="pdf-tab active" onclick="switchMemo('orderful')">
                             <span class="pdf-icon">📊</span>
-                            <span class="pdf-title">Orderful</span>
+                            <span class="pdf-title">Detailed Analysis Example (Orderful)</span>
                         </button>
                         <button class="pdf-tab" onclick="switchMemo('memo2')">
                             <span class="pdf-icon">📝</span>
-                            <span class="pdf-title">Memo 2</span>
-                        </button>
-                        <button class="pdf-tab" onclick="switchMemo('memo3')">
-                            <span class="pdf-icon">📈</span>
-                            <span class="pdf-title">Memo 3</span>
+                            <span class="pdf-title">Screening Memo Example (Ethic)</span>
                         </button>
                     </div>
                 </div>
@@ -286,10 +282,14 @@
                 <div id="orderful" class="memo-content active">
                     <div class="subtab-navigation">
                         <button class="subtab-button active" onclick="switchSubtab('dashboard')">Dashboard</button>
-                        <button class="subtab-button" onclick="switchSubtab('topic2')">Topic 2</button>
+                        <button class="subtab-button" onclick="switchSubtab('topic2')">
+                            <span class="pdf-icon">🧩</span>
+                            <span class="pdf-title">Orderful One Page Memo(Ethic)</span>
+                        </button>
                         <button class="subtab-button" onclick="switchSubtab('topic3')">Topic 3</button>
-                        <button class="subtab-button" onclick="switchSubtab('topic4')">Topic 4</button>
-                        <button class="subtab-button" onclick="switchSubtab('topic5')">Topic 5</button>
+                        <span class="pdf-icon">🗂️</span>
+                            <span class="pdf-title">Orderful Slide Deck(Ethic)</span>
+                        </button>
                     </div>
                     
                        <div id="dashboard" class="subtab-content active">
@@ -568,10 +568,27 @@
                             </div> <!-- closes investor-dashboard -->
                         </div> <!-- closes dashboard -->
 
-                    <div id="topic2" class="subtab-content">Topic 2 Content</div>
-                    <div id="topic3" class="subtab-content">Topic 3 Content</div>
-                    <div id="topic4" class="subtab-content">Topic 4 Content</div>
-                    <div id="topic5" class="subtab-content">Topic 5 Content</div>
+                    <div id="topic2" class="subtab-content"> 
+                        <iframe 
+                            src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/Orderful_OnePager.pdf&embedded=true&rm=minimal"
+                            frameborder="0" 
+                            width="100%" 
+                            height="700px" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <div id="topic3" class="subtab-content">
+                        <iframe 
+                            src="https://docs.google.com/viewer?url=https://github.com/NUbivek/NUbivek.github.io/raw/main/2024%20Orderful%20Deck.pdf&embedded=true" 
+                            width="100%" 
+                            height="700px" 
+                            style="border: none;"
+                            frameborder="0"
+                            loading="lazy">
+                        </iframe>
+                    </div>
+
                 </div>
         
                 <div id="memo2" class="memo-content">Memo 2 Content</div>
