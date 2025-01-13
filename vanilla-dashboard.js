@@ -377,8 +377,17 @@ function createEfficiencyChart() {
                     }
                 },
                 datalabels: {
-                    display: false  // Turn off all data labels
+                display: true,
+                color: '#ffffff',
+                font: {
+                    weight: 'bold'
                 },
+                anchor: 'center',
+                align: 'center',
+                formatter: function(value) {
+                    return value.toLocaleString();
+                }
+            }
                 legend: {
                     display: false  // Hide legend to avoid "undefined"
                 }
