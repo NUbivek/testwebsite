@@ -875,12 +875,10 @@ body.dark-theme .pdf-frame {
     font-size: 2em;
     font-weight: bold;
     color: #2b6cb0;
-    opacity: 0;
-    animation: slideInUp 1s forwards;
-    animation-delay: 0.3s;
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum";
 }
+
 
 
 /* Add the bounce keyframes animation */
@@ -1111,14 +1109,5 @@ body.dark-theme .stat-number {
     transform: translateZ(0);
     backface-visibility: hidden;
     will-change: transform;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-    /* Enhanced Hardware Acceleration for Heavy Animations */
-.chart-container,
-.market-stat {
-    perspective: 1000px;
-    transform-style: preserve-3d;
 }
 
