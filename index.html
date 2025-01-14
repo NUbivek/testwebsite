@@ -780,7 +780,7 @@
                 const step = (timestamp) => {
                     if (!startTimestamp) startTimestamp = timestamp;
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                    const currentValue = (progress * (end - start) + start).toFixed(2);
+                    const currentValue = parseFloat((progress * (end - start) + start).toFixed(2));
                     obj.innerHTML = `$${currentValue}B`;
                     if (progress < 1) {
                         window.requestAnimationFrame(step);
@@ -788,6 +788,7 @@
                 };
                 window.requestAnimationFrame(step);
             }
+
       
           // Initialization
           document.addEventListener('DOMContentLoaded', function() {
