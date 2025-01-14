@@ -863,7 +863,6 @@ body.dark-theme .pdf-frame {
     border-radius: 8px;
     margin: 10px 0;
     transition: all 0.3s ease;
-    animation: bounce 1s ease infinite alternate;
 }
 
 .market-stat:hover {
@@ -875,20 +874,9 @@ body.dark-theme .pdf-frame {
     font-size: 2em;
     font-weight: bold;
     color: #2b6cb0;
-    font-variant-numeric: tabular-nums;
-    font-feature-settings: "tnum";
-}
-
-
-
-/* Add the bounce keyframes animation */
-@keyframes bounce {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-10px);
-    }
+    opacity: 0;
+    animation: slideInUp 1s forwards;
+    animation-delay: 0.3s;
 }
 
 /* Quote */
@@ -1110,4 +1098,3 @@ body.dark-theme .stat-number {
     backface-visibility: hidden;
     will-change: transform;
 }
-
