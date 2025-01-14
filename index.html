@@ -797,7 +797,10 @@
               checkScroll();
               
               document.querySelectorAll('.stat-number').forEach(stat => {
-                  const value = parseInt(stat.innerText.replace(/[^0-9.-]+/g,""));
+                // Change parseInt to parseFloat to handle decimal numbers
+                const value = parseFloat(stat.innerText.replace(/[^0-9.-]+/g,""));
+                  // Store original text for reference
+                    stat.setAttribute('data-value', stat.innerText);
                   if (!isNaN(value)) {
                       animateValue(stat, 0, value, 2000);
                   }
