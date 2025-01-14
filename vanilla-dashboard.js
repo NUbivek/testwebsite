@@ -66,28 +66,6 @@ const universalChartOptions = {
     }
 };
 
-    // Number Counter Animation with Currency Formatting
-    function animateValue(obj, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            
-            // Extract unit (B or T) from the original text
-            const originalText = obj.getAttribute('data-value');
-            const unit = originalText.slice(-1);
-            
-            // Format number with $ sign, 2 decimal places, and unit
-            const currentValue = (progress * (end - start) + start).toFixed(2);
-            obj.innerHTML = `$${currentValue}${unit}`;
-            
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-        window.requestAnimationFrame(step);
-    }
-
 function initDashboard() {
     // Ensure Chart.js is loaded
     if (typeof Chart === 'undefined') {
