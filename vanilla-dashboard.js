@@ -1541,10 +1541,6 @@ function updateChartsTheme() {
 // Initialize when DOM is loaded
 // Update the initialization code
 document.addEventListener('DOMContentLoaded', function() {
-    // Apply initial blur effect
-    document.body.classList.add('blur-background');
-
-    // Handle dashboard initialization
     const dashboard = document.getElementById('dashboard');
     if (dashboard?.classList.contains('active')) {
         setTimeout(() => {
@@ -1566,11 +1562,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 300);
     }
-
-    // Remove blur effect after delay
-    setTimeout(() => {
-        document.body.classList.remove('blur-background');
-    }, 3000);
 });
 
 
