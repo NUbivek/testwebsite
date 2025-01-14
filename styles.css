@@ -19,6 +19,34 @@ body {
     animation: fadeIn 0.8s ease-out forwards;
 }
 
+.title-slide {
+    position: relative;
+    text-align: center;
+}
+
+.highlight-text {
+    font-size: 2em; /* Larger font size for emphasis */
+    color: #ffcc00; /* Highlight color */
+    animation: fadeIn 1s ease-in-out; /* Animation for dramatic entry */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.blur-background {
+    filter: blur(5px); /* Blur effect for background */
+    transition: filter 0.5s ease; /* Smooth transition */
+}
+
+
 /* Theme Variables */
 :root {
     --financial-primary: #1e40af;
