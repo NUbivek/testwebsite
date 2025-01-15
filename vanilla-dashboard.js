@@ -1407,27 +1407,17 @@ function createTeamCompositionChart() {
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
-        type: 'funnel',
+        type: 'line',
         data: {
             labels: ['Leads', 'Qualified Prospects', 'Trials', 'Conversions'],
             datasets: [{
+                label: 'Customer Journey',
                 data: [5000, 2000, 828, 276],
-                backgroundColor: [
-                    colors.operational.primary,
-                    colors.operational.primary + 'CC',
-                    colors.operational.primary + '99',
-                    colors.operational.primary + '66'
-                ],
-                borderWidth: 2,
-                borderColor: colors.background,
-                datalabels: {
-                    display: true,
-                    color: colors.text,
-                    font: {
-                        weight: 'bold'
-                    },
-                    formatter: (value) => `${value} (${((value/5000)*100).toFixed(1)}%)`
-                }
+                borderColor: colors.operational.primary,
+                backgroundColor: colors.operational.primary + '40',
+                fill: true,
+                stepped: true,
+                tension: 0.4
             }]
         },
         options: {
@@ -1436,47 +1426,42 @@ function createTeamCompositionChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Customer Acquisition Funnel',
+                    text: 'Customer Acquisition Journey',
                     align: 'start',
                     color: colors.text,
                     font: {
                         size: 16,
                         weight: 'bold',
                         family: 'system-ui, -apple-system, sans-serif'
-                    },
-                    padding: {
-                        top: 20,
-                        bottom: 20
                     }
                 },
                 legend: {
                     display: false
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const value = context.raw;
-                            const percentage = ((value/5000)*100).toFixed(1);
-                            return `Count: ${value} (${percentage}%)`;
-                        }
-                    }
                 }
             },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
-            },
-            layout: {
-                padding: {
-                    top: 20,
-                    right: 20,
-                    bottom: 20,
-                    left: 20
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: colors.grid + '20'
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
                 }
             }
         }
     });
 }
+
 
 
 
