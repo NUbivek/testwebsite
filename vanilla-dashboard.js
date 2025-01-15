@@ -1029,7 +1029,7 @@ function createCostScalingChart() {
                     position: 'top',
                     align: 'end',
                     labels: {
-                        color: colors.text,
+                        color: '#313131',
                         boxWidth: 12,
                         padding: 20
                     }
@@ -1115,33 +1115,43 @@ function createDeploymentTimelineChart() {
     const ctx = document.getElementById('deploymentTimelineChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
+    // Network data
+    const data = {
+        nodes: [
+            { id: 'hub', label: 'Orderful', size: 20 },
+            { id: 'retail', label: 'Retail/eComm', size: 15 },
+            { id: 'logistics', label: 'Logistics', size: 12 },
+            { id: 'manufacturing', label: 'Manufacturing', size: 10 },
+            { id: 'healthcare', label: 'Healthcare', size: 8 }
+        ],
+        edges: [
+            { from: 'hub', to: 'retail', value: 3000 },
+            { from: 'hub', to: 'logistics', value: 2000 },
+            { from: 'hub', to: 'manufacturing', value: 1500 },
+            { from: 'hub', to: 'healthcare', value: 1000 }
+        ]
+    };
+
     return new Chart(ctx, {
-        type: 'bar',
+        type: 'sankey',
         data: {
-            labels: ['Enterprise', 'SMB', 'Self-Service'],
-            datasets: [
-                {
-                    label: 'Orderful (Days)',
-                    data: [9, 5, 1],
-                    backgroundColor: colors.operational.primary,
-                    borderRadius: 6
-                },
-                {
-                    label: 'Industry Average',
-                    data: [45, 30, 14],
-                    backgroundColor: colors.operational.secondary,
-                    borderRadius: 6
-                }
-            ]
+            labels: data.nodes.map(n => n.label),
+            datasets: [{
+                data: data.nodes,
+                edges: data.edges,
+                backgroundColor: colors.operational.primary,
+                borderColor: colors.operational.secondary,
+                borderWidth: 2,
+                hoverBorderWidth: 4
+            }]
         },
         options: {
-            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,
-                    text: 'Deployment Timeline',
+                    text: 'Network Effect',
                     align: 'start',
                     color: colors.text,
                     font: {
@@ -1151,25 +1161,18 @@ function createDeploymentTimelineChart() {
                     }
                 },
                 legend: {
-                    position: 'top',
-                    align: 'end',
-                    labels: {
-                        color: colors.text,
-                        boxWidth: 12,
-                        padding: 20
-                    }
+                    display: false
                 }
             },
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    ticks: { color: colors.text },
-                    grid: { color: colors.grid + '20' }
-                },
-                y: {
-                    ticks: { color: colors.text },
-                    grid: { display: false }
-                }
+            layout: {
+                padding: 20
+            },
+            graph: {
+                springLength: 150,
+                springConstant: 0.2,
+                dragCoeff: 0.02,
+                gravity: -1.2,
+                repulsion: 10
             },
             animation: {
                 duration: 2000,
@@ -1325,81 +1328,10 @@ function createMarketPenetrationChart() {
                 legend: {
                     position: 'right',
                     labels: {
-                        color: colors.text,
+                        color: '#313131',
                         boxWidth: 12,
                         padding: 20
                     }
-                }
-            },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
-            }
-        }
-    });
-}
-function createPartnerGrowthChart() {
-    const ctx = document.getElementById('partnerGrowthChart').getContext('2d');
-    const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
-    return new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['FY24', 'FY25', 'FY26'],
-            datasets: [
-                {
-                    label: 'Partners',
-                    type: 'bar',
-                    data: [5000, 6500, 8000],
-                    backgroundColor: colors.operational.primary,
-                    borderRadius: 6,
-                    order: 2
-                },
-                {
-                    label: 'Growth Rate (%)',
-                    type: 'line',
-                    data: [156, 130, 123],
-                    borderColor: colors.operational.secondary,
-                    backgroundColor: colors.operational.secondary + '20',
-                    tension: 0.4,
-                    order: 1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Partner Growth',
-                    align: 'start',
-                    color: colors.text,
-                    font: {
-                        size: 16,
-                        weight: 'bold',
-                        family: 'system-ui, -apple-system, sans-serif'
-                    }
-                },
-                legend: {
-                    position: 'top',
-                    align: 'end',
-                    labels: {
-                        color: colors.text,
-                        boxWidth: 12,
-                        padding: 20
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: { color: colors.text },
-                    grid: { color: colors.grid + '20' }
-                },
-                y: {
-                    beginAtZero: true,
-                    ticks: { color: colors.text },
-                    grid: { color: colors.grid + '20' }
                 }
             },
             animation: {
@@ -1410,24 +1342,47 @@ function createPartnerGrowthChart() {
     });
 }
 
-function createTeamCompositionChart() {
-    const ctx = document.getElementById('teamCompositionChart').getContext('2d');
+function createPartnerGrowthChart() {
+    const ctx = document.getElementById('partnerGrowthChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
-        type: 'doughnut',
+        type: 'sankey',
         data: {
-            labels: ['Engineering', 'Sales', 'Customer Success', 'Product'],
             datasets: [{
-                data: [28, 18, 15, 12],
-                backgroundColor: [
-                    colors.operational.primary,
-                    colors.operational.primary + 'CC',
-                    colors.operational.primary + '99',
-                    colors.operational.primary + '66'
+                data: [
+                    // Retail/eComm flows
+                    { from: 'Retail/eComm', to: 'Base', flow: 1200 },
+                    { from: 'Retail/eComm', to: 'Enterprise', flow: 800 },
+                    { from: 'Retail/eComm', to: 'Growth', flow: 600 },
+                    { from: 'Retail/eComm', to: 'Scale', flow: 400 },
+                    
+                    // Logistics flows
+                    { from: 'Logistics', to: 'Base', flow: 800 },
+                    { from: 'Logistics', to: 'Enterprise', flow: 600 },
+                    { from: 'Logistics', to: 'Growth', flow: 400 },
+                    { from: 'Logistics', to: 'Scale', flow: 200 },
+                    
+                    // Manufacturing flows
+                    { from: 'Manufacturing', to: 'Base', flow: 600 },
+                    { from: 'Manufacturing', to: 'Enterprise', flow: 400 },
+                    { from: 'Manufacturing', to: 'Growth', flow: 300 },
+                    { from: 'Manufacturing', to: 'Scale', flow: 200 },
+                    
+                    // Healthcare flows
+                    { from: 'Healthcare', to: 'Base', flow: 400 },
+                    { from: 'Healthcare', to: 'Enterprise', flow: 300 },
+                    { from: 'Healthcare', to: 'Growth', flow: 200 },
+                    { from: 'Healthcare', to: 'Scale', flow: 100 }
                 ],
-                borderWidth: 2,
-                borderColor: colors.background
+                colorFrom: (c) => colors.operational.primary + '80',
+                colorTo: (c) => colors.operational.secondary + '80',
+                colorMode: 'gradient',
+                /* Data matches marketCoverage totals:
+                   Retail/eComm: 3000
+                   Logistics: 2000
+                   Manufacturing: 1500
+                   Healthcare: 1000 */
             }]
         },
         options: {
@@ -1436,7 +1391,63 @@ function createTeamCompositionChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Team Scaling',
+                    text: 'Partner Distribution',
+                    align: 'start',
+                    color: colors.text,
+                    font: {
+                        size: 16,
+                        weight: 'bold',
+                        family: 'system-ui, -apple-system, sans-serif'
+                    }
+                },
+                
+                datalabels: {
+                    display: false
+                }
+                    
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (items) => {
+                            return `${items[0].raw.from} → ${items[0].raw.to}`;
+                        },
+                        label: (item) => {
+                            return `Partners: ${item.raw.flow}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function createTeamCompositionChart() {
+    const ctx = document.getElementById('teamCompositionChart').getContext('2d');
+    const colors = getThemeColors(document.body.classList.contains('dark-theme'));
+    
+    return new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Leads', 'Qualified Prospects', 'Trials', 'Conversions'],
+            datasets: [{
+                label: 'Customer Journey',
+                data: [5000, 2000, 828, 276],
+                borderColor: colors.operational.primary,
+                backgroundColor: colors.operational.primary + '40',
+                fill: true,
+                stepped: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Customer Acquisition Journey',
                     align: 'start',
                     color: colors.text,
                     font: {
@@ -1446,17 +1457,27 @@ function createTeamCompositionChart() {
                     }
                 },
                 legend: {
-                    position: 'right',
-                    labels: {
-                        color: colors.text,
-                        boxWidth: 12,
-                        padding: 20
-                    }
+                    display: false
                 }
             },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: colors.grid + '20'
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                }
             }
         }
     });
