@@ -937,6 +937,10 @@ function createRevenueStreamsChart() {
                     display: false
                 }
             },
+             datalabels: {
+                    display: false
+                }
+            },
             scales: {
                 x: {
                     ticks: { color: colors.text },
@@ -1063,6 +1067,10 @@ function createHeadcountEfficiencyChart() {
                     }
                 },
                 legend: {
+                    display: false
+                }
+            },
+             datalabels: {
                     display: false
                 }
             },
