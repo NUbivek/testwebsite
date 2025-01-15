@@ -788,14 +788,17 @@ function createBurnMarginChart() {
     const ctx = document.getElementById('burnMarginChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
+    // Function to format values as percentages
+    const formatPercentage = (value) => `${(value * 100).toFixed(0)}%`;
+
     return new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['FY24', 'FY25', 'FY26'],
             datasets: [
                 {
-                    label: 'Burn Multiple',
-                    data: [1.96, -0.24, -0.24],
+                    label: 'Burn Multiple (%)', // Changed label to include (%)
+                    data: [196, -24, -24], // Changed data to percentages
                     borderColor: colors.financial.primary,
                     backgroundColor: colors.financial.primary + '20',
                     yAxisID: 'y',
@@ -836,6 +839,20 @@ function createBurnMarginChart() {
                         boxWidth: 12,
                         padding: 20
                     }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += formatPercentage(context.parsed.y / 100); // Added formatting for tooltip
+                            }
+                            return label;
+                        }
+                    }
                 }
             },
             scales: {
@@ -844,9 +861,14 @@ function createBurnMarginChart() {
                     position: 'left',
                     title: { 
                         display: true, 
-                        text: 'Burn Multiple' 
+                        text: 'Burn Multiple (%)' // Changed axis title to include (%)
                     },
-                    ticks: { color: colors.text }
+                    ticks: {
+                        color: colors.text,
+                        callback: function(value) {
+                            return formatPercentage(value / 100); // Added formatting for y-axis labels
+                        }
+                    }
                 },
                 y1: {
                     type: 'linear',
@@ -858,7 +880,12 @@ function createBurnMarginChart() {
                     grid: { 
                         drawOnChartArea: false 
                     },
-                    ticks: { color: colors.text }
+                    ticks: {
+                        color: colors.text,
+                        callback: function(value) {
+                            return formatPercentage(value / 100); // Added formatting for y1-axis labels
+                        }
+                    }
                 }
             },
             animation: {
