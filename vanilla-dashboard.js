@@ -36,6 +36,11 @@ const operationalData = {
 
 // Register Chart.js plugin
 Chart.register(ChartDataLabels);
+Chart.register({
+    id: 'funnel',
+    controller: window.Chart.FunnelController,
+    element: window.Chart.TrapezoidElement
+});
 
 Chart.register({
     id: 'graph',
