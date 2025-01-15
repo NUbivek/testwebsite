@@ -1422,7 +1422,15 @@ function createTeamCompositionChart() {
                     colors.operational.primary + '66'
                 ],
                 borderWidth: 2,
-                borderColor: colors.background
+                borderColor: colors.background,
+                datalabels: {
+                    display: true,
+                    color: colors.text,
+                    font: {
+                        weight: 'bold'
+                    },
+                    formatter: (value) => `${value} (${((value/5000)*100).toFixed(1)}%)`
+                }
             }]
         },
         options: {
@@ -1438,15 +1446,36 @@ function createTeamCompositionChart() {
                         size: 16,
                         weight: 'bold',
                         family: 'system-ui, -apple-system, sans-serif'
+                    },
+                    padding: {
+                        top: 20,
+                        bottom: 20
                     }
                 },
                 legend: {
                     display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const percentage = ((value/5000)*100).toFixed(1);
+                            return `Count: ${value} (${percentage}%)`;
+                        }
+                    }
                 }
             },
             animation: {
                 duration: 2000,
                 easing: 'easeInOutQuart'
+            },
+            layout: {
+                padding: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20
+                }
             }
         }
     });
