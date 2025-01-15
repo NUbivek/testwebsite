@@ -159,14 +159,14 @@ function initDashboard() {
 function getThemeColors(isDark) {
     return {
         background: isDark ? 'rgba(36, 44, 52, 0.9)' : 'rgba(242, 243, 245, 0.9)', // Soft dark gray vs light off-white
-        text: isDark ? '#d4d8dd' : '#4a4a4a', // Gentle light gray vs deep charcoal
-        grid: isDark ? '#5c6671' : '#d1d5db', // Medium slate gray vs soft silver
+        text: isDark ? '#f1f5f9' : '#2d3748', // Gentle light gray vs deep charcoal
+        grid: isDark ? '#4a5568' : '#e2e8f0', // Medium slate gray vs soft silver
         financial: {
-            primary: isDark ? '#3d474f' : '#5a5f65', // Muted slate blue-gray
-            secondary: isDark ? '#6b7280' : '#888c93', // Delicate muted gray
+            primary: isDark ? '#63b3ed' : '#2b6cb0',  // Muted slate blue-gray
+            secondary: isDark ? '#90cdf4' : '#4299e1', // Delicate muted gray
             gradient: isDark ? 
-                ['rgba(61, 71, 79, 0.5)', 'rgba(107, 114, 128, 0.5)'] :
-                ['rgba(90, 95, 101, 0.5)', 'rgba(136, 140, 147, 0.5)'] // Smooth transition
+                ['rgba(99, 179, 237, 0.5)', 'rgba(144, 205, 244, 0.5)'] :
+                ['rgba(43, 108, 176, 0.5)', 'rgba(66, 153, 225, 0.5)'] // Smooth transition
         },
         operational: {
             primary: isDark ? '#355f7a' : '#3c8dad', // Soft navy blue vs teal
