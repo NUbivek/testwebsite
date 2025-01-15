@@ -686,10 +686,10 @@ function createROIChart() {
             scales: {
                 r: {
                     angleLines: {
-                        color: '#333333'
+                        color: '#3b3b3b'
                     },
                     grid: {
-                        color: '#333333'
+                        color: '#345e81'
                     },
                     pointLabels: {
                         color: colors.text,
@@ -717,6 +717,7 @@ function createROIChart() {
         }
     });
 }
+
 
 
 
@@ -1381,6 +1382,11 @@ function createPartnerGrowthChart() {
                         family: 'system-ui, -apple-system, sans-serif'
                     }
                 },
+                
+                datalabels: {
+                    display: false
+                }
+                    
                 legend: {
                     display: false
                 },
