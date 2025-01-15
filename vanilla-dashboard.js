@@ -1197,12 +1197,12 @@ function createSupportMetricsChart() {
                 r: {
                     // Adjust angle lines for better visibility
                     angleLines: {
-                        color: colors.grid + '30', // Change from '40' to '30'
+                        color: '#3b3b3b' // Change from '40' to '30'
                         lineWidth: 1
                     },
                     // Customize grid lines
                     grid: {
-                        color: colors.grid + '15', // Change from '20' to '15'
+                        color: '#345e81' // Change from '20' to '15'
                         circular: true
                     },
                     // Improve point labels
