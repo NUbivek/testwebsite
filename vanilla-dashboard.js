@@ -1114,7 +1114,7 @@ function createDeploymentTimelineChart() {
     };
 
     return new Chart(ctx, {
-        type: 'graph',
+        type: 'sankey',
         data: {
             labels: data.nodes.map(n => n.label),
             datasets: [{
@@ -1162,6 +1162,7 @@ function createDeploymentTimelineChart() {
         }
     });
 }
+
 
 function createSupportMetricsChart() {
     const ctx = document.getElementById('supportMetricsChart').getContext('2d');
