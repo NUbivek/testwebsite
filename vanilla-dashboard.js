@@ -163,7 +163,7 @@ function getThemeColors(isDark) {
         grid: isDark ? '#4a5568' : '#e2e8f0', // Medium slate gray vs soft silver
         financial: {
             primary: isDark ? '#63b3ed' : '#2b6cb0',  // Muted slate blue-gray
-            secondary: isDark ? '#90cdf4' : '#4299e1', // Delicate muted gray
+            secondary: isDark ? '#3d474f' : '#5a5f65', // Delicate muted gray
             gradient: isDark ? 
                 ['rgba(99, 179, 237, 0.5)', 'rgba(144, 205, 244, 0.5)'] :
                 ['rgba(43, 108, 176, 0.5)', 'rgba(66, 153, 225, 0.5)'] // Smooth transition
