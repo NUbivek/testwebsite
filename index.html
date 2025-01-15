@@ -14,8 +14,15 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+      <!-- Add these after the existing Chart.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-funnel@4.1.7/dist/index.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-graph@4.1.7/dist/index.umd.min.js"></script>
+
+     <!-- Animation library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="vanilla-dashboard.js"></script>
+    
+    <script src="vanilla-dashboard.js"></script>   <!-- Custom JavaScript (should be last) -->
+    
 </head>
 
 <body>
@@ -28,7 +35,7 @@
                 Berkeley Haas MBA • MS in Machine Learning, Northwestern University • BS Finance & CS
             </div>
             <div class="theme-toggle">
-                <button class="toggle-button" id="themeToggle" aria-label="Toggle dark mode"></button>
+                <button class="toggle-button" id="themeToggle" aria-label="Toggle dark mode"></button> 
             </div>
         </div>
 
