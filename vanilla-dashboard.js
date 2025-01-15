@@ -628,19 +628,19 @@ function createROIChart() {
         type: 'radar',
         data: {
             labels: [
-                'Labor Cost Savings',
+                'Revenue Retention',
                 'Integration Speed',
-                'Operational Efficiency',
-                'Success Rate',
+                'Gross Margin Efficiency',
+                'Partner Adoption Rate',
                 'System Uptime'
             ],
             datasets: [{
                 label: 'Performance Metrics (%)',
                 data: [
-                    operationalData.roi.laborCost,
+                    130,                            // NRR from financialData
                     operationalData.roi.integrationTime,
-                    operationalData.roi.operationalCost,
-                    operationalData.roi.successRate,
+                    95.03,                         // Latest Gross Margin from financialData
+                    85,                            // Partner Adoption Rate
                     operationalData.roi.uptime
                 ],
                 backgroundColor: colors.operational.primary + '40',
@@ -681,43 +681,33 @@ function createROIChart() {
                 },
                 tooltip: {
                     enabled: true
-                },
-                datalabels: {
-                    display: function(context) {
-                        return context.active;
-                    },
-                    color: colors.text,
-                    font: {
-                        weight: 'bold'
-                    },
-                    padding: 6
                 }
             },
             scales: {
                 r: {
                     angleLines: {
-                        color: '#e7dde1'  // Changed this line to set radar line color
+                        color: '#000000'
                     },
                     grid: {
-                        color: colors.grid + '20'
+                        color: '#000000'
                     },
                     pointLabels: {
                         color: colors.text,
                         font: {
-                            size: 12
+                            size: 12,
+                            weight: 'bold'
                         }
                     },
                     ticks: {
                         color: colors.text,
                         backdropColor: 'transparent',
                         font: {
-                            size: 10
+                            size: 10,
+                            weight: 'bold'
                         }
                     },
-                    title: {
-                        display: true,
-                        text: 'Performance Score (%)'
-                    }
+                    min: 0,
+                    max: 140
                 }
             },
             animation: {
@@ -727,6 +717,7 @@ function createROIChart() {
         }
     });
 }
+
 
 
 function createRevenueGrowthChart() {
