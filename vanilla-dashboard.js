@@ -1251,33 +1251,48 @@ function createMarketPenetrationChart() {
         }
     });
 }
+
 function createPartnerGrowthChart() {
     const ctx = document.getElementById('partnerGrowthChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
+    const data = {
+        features: ['Base', 'Enterprise', 'Growth', 'Scale'],
+        segments: ['Retail/eComm', 'Logistics', 'Manufacturing', 'Healthcare'],
+        values: [
+            [95, 80, 70, 60],  // Retail/eComm adoption rates
+            [85, 75, 65, 50],  // Logistics adoption rates
+            [75, 65, 55, 40],  // Manufacturing adoption rates
+            [65, 55, 45, 30]   // Healthcare adoption rates
+        ]
+    };
+
+    const datasets = [];
+    data.segments.forEach((segment, i) => {
+        data.features.forEach((feature, j) => {
+            datasets.push({
+                x: j,
+                y: i,
+                v: data.values[i][j]
+            });
+        });
+    });
+
     return new Chart(ctx, {
-        type: 'bar',
+        type: 'matrix',
         data: {
-            labels: ['FY24', 'FY25', 'FY26'],
-            datasets: [
-                {
-                    label: 'Partners',
-                    type: 'bar',
-                    data: [5000, 6500, 8000],
-                    backgroundColor: colors.operational.primary,
-                    borderRadius: 6,
-                    order: 2
+            datasets: [{
+                data: datasets,
+                backgroundColor(context) {
+                    const value = context.dataset.data[context.dataIndex].v;
+                    const alpha = value / 100;
+                    return colors.operational.primary + Math.round(alpha * 255).toString(16).padStart(2, '0');
                 },
-                {
-                    label: 'Growth Rate (%)',
-                    type: 'line',
-                    data: [156, 130, 123],
-                    borderColor: colors.operational.secondary,
-                    backgroundColor: colors.operational.secondary + '20',
-                    tension: 0.4,
-                    order: 1
-                }
-            ]
+                borderColor: colors.background,
+                borderWidth: 1,
+                width: ({ chart }) => (chart.chartArea || {}).width / 4 - 1,
+                height: ({ chart }) => (chart.chartArea || {}).height / 4 - 1
+            }]
         },
         options: {
             responsive: true,
@@ -1285,7 +1300,7 @@ function createPartnerGrowthChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Partner Growth',
+                    text: 'Feature Adoption Rate',
                     align: 'start',
                     color: colors.text,
                     font: {
@@ -1295,33 +1310,50 @@ function createPartnerGrowthChart() {
                     }
                 },
                 legend: {
-                    position: 'top',
-                    align: 'end',
-                    labels: {
-                        color: colors.text,
-                        boxWidth: 12,
-                        padding: 20
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        title() {
+                            return '';
+                        },
+                        label(context) {
+                            const v = context.dataset.data[context.dataIndex];
+                            return [
+                                `${data.segments[v.y]}: ${data.features[v.x]}`,
+                                `Adoption: ${v.v}%`
+                            ];
+                        }
                     }
                 }
             },
             scales: {
                 x: {
-                    ticks: { color: colors.text },
-                    grid: { color: colors.grid + '20' }
+                    type: 'category',
+                    labels: data.features,
+                    ticks: {
+                        color: colors.text
+                    },
+                    grid: {
+                        display: false
+                    }
                 },
                 y: {
-                    beginAtZero: true,
-                    ticks: { color: colors.text },
-                    grid: { color: colors.grid + '20' }
+                    type: 'category',
+                    labels: data.segments,
+                    ticks: {
+                        color: colors.text
+                    },
+                    grid: {
+                        display: false
+                    }
                 }
-            },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutQuart'
             }
         }
     });
 }
+
+
 
 function createTeamCompositionChart() {
     const ctx = document.getElementById('teamCompositionChart').getContext('2d');
