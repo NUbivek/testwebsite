@@ -595,7 +595,7 @@ function createMarketCoverageChart() {
                     enabled: true
                 },
                 datalabels: {
-                    display: false
+                    display: true
                 }
             },
             animation: {
@@ -614,19 +614,19 @@ function createROIChart() {
         type: 'radar',
         data: {
             labels: [
-                'Labor Cost Savings',
+                'Revenue Retention',
                 'Integration Speed',
-                'Operational Efficiency',
-                'Success Rate',
+                'Gross Margin Efficiency',
+                'Partner Adoption Rate',
                 'System Uptime'
             ],
             datasets: [{
                 label: 'Performance Metrics (%)',
                 data: [
-                    operationalData.roi.laborCost,
+                    130,                            // NRR from financialData
                     operationalData.roi.integrationTime,
-                    operationalData.roi.operationalCost,
-                    operationalData.roi.successRate,
+                    95.03,                         // Latest Gross Margin from financialData
+                    85,                            // Partner Adoption Rate
                     operationalData.roi.uptime
                 ],
                 backgroundColor: colors.operational.primary + '40',
@@ -667,43 +667,33 @@ function createROIChart() {
                 },
                 tooltip: {
                     enabled: true
-                },
-                datalabels: {
-                    display: function(context) {
-                        return context.active;
-                    },
-                    color: colors.text,
-                    font: {
-                        weight: 'bold'
-                    },
-                    padding: 6
                 }
             },
             scales: {
                 r: {
                     angleLines: {
-                        color: '#e7dde1'  // Changed this line to set radar line color
+                        color: '#3b3b3b'
                     },
                     grid: {
-                        color: colors.grid + '20'
+                        color: '#345e81'
                     },
                     pointLabels: {
                         color: colors.text,
                         font: {
-                            size: 12
+                            size: 12,
+                            weight: 'bold'
                         }
                     },
                     ticks: {
                         color: colors.text,
                         backdropColor: 'transparent',
                         font: {
-                            size: 10
+                            size: 10,
+                            weight: 'bold'
                         }
                     },
-                    title: {
-                        display: true,
-                        text: 'Performance Score (%)'
-                    }
+                    min: 0,
+                    max: 140
                 }
             },
             animation: {
@@ -718,7 +708,12 @@ function createROIChart() {
 function createRevenueGrowthChart() {
     const ctx = document.getElementById('revenueGrowthChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
+
+    // Function to format values as "$X.XM"
+    const formatValue = (value) => {
+        return `$${value.toFixed(1)}M`;
+    };
+
     return new Chart(ctx, {
         type: 'line',
         data: {
@@ -761,9 +756,24 @@ function createRevenueGrowthChart() {
                     position: 'top',
                     align: 'end',
                     labels: {
-                        color: colors.text,
+                        color: 	'#784ea7',
                         boxWidth: 12,
                         padding: 20
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                // Use formatValue for tooltip display
+                                label += formatValue(context.parsed.y);
+                            }
+                            return label;
+                        }
                     }
                 }
             },
@@ -774,7 +784,13 @@ function createRevenueGrowthChart() {
                 },
                 y: {
                     beginAtZero: true,
-                    ticks: { color: colors.text },
+                    ticks: {
+                        color: colors.text,
+                        // Use formatValue for y-axis labels
+                        callback: function(value) {
+                            return formatValue(value);
+                        }
+                    },
                     grid: { color: colors.grid + '20' }
                 }
             },
