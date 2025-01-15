@@ -36,8 +36,7 @@ const operationalData = {
 
 // Register Chart.js plugin
 Chart.register(ChartDataLabels);
-Chart.register(window.Chart.GraphController);
-Chart.register(window.Chart.EdgeLine);
+
 
 // ADD this after all plugin registrations at the top
 console.log('Registered controllers:', Chart.registry.controllers);
