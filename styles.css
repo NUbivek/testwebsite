@@ -67,8 +67,8 @@ body {
     --operational-primary: #0f172a;
     --operational-secondary: #475569;
     --operational-gradient: linear-gradient(145deg, #0f172a26, #47556926);
-    --bg-primary: #ffffff;
-    --text-primary: #1a202c;
+    --bg-primary: #ebf2f1;
+    --text-primary: #0c111c;
     --card-bg: #f7fafc;
 }
 
