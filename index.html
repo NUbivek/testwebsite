@@ -11,27 +11,24 @@
   gtag('config', 'G-G8ZVX8ZL6K');
 </script>
     
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-      <!-- Add these after the existing Chart.js script -->
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-funnel@4.1.7/dist/index.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-graph@4.1.7/dist/index.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1/dist/chartjs-chart-matrix.min.js"></script>
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+<!-- Core Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<!-- Chart.js Plugins -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://unpkg.com/chartjs-chart-funnel@1.0.5/dist/chart.funnel.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-graph@4.2.0/dist/chartjs-chart-graph.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1/dist/chartjs-chart-matrix.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@0.12.0/dist/chartjs-chart-sankey.min.js"></script>
 
+<!-- Animation library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
+<!-- Custom JavaScript (should be last) -->
+<script src="vanilla-dashboard.js"></script>
 
-        <!-- Debug console logs -->
-    <script>
-        console.log('Funnel plugin:', window.Chart.FunnelController);
-        console.log('Matrix plugin:', window.Chart.MatrixController);
-    </script>
-
-     <!-- Animation library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    
-    <script src="vanilla-dashboard.js"></script>   <!-- Custom JavaScript (should be last) -->
     
 </head>
 
