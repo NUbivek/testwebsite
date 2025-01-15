@@ -1680,20 +1680,7 @@ document.addEventListener('DOMContentLoaded', function() {
                  // Register required Chart.js plugins before initialization
                 Chart.register(ChartDataLabels);
 
-                // Register Funnel plugin
-                if (window.Chart.Funnel) {
-                    Chart.register(window.Chart.Funnel);
-                } else {
-                    console.error('Funnel plugin not loaded');
-                }
-                
-                // Register Graph plugin
-                if (window.Chart.Graph) {
-                    Chart.register(window.Chart.Graph);
-                } else {
-                    console.error('Graph plugin not loaded');
-                }
-                
+                               
                 // Wait for charts to be created
                 setTimeout(() => {
                     // Initialize navigation
