@@ -723,7 +723,12 @@ function createROIChart() {
 function createRevenueGrowthChart() {
     const ctx = document.getElementById('revenueGrowthChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-    
+
+    // Function to format values as "$X.XM"
+    const formatValue = (value) => {
+        return `$${value.toFixed(1)}M`;
+    };
+
     return new Chart(ctx, {
         type: 'line',
         data: {
@@ -766,9 +771,24 @@ function createRevenueGrowthChart() {
                     position: 'top',
                     align: 'end',
                     labels: {
-                        color: colors.text,
+                        color: 	#784ea7,
                         boxWidth: 12,
                         padding: 20
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                // Use formatValue for tooltip display
+                                label += formatValue(context.parsed.y);
+                            }
+                            return label;
+                        }
                     }
                 }
             },
@@ -779,7 +799,13 @@ function createRevenueGrowthChart() {
                 },
                 y: {
                     beginAtZero: true,
-                    ticks: { color: colors.text },
+                    ticks: {
+                        color: colors.text,
+                        // Use formatValue for y-axis labels
+                        callback: function(value) {
+                            return formatValue(value);
+                        }
+                    },
                     grid: { color: colors.grid + '20' }
                 }
             },
@@ -790,6 +816,7 @@ function createRevenueGrowthChart() {
         }
     });
 }
+
 
 function createBurnMarginChart() {
     const ctx = document.getElementById('burnMarginChart').getContext('2d');
