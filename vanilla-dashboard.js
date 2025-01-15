@@ -36,6 +36,11 @@ const operationalData = {
 
 // Register Chart.js plugin
 Chart.register(ChartDataLabels);
+// Add this right after Chart.register(ChartDataLabels);
+import { FunnelController, TrapezoidElement } from 'chartjs-chart-funnel';
+import { MatrixController, MatrixElement } from 'chartjs-chart-matrix';
+Chart.register(FunnelController, TrapezoidElement);
+Chart.register(MatrixController, MatrixElement);
 
 const universalChartOptions = {
     responsive: true,
@@ -1652,6 +1657,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dashboard?.classList.contains('active')) {
         setTimeout(() => {
             try {
+                // Register required Chart.js plugins before initialization
+                Chart.register(FunnelController, TrapezoidElement);  // Add this for funnel chart
+                Chart.register(GraphController, EdgeLine);  // Add this for network graph
+                Chart.register(MatrixController, MatrixElement);  // Add this for matrix chart
+                
                 initDashboard();
                 
                 // Wait for charts to be created
@@ -1662,7 +1672,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Then show initial charts
                     showChart(0, 'financial');
                     showChart(0, 'operational');
-                }, 500);
+               // Add event listener for theme changes to update new chart types
+                    document.getElementById('themeToggle')?.addEventListener('click', () => {
+                        updateChartsTheme();
+                    });
+                }, 800);  // Increased timeout to ensure plugin loading
+                
                 
             } catch (error) {
                 console.error('Dashboard initialization failed:', error);
