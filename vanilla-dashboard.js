@@ -1696,32 +1696,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dashboard?.classList.contains('active')) {
         setTimeout(() => {
             try {
-                 // CHANGE: Move plugin registration before initDashboard
-                // Register required Chart.js plugins first
+                initDashboard();
+                 // Register required Chart.js plugins before initialization
                 Chart.register(ChartDataLabels);
 
-                // CHANGE: Update Funnel plugin registration to use correct object
-                if (typeof Chart.Funnel !== 'undefined') {  // Changed from window.Chart.Funnel
-                    Chart.register(Chart.Funnel);
+                // Register Funnel plugin
+                if (window.Chart.Funnel) {
+                    Chart.register(window.Chart.Funnel);
                 } else {
                     console.error('Funnel plugin not loaded');
                 }
                 
-                // CHANGE: Update Graph plugin registration to use correct object
-                if (typeof Chart.Graph !== 'undefined') {  // Changed from window.Chart.Graph
-                    Chart.register(Chart.Graph);
+                // Register Graph plugin
+                if (window.Chart.Graph) {
+                    Chart.register(window.Chart.Graph);
                 } else {
                     console.error('Graph plugin not loaded');
                 }
-
-                // ADD: Console log to verify plugin registration
-                console.log('Chart plugins registered:', {
-                    funnel: typeof Chart.Funnel !== 'undefined',
-                    graph: typeof Chart.Graph !== 'undefined'
-                });
-                
-                // MOVE: initDashboard after plugin registration
-                initDashboard();
                 
                 // Wait for charts to be created
                 setTimeout(() => {
