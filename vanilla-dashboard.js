@@ -36,19 +36,6 @@ const operationalData = {
 
 // Register Chart.js plugin
 Chart.register(ChartDataLabels);
-Chart.register({
-    id: 'funnel',
-    controller: window.Chart.FunnelController,
-    element: window.Chart.TrapezoidElement
-});
-
-Chart.register({
-    id: 'graph',
-    controller: window.Chart.GraphController,
-    element: window.Chart.EdgeLine
-});
-
-
 
 const universalChartOptions = {
     responsive: true,
@@ -111,9 +98,6 @@ const universalChartOptions = {
         easing: 'easeInOutQuart'
     }
 };
-
-
-
 
 function initDashboard() {
     // Ensure Chart.js is loaded
@@ -628,19 +612,19 @@ function createROIChart() {
         type: 'radar',
         data: {
             labels: [
-                'Revenue Retention',
+                'Labor Cost Savings',
                 'Integration Speed',
-                'Gross Margin Efficiency',
-                'Partner Adoption Rate',
+                'Operational Efficiency',
+                'Success Rate',
                 'System Uptime'
             ],
             datasets: [{
                 label: 'Performance Metrics (%)',
                 data: [
-                    130,                            // NRR from financialData
+                    operationalData.roi.laborCost,
                     operationalData.roi.integrationTime,
-                    95.03,                         // Latest Gross Margin from financialData
-                    85,                            // Partner Adoption Rate
+                    operationalData.roi.operationalCost,
+                    operationalData.roi.successRate,
                     operationalData.roi.uptime
                 ],
                 backgroundColor: colors.operational.primary + '40',
@@ -681,33 +665,43 @@ function createROIChart() {
                 },
                 tooltip: {
                     enabled: true
+                },
+                datalabels: {
+                    display: function(context) {
+                        return context.active;
+                    },
+                    color: colors.text,
+                    font: {
+                        weight: 'bold'
+                    },
+                    padding: 6
                 }
             },
             scales: {
                 r: {
                     angleLines: {
-                        color: '#3b3b3b'
+                        color: '#e7dde1'  // Changed this line to set radar line color
                     },
                     grid: {
-                        color: '#345e81'
+                        color: colors.grid + '20'
                     },
                     pointLabels: {
                         color: colors.text,
                         font: {
-                            size: 12,
-                            weight: 'bold'
+                            size: 12
                         }
                     },
                     ticks: {
                         color: colors.text,
                         backdropColor: 'transparent',
                         font: {
-                            size: 10,
-                            weight: 'bold'
+                            size: 10
                         }
                     },
-                    min: 0,
-                    max: 140
+                    title: {
+                        display: true,
+                        text: 'Performance Score (%)'
+                    }
                 }
             },
             animation: {
@@ -717,8 +711,6 @@ function createROIChart() {
         }
     });
 }
-
-
 
 
 function createRevenueGrowthChart() {
@@ -796,17 +788,14 @@ function createBurnMarginChart() {
     const ctx = document.getElementById('burnMarginChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
-    // Function to format values as percentages
-    const formatPercentage = (value) => `${(value * 100).toFixed(0)}%`;
-
     return new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['FY24', 'FY25', 'FY26'],
             datasets: [
                 {
-                    label: 'Burn Multiple (%)', // Changed label to include (%)
-                    data: [196, -24, -24], // Changed data to percentages
+                    label: 'Burn Multiple',
+                    data: [1.96, -0.24, -0.24],
                     borderColor: colors.financial.primary,
                     backgroundColor: colors.financial.primary + '20',
                     yAxisID: 'y',
@@ -847,20 +836,6 @@ function createBurnMarginChart() {
                         boxWidth: 12,
                         padding: 20
                     }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                label += formatPercentage(context.parsed.y / 100); // Added formatting for tooltip
-                            }
-                            return label;
-                        }
-                    }
                 }
             },
             scales: {
@@ -869,14 +844,9 @@ function createBurnMarginChart() {
                     position: 'left',
                     title: { 
                         display: true, 
-                        text: 'Burn Multiple (%)' // Changed axis title to include (%)
+                        text: 'Burn Multiple' 
                     },
-                    ticks: {
-                        color: colors.text,
-                        callback: function(value) {
-                            return formatPercentage(value / 100); // Added formatting for y-axis labels
-                        }
-                    }
+                    ticks: { color: colors.text }
                 },
                 y1: {
                     type: 'linear',
@@ -888,12 +858,7 @@ function createBurnMarginChart() {
                     grid: { 
                         drawOnChartArea: false 
                     },
-                    ticks: {
-                        color: colors.text,
-                        callback: function(value) {
-                            return formatPercentage(value / 100); // Added formatting for y1-axis labels
-                        }
-                    }
+                    ticks: { color: colors.text }
                 }
             },
             animation: {
@@ -903,6 +868,7 @@ function createBurnMarginChart() {
         }
     });
 }
+
 
 
 function createRevenueStreamsChart() {
@@ -1096,43 +1062,33 @@ function createDeploymentTimelineChart() {
     const ctx = document.getElementById('deploymentTimelineChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
-    // Network data
-    const data = {
-        nodes: [
-            { id: 'hub', label: 'Orderful', size: 20 },
-            { id: 'retail', label: 'Retail/eComm', size: 15 },
-            { id: 'logistics', label: 'Logistics', size: 12 },
-            { id: 'manufacturing', label: 'Manufacturing', size: 10 },
-            { id: 'healthcare', label: 'Healthcare', size: 8 }
-        ],
-        edges: [
-            { from: 'hub', to: 'retail', value: 3000 },
-            { from: 'hub', to: 'logistics', value: 2000 },
-            { from: 'hub', to: 'manufacturing', value: 1500 },
-            { from: 'hub', to: 'healthcare', value: 1000 }
-        ]
-    };
-
     return new Chart(ctx, {
-        type: 'sankey',
+        type: 'bar',
         data: {
-            labels: data.nodes.map(n => n.label),
-            datasets: [{
-                data: data.nodes,
-                edges: data.edges,
-                backgroundColor: colors.operational.primary,
-                borderColor: colors.operational.secondary,
-                borderWidth: 2,
-                hoverBorderWidth: 4
-            }]
+            labels: ['Enterprise', 'SMB', 'Self-Service'],
+            datasets: [
+                {
+                    label: 'Orderful (Days)',
+                    data: [9, 5, 1],
+                    backgroundColor: colors.operational.primary,
+                    borderRadius: 6
+                },
+                {
+                    label: 'Industry Average',
+                    data: [45, 30, 14],
+                    backgroundColor: colors.operational.secondary,
+                    borderRadius: 6
+                }
+            ]
         },
         options: {
+            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,
-                    text: 'Network Effect',
+                    text: 'Deployment Timeline',
                     align: 'start',
                     color: colors.text,
                     font: {
@@ -1142,18 +1098,25 @@ function createDeploymentTimelineChart() {
                     }
                 },
                 legend: {
-                    display: false
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: colors.text,
+                        boxWidth: 12,
+                        padding: 20
+                    }
                 }
             },
-            layout: {
-                padding: 20
-            },
-            graph: {
-                springLength: 150,
-                springConstant: 0.2,
-                dragCoeff: 0.02,
-                gravity: -1.2,
-                repulsion: 10
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: { color: colors.text },
+                    grid: { color: colors.grid + '20' }
+                },
+                y: {
+                    ticks: { color: colors.text },
+                    grid: { display: false }
+                }
             },
             animation: {
                 duration: 2000,
@@ -1162,7 +1125,6 @@ function createDeploymentTimelineChart() {
         }
     });
 }
-
 
 function createSupportMetricsChart() {
     const ctx = document.getElementById('supportMetricsChart').getContext('2d');
@@ -1180,21 +1142,11 @@ function createSupportMetricsChart() {
             datasets: [{
                 label: 'Support Metrics',
                 data: [99, 95, 98, 95],
-                // Change background opacity for better visibility
-                backgroundColor: colors.operational.primary + '20', // Change from '40' to '20'
-                // Increase border width for more prominence
+                backgroundColor: colors.operational.primary + '40',
                 borderColor: colors.operational.primary,
-                borderWidth: 3, // Change from 2 to 3
-                // Add point styling for better visibility
-                pointBackgroundColor: colors.operational.primary,
-                pointBorderColor: colors.background,
-                pointHoverBackgroundColor: colors.operational.secondary,
-                pointHoverBorderColor: colors.operational.primary,
-                // Add point size configurations
-                pointRadius: 4,
-                pointHoverRadius: 6,
-                // Add line tension for smoother curves
-                lineTension: 0.2
+                pointBackgroundColor: colors.operational.secondary,
+                pointBorderColor: colors.operational.primary,
+                borderWidth: 2
             }]
         },
         options: {
@@ -1206,15 +1158,10 @@ function createSupportMetricsChart() {
                     text: 'Support Metrics',
                     align: 'start',
                     color: colors.text,
-                    // Increase title size
                     font: {
-                        size: 18, // Change from 16 to 18
+                        size: 16,
                         weight: 'bold',
                         family: 'system-ui, -apple-system, sans-serif'
-                    },
-                    padding: {
-                        top: 20,
-                        bottom: 20
                     }
                 },
                 legend: {
@@ -1223,55 +1170,29 @@ function createSupportMetricsChart() {
             },
             scales: {
                 r: {
-                    // Adjust angle lines for better visibility
                     angleLines: {
-                        color: '#3b3b3b' // Change from '40' to '30'
-                        lineWidth: 1
+                        color: colors.grid + '40'
                     },
-                    // Customize grid lines
                     grid: {
-                        color: '#345e81' // Change from '20' to '15'
-                        circular: true
+                        color: colors.grid + '20'
                     },
-                    // Improve point labels
                     pointLabels: {
-                        color: colors.text,
-                        font: {
-                            size: 12,
-                            weight: 'bold'
-                        }
+                        color: colors.text
                     },
-                    // Customize ticks
                     ticks: {
                         beginAtZero: true,
                         max: 100,
-                        stepSize: 20,
-                        color: colors.text,
-                        backdropColor: 'transparent',
-                        // Add padding for better spacing
-                        padding: 10,
-                        font: {
-                            size: 10,
-                            weight: 'bold'
-                        }
-                    },
-                    // Add minimum value to prevent chart from looking empty
-                    min: 0
+                        color: colors.text
+                    }
                 }
             },
-            // Add custom animation
             animation: {
                 duration: 2000,
-                easing: 'easeInOutQuart',
-                // Add sequential animation
-                delay: (context) => context.dataIndex * 100
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
-
-
-
 function createMarketPenetrationChart() {
     const ctx = document.getElementById('marketPenetrationChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
@@ -1323,49 +1244,33 @@ function createMarketPenetrationChart() {
         }
     });
 }
-
 function createPartnerGrowthChart() {
     const ctx = document.getElementById('partnerGrowthChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
-        type: 'sankey',
+        type: 'bar',
         data: {
-            datasets: [{
-                data: [
-                    // Retail/eComm flows
-                    { from: 'Retail/eComm', to: 'Base', flow: 1200 },
-                    { from: 'Retail/eComm', to: 'Enterprise', flow: 800 },
-                    { from: 'Retail/eComm', to: 'Growth', flow: 600 },
-                    { from: 'Retail/eComm', to: 'Scale', flow: 400 },
-                    
-                    // Logistics flows
-                    { from: 'Logistics', to: 'Base', flow: 800 },
-                    { from: 'Logistics', to: 'Enterprise', flow: 600 },
-                    { from: 'Logistics', to: 'Growth', flow: 400 },
-                    { from: 'Logistics', to: 'Scale', flow: 200 },
-                    
-                    // Manufacturing flows
-                    { from: 'Manufacturing', to: 'Base', flow: 600 },
-                    { from: 'Manufacturing', to: 'Enterprise', flow: 400 },
-                    { from: 'Manufacturing', to: 'Growth', flow: 300 },
-                    { from: 'Manufacturing', to: 'Scale', flow: 200 },
-                    
-                    // Healthcare flows
-                    { from: 'Healthcare', to: 'Base', flow: 400 },
-                    { from: 'Healthcare', to: 'Enterprise', flow: 300 },
-                    { from: 'Healthcare', to: 'Growth', flow: 200 },
-                    { from: 'Healthcare', to: 'Scale', flow: 100 }
-                ],
-                colorFrom: (c) => colors.operational.primary + '80',
-                colorTo: (c) => colors.operational.secondary + '80',
-                colorMode: 'gradient',
-                /* Data matches marketCoverage totals:
-                   Retail/eComm: 3000
-                   Logistics: 2000
-                   Manufacturing: 1500
-                   Healthcare: 1000 */
-            }]
+            labels: ['FY24', 'FY25', 'FY26'],
+            datasets: [
+                {
+                    label: 'Partners',
+                    type: 'bar',
+                    data: [5000, 6500, 8000],
+                    backgroundColor: colors.operational.primary,
+                    borderRadius: 6,
+                    order: 2
+                },
+                {
+                    label: 'Growth Rate (%)',
+                    type: 'line',
+                    data: [156, 130, 123],
+                    borderColor: colors.operational.secondary,
+                    backgroundColor: colors.operational.secondary + '20',
+                    tension: 0.4,
+                    order: 1
+                }
+            ]
         },
         options: {
             responsive: true,
@@ -1373,7 +1278,7 @@ function createPartnerGrowthChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Partner Distribution',
+                    text: 'Partner Growth',
                     align: 'start',
                     color: colors.text,
                     font: {
@@ -1382,41 +1287,45 @@ function createPartnerGrowthChart() {
                         family: 'system-ui, -apple-system, sans-serif'
                     }
                 },
-                
-                datalabels: {
-                    display: false
-                }
-                    
                 legend: {
-                    display: false
-                },
-                tooltip: {
-                    callbacks: {
-                        title: (items) => {
-                            return `${items[0].raw.from} → ${items[0].raw.to}`;
-                        },
-                        label: (item) => {
-                            return `Partners: ${item.raw.flow}`;
-                        }
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: colors.text,
+                        boxWidth: 12,
+                        padding: 20
                     }
                 }
+            },
+            scales: {
+                x: {
+                    ticks: { color: colors.text },
+                    grid: { color: colors.grid + '20' }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: colors.text },
+                    grid: { color: colors.grid + '20' }
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
-
-
 
 function createTeamCompositionChart() {
     const ctx = document.getElementById('teamCompositionChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
-        type: 'funnel',
+        type: 'doughnut',
         data: {
-            labels: ['Leads', 'Qualified Prospects', 'Trials', 'Conversions'],
+            labels: ['Engineering', 'Sales', 'Customer Success', 'Product'],
             datasets: [{
-                data: [5000, 2000, 828, 276],
+                data: [28, 18, 15, 12],
                 backgroundColor: [
                     colors.operational.primary,
                     colors.operational.primary + 'CC',
@@ -1424,15 +1333,7 @@ function createTeamCompositionChart() {
                     colors.operational.primary + '66'
                 ],
                 borderWidth: 2,
-                borderColor: colors.background,
-                datalabels: {
-                    display: true,
-                    color: colors.text,
-                    font: {
-                        weight: 'bold'
-                    },
-                    formatter: (value) => `${value} (${((value/5000)*100).toFixed(1)}%)`
-                }
+                borderColor: colors.background
             }]
         },
         options: {
@@ -1441,48 +1342,31 @@ function createTeamCompositionChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Customer Acquisition Funnel',
+                    text: 'Team Scaling',
                     align: 'start',
                     color: colors.text,
                     font: {
                         size: 16,
                         weight: 'bold',
                         family: 'system-ui, -apple-system, sans-serif'
-                    },
-                    padding: {
-                        top: 20,
-                        bottom: 20
                     }
                 },
                 legend: {
-                    display: false
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const value = context.raw;
-                            const percentage = ((value/5000)*100).toFixed(1);
-                            return `Count: ${value} (${percentage}%)`;
-                        }
+                    position: 'right',
+                    labels: {
+                        color: colors.text,
+                        boxWidth: 12,
+                        padding: 20
                     }
                 }
             },
             animation: {
                 duration: 2000,
                 easing: 'easeInOutQuart'
-            },
-            layout: {
-                padding: {
-                    top: 20,
-                    right: 20,
-                    bottom: 20,
-                    left: 20
-                }
             }
         }
     });
 }
-
 
 
 
@@ -1559,10 +1443,7 @@ function getChartFunction(chartId) {
         'supportMetricsChart': createSupportMetricsChart,
         'marketPenetrationChart': createMarketPenetrationChart,
         'partnerGrowthChart': createPartnerGrowthChart,
-        'teamCompositionChart': createTeamCompositionChart,
-
-
-        
+        'teamCompositionChart': createTeamCompositionChart
     };
     
     return chartFunctions[chartId];
@@ -1696,31 +1577,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dashboard?.classList.contains('active')) {
         setTimeout(() => {
             try {
-                 // CHANGE: Move plugin registration before initDashboard
-                // Register required Chart.js plugins first
-                Chart.register(ChartDataLabels);
-
-                // CHANGE: Update Funnel plugin registration to use correct object
-                if (typeof Chart.Funnel !== 'undefined') {  // Changed from window.Chart.Funnel
-                    Chart.register(Chart.Funnel);
-                } else {
-                    console.error('Funnel plugin not loaded');
-                }
-                
-                // CHANGE: Update Graph plugin registration to use correct object
-                if (typeof Chart.Graph !== 'undefined') {  // Changed from window.Chart.Graph
-                    Chart.register(Chart.Graph);
-                } else {
-                    console.error('Graph plugin not loaded');
-                }
-
-                // ADD: Console log to verify plugin registration
-                console.log('Chart plugins registered:', {
-                    funnel: typeof Chart.Funnel !== 'undefined',
-                    graph: typeof Chart.Graph !== 'undefined'
-                });
-                
-                // MOVE: initDashboard after plugin registration
                 initDashboard();
                 
                 // Wait for charts to be created
