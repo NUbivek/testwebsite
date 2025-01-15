@@ -36,7 +36,12 @@ const operationalData = {
 
 // Register Chart.js plugin
 Chart.register(ChartDataLabels);
-Chart.register(ChartSankey);  // Add this line if you're using Sankey charts
+
+Chart.register({
+    id: 'graph',
+    controller: window.Chart.GraphController,
+    element: window.Chart.EdgeLine
+});
 
 
 
@@ -761,7 +766,7 @@ function createRevenueGrowthChart() {
                     position: 'top',
                     align: 'end',
                     labels: {
-                        color: 	'#784ea7',
+                        color: 	#784ea7,
                         boxWidth: 12,
                         padding: 20
                     }
@@ -812,17 +817,14 @@ function createBurnMarginChart() {
     const ctx = document.getElementById('burnMarginChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
-    // Function to format values as percentages
-    const formatPercentage = (value) => `${(value * 100).toFixed(0)}%`;
-
     return new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['FY24', 'FY25', 'FY26'],
             datasets: [
                 {
-                    label: 'Burn Multiple (%)', // Changed label to include (%)
-                    data: [196, -24, -24], // Changed data to percentages
+                    label: 'Burn Multiple',
+                    data: [1.96, -0.24, -0.24],
                     borderColor: colors.financial.primary,
                     backgroundColor: colors.financial.primary + '20',
                     yAxisID: 'y',
@@ -863,20 +865,6 @@ function createBurnMarginChart() {
                         boxWidth: 12,
                         padding: 20
                     }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                label += formatPercentage(context.parsed.y / 100); // Added formatting for tooltip
-                            }
-                            return label;
-                        }
-                    }
                 }
             },
             scales: {
@@ -885,14 +873,9 @@ function createBurnMarginChart() {
                     position: 'left',
                     title: { 
                         display: true, 
-                        text: 'Burn Multiple (%)' // Changed axis title to include (%)
+                        text: 'Burn Multiple' 
                     },
-                    ticks: {
-                        color: colors.text,
-                        callback: function(value) {
-                            return formatPercentage(value / 100); // Added formatting for y-axis labels
-                        }
-                    }
+                    ticks: { color: colors.text }
                 },
                 y1: {
                     type: 'linear',
@@ -904,12 +887,7 @@ function createBurnMarginChart() {
                     grid: { 
                         drawOnChartArea: false 
                     },
-                    ticks: {
-                        color: colors.text,
-                        callback: function(value) {
-                            return formatPercentage(value / 100); // Added formatting for y1-axis labels
-                        }
-                    }
+                    ticks: { color: colors.text }
                 }
             },
             animation: {
@@ -1131,7 +1109,7 @@ function createDeploymentTimelineChart() {
     };
 
     return new Chart(ctx, {
-        type: 'sankey',
+        type: 'graph',
         data: {
             labels: data.nodes.map(n => n.label),
             datasets: [{
@@ -1327,7 +1305,7 @@ function createMarketPenetrationChart() {
                 legend: {
                     position: 'right',
                     labels: {
-                        color: '#313131',
+                        color: #313131,
                         boxWidth: 12,
                         padding: 20
                     }
@@ -1429,17 +1407,27 @@ function createTeamCompositionChart() {
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
     return new Chart(ctx, {
-        type: 'line',
+        type: 'funnel',
         data: {
             labels: ['Leads', 'Qualified Prospects', 'Trials', 'Conversions'],
             datasets: [{
-                label: 'Customer Journey',
                 data: [5000, 2000, 828, 276],
-                borderColor: colors.operational.primary,
-                backgroundColor: colors.operational.primary + '40',
-                fill: true,
-                stepped: true,
-                tension: 0.4
+                backgroundColor: [
+                    colors.operational.primary,
+                    colors.operational.primary + 'CC',
+                    colors.operational.primary + '99',
+                    colors.operational.primary + '66'
+                ],
+                borderWidth: 2,
+                borderColor: colors.background,
+                datalabels: {
+                    display: true,
+                    color: colors.text,
+                    font: {
+                        weight: 'bold'
+                    },
+                    formatter: (value) => `${value} (${((value/5000)*100).toFixed(1)}%)`
+                }
             }]
         },
         options: {
@@ -1448,42 +1436,47 @@ function createTeamCompositionChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Customer Acquisition Journey',
+                    text: 'Customer Acquisition Funnel',
                     align: 'start',
                     color: colors.text,
                     font: {
                         size: 16,
                         weight: 'bold',
                         family: 'system-ui, -apple-system, sans-serif'
+                    },
+                    padding: {
+                        top: 20,
+                        bottom: 20
                     }
                 },
                 legend: {
                     display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const percentage = ((value/5000)*100).toFixed(1);
+                            return `Count: ${value} (${percentage}%)`;
+                        }
+                    }
                 }
             },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: colors.grid + '20'
-                    },
-                    ticks: {
-                        color: colors.text
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        color: colors.text
-                    }
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
+            },
+            layout: {
+                padding: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20
                 }
             }
         }
     });
 }
-
 
 
 
@@ -1603,7 +1596,6 @@ function showChart(index, section) {
 
 
 
-
 function updateChartsTheme() {
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
@@ -1700,6 +1692,22 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             try {
                 initDashboard();
+                 // Register required Chart.js plugins before initialization
+                Chart.register(ChartDataLabels);
+
+                // Register Funnel plugin
+                if (window.Chart.Funnel) {
+                    Chart.register(window.Chart.Funnel);
+                } else {
+                    console.error('Funnel plugin not loaded');
+                }
+                
+                // Register Graph plugin
+                if (window.Chart.Graph) {
+                    Chart.register(window.Chart.Graph);
+                } else {
+                    console.error('Graph plugin not loaded');
+                }
                 
                 // Wait for charts to be created
                 setTimeout(() => {
