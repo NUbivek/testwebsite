@@ -686,10 +686,10 @@ function createROIChart() {
             scales: {
                 r: {
                     angleLines: {
-                        color: '#3b3b3b'
+                        color: '#333333'
                     },
                     grid: {
-                        color: '#345e81'
+                        color: '#333333'
                     },
                     pointLabels: {
                         color: colors.text,
@@ -723,12 +723,7 @@ function createROIChart() {
 function createRevenueGrowthChart() {
     const ctx = document.getElementById('revenueGrowthChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
-
-    // Function to format values as "$X.XM"
-    const formatValue = (value) => {
-        return `$${value.toFixed(1)}M`;
-    };
-
+    
     return new Chart(ctx, {
         type: 'line',
         data: {
@@ -771,24 +766,9 @@ function createRevenueGrowthChart() {
                     position: 'top',
                     align: 'end',
                     labels: {
-                        color: 	#784ea7,
+                        color: colors.text,
                         boxWidth: 12,
                         padding: 20
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                // Use formatValue for tooltip display
-                                label += formatValue(context.parsed.y);
-                            }
-                            return label;
-                        }
                     }
                 }
             },
@@ -799,13 +779,7 @@ function createRevenueGrowthChart() {
                 },
                 y: {
                     beginAtZero: true,
-                    ticks: {
-                        color: colors.text,
-                        // Use formatValue for y-axis labels
-                        callback: function(value) {
-                            return formatValue(value);
-                        }
-                    },
+                    ticks: { color: colors.text },
                     grid: { color: colors.grid + '20' }
                 }
             },
@@ -816,7 +790,6 @@ function createRevenueGrowthChart() {
         }
     });
 }
-
 
 function createBurnMarginChart() {
     const ctx = document.getElementById('burnMarginChart').getContext('2d');
@@ -1224,12 +1197,12 @@ function createSupportMetricsChart() {
                 r: {
                     // Adjust angle lines for better visibility
                     angleLines: {
-                        color: '#3b3b3b' // Change from '40' to '30'
+                        color: colors.grid + '30', // Change from '40' to '30'
                         lineWidth: 1
                     },
                     // Customize grid lines
                     grid: {
-                        color: '#345e81' // Change from '20' to '15'
+                        color: colors.grid + '15', // Change from '20' to '15'
                         circular: true
                     },
                     // Improve point labels
@@ -1310,7 +1283,7 @@ function createMarketPenetrationChart() {
                 legend: {
                     position: 'right',
                     labels: {
-                        color: #313131,
+                        color: colors.text,
                         boxWidth: 12,
                         padding: 20
                     }
@@ -1382,11 +1355,6 @@ function createPartnerGrowthChart() {
                         family: 'system-ui, -apple-system, sans-serif'
                     }
                 },
-                
-                datalabels: {
-                    display: false
-                }
-                    
                 legend: {
                     display: false
                 },
@@ -1696,23 +1664,32 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dashboard?.classList.contains('active')) {
         setTimeout(() => {
             try {
-                initDashboard();
-                 // Register required Chart.js plugins before initialization
+                 // CHANGE: Move plugin registration before initDashboard
+                // Register required Chart.js plugins first
                 Chart.register(ChartDataLabels);
 
-                // Register Funnel plugin
-                if (window.Chart.Funnel) {
-                    Chart.register(window.Chart.Funnel);
+                // CHANGE: Update Funnel plugin registration to use correct object
+                if (typeof Chart.Funnel !== 'undefined') {  // Changed from window.Chart.Funnel
+                    Chart.register(Chart.Funnel);
                 } else {
                     console.error('Funnel plugin not loaded');
                 }
                 
-                // Register Graph plugin
-                if (window.Chart.Graph) {
-                    Chart.register(window.Chart.Graph);
+                // CHANGE: Update Graph plugin registration to use correct object
+                if (typeof Chart.Graph !== 'undefined') {  // Changed from window.Chart.Graph
+                    Chart.register(Chart.Graph);
                 } else {
                     console.error('Graph plugin not loaded');
                 }
+
+                // ADD: Console log to verify plugin registration
+                console.log('Chart plugins registered:', {
+                    funnel: typeof Chart.Funnel !== 'undefined',
+                    graph: typeof Chart.Graph !== 'undefined'
+                });
+                
+                // MOVE: initDashboard after plugin registration
+                initDashboard();
                 
                 // Wait for charts to be created
                 setTimeout(() => {
