@@ -952,12 +952,13 @@ function createRevenueStreamsChart() {
                 },
                 legend: {
                     display: false
-                }
-            },
-             datalabels: {
+                },
+                datalabels: {
+                    // Moved datalabels inside the plugins object, removing the extra bracket
                     display: false
                 }
             },
+            // Removed the misplaced bracket so that scales, animation, etc. stay in options
             scales: {
                 x: {
                     ticks: { color: colors.text },
@@ -976,6 +977,7 @@ function createRevenueStreamsChart() {
         }
     });
 }
+
 
 function createCostScalingChart() {
     const ctx = document.getElementById('costScalingChart').getContext('2d');
