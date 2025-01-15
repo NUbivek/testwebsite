@@ -36,10 +36,7 @@ const operationalData = {
 
 // Register Chart.js plugin
 Chart.register(ChartDataLabels);
-
-
-// ADD this after all plugin registrations at the top
-console.log('Registered controllers:', Chart.registry.controllers);
+Chart.register(ChartSankey);  // Add this line if you're using Sankey charts
 
 
 
