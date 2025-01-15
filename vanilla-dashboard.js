@@ -979,6 +979,7 @@ function createRevenueStreamsChart() {
 }
 
 
+
 function createCostScalingChart() {
     const ctx = document.getElementById('costScalingChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
