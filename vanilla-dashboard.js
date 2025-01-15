@@ -788,17 +788,14 @@ function createBurnMarginChart() {
     const ctx = document.getElementById('burnMarginChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
-    // Function to format values as percentages
-    const formatPercentage = (value) => `${(value * 100).toFixed(0)}%`;
-
     return new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['FY24', 'FY25', 'FY26'],
             datasets: [
                 {
-                    label: 'Burn Multiple (%)', // Changed label to include (%)
-                    data: [196, -24, -24], // Changed data to percentages
+                    label: 'Burn Multiple',
+                    data: [1.96, -0.24, -0.24],
                     borderColor: colors.financial.primary,
                     backgroundColor: colors.financial.primary + '20',
                     yAxisID: 'y',
@@ -839,20 +836,6 @@ function createBurnMarginChart() {
                         boxWidth: 12,
                         padding: 20
                     }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                label += formatPercentage(context.parsed.y / 100); // Added formatting for tooltip
-                            }
-                            return label;
-                        }
-                    }
                 }
             },
             scales: {
@@ -861,14 +844,9 @@ function createBurnMarginChart() {
                     position: 'left',
                     title: { 
                         display: true, 
-                        text: 'Burn Multiple (%)' // Changed axis title to include (%)
+                        text: 'Burn Multiple' 
                     },
-                    ticks: {
-                        color: colors.text,
-                        callback: function(value) {
-                            return formatPercentage(value / 100); // Added formatting for y-axis labels
-                        }
-                    }
+                    ticks: { color: colors.text }
                 },
                 y1: {
                     type: 'linear',
@@ -880,12 +858,7 @@ function createBurnMarginChart() {
                     grid: { 
                         drawOnChartArea: false 
                     },
-                    ticks: {
-                        color: colors.text,
-                        callback: function(value) {
-                            return formatPercentage(value / 100); // Added formatting for y1-axis labels
-                        }
-                    }
+                    ticks: { color: colors.text }
                 }
             },
             animation: {
@@ -934,10 +907,6 @@ function createRevenueStreamsChart() {
                     }
                 },
                 legend: {
-                    display: false
-                }
-            },
-             datalabels: {
                     display: false
                 }
             },
@@ -1070,10 +1039,6 @@ function createHeadcountEfficiencyChart() {
                     display: false
                 }
             },
-             datalabels: {
-                    display: false
-                }
-            },
             scales: {
                 x: {
                     ticks: { color: colors.text },
@@ -1161,7 +1126,6 @@ function createDeploymentTimelineChart() {
     });
 }
 
-
 function createSupportMetricsChart() {
     const ctx = document.getElementById('supportMetricsChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
@@ -1178,21 +1142,11 @@ function createSupportMetricsChart() {
             datasets: [{
                 label: 'Support Metrics',
                 data: [99, 95, 98, 95],
-                // Change background opacity for better visibility
-                backgroundColor: colors.operational.primary + '20', // Change from '40' to '20'
-                // Increase border width for more prominence
+                backgroundColor: colors.operational.primary + '40',
                 borderColor: colors.operational.primary,
-                borderWidth: 3, // Change from 2 to 3
-                // Add point styling for better visibility
-                pointBackgroundColor: colors.operational.primary,
-                pointBorderColor: colors.background,
-                pointHoverBackgroundColor: colors.operational.secondary,
-                pointHoverBorderColor: colors.operational.primary,
-                // Add point size configurations
-                pointRadius: 4,
-                pointHoverRadius: 6,
-                // Add line tension for smoother curves
-                lineTension: 0.2
+                pointBackgroundColor: colors.operational.secondary,
+                pointBorderColor: colors.operational.primary,
+                borderWidth: 2
             }]
         },
         options: {
@@ -1204,15 +1158,10 @@ function createSupportMetricsChart() {
                     text: 'Support Metrics',
                     align: 'start',
                     color: colors.text,
-                    // Increase title size
                     font: {
-                        size: 18, // Change from 16 to 18
+                        size: 16,
                         weight: 'bold',
                         family: 'system-ui, -apple-system, sans-serif'
-                    },
-                    padding: {
-                        top: 20,
-                        bottom: 20
                     }
                 },
                 legend: {
@@ -1221,54 +1170,29 @@ function createSupportMetricsChart() {
             },
             scales: {
                 r: {
-                    // Adjust angle lines for better visibility
                     angleLines: {
-                        color: '#3b3b3b' // Change from '40' to '30'
-                        lineWidth: 1
+                        color: colors.grid + '40'
                     },
-                    // Customize grid lines
                     grid: {
-                        color: '#345e81' // Change from '20' to '15'
-                        circular: true
+                        color: colors.grid + '20'
                     },
-                    // Improve point labels
                     pointLabels: {
-                        color: colors.text,
-                        font: {
-                            size: 12,
-                            weight: 'bold'
-                        }
+                        color: colors.text
                     },
-                    // Customize ticks
                     ticks: {
                         beginAtZero: true,
                         max: 100,
-                        stepSize: 20,
-                        color: colors.text,
-                        backdropColor: 'transparent',
-                        // Add padding for better spacing
-                        padding: 10,
-                        font: {
-                            size: 10,
-                            weight: 'bold'
-                        }
-                    },
-                    // Add minimum value to prevent chart from looking empty
-                    min: 0
+                        color: colors.text
+                    }
                 }
             },
-            // Add custom animation
             animation: {
                 duration: 2000,
-                easing: 'easeInOutQuart',
-                // Add sequential animation
-                delay: (context) => context.dataIndex * 100
+                easing: 'easeInOutQuart'
             }
         }
     });
 }
-
-
 function createMarketPenetrationChart() {
     const ctx = document.getElementById('marketPenetrationChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
