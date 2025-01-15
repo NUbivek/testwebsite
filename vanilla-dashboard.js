@@ -1283,7 +1283,7 @@ function createMarketPenetrationChart() {
                 legend: {
                     position: 'right',
                     labels: {
-                        color: colors.text,
+                        color: #313131,
                         boxWidth: 12,
                         padding: 20
                     }
