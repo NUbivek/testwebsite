@@ -1310,76 +1310,52 @@ function createPartnerGrowthChart() {
     const ctx = document.getElementById('partnerGrowthChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
-    // Define data points for the bubble matrix
-    const data = [
-        // Retail/eComm
-        { x: 0, y: 0, r: 30, v: 3000 },  // Base adoption
-        { x: 1, y: 0, r: 25, v: 2500 },  // Enterprise adoption
-        { x: 2, y: 0, r: 20, v: 2000 },  // Growth adoption
-        { x: 3, y: 0, r: 15, v: 1500 },  // Scale adoption
-        
-        // Logistics
-        { x: 0, y: 1, r: 25, v: 2000 },
-        { x: 1, y: 1, r: 20, v: 1800 },
-        { x: 2, y: 1, r: 15, v: 1500 },
-        { x: 3, y: 1, r: 10, v: 1000 },
-        
-        // Manufacturing
-        { x: 0, y: 2, r: 20, v: 1500 },
-        { x: 1, y: 2, r: 15, v: 1200 },
-        { x: 2, y: 2, r: 10, v: 900 },
-        { x: 3, y: 2, r: 8, v: 600 },
-        
-        // Healthcare
-        { x: 0, y: 3, r: 15, v: 1000 },
-        { x: 1, y: 3, r: 12, v: 800 },
-        { x: 2, y: 3, r: 8, v: 500 },
-        { x: 3, y: 3, r: 5, v: 300 }
-    ];
-
     return new Chart(ctx, {
-        type: 'bubble',
+        type: 'sankey',
         data: {
             datasets: [{
-                data: data,
-                backgroundColor: (context) => {
-                    const value = context.raw.v;
-                    const alpha = Math.min(0.9, Math.max(0.2, value / 3000));
-                    return colors.operational.primary + Math.round(alpha * 255).toString(16).padStart(2, '0');
-                },
-                borderColor: colors.operational.secondary,
-                borderWidth: 1
+                data: [
+                    // Retail/eComm flows
+                    { from: 'Retail/eComm', to: 'Base', flow: 1200 },
+                    { from: 'Retail/eComm', to: 'Enterprise', flow: 800 },
+                    { from: 'Retail/eComm', to: 'Growth', flow: 600 },
+                    { from: 'Retail/eComm', to: 'Scale', flow: 400 },
+                    
+                    // Logistics flows
+                    { from: 'Logistics', to: 'Base', flow: 800 },
+                    { from: 'Logistics', to: 'Enterprise', flow: 600 },
+                    { from: 'Logistics', to: 'Growth', flow: 400 },
+                    { from: 'Logistics', to: 'Scale', flow: 200 },
+                    
+                    // Manufacturing flows
+                    { from: 'Manufacturing', to: 'Base', flow: 600 },
+                    { from: 'Manufacturing', to: 'Enterprise', flow: 400 },
+                    { from: 'Manufacturing', to: 'Growth', flow: 300 },
+                    { from: 'Manufacturing', to: 'Scale', flow: 200 },
+                    
+                    // Healthcare flows
+                    { from: 'Healthcare', to: 'Base', flow: 400 },
+                    { from: 'Healthcare', to: 'Enterprise', flow: 300 },
+                    { from: 'Healthcare', to: 'Growth', flow: 200 },
+                    { from: 'Healthcare', to: 'Scale', flow: 100 }
+                ],
+                colorFrom: (c) => colors.operational.primary + '80',
+                colorTo: (c) => colors.operational.secondary + '80',
+                colorMode: 'gradient',
+                /* Data matches marketCoverage totals:
+                   Retail/eComm: 3000
+                   Logistics: 2000
+                   Manufacturing: 1500
+                   Healthcare: 1000 */
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            scales: {
-                x: {
-                    type: 'category',
-                    labels: ['Base', 'Enterprise', 'Growth', 'Scale'],
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        color: colors.text
-                    }
-                },
-                y: {
-                    type: 'category',
-                    labels: ['Retail/eComm', 'Logistics', 'Manufacturing', 'Healthcare'],
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        color: colors.text
-                    }
-                }
-            },
             plugins: {
                 title: {
                     display: true,
-                    text: 'Partner Adoption Matrix',
+                    text: 'Partner Distribution',
                     align: 'start',
                     color: colors.text,
                     font: {
@@ -1393,8 +1369,11 @@ function createPartnerGrowthChart() {
                 },
                 tooltip: {
                     callbacks: {
-                        label: function(context) {
-                            return `Partners: ${context.raw.v}`;
+                        title: (items) => {
+                            return `${items[0].raw.from} → ${items[0].raw.to}`;
+                        },
+                        label: (item) => {
+                            return `Partners: ${item.raw.flow}`;
                         }
                     }
                 }
