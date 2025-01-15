@@ -1668,9 +1668,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 initDashboard();
                  // Register required Chart.js plugins before initialization
                 Chart.register(ChartDataLabels);
-                Chart.register(FunnelController, TrapezoidElement);  // Add this for funnel chart
-                Chart.register(GraphController, EdgeLine);  // Add this for network graph
-                Chart.register(MatrixController, MatrixElement);  // Add this for matrix chart
                 // Wait for charts to be created
                 setTimeout(() => {
                     // Initialize navigation
