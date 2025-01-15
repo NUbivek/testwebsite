@@ -1657,13 +1657,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dashboard?.classList.contains('active')) {
         setTimeout(() => {
             try {
-                // Register required Chart.js plugins before initialization
+                initDashboard();
+                 // Register required Chart.js plugins before initialization
                 Chart.register(FunnelController, TrapezoidElement);  // Add this for funnel chart
                 Chart.register(GraphController, EdgeLine);  // Add this for network graph
                 Chart.register(MatrixController, MatrixElement);  // Add this for matrix chart
-                
-                initDashboard();
-                
                 // Wait for charts to be created
                 setTimeout(() => {
                     // Initialize navigation
@@ -1672,12 +1670,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Then show initial charts
                     showChart(0, 'financial');
                     showChart(0, 'operational');
-               // Add event listener for theme changes to update new chart types
-                    document.getElementById('themeToggle')?.addEventListener('click', () => {
-                        updateChartsTheme();
-                    });
-                }, 800);  // Increased timeout to ensure plugin loading
-                
+                }, 500);
                 
             } catch (error) {
                 console.error('Dashboard initialization failed:', error);
