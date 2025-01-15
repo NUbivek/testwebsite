@@ -761,7 +761,7 @@ function createRevenueGrowthChart() {
                     position: 'top',
                     align: 'end',
                     labels: {
-                        color: 	#784ea7,
+                        color: 	'#784ea7',
                         boxWidth: 12,
                         padding: 20
                     }
@@ -1131,7 +1131,7 @@ function createDeploymentTimelineChart() {
     };
 
     return new Chart(ctx, {
-        type: 'graph',
+        type: 'sankey',
         data: {
             labels: data.nodes.map(n => n.label),
             datasets: [{
@@ -1327,7 +1327,7 @@ function createMarketPenetrationChart() {
                 legend: {
                     position: 'right',
                     labels: {
-                        color: #313131,
+                        color: '#313131',
                         boxWidth: 12,
                         padding: 20
                     }
