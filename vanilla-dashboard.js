@@ -250,8 +250,7 @@ function createRevenueChart() {
                 },
                 datalabels: {
                     display: false // Hide permanent data labels
-                }
-            },
+                },
             scales: {
                 x: {
                     ticks: {
@@ -1088,10 +1087,7 @@ function createHeadcountEfficiencyChart() {
                     display: false
                 }
             },
-             datalabels: {
-                    display: false
-                }
-            },
+             
             scales: {
                 x: {
                     ticks: { color: colors.text },
@@ -1401,10 +1397,7 @@ function createPartnerGrowthChart() {
                     }
                 },
                 
-                datalabels: {
-                    display: false
-                }
-                    
+                   
                 legend: {
                     display: false
                 },
