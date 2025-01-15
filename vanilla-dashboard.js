@@ -36,6 +36,8 @@ const operationalData = {
 
 // Register Chart.js plugin
 Chart.register(ChartDataLabels);
+Chart.register(ChartSankey);  // Add this line if you're using Sankey charts
+
 
 const universalChartOptions = {
     responsive: true,
