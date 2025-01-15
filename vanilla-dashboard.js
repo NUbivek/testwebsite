@@ -1297,51 +1297,76 @@ function createPartnerGrowthChart() {
     const ctx = document.getElementById('partnerGrowthChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
-    const data = {
-        features: ['Base', 'Enterprise', 'Growth', 'Scale'],
-        segments: ['Retail/eComm', 'Logistics', 'Manufacturing', 'Healthcare'],
-        values: [
-            [95, 80, 70, 60],  // Retail/eComm adoption rates
-            [85, 75, 65, 50],  // Logistics adoption rates
-            [75, 65, 55, 40],  // Manufacturing adoption rates
-            [65, 55, 45, 30]   // Healthcare adoption rates
-        ]
-    };
-
-    const datasets = [];
-    data.segments.forEach((segment, i) => {
-        data.features.forEach((feature, j) => {
-            datasets.push({
-                x: j,
-                y: i,
-                v: data.values[i][j]
-            });
-        });
-    });
+    // Define data points for the bubble matrix
+    const data = [
+        // Retail/eComm
+        { x: 0, y: 0, r: 30, v: 3000 },  // Base adoption
+        { x: 1, y: 0, r: 25, v: 2500 },  // Enterprise adoption
+        { x: 2, y: 0, r: 20, v: 2000 },  // Growth adoption
+        { x: 3, y: 0, r: 15, v: 1500 },  // Scale adoption
+        
+        // Logistics
+        { x: 0, y: 1, r: 25, v: 2000 },
+        { x: 1, y: 1, r: 20, v: 1800 },
+        { x: 2, y: 1, r: 15, v: 1500 },
+        { x: 3, y: 1, r: 10, v: 1000 },
+        
+        // Manufacturing
+        { x: 0, y: 2, r: 20, v: 1500 },
+        { x: 1, y: 2, r: 15, v: 1200 },
+        { x: 2, y: 2, r: 10, v: 900 },
+        { x: 3, y: 2, r: 8, v: 600 },
+        
+        // Healthcare
+        { x: 0, y: 3, r: 15, v: 1000 },
+        { x: 1, y: 3, r: 12, v: 800 },
+        { x: 2, y: 3, r: 8, v: 500 },
+        { x: 3, y: 3, r: 5, v: 300 }
+    ];
 
     return new Chart(ctx, {
-        type: 'matrix',
+        type: 'bubble',
         data: {
             datasets: [{
-                data: datasets,
-                backgroundColor(context) {
-                    const value = context.dataset.data[context.dataIndex].v;
-                    const alpha = value / 100;
+                data: data,
+                backgroundColor: (context) => {
+                    const value = context.raw.v;
+                    const alpha = Math.min(0.9, Math.max(0.2, value / 3000));
                     return colors.operational.primary + Math.round(alpha * 255).toString(16).padStart(2, '0');
                 },
-                borderColor: colors.background,
-                borderWidth: 1,
-                width: ({ chart }) => (chart.chartArea || {}).width / 4 - 1,
-                height: ({ chart }) => (chart.chartArea || {}).height / 4 - 1
+                borderColor: colors.operational.secondary,
+                borderWidth: 1
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            scales: {
+                x: {
+                    type: 'category',
+                    labels: ['Base', 'Enterprise', 'Growth', 'Scale'],
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                },
+                y: {
+                    type: 'category',
+                    labels: ['Retail/eComm', 'Logistics', 'Manufacturing', 'Healthcare'],
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: colors.text
+                    }
+                }
+            },
             plugins: {
                 title: {
                     display: true,
-                    text: 'Feature Adoption Rate',
+                    text: 'Partner Adoption Matrix',
                     align: 'start',
                     color: colors.text,
                     font: {
@@ -1355,38 +1380,9 @@ function createPartnerGrowthChart() {
                 },
                 tooltip: {
                     callbacks: {
-                        title() {
-                            return '';
-                        },
-                        label(context) {
-                            const v = context.dataset.data[context.dataIndex];
-                            return [
-                                `${data.segments[v.y]}: ${data.features[v.x]}`,
-                                `Adoption: ${v.v}%`
-                            ];
+                        label: function(context) {
+                            return `Partners: ${context.raw.v}`;
                         }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    type: 'category',
-                    labels: data.features,
-                    ticks: {
-                        color: colors.text
-                    },
-                    grid: {
-                        display: false
-                    }
-                },
-                y: {
-                    type: 'category',
-                    labels: data.segments,
-                    ticks: {
-                        color: colors.text
-                    },
-                    grid: {
-                        display: false
                     }
                 }
             }
