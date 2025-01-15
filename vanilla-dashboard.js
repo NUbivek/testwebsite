@@ -1675,7 +1675,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             try {
                 initDashboard();
-                               
+                
                 // Wait for charts to be created
                 setTimeout(() => {
                     // Initialize navigation
