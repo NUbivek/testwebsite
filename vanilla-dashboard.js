@@ -36,6 +36,7 @@ const operationalData = {
 
 // Register Chart.js plugin
 Chart.register(ChartDataLabels);
+Chart.register(ChartSankey);  // Add this line if you're using Sankey charts
 
 const universalChartOptions = {
     responsive: true,
@@ -1062,33 +1063,43 @@ function createDeploymentTimelineChart() {
     const ctx = document.getElementById('deploymentTimelineChart').getContext('2d');
     const colors = getThemeColors(document.body.classList.contains('dark-theme'));
     
+    // Network data
+    const data = {
+        nodes: [
+            { id: 'hub', label: 'Orderful', size: 20 },
+            { id: 'retail', label: 'Retail/eComm', size: 15 },
+            { id: 'logistics', label: 'Logistics', size: 12 },
+            { id: 'manufacturing', label: 'Manufacturing', size: 10 },
+            { id: 'healthcare', label: 'Healthcare', size: 8 }
+        ],
+        edges: [
+            { from: 'hub', to: 'retail', value: 3000 },
+            { from: 'hub', to: 'logistics', value: 2000 },
+            { from: 'hub', to: 'manufacturing', value: 1500 },
+            { from: 'hub', to: 'healthcare', value: 1000 }
+        ]
+    };
+
     return new Chart(ctx, {
-        type: 'bar',
+        type: 'sankey',
         data: {
-            labels: ['Enterprise', 'SMB', 'Self-Service'],
-            datasets: [
-                {
-                    label: 'Orderful (Days)',
-                    data: [9, 5, 1],
-                    backgroundColor: colors.operational.primary,
-                    borderRadius: 6
-                },
-                {
-                    label: 'Industry Average',
-                    data: [45, 30, 14],
-                    backgroundColor: colors.operational.secondary,
-                    borderRadius: 6
-                }
-            ]
+            labels: data.nodes.map(n => n.label),
+            datasets: [{
+                data: data.nodes,
+                edges: data.edges,
+                backgroundColor: colors.operational.primary,
+                borderColor: colors.operational.secondary,
+                borderWidth: 2,
+                hoverBorderWidth: 4
+            }]
         },
         options: {
-            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 title: {
                     display: true,
-                    text: 'Deployment Timeline',
+                    text: 'Network Effect',
                     align: 'start',
                     color: colors.text,
                     font: {
@@ -1098,25 +1109,18 @@ function createDeploymentTimelineChart() {
                     }
                 },
                 legend: {
-                    position: 'top',
-                    align: 'end',
-                    labels: {
-                        color: colors.text,
-                        boxWidth: 12,
-                        padding: 20
-                    }
+                    display: false
                 }
             },
-            scales: {
-                x: {
-                    beginAtZero: true,
-                    ticks: { color: colors.text },
-                    grid: { color: colors.grid + '20' }
-                },
-                y: {
-                    ticks: { color: colors.text },
-                    grid: { display: false }
-                }
+            layout: {
+                padding: 20
+            },
+            graph: {
+                springLength: 150,
+                springConstant: 0.2,
+                dragCoeff: 0.02,
+                gravity: -1.2,
+                repulsion: 10
             },
             animation: {
                 duration: 2000,
