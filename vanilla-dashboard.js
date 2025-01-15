@@ -1355,6 +1355,11 @@ function createPartnerGrowthChart() {
                         family: 'system-ui, -apple-system, sans-serif'
                     }
                 },
+                
+                datalabels: {
+                    display: false
+                }
+                    
                 legend: {
                     display: false
                 },
