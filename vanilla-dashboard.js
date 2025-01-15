@@ -36,11 +36,19 @@ const operationalData = {
 
 // Register Chart.js plugin
 Chart.register(ChartDataLabels);
-// Add this right after Chart.register(ChartDataLabels);
-import { FunnelController, TrapezoidElement } from 'chartjs-chart-funnel';
-import { MatrixController, MatrixElement } from 'chartjs-chart-matrix';
-Chart.register(FunnelController, TrapezoidElement);
-Chart.register(MatrixController, MatrixElement);
+Chart.register({
+    id: 'funnel',
+    controller: window.Chart.FunnelController,
+    element: window.Chart.TrapezoidElement
+});
+
+Chart.register({
+    id: 'graph',
+    controller: window.Chart.GraphController,
+    element: window.Chart.EdgeLine
+});
+
+
 
 const universalChartOptions = {
     responsive: true,
@@ -1659,6 +1667,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 initDashboard();
                  // Register required Chart.js plugins before initialization
+                Chart.register(ChartDataLabels);
                 Chart.register(FunnelController, TrapezoidElement);  // Add this for funnel chart
                 Chart.register(GraphController, EdgeLine);  // Add this for network graph
                 Chart.register(MatrixController, MatrixElement);  // Add this for matrix chart
