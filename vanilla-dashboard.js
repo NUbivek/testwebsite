@@ -44,20 +44,53 @@ const universalChartOptions = {
         datalabels: { display: false },
         title: {
             font: {
-                size: 16,
+                size: 18,
                 weight: 'bold',
                 family: 'system-ui, -apple-system, sans-serif'
+            }
+        },
+        legend: {
+            labels: {
+                font: {
+                    size: 14,
+                    weight: 'bold'
+                }
             }
         }
     },
     scales: {
         x: {
-            title: { display: true },
-            grid: { drawBorder: false }
+            title: { 
+                display: true,
+                font: {
+                    size: 14,
+                    weight: 'bold'
+                }
+            },
+            grid: { drawBorder: false },
+            ticks: {
+                font: {
+                    weight: 'bold'
+                }
+            }
         },
         y: {
-            title: { display: true },
-            grid: { drawBorder: false }
+            title: { 
+                display: true,
+                font: {
+                    size: 14,
+                    weight: 'bold'
+                }
+            },
+            grid: { drawBorder: false },
+            ticks: {
+                font: {
+                    weight: 'bold'
+                },
+                callback: function(value) {
+                    return '$' + Math.round(value) + 'M';
+                }
+            }
         }
     },
     animation: {
@@ -993,7 +1026,7 @@ function createHeadcountEfficiencyChart() {
             plugins: {
                 title: {
                     display: true,
-                    text: 'Headcount Efficiency',
+                    text: 'Revenue per Employee',
                     align: 'start',
                     color: colors.text,
                     font: {
