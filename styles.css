@@ -74,12 +74,12 @@ body {
 
 /* Dark Theme Overrides */
 [data-theme="dark"], body.dark-theme {
-   --bg-primary: #0f172a;           /* Darker background */
+   --bg-primary: #2d3854;           /* Darker background */
     --card-bg: #1e293b;             /* Deeper card color */
     --financial-gradient: linear-gradient(145deg, #1e40af66, #60a5fa66);
     --operational-gradient: linear-gradient(145deg, #0f172a66, #47556966);
     --border-color: #2d3748;
-    --text-primary: #f1f5f9;         /* Increase brightness for main text */
+    --text-primary: #9ecaf1;         /* Increase brightness for main text */
     --text-secondary: #cbd5e0;       /* Lighter subtext */
     --text-tertiary: #a0aec0;        /* Even lighter tertiary text */
 }
@@ -239,13 +239,13 @@ body {
     transform: translate(-50%, -50%);
     max-width: 90%;
     max-height: 90%;
-    opacity: 0;
+    opacity: 40;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: none;  // Add this line
 }
 
 .chart-container canvas.active {
-    opacity: 1;
+    opacity: 10;
     transform: translate(-50%, -50%) scale(1);
     display: block;  // Add this line
 }
