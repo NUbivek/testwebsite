@@ -1717,8 +1717,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-// Update switchSubtab
 function switchSubtab(subtabId) {
+    // NEW: Add error handling for undefined event
+    if (typeof event === 'undefined') {
+        console.error('Event is undefined');
+        return;
+    }
+    
+    // NEW: Get target content first and validate
+    const targetContent = document.getElementById(subtabId);
+    if (!targetContent) {
+        console.error('Target content not found');
+        return;
+    }
+
+    // Keeping your existing code for removing active states
     document.querySelectorAll('.subtab-content').forEach(content => {
         content.classList.remove('active');
     });
@@ -1727,7 +1740,13 @@ function switchSubtab(subtabId) {
         button.classList.remove('active');
     });
     
-    document.getElementById(subtabId).classList.add('active');
+    // NEW: Force reflow before adding active class
+    targetContent.style.display = 'none';
+    targetContent.offsetHeight; // Force reflow
+    targetContent.style.display = '';
+    
+    // Your existing code for adding active states
+    targetContent.classList.add('active');
     event.currentTarget.classList.add('active');
 }
 
