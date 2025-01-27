@@ -1750,6 +1750,25 @@ function lazyLoadIframes() {
     });
 }
 
+function switchPDF(pdfId) {
+    document.querySelectorAll('.pdf-frame').forEach(frame => {
+        frame.style.display = 'none'; // Hide all frames
+        frame.classList.remove('active');
+    });
+    
+    const selectedPDF = document.getElementById(pdfId);
+    if (selectedPDF) {
+        selectedPDF.style.display = 'block'; // Show selected PDF
+        selectedPDF.classList.add('active');
+        lazyLoadIframes(); // Ensure it loads when switched
+    }
+    
+    document.querySelectorAll('.pdf-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    event.currentTarget.classList.add('active');
+}
+
 
 // Enhanced dashboard animations
 function initDashboardAnimations() {
