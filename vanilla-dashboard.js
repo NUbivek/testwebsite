@@ -1718,18 +1718,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Update switchSubtab
-function switchSubtab(subtabId) {
-    document.querySelectorAll('.subtab-content').forEach(content => {
-        content.classList.remove('active');
+function switchTab(tabName) {
+    const tabContents = document.getElementsByClassName("tab-content");
+    const tabButtons = document.getElementsByClassName("tab-button");
+    
+    Array.from(tabContents).forEach(tab => {
+        tab.classList.remove("active");
+        tab.style.display = 'none';
     });
     
-    document.querySelectorAll('.subtab-button').forEach(button => {
-        button.classList.remove('active');
+    Array.from(tabButtons).forEach(button => {
+        button.classList.remove("active");
     });
     
-    document.getElementById(subtabId).classList.add('active');
-    event.currentTarget.classList.add('active');
+    const selectedTab = document.getElementById(tabName);
+    selectedTab.classList.add("active");
+    selectedTab.style.display = 'block';
+    
+    event.currentTarget.classList.add("active");
+    
+    // Lazy load iframes when tab is opened
+    lazyLoadIframes();
 }
+
+function lazyLoadIframes() {
+    const iframes = document.querySelectorAll('iframe[data-src]');
+    iframes.forEach(iframe => {
+        if (iframe.getAttribute('src') === 'about:blank') {
+            iframe.setAttribute('src', iframe.getAttribute('data-src'));
+        }
+    });
+}
+
 
 // Enhanced dashboard animations
 function initDashboardAnimations() {
